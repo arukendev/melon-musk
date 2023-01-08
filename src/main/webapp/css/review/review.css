@@ -1,0 +1,131 @@
+@charset "UTF-8";
+
+
+.review_table{
+	width: 100vw;
+	height: 60px;
+	background-color: var(--black);
+	color: var(--white);
+	padding: 10px;
+	box-sizing: border-box;
+}
+
+.review_table_title {
+	margin: auto;
+	text-align: center;
+}
+
+.review_table_btns a{
+	margin: 10px;
+	color: var(--white);
+	float: right;
+}
+
+#review_columnsWrap{
+	width: 100vw;
+	height: 30px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: #DCDDE1; 
+}
+#review_columnsWrap_columns{
+	/* #DCDDE1; */
+	width: 75vw;
+	display: flex;
+	justify-content: space-between;
+}
+#review_columnsWrap_columns div{
+	text-align: center;
+}
+
+#review_columnsWrap_columns div:first-child{
+	width: 10%;
+}
+#review_columnsWrap_columns div:nth-child(2){
+	width: 55%;
+}
+#review_table2{
+	width: 75vw;
+}
+
+.review_table2_row{
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
+	margin: 20px 0px;
+}
+.review_table2_row:hover{
+	background-color: red;
+}
+.review_table2_row a{
+	width: 50%;
+}
+
+.review_pageNum{
+	text-align: center;
+}
+
+/* ----------------------------------------------------------------  */
+ #reviewReg_table{
+ 	width: 500px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+} 
+#reviewReg_table_h{
+	display: flex;
+	justify-content: space-between;
+}
+#reivewReg_h_title{
+	margin: auto;
+}
+.reviewReg_table_row{
+	display: flex;
+}
+.reviewReg_row_index{
+	text-align: center;
+	align-items: center;
+	width:100px;
+	background-color: #DCDDE1;
+	border: 1px solid var(--white);
+}
+
+.reviewReg_row_input{
+	width: 400px;
+}
+.reviewReg_row_txt{
+	width: 400px;
+	height: 400px;
+}
+
+/*--------------------------------------------------------------------------*/
+
+#reviewDetail_row_viewsLike{
+	display: flex;
+	justify-content: flex-end;
+	width:200px;
+}
+.reviewDetail_viewsLike_items{
+	margin: 0px 5px;
+}
+.reviewDetail_row_200{
+	width: 200px;
+}
+.reviewDetail_row_100{
+	width: 100px;
+}
+.reviewDetail_row_50{
+	width: 50px;
+	text-align: center;
+}
+
+#reviewDetail_row_img{
+	max-height: 30px;
+}
+
+#reviewDetail_bttmBtns{
+	width: 100%;
+	display: flex;
+	justify-content: flex-end;
+}

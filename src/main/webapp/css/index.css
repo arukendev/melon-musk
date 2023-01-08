@@ -1,0 +1,116 @@
+@charset "UTF-8";
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400&family=Permanent+Marker&display=swap");
+@import "reset.css";
+@import "variable.css";
+
+@import "main/main.css";
+
+.hidden {
+  display: none;
+}
+
+body {
+  height: 100vh;
+  display: grid;
+  grid-template-rows: 80px 1fr 80px;
+  font-family: "Noto Sans KR", sans-serif;
+  font-weight: 300;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+header {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+main,
+footer {
+  width: 1170px;
+  min-width: 1170px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+main {
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+#index_hWrapper,
+#index_mWrapper,
+#index_fWrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+#index_hWrapper {
+  background-color: #dcdde1;
+}
+
+#index_mWrapper {
+  background-color: var(--white);
+}
+
+#index_fWrapper {
+  background-color: var(--black);
+  color: var(--white);
+}
+
+#index_title_h1 {
+  font-size: 40px;
+  font-family: "Permanent Marker", cursive;
+  background: linear-gradient(
+    45deg,
+    rgba(45, 52, 54, 1) 0%,
+    rgba(33, 140, 116, 1) 20%,
+    rgba(255, 82, 82, 1) 50%,
+    rgba(33, 140, 116, 1) 80%,
+    rgba(45, 52, 54, 1) 100%
+  );
+  color: transparent;
+  background-clip: text;
+  -webkit-background-clip: text;
+}
+
+#index_header_hLeft,
+#index_header_hCenter,
+#index_header_hRight {
+  display: flex;
+  align-items: center;
+}
+
+#index_header_hCenter {
+  position: relative;
+  justify-content: center;
+}
+
+#index_header_hRight {
+  position: relative;
+  justify-content: flex-end;
+}
+
+#index_hCenter_search {
+  background-color: #dcdde1;
+  position: absolute;
+}
+
+.index_searchUl_li {
+  display: grid;
+  grid-template-columns: 64px 1fr;
+  grid-template-rows: 1fr 1fr;
+}
+
+.index_searchLi_img {
+  grid-row: 1 / span 2;
+}
+
+#index_hCenter_nav {
+  display: flex;
+  gap: 20px;
+}
