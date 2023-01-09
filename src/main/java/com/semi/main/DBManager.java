@@ -10,8 +10,9 @@ public class DBManager {
 	
 	public static Connection connect() throws SQLException {
 	
-		String url = "jdbc:oracle:thin:@localhost:1521:xe";
-		return DriverManager.getConnection(url, "c##cwy1231", "cwy1231");
+		String url = "jdbc:oracle:thin:@URJ817BYXD912F6F_high?TNS_ADMIN=C:/ljh/Wallet_URJ817BYXD912F6F";
+		System.out.println("success");
+		return DriverManager.getConnection(url, "SEMI", "Soldeskljh802");
 		
 		//재현 c##ljh1004 ljh1004
 		//우영 c##cwy1231 cwy1231

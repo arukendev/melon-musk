@@ -8,7 +8,7 @@ delete artist;
 --ALTER TABLE 테이블명 ADD 컬럼명 number(10) not null;
 
 --테이블 조회
-select * from music;
+select * from auth;
 
 --아티스트
 create table artist(
@@ -92,7 +92,8 @@ create table review(
 	re_img varchar2(200 char) not null,
 	re_text varchar2(2000 char) not null,
 	re_view number(10) not null,
-	re_like number(10) not null
+	re_like number(10) not null,
+	re_date date not null
 );
 
 create sequence review_seq;
@@ -117,7 +118,8 @@ create table playlist(
 	pl_id number(10) primary key,
 	pl_name varchar2(20 char) not null,
 	pl_view number(10) not null,
-	pl_like number(10) not null
+	pl_like number(10) not null,
+	pl_date date not null
 );
 
 insert into playlist values(
