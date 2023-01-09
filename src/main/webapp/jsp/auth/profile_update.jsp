@@ -22,6 +22,11 @@
 					<img src="${account.au_img}">
 	  			</div>
 	  		</div>
+	  		  <div class="items" id="file-box">
+        <label for="file" class="titles">Profile Image</label>
+        <input hidden name="img" value="${sessionScope.account.au_img}">
+        <input type="file" name="img2" id="file" accept="image/*" />
+      </div>
       <div class="items" id="name-box">
         <label for="name" class="titles">Name</label>
         <input type="text" name="name" id="name" placeholder="필수입력" value="${sessionScope.account.au_name}" />

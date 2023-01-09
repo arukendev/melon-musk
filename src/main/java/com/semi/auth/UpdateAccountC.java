@@ -7,29 +7,25 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.semi.auth.AuthDAO;
+
 @WebServlet("/UpdateAccountC")
 public class UpdateAccountC extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		if (AuthDAO.loginCheck(request)) {
-			request.setAttribute("contentPage", "account/update.jsp");
+			request.setAttribute("contentPage", "jsp/auth/profile_update.jsp");
 			
 		}else {
-			request.setAttribute("contentPage", "home.jsp");
+			request.setAttribute("contentPage", "jsp/main/main.jsp");
 			
 		}
 		request.getRequestDispatcher("index.jsp").forward(request, response);
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//�����ϴ� ��
-		if (	AuthDAO.loginCheck(request)) {
-			AuthDAO.updateAccount(request);
-		}
-	
-		//���?
-		
-		request.setAttribute("contentPage", "account/myPage.jsp");
+		AuthDAO.loginCheck(request);
+		AuthDAO.updateAccount(request);
 		request.getRequestDispatcher("index.jsp").forward(request, response);
-	}
 
+}
 }
