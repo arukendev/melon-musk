@@ -1,11 +1,14 @@
 --테이블 삭제
-drop table playlist_music cascade constraint purge;
+drop table artist cascade constraint purge;
+
+--테이블 안에 모든 항목 삭제
+delete artist;
 
 --테이블 컬럼 추가
 --ALTER TABLE 테이블명 ADD 컬럼명 number(10) not null;
 
 --테이블 조회
-select * from artist;
+select * from music;
 
 --아티스트
 create table artist(

@@ -94,6 +94,9 @@
 .reviewReg_row_input{
 	width: 400px;
 }
+.reviewReg_row_writer{
+	width: 408px;
+}
 .reviewReg_row_txt{
 	width: 400px;
 	height: 400px;
@@ -108,6 +111,9 @@
 }
 .reviewDetail_viewsLike_items{
 	margin: 0px 5px;
+}
+.reviewDetail_row_400{
+	width: 400px;
 }
 .reviewDetail_row_200{
 	width: 200px;

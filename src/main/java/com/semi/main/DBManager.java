@@ -15,9 +15,9 @@ public class DBManager {
 		
 		//재현 c##ljh1004 ljh1004
 		//우영 c##cwy1231 cwy1231
-		//재호
-		//경록
-		//승명
+		//재호 c##ojh1004 ojh1004
+		//경록 c##pkr pkr
+    //승명 
 
 	}
 	public static void close(Connection con, PreparedStatement pstmt, ResultSet rs) {

@@ -23,7 +23,7 @@
 	<h1>앨범정보</h1>
 	<c:choose>
 		<c:when test="${album.info eq 'none'}">
-			<h1>등록된 정보가가 없습니다.</h1>
+			<h1>등록된 앨범 정보가 없습니다.</h1>
 		</c:when>
 		<c:otherwise>
 			<h1>${album.info}</h1>

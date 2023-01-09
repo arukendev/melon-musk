@@ -20,7 +20,14 @@
 	<h1>장르 : ${album.genre}</h1>
 	<h1>발매사 : ${album.publisher}</h1>
 	<h1>기획사 : ${album.agency}</h1>
-	<h1>앨범 정보</h1>
-	<h1>${album.info}</h1>
+	<h1>앨범정보</h1>
+	<c:choose>
+		<c:when test="${album.info eq 'none'}">
+			<h1>등록된 앨범 정보가 없습니다.</h1>
+		</c:when>
+		<c:otherwise>
+			<h1>${album.info}</h1>
+		</c:otherwise>
+	</c:choose>
 </body>
 </html>
