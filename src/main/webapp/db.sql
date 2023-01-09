@@ -73,7 +73,8 @@ insert into auth values(
 'Admin123',
 '관리자',
 'k-pop,j-pop,메탈,힙합',
-'관리자입니다.'
+'관리자입니다.',
+'...'
 );
 
 insert into auth values(
@@ -81,7 +82,8 @@ insert into auth values(
 'aa',
 'test',
 'k-pop,j-pop,메탈,힙합',
-'test입니다.'
+'test입니다.',
+'...'
 );
 
 --리뷰
@@ -98,15 +100,11 @@ create table review(
 
 create sequence review_seq;
 
-insert into review values(
-1,
-'뉴진스 신곡 리뷰',
-'https://img.gqkorea.co.kr/gq/2022/10/style_634e7c680d723.jpg',
-'너무 이쁘다...',
-0,
-0,
-sysdate
-);
+insert into review values(review_seq.nextval,'뉴진스 신곡 리뷰','https://img.gqkorea.co.kr/gq/2022/10/style_634e7c680d723.jpg','너무 이쁘다...',0,0,sysdate);
+insert into review values(review_seq.nextval,'BTS 최고다','https://ichef.bbci.co.uk/news/800/cpsprodpb/110F8/production/_125408896_f9fa9184-bdc3-4e62-b57a-9195062fd4b0.jpg','진 ㅠㅠ',0,0,sysdate);
+insert into review values(review_seq.nextval,'Aespa 짱','https://storage.blip.kr/artist/77755aaede9a08307aeaff9bb2c079a6.jpg','광야로 걸어가',0,0,sysdate);
+insert into review values(review_seq.nextval,'엔하이픈!!!!!','https://file2.nocutnews.co.kr/newsroom/image/2020/10/09/20201009144925523873_0_795_590.jpg','n-',0,0,sysdate);
+insert into review values(review_seq.nextval,'세븐틴!!!!','https://m.sedaily.com/PhotoViewer/1VQRPADKLV/1,171717171717171717171717',0,0,sysdate);
 
 alter table review add re_date date not null;
 
@@ -202,13 +200,14 @@ and mu_al_id = al_id;
 
 --댓글
 
-create comment {
+create table review_comment (
 	co_id number(10) primary key,
-	co_au_id number(10) not null,
+	co_au_id varchar2(10 char) not null,
 	co_re_id number(10) not null,
 	co_text varchar2(500 char) not null
-}
+);
 
+create sequence re_comment_seq;
 
 
 insert into artist values(

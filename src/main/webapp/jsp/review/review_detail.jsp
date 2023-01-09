@@ -45,6 +45,13 @@
 		<button onclick="location.href='ReviewUpdateC?no=${review.id}'">수정하기</button>
 		<button onclick="location.href='ReviewDelC?no=${review.id}'">삭제하기</button>
 	</div>
+	<div id="reviewDetail_comment">
+	<form action="ReviewCommentC"  >
+	<span>${r }</span>
+		<textarea name="contents"></textarea>
+		<button>전송</button>
+		</form>
+	</div>
 </div>
 <script src="https://kit.fontawesome.com/772d40e343.js" crossorigin="anonymous"></script>
 </body>
