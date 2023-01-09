@@ -18,18 +18,24 @@
 		<div class="reviewDetail_row_200">${review.name }</div>
 		<div id="reviewDetail_row_viewsLike">
 			<div class="reviewDetail_viewsLike_items"><i class="fa-solid fa-eye"></i></div>
-			<div class="reviewDetail_viewsLike_items">${review.view }</div>
+			<div class="reviewDetail_viewsLike_items">${review.view +1 }</div>
 			<div class="reviewDetail_viewsLike_items"><button onclick=""><i class="fa-regular fa-thumbs-up"></i></button></div>
 			<div class="reviewDetail_viewsLike_items">${review.like }</div>
 		</div>
 	</div>
 	<div class="reviewReg_table_row">
-		<div class="reviewReg_row_index">Photo</div>
-		<div class="reviewDetail_row_200"><img src="${review.img }" id="reviewDetail_row_img"><a href="${review.img }" target="blank"><i class="fa-solid fa-magnifying-glass-plus"></i></a></div>
+		<div class="reviewReg_row_index">Writer</div>
+		<div class="reviewDetail_row_200">
+		${review.au_id }
+		</div>
 		<div class="reviewReg_row_index">Date</div>
 		<div class="reviewDetail_row_100">
 		<fmt:formatDate value="${review.date }" type="both" pattern="yyyy-MM-dd hh:mm:ss"></fmt:formatDate>
 		</div>
+	</div>
+	<div class="reviewReg_table_row">
+		<div class="reviewReg_row_index">Photo</div>
+		<div class="reviewDetail_row_400"><img src="${review.img }" id="reviewDetail_row_img"><a href="${review.img }" target="blank"><i class="fa-solid fa-magnifying-glass-plus"></i></a></div>
 	</div>
 	<div class="reviewReg_table_row">
 		<div class="reviewReg_row_index">Content</div>

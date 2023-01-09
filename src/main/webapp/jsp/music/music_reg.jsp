@@ -34,7 +34,7 @@
 			<h1>등록된 링크가 없습니다.</h1>
 		</c:when>
 		<c:otherwise>
-			<h1>${music.link}</h1>
+			<iframe width="560" height="315" src="${music.link}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 		</c:otherwise>
 	</c:choose>
 </body>

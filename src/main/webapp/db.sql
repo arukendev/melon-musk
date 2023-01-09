@@ -1,5 +1,8 @@
 --테이블 삭제
-drop table review_comment cascade constraint purge;
+drop table artist cascade constraint purge;
+
+--테이블 안에 모든 항목 삭제
+delete artist;
 
 --테이블 컬럼 추가
 --ALTER TABLE 테이블명 ADD 컬럼명 number(10) not null;
@@ -113,7 +116,8 @@ create table playlist(
 	pl_id number(10) primary key,
 	pl_name varchar2(20 char) not null,
 	pl_view number(10) not null,
-	pl_like number(10) not null
+	pl_like number(10) not null,
+	pl_date date not null
 );
 
 insert into playlist values(

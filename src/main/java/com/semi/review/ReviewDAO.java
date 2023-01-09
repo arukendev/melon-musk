@@ -7,7 +7,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
+import com.semi.auth.Auth;
 import com.semi.main.DBManager;
 import com.semi.review.Review;
 
@@ -53,7 +55,9 @@ public class ReviewDAO {
 		}
 
 	public static void reviewReg(HttpServletRequest request) {
-		
+		HttpSession hs = request.getSession();
+		Auth a =(Auth)hs.getAttribute("account");
+		request.setAttribute("a", a);
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		
@@ -61,16 +65,17 @@ public class ReviewDAO {
 			request.setCharacterEncoding("utf-8");
 
 			String sql = "insert into review values(review_seq.nextval,"
-					+ "?, ?, ?, 0, 0, sysdate)";
+					+ "?, ?, ?, 0, 0, sysdate, ?)";
 
 			con = DBManager.connect();
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, request.getParameter("name"));
 			pstmt.setString(2, request.getParameter("img"));
 			pstmt.setString(3, request.getParameter("text"));
+			pstmt.setString(4, a.getAu_id());
 			
 			if(pstmt.executeUpdate() == 1) {
-				System.out.println("�����ϼ���");
+				System.out.println("등록성공");
 			}
 			
 			getReview2(request);
@@ -115,7 +120,7 @@ public class ReviewDAO {
 			rs.next();
 			int viewCnt = rs.getInt("re_view");
 			viewCnt++;
-			Review r = new Review(rs.getInt("re_id"), rs.getString("re_name"), rs.getString("re_img"), rs.getString("re_text"), viewCnt, rs.getInt("re_like"), rs.getDate("re_date"));
+			Review r = new Review(rs.getInt("re_id"), rs.getString("re_name"), rs.getString("re_img"), rs.getString("re_text"), rs.getDate("re_date"), rs.getInt("re_view"), rs.getInt("re_like"),  rs.getString("re_au_id"));
 			countUpdate(viewCnt, rs.getInt("re_id"));
 			request.setAttribute("review", r);
 			
@@ -143,8 +148,8 @@ public class ReviewDAO {
 			rs.next();
 			int viewCnt = rs.getInt("re_view");
 			viewCnt++;
-			Review r = new Review(rs.getInt("re_id"), rs.getString("re_name"), rs.getString("re_img"), rs.getString("re_text"), viewCnt, rs.getInt("re_like"), rs.getDate("re_date"));
 			countUpdate(viewCnt, rs.getInt("re_id"));
+			Review r = new Review(rs.getInt("re_id"), rs.getString("re_name"), rs.getString("re_img"), rs.getString("re_text"), rs.getDate("re_date"), rs.getInt("re_view"), rs.getInt("re_like"), rs.getString("re_au_id"));
 			request.setAttribute("review", r);
 			
 		} catch (Exception e) {
@@ -218,6 +223,29 @@ public class ReviewDAO {
 			e.printStackTrace();
 		} finally {
 			DBManager.close(con, pstmt, null);
+		}
+		
+	}
+
+	public static void getReview3(HttpServletRequest request) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		String sql = "select * from review where re_id = ?";
+		try {
+			con = DBManager.connect();
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, request.getParameter("no"));
+			rs = pstmt.executeQuery();
+			rs.next();
+			Review r = new Review(rs.getInt("re_id"), rs.getString("re_name"), rs.getString("re_img"), rs.getString("re_text"), rs.getDate("re_date"), rs.getInt("re_view"), rs.getInt("re_like"),  rs.getString("re_au_id"));
+			request.setAttribute("review", r);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBManager.close(con, pstmt, rs);
 		}
 		
 	}

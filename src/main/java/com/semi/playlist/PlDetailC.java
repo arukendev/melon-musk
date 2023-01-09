@@ -19,10 +19,8 @@ public class PlDetailC extends HttpServlet {
 	
 		
 		AuthDAO.loginCheck(request);
-		//Ŭ���� �÷��̸���Ʈ�� �뷡���� ���� ���� ��ȸ
 		PlaylistDAO.getRdao().getPlaylist(request);
 		
-		//����?
 		request.setAttribute("contentPage", "jsp/playlist/playlistDetail.jsp");	
 		request.getRequestDispatcher("index.jsp").forward(request, response);
 	
