@@ -14,25 +14,25 @@
 	  		
 	  		<div class="profile_content">
 	  			<div id="profile_img">
-					<img src="${account.au_img}">
+					<img src="${sessionScope.account.au_img}">
 	  			</div>
 	  		</div>
 	  		<div class="profile_content">
 	  			<div class="profile_title">Name</div>
-	  			<div class="profile_result">${account.au_name}</div>
+	  			<div class="profile_result">${sessionScope.account.au_name}</div>
 	  		</div>
 	  		<div class="profile_content">
 	  			<div class="profile_title">ID</div>
-	  			<div class="profile_result">${account.au_id}</div>
+	  			<div class="profile_result">${sessionScope.account.au_id}</div>
 	  		</div>
 	  		
 	  		<div class="profile_content">
 	  			<div class="profile_title">Interest</div>
-	  			<div class="profile_result">${account.au_interest}</div>
+	  			<div class="profile_result">${sessionScope.account.au_interest}</div>
 	  		</div>
 	  		<div class="profile_content">
 	  			<div class="profile_title">Introduce</div>
-	  			<div class="profile_result">${account.au_introduce}</div>
+	  			<div class="profile_result">${sessionScope.account.au_introduce}</div>
 	  		</div>
 	  		<div>
 	  			<button class="profile_button" onclick="location.href='UpdateC'">수정</button>

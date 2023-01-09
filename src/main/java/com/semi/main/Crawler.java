@@ -206,6 +206,10 @@ public class Crawler {
 			String name = nameElm.text().replace("아티스트명", "");
 			String img = imgElm.attr("src");
 			
+			if (img.equals("https://cdnimg.melon.co.kr")) {
+				img = "none";
+			}
+			
 			a.setId(request.getParameter("artistId"));
 			a.setName(name);
 			a.setImg(img);
