@@ -18,6 +18,10 @@
 			<div><input class="reviewReg_row_input" name="name"/></div>
 		</div>
 		<div class="reviewReg_table_row">
+			<div class="reviewReg_row_index">Writer</div>
+			<div><div class="reviewReg_row_writer" name="auth">${a.au_id }</div></div>
+		</div>
+		<div class="reviewReg_table_row">
 			<div class="reviewReg_row_index">Photo Link</div>
 			<div><input class="reviewReg_row_input" name="img"/></div>
 		</div>

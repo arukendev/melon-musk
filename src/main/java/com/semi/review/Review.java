@@ -10,20 +10,22 @@ public class Review {
 	private Date date;
 	private int view;
 	private int like;
+	private String au_id;
 	
 	public Review() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Review(int id, String name, String img, String text, int view, int like, Date date) {
+	public Review(int id, String name, String img, String text, Date date, int view, int like, String au_id) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.img = img;
 		this.text = text;
+		this.date = date;
 		this.view = view;
 		this.like = like;
-		this.date = date;
+		this.au_id = au_id;
 	}
 
 	public int getId() {
@@ -58,6 +60,14 @@ public class Review {
 		this.text = text;
 	}
 
+	public Date getDate() {
+		return date;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
+	}
+
 	public int getView() {
 		return view;
 	}
@@ -74,13 +84,13 @@ public class Review {
 		this.like = like;
 	}
 
-	public Date getDate() {
-		return date;
+	public String getAu_id() {
+		return au_id;
 	}
 
-	public void setDate(Date date) {
-		this.date = date;
+	public void setAu_id(String au_id) {
+		this.au_id = au_id;
 	}
-	
+
 	
 }
