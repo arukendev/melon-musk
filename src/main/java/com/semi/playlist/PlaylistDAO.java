@@ -25,7 +25,7 @@ public class PlaylistDAO {
 	}
 
 
-	private  ArrayList<Playlist> playlists ;
+	private  ArrayList<Playlist> playlists;
 	private  ArrayList<PlaylistMusic> playlistmusics ;
 	private  ArrayList<Music> musics ;
 	
@@ -79,7 +79,7 @@ public class PlaylistDAO {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "select * from playlist ";
+		String sql = "select * from playlist";
 		try {
 				con = DBManager.connect();
 				pstmt = con.prepareStatement(sql);
