@@ -191,6 +191,15 @@ select al_img, mu_name, ar_name from album, music, artist where mu_ar_id = mu_id
 and al_ar_id = ar_id
 and mu_al_id = al_id;
 
+--
+select pl_name,al_img, mu_name, ar_name, mu_lyrics from playlist, playlist_music, album, music, artist 
+where pm_pl_id = pl_id and pm_mu_id = mu_id and mu_ar_id = ar_id and mu_al_id = al_id and pl_id = 1;
+
+
+
+
+
+
 
 
 
