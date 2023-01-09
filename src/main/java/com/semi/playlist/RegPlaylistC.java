@@ -18,9 +18,7 @@ public class RegPlaylistC extends HttpServlet {
 	
 	AuthDAO.loginCheck(request);
 	
-	//�ø��� ����� ��� ���� ��ȸ
 	PlaylistDAO.getRdao().getAllPlMusic(request);
-	//�ø������ �������� �̵�
 	request.setAttribute("contentPage", "jsp/playlist/regPlaylist.jsp");
 	request.getRequestDispatcher("index.jsp").forward(request, response);
 	
