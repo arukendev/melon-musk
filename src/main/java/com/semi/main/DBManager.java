@@ -16,7 +16,7 @@ public class DBManager {
 		//재현 c##ljh1004 ljh1004
 		//우영
 		//재호 c##ojh1004 ojh1004
-		//경록
+		//경록 c##pkr pkr
 		//승명
 
 	}

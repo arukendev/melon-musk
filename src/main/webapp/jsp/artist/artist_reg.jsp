@@ -10,7 +10,9 @@
 <body>
 	<h1>${artist.name}</h1>
 	<c:forEach var="m" items="${members}">
-		<a href="ArtistC?artistId=${m.id}">${m.name}</a>
+		<c:if test="${m.name != 'none'}">
+			<a href="ArtistC?artistId=${m.id}">${m.name}</a>
+		</c:if>
 	</c:forEach>
 	<img src="${artist.img}">
 	<h1>활동유형 : ${artist.type}</h1>
@@ -23,7 +25,14 @@
 	<c:if test="${artist.birth != 'none'}">
 		<h1>생일 : ${artist.birth}</h1>
 	</c:if>
-	<div>가수 정보</div>
-	<div>${artist.info}</div>
+	<h1>아티스트 정보</h1>
+	<c:choose>
+		<c:when test="${artist.info eq 'none'}">
+			<h1>등록된 가수 정보가 없습니다.</h1>
+		</c:when>
+		<c:otherwise>
+			<h1>${artist.info}</h1>
+		</c:otherwise>
+	</c:choose>
 </body>
 </html>
