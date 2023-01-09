@@ -72,8 +72,8 @@ public class AuthDAO {
 					
 					//id,name 
 					Auth a = new Auth();
-					a.setAu_id(rs.getString("userid"));
-					a.setAu_pw(rs.getString("userpw"));
+					a.setAu_id(rs.getString("au_id"));
+					a.setAu_pw(rs.getString("au_pw"));
 				//	a.setAu_addr(rs.getString("a_addr"));
 				//a.setAu_gender(rs.getString("a_gender"));
 					a.setAu_name(rs.getString("au_name"));
