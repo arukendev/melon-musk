@@ -1,5 +1,5 @@
 --테이블 삭제
-drop table music cascade constraint purge;
+drop table playlist_music cascade constraint purge;
 
 --테이블 컬럼 추가
 --ALTER TABLE 테이블명 ADD 컬럼명 number(10) not null;
