@@ -46,9 +46,8 @@ public class AuthDAO {
 		String userid= request.getParameter("id");
 		String userpw= request.getParameter("pw");
 		
-		//���� ����� ����Ǹ� �Ʒ��� ������ �Ƿ����� ��
-		String iddd=(String) request.getAttribute("iddd");
-		String pwww= (String)request.getAttribute("pwww");
+		String iddd = (String) request.getAttribute("iddd");
+		String pwww = (String) request.getAttribute("pwww");
 		
 		if (iddd!=null) {
 			userid = iddd;
@@ -58,7 +57,7 @@ public class AuthDAO {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "select *from auth where au_id=?";
+		String sql = "select * from auth where au_id=?";
 		
 		try {
 			con = DBManager.connect();
@@ -69,12 +68,12 @@ public class AuthDAO {
 			if (rs.next()) {
 				
 				if (userpw.equals(rs.getString("au_pw"))) {
-					request.setAttribute("r","�α��μ���");
+					request.setAttribute("r","로그인 성공");
 					
 					//id,name 
 					Auth a = new Auth();
-					a.setAu_id(rs.getString("au_id"));
-					a.setAu_pw(rs.getString("au_pw"));
+					a.setAu_id(rs.getString("userid"));
+					a.setAu_pw(rs.getString("userpw"));
 				//	a.setAu_addr(rs.getString("a_addr"));
 				//a.setAu_gender(rs.getString("a_gender"));
 					a.setAu_name(rs.getString("au_name"));
@@ -83,16 +82,16 @@ public class AuthDAO {
 					a.setAu_img(rs.getString("au_img"));
 				
 					
-			HttpSession hs =request.getSession();
-			hs.setAttribute("account", a);
-			hs.setMaxInactiveInterval(30*10);
+					HttpSession hs = request.getSession();
+					hs.setAttribute("account", a);
+					hs.setMaxInactiveInterval(60 * 10);
 				}else {
-					request.setAttribute("r","��й�ȣ����");
+					request.setAttribute("r","비번에러");
 					request.setAttribute("contentPage", "jsp/auth/login.jsp");
 
 				}
 			}else {
-				request.setAttribute("r","���� ���̵�");
+				request.setAttribute("r","없는아이디");
 				request.setAttribute("contentPage", "jsp/auth/login.jsp");
 
 			}
@@ -109,21 +108,22 @@ public class AuthDAO {
 
 	public static void logout(HttpServletRequest req) {
 		
-		//�α׾ƿ��ϴ� ��
-		//���� ���̱�
+		//로그아웃하는 일
+				//세션 죽이기
 		
 		HttpSession hs = req.getSession();
 		
 		hs.setAttribute("account", null);
 		//hs.removeAttribute("account");
-		//hs.invalidate();
-		//���ʿ� ����������� ���ų�, �����ð� ����
+				//hs.invalidate();
+				//애초에 만들어진적도 없거나, 설정시간 만료
 		loginCheck(req);
 	}
 
 
 	public static void setAccount(HttpServletRequest request) {
-		//�����ϴ� ��-crud	-c
+
+		//가입하는 일-crud	-c
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		String sql = "insert into auth values(?,?,?,?,?,?)";
@@ -131,7 +131,7 @@ public class AuthDAO {
 			con = DBManager.connect();
 			pstmt = con.prepareStatement(sql);
 			
-			String path = request.getSession().getServletContext().getRealPath("jsp/auth/files");
+			String path = request.getSession().getServletContext().getRealPath("files/auth");
 			
 			
 			MultipartRequest mr = new MultipartRequest(request,path,20*1024*1024,"utf-8",new DefaultFileRenamePolicy());
@@ -154,7 +154,7 @@ public class AuthDAO {
 				interest2 += s+"!";//food!excer!game,dev
 			}
 			}else {
-				interest2="���ɻ����";
+				interest2="관심사없음";
 			}
 			
 			if (introduce.isEmpty()) {
@@ -177,15 +177,15 @@ public class AuthDAO {
 		//	pstmt.setString(6, addr);
 			pstmt.setString(4, interest2);
 			pstmt.setString(5, introduce);
-			pstmt.setString(6, "jsp/auth/files/"+file);
+			pstmt.setString(6, file);
 			
 			if (pstmt.executeUpdate()==1) {
-				System.out.println("���Լ���");
-				request.setAttribute("r", "���Լ���");
+				System.out.println("가입성공");
+				request.setAttribute("r", "가입성공!!");
 			}
 			
-			//���� �� �� ����
-		
+			//받은 값 다 띄우기
+			
 			//request.getParameter(sql)
 		} catch (Exception e) {
 		e.printStackTrace();
@@ -202,7 +202,7 @@ public class AuthDAO {
 		Auth a =(Auth)request.getSession().getAttribute("account");
 		
 	if(a!=null){
-		String interest = a.getAu_interest();//�丮!��ȭ!����!����!
+		String interest = a.getAu_interest();//요리!영화!게임!개발!
 		String[]interest2=	interest.split("!");		
 		request.setAttribute("inter", interest2);
 		return 1;
@@ -225,11 +225,11 @@ public class AuthDAO {
 			pstmt.setString(1, a.getAu_id());
 			
 			if (pstmt.executeUpdate()==1) {
-				request.setAttribute("r", "Ż�𼺰�");
+				request.setAttribute("r", "탈퇴성공");
 				logout(request);
 			}
 		} catch (Exception e) {
-			request.setAttribute("r", "Ż�����");
+			request.setAttribute("r", "탈퇴실패");
 			e.printStackTrace();
 		}finally {
 			DBManager.close(con, pstmt, null);
@@ -242,7 +242,7 @@ public class AuthDAO {
 		
 		Connection con = null;
 		PreparedStatement pstmt = null;
-		String sql = "update auth set au_img ,au_name=?,au_pw=?,au_interest=?,au_introduce=? where au_id=?";
+		String sql = "update auth set au_img=? ,au_name=?,au_pw=?,au_interest=?,au_introduce=? where au_id=?";
 	
 		HttpSession hs = request.getSession();
 		Auth a = (Auth) hs.getAttribute("account");
@@ -252,7 +252,7 @@ public class AuthDAO {
 			con = DBManager.connect();
 			pstmt = con.prepareStatement(sql);
 			
-			String path = request.getSession().getServletContext().getRealPath("jsp/auth/files");
+			String path = request.getSession().getServletContext().getRealPath("files/auth");
 			
 			
 			MultipartRequest mr = new MultipartRequest(request,path,20*1024*1024,"utf-8",new DefaultFileRenamePolicy());
@@ -263,7 +263,7 @@ public class AuthDAO {
 			String[] interest = mr.getParameterValues("interest");
 			String introduce = mr.getParameter("introduce");
 			String oldFile = mr.getParameter("img");//11.jpg��������
-			String newFile =mr.getFilesystemName("img2");//������ ���Ӱ� �߰�	
+			String newFile =mr.getFilesystemName("img2");//사진을 새롭게 추가	
 			
 			
 //			String name = request.getParameter("name");
@@ -287,7 +287,7 @@ public class AuthDAO {
 				interest2 +=s+"!";//food!excer!game,dev
 			}
 			}else {
-				interest2="���ɻ����";
+				interest2="관심사없음";
 			}
 			
 			if (introduce.equals("")) {
@@ -309,9 +309,8 @@ public class AuthDAO {
 				pstmt.setString(1, oldFile);
 				a.setAu_img(oldFile);
 			} else {				
-				pstmt.setString(7, "jsp/auth/files/" + newFile);
 				a.setAu_img(newFile);
-				oldFile = oldFile.replace("jsp/auth/files/", "");
+				oldFile = oldFile.replace("files/auth/", "");
 				String delFile = path + "/" + oldFile;
 				File f = new File(delFile);
 				f.delete();
@@ -320,8 +319,8 @@ public class AuthDAO {
 			pstmt.setString(6, a.getAu_id());
 		if(a!=null) {	
 			if (pstmt.executeUpdate()==1) {
-				System.out.println("��������");
-				request.setAttribute("r", "��������");
+				System.out.println("수정성공");
+				request.setAttribute("r", "수정성공");
 			
 				request.setAttribute("iddd", a.getAu_id());
 				request.setAttribute("pwww", pw);
@@ -338,8 +337,8 @@ public class AuthDAO {
 		
 			//request.getParameter(sql)
 		} catch (Exception e) {
-			request.setAttribute("r", "����!");
-			System.out.println("����");
+			request.setAttribute("r", "실패!");
+			System.out.println("실패");
 		e.printStackTrace();
 		}finally {
 			DBManager.close(con, pstmt, null);
@@ -349,20 +348,19 @@ public class AuthDAO {
 	}
 
 
-//	public static void getAccount(HttpServletRequest request) {
-//			//1.���ǰ�������
-//		Account a =(Account)request.getSession().getAttribute("account");
-//			a.getA_id();
-//			//2. �Ķ���� �Ǿ��ֱ�
-//			request.getParameter("id");
-//			
-//		Connection con = null;
-//		PreparedStatement pstmt = null;
-//		String sql = "select *from";
-//		
-//	}
+//public static void getAccount(HttpServletRequest request) {
+////1.세션가져오기
+//Account a =(Account)request.getSession().getAttribute("account");
+//a.getA_id();
+////2. 파라미터 실어주기
+//request.getParameter("id");
+//
+//Connection con = null;
+//PreparedStatement pstmt = null;
+//String sql = "select *from";
+//
+//}
 
-	
 	
 	
 

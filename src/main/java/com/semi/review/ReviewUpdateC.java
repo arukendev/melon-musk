@@ -13,7 +13,7 @@ import com.semi.auth.AuthDAO;
 public class ReviewUpdateC extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		AuthDAO.loginCheck(request);
-		ReviewDAO.getReview(request);
+		ReviewDAO.getReview3(request);
 		
 		request.setAttribute("contentPage", "jsp/review/review_update.jsp");
 		request.getRequestDispatcher("index.jsp").forward(request, response);

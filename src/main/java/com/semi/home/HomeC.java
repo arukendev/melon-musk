@@ -13,7 +13,8 @@ import com.semi.auth.AuthDAO;
 public class HomeC extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		AuthDAO.loginCheck(request);
-		request.setAttribute("contentPage", "jsp/main/main.jsp");
+		request
+		.setAttribute("contentPage", "jsp/main/main.jsp");
 		request.getRequestDispatcher("index.jsp").forward(request, response);
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
