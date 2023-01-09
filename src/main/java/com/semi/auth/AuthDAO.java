@@ -46,9 +46,8 @@ public class AuthDAO {
 		String userid= request.getParameter("id");
 		String userpw= request.getParameter("pw");
 		
-		//���� ����� ����Ǹ� �Ʒ��� ������ �Ƿ����� ��
-		String iddd=(String) request.getAttribute("iddd");
-		String pwww= (String)request.getAttribute("pwww");
+		String iddd = (String) request.getAttribute("iddd");
+		String pwww = (String) request.getAttribute("pwww");
 		
 		if (iddd!=null) {
 			userid = iddd;
@@ -58,7 +57,7 @@ public class AuthDAO {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "select *from auth where au_id=?";
+		String sql = "select * from auth where au_id=?";
 		
 		try {
 			con = DBManager.connect();
@@ -69,12 +68,12 @@ public class AuthDAO {
 			if (rs.next()) {
 				
 				if (userpw.equals(rs.getString("au_pw"))) {
-					request.setAttribute("r","�α��μ���");
+					request.setAttribute("r","로그인 성공");
 					
 					//id,name 
 					Auth a = new Auth();
-					a.setAu_id(rs.getString("au_id"));
-					a.setAu_pw(rs.getString("au_pw"));
+					a.setAu_id(rs.getString("userid"));
+					a.setAu_pw(rs.getString("userpw"));
 				//	a.setAu_addr(rs.getString("a_addr"));
 				//a.setAu_gender(rs.getString("a_gender"));
 					a.setAu_name(rs.getString("au_name"));
@@ -83,16 +82,16 @@ public class AuthDAO {
 					a.setAu_img(rs.getString("au_img"));
 				
 					
-			HttpSession hs =request.getSession();
-			hs.setAttribute("account", a);
-			hs.setMaxInactiveInterval(30*10);
+					HttpSession hs = request.getSession();
+					hs.setAttribute("account", a);
+					hs.setMaxInactiveInterval(60 * 10);
 				}else {
-					request.setAttribute("r","��й�ȣ����");
+					request.setAttribute("r","비밀번호 오류");
 					request.setAttribute("contentPage", "jsp/auth/login.jsp");
 
 				}
 			}else {
-				request.setAttribute("r","���� ���̵�");
+				request.setAttribute("r","없는 계정");
 				request.setAttribute("contentPage", "jsp/auth/login.jsp");
 
 			}
@@ -109,21 +108,17 @@ public class AuthDAO {
 
 	public static void logout(HttpServletRequest req) {
 		
-		//�α׾ƿ��ϴ� ��
-		//���� ���̱�
 		
 		HttpSession hs = req.getSession();
 		
 		hs.setAttribute("account", null);
 		//hs.removeAttribute("account");
 		//hs.invalidate();
-		//���ʿ� ����������� ���ų�, �����ð� ����
 		loginCheck(req);
 	}
 
 
 	public static void setAccount(HttpServletRequest request) {
-		//�����ϴ� ��-crud	-c
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		String sql = "insert into auth values(?,?,?,?,?,?)";
@@ -202,7 +197,7 @@ public class AuthDAO {
 		Auth a =(Auth)request.getSession().getAttribute("account");
 		
 	if(a!=null){
-		String interest = a.getAu_interest();//�丮!��ȭ!����!����!
+		String interest = a.getAu_interest();
 		String[]interest2=	interest.split("!");		
 		request.setAttribute("inter", interest2);
 		return 1;

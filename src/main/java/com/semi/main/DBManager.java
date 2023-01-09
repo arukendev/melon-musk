@@ -11,13 +11,13 @@ public class DBManager {
 	public static Connection connect() throws SQLException {
 	
 		String url = "jdbc:oracle:thin:@localhost:1521:xe";
-		return DriverManager.getConnection(url, "c##ljh1004", "ljh1004");
+		return DriverManager.getConnection(url, "c##bsm1004", "bsm1004");
 		
 		//재현 c##ljh1004 ljh1004
 		//우영
 		//재호
 		//경록
-		//승명
+		//승명 c##sm1004 sm1004
 
 	}
 	public static void close(Connection con, PreparedStatement pstmt, ResultSet rs) {
