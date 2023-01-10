@@ -249,6 +249,31 @@ public class ReviewDAO {
 		}
 		
 	}
+
+	public static void likeUpdate(HttpServletRequest request) {
+		int likes = Integer.parseInt(request.getParameter("likes"));
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		
+		try {
+			con = DBManager.connect();
+			pstmt = con.prepareStatement(
+					"update review set re_like = ? where = re_id= ?"
+					);
+			
+			pstmt.setInt(1, Integer.parseInt(request.getParameter("likes")));
+			pstmt.setString(2, request.getParameter("id"));
+			
+			System.out.println(request.getParameter("likes") + request.getParameter("id"));
+			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		
+	}
 	
 	
 
