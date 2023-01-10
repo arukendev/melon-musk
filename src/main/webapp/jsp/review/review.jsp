@@ -21,12 +21,12 @@
 </div>
 </div>
 <div id="review_table2">
-<c:forEach var="review" items="${reviews }">
+<c:forEach var="review" items="${reviews }" varStatus="status">
 	<div class="review_table2_row">
-		<div>글번호(방법 고민중)</div>
+		<div style="width:100px; text-align: center;">${status.count }</div>
 		<a href="ReviewDetailC?no=${review.id }"><div>${review.name }	[코멘트수??]</div></a>
 		<div>${review.date }</div>
-		<div>${review.view }</div>
+		<div style="width:50px; text-align: center">${review.view }</div>
 	</div>
 </c:forEach>
 

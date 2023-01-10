@@ -8,22 +8,33 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<c:forEach var="c" items="${charts}">
-		<div>
-			<div>
-				<span>${c.rank}</span>
+	<div class="list_title">
+		<h1>TOP 100</h1>
+	</div>
+	<div class="list_subtitle">
+		<h6>Powered by</h6>
+		<img src="https://cdnimg.melon.co.kr/resource/image/web/common/logo_melon142x99.png">
+	</div>
+	<div class="list_container">
+		<c:forEach var="c" items="${charts}">
+			<div class="list_boxs" onclick="location.href='MusicC?musicId=${c.musicId}'">
+				<div class="list_boxs_box">
+					<span>${c.rank}</span>
+				</div>
+				<div class="list_boxs_box">
+					<img src="${c.img}">
+				</div>
+				<div class="list_boxs_box">
+					<a href="MusicC?musicId=${c.musicId}">${c.music}</a>
+				</div>
+				<div class="list_boxs_box">
+					<a href="ArtistC?artistId=${c.artistId}">${c.artist}</a>
+				</div>
+				<div class="list_boxs_box">
+					<a href="AlbumC?albumId=${c.albumId}">${c.album}</a>
+				</div>
 			</div>
-			<div>
-				<img src="${c.img}">
-			</div>
-			<div>
-				<a href="MusicC?musicId=${c.musicId}">${c.music}</a>
-				<a href="ArtistC?artistId=${c.artistId}">${c.artist}</a>
-			</div>
-			<div>
-				<a href="AlbumC?albumId=${c.albumId}">${c.album}</a>
-			</div>
-		</div>
-	</c:forEach>
+		</c:forEach>
+	</div>
 </body>
 </html>

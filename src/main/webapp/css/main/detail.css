@@ -1,0 +1,49 @@
+@charset "UTF-8";
+
+.detail_header {
+  margin: 30px 0;
+  width: 1170px;
+  min-width: 1170px;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 1fr 282px;
+  grid-template-rows: 150px 132px;
+}
+
+.detail_titles_title {
+  font-size: 40px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.artist_members {
+  color: var(--gray);
+}
+
+.detail_header_info {
+  font-size: 18px;
+}
+
+.detail_header_img {
+  grid-column: 2 / 3;
+  grid-row: 1 / span 2;
+}
+
+.detail_header_img img {
+  width: 282px;
+  border-radius: 22px;
+  box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.2);
+}
+
+.detail_main {
+  width: inherit;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.detail_main h1 {
+  font-size: 24px;
+  font-weight: 400;
+  margin-bottom: 20px;
+  color: #e1b12c;
+}

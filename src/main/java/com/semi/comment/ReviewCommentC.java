@@ -11,13 +11,14 @@ import com.semi.auth.AuthDAO;
 import com.semi.review.ReviewDAO;
 
 
+
 @WebServlet("/ReviewCommentC")
 public class ReviewCommentC extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		AuthDAO.loginCheck(request);
-		CommetDAO.setComment(request);
-		ReviewDAO.getReview(request);
+		CommentDAO.setComment(request);
+		
 		request.setAttribute("contentPage", "jsp/review/review_detail.jsp");
 		request.getRequestDispatcher("index.jsp").forward(request, response);
 	}

@@ -11,7 +11,7 @@ function call() {
   }
 
   if (containKR(id) || lessThan(id, 5)) {
-    alert("ID 오류");
+    alert("ID는5자 이상 입력해주세요!");
     id.focus();
     return false;
   }
@@ -20,7 +20,7 @@ function call() {
     lessThan(pw, 3) ||
     notContains(pw)
   ) {
-    alert("PW 오류");
+    alert("PW는 대문자 소문자 숫자 섞어주세요!");
     pw.focus();
     pw.value = "";
     pwConfirm.value = "";

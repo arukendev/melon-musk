@@ -9,7 +9,7 @@ import com.semi.auth.Auth;
 import com.semi.main.DBManager;
 import com.semi.review.Review;
 
-public class CommetDAO {
+public class CommentDAO {
 
 	public static void setComment(HttpServletRequest request) {
 		
@@ -29,11 +29,9 @@ public class CommetDAO {
 			pstmt.setString(3, commenttext);
 			if (pstmt.executeUpdate() == 1) {
 				request.setAttribute("r","댓글 등록완료");
-				request.setAttribute("review", review);
 			}
 		} catch (Exception e) {
-			request.setAttribute("r","로그인 해주세요!");
-			request.setAttribute("review", review);
+			request.setAttribute("r","등록 실패");
 			e.printStackTrace();
 		}finally {
 			

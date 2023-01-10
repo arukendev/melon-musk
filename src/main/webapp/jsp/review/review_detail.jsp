@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script type="text/javascript" src="js/review/review.js"></script>
 </head>
 <body>
 <div id="reviewReg_table">
@@ -19,7 +20,7 @@
 		<div id="reviewDetail_row_viewsLike">
 			<div class="reviewDetail_viewsLike_items"><i class="fa-solid fa-eye"></i></div>
 			<div class="reviewDetail_viewsLike_items">${review.view +1 }</div>
-			<div class="reviewDetail_viewsLike_items"><button onclick=""><i class="fa-regular fa-thumbs-up"></i></button></div>
+			<div class="reviewDetail_viewsLike_items"><button id="reviewDetail_items_likeBtn" onclick="pushLike('${a.au_id}',${review.id })"><i class="fa-regular fa-thumbs-up"></i></button></div>
 			<div class="reviewDetail_viewsLike_items">${review.like }</div>
 		</div>
 	</div>
@@ -46,13 +47,14 @@
 		<button onclick="location.href='ReviewDelC?no=${review.id}'">삭제하기</button>
 	</div>
 	<div id="reviewDetail_comment">
-	<form action="ReviewCommentC"  >
-	<span>${r }</span>
-		<textarea name="contents"></textarea>
-		<button>전송</button>
+		<form action="ReviewCommentC" >
+			<span>${r }</span>
+			<textarea name="contents"></textarea>
+			<button>전송</button>
 		</form>
 	</div>
 </div>
 <script src="https://kit.fontawesome.com/772d40e343.js" crossorigin="anonymous"></script>
+
 </body>
 </html>
