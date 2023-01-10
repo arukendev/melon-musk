@@ -5,7 +5,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  color: #dcdde1;
+  color: rgb(0, 0, 0);
   font-size: 16px;
 }
 
@@ -149,7 +149,7 @@
   appearance: none;
   width: 15px;
   height: 15px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 1px solid black;
   border-radius: 3px;
   transition: border 0.1s ease-in-out;
 }

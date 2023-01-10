@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,7 +18,7 @@
       
      <div class="profile_content">
 	  			<div id="profile_img">
-					<img src="${account.au_img}">
+					<img src="files/auth/${account.au_img}">
 	  			</div>
 	  		</div>
 	  		  <div class="items" id="file-box">
@@ -29,22 +28,23 @@
       </div>
       <div class="items" id="name-box">
         <label for="name" class="titles">Name</label>
-        <input type="text" name="name" id="name" placeholder="필수입력" value="${sessionScope.account.au_name}" />
+        <input type="text" name="name" id="name" placeholder="필수입력" value="${sessionScope.account.au_name}"  />
       </div>
       <div class="items" id="id-box">
         <label for="id" class="titles">ID</label>
-        <div id="id"><input hidden name="id" value="${sessionScope.account.au_id}">${sessionScope.account.au_id}</div>
+        <div id="id"><input hidden name="id" value="${sessionScope.account.au_id}">${sessionScope.account.au_id} </div>
       </div>
-      <div class="items" id="pw-box">
+      <div class="items" id="pw-box" >
         <label for="pw" class="titles">Password</label>
         <input
           type="password"
           name="pw"
           id="pw"
           placeholder="대문자, 소문자, 숫자 포함 3자 이상"
+         
         />
       </div>
-      <div class="items" id="pw-confirm-box">
+      <div class="items" id="pw-confirm-box" ">
         <label for="pw-confirm" class="titles">Password Confirm</label>
         <input
           type="password"
@@ -58,13 +58,13 @@
       <div class="items" id="interest-box">
         <label class="titles">Interest</label>
         <div id="check-box">
-          <input id="food" type="checkbox" name="interest" value="k-pop" />
+          <input id="k-pop" type="checkbox" name="interest" value="k-pop" />
           <label for="k-pop" class="contents">k-pop</label>
-          <input id="exercise" type="checkbox" name="interest" value="j-pop" />
+          <input id="j-pop" type="checkbox" name="interest" value="j-pop" />
           <label for="j-pop" class="contents">j-pop</label>
-          <input id="develop" type="checkbox" name="interest" value="메탈" />
+          <input id="메탈" type="checkbox" name="interest" value="메탈" />
           <label for="메탈" class="contents">메탈</label>
-          <input id="travel" type="checkbox" name="interest" value="힙합" />
+          <input id="힙합" type="checkbox" name="interest" value="힙합" />
           <label for="힙합" class="contents">힙합</label>
         </div>
       </div>
@@ -77,8 +77,8 @@
       </div>
     </form>
   	</div>
-    <script src="js/acValueCheck.js"></script>
-    <script src="js/acValidCheck.js"></script>
+    <script src="js/auth/acValueCheck.js?v=<%=System.currentTimeMillis() %>"></script>
+    <script src="js/auth/acValidCheck.js?v=<%=System.currentTimeMillis() %>"></script>
     <script
       src="https://kit.fontawesome.com/6478f529f2.js"
       crossorigin="anonymous"

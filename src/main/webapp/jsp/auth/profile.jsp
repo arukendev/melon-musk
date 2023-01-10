@@ -14,7 +14,7 @@
 	  		
 	  		<div class="profile_content">
 	  			<div id="profile_img">
-					<img src="${sessionScope.account.au_img}">
+					<img src="files/auth/${sessionScope.account.au_img}">
 	  			</div>
 	  		</div>
 	  		<div class="profile_content">

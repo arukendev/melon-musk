@@ -10,12 +10,12 @@
 	<form action="LoginC" method="post">
 	
 	
-	<div id="">
-        <div class="">
+	<div id="login_form">
+        <div class="login_form">
           <label for="id">ID</label>
           <input id="id" name="id" placeholder="ID를 입력해주세요" />
         </div>
-        <div class="">
+        <div class="login_form">
           <label for="pw">Password</label>
           <input
             type="password"
