@@ -25,22 +25,17 @@ public class PlaylistDAO {
 	}
 
 
-	private  ArrayList<Playlist> playlists ;
+	private  ArrayList<Playlist> playlists;
 	private  ArrayList<PlaylistMusic> playlistmusics ;
-	private  ArrayList<Music> musics ;
+	private  ArrayList<PlaylistDBMusic> musics ;
 	
 	
 	public  void getPlaylist(HttpServletRequest request) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "select pl_name,al_img, mu_name, ar_name, mu_lyrics "
-				+ "from playlist, playlist_music, album, music, artist "
-				+ "where pm_pl_id = pl_id "
-				+ "and pm_mu_id = mu_id "
-				+ "and mu_ar_id = ar_id "
-				+ "and mu_al_id = al_id "
-				+ "and pl_id = ?";
+		String sql = "select pl_name,mu_al_img, mu_name, mu_ar_name, mu_lyrics from playlist, playlist_music, music where pm_pl_id = pl_id and pm_mu_id = mu_id and pl_id = ?";
+		
 		try {
 				con = DBManager.connect();
 				pstmt = con.prepareStatement(sql);
@@ -51,9 +46,9 @@ public class PlaylistDAO {
 				while (rs.next()) {
 					playlistmusic = new PlaylistMusic(
 							rs.getString("pl_name")
-							,rs.getString("al_img")
+							,rs.getString("mu_al_img")
 							,rs.getString("mu_name")
-							,rs.getString("ar_name")
+							,rs.getString("mu_ar_name")
 							,rs.getString("mu_lyrics")
 							,request.getParameter("pl_id")
 							);
@@ -79,7 +74,7 @@ public class PlaylistDAO {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "select * from playlist ";
+		String sql = "select * from playlist";
 		try {
 				con = DBManager.connect();
 				pstmt = con.prepareStatement(sql);
@@ -186,48 +181,27 @@ public  void updateReview(HttpServletRequest request) {
 		
 	}
 
-	public void regReview(HttpServletRequest request) {
-		
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		String sql = "insert into review_test values(review_test_seq.nextval,?,?,sysdate)";
-		try {
-				con = DBManager.connect();
-				pstmt = con.prepareStatement(sql);
-				pstmt.setString(1, request.getParameter("title"));
-				pstmt.setString(2, request.getParameter("txt"));
-				
-				if (pstmt.executeUpdate()==1) {
-					request.setAttribute("r", "��ϼ���");
-				}
-				
-		} catch (Exception e) {
-			e.printStackTrace();
-		}finally {
-			DBManager.close(con, pstmt, null);
-		}
-	}
-
-	public void getOnePl() {
-		// TODO Auto-generated method stub
-		
-	}
 
 	public void getAllPlMusic(HttpServletRequest request) {
 
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "select mu_id,ar_id,al_id,al_img,al_name,mu_name, ar_name, mu_lyrics from album, music, artist where mu_ar_id = mu_id and mu_ar_id = ar_id and mu_al_id = al_id";
+		String sql = "select * from music";
 		try {
 			con = DBManager.connect();
 			pstmt = con.prepareStatement(sql);
 			rs=pstmt.executeQuery();
-			Music music = null;
-			musics = new ArrayList<Music>();
+			PlaylistDBMusic music = null;
+			musics = new ArrayList<PlaylistDBMusic>();
 			while (rs.next()) {
+				music = new PlaylistDBMusic(rs.getString("mu_id"),rs.getString("mu_ar_id"),rs.getString("mu_ar_name")
+						, rs.getString("mu_al_id"), rs.getString("mu_al_name"), rs.getString("mu_al_img")
+						, rs.getString("mu_date"), rs.getString("mu_name"), rs.getString("mu_genre")
+						, rs.getString("mu_lyrics"), rs.getString("mu_link"));
 				musics.add(music);
 			}
+			
 			request.setAttribute("musics", musics);
 			
 			
@@ -237,6 +211,27 @@ public  void updateReview(HttpServletRequest request) {
 			DBManager.close(con, pstmt, rs);
 		}
 		
+	}
+
+	public void regPlaylist(HttpServletRequest request) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		String sql = "insert into playlist values(playlist_seq.nextval,?,0,0,sysdate)";
+		try {
+				con = DBManager.connect();
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, request.getParameter("pl_name"));
+				
+				if (pstmt.executeUpdate()==1) {
+					request.setAttribute("r", "등록성공!");
+					System.out.println("등록성공");
+				}
+				
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			DBManager.close(con, pstmt, null);
+		}
 	}
 		
 		
