@@ -46,10 +46,10 @@
 		<button onclick="location.href='ReviewDelC?no=${review.id}'">삭제하기</button>
 	</div>
 	<div id="reviewDetail_comment">
-	<form action="ReviewCommentC"  >
-	<span>${r }</span>
-		<textarea name="contents"></textarea>
-		<button>전송</button>
+		<form action="ReviewCommentC" >
+			<span>${r }</span>
+			<textarea name="contents"></textarea>
+			<button>전송</button>
 		</form>
 	</div>
 </div>

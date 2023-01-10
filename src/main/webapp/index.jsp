@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Melon Musk</title>
+<title>MelonMusk</title>
 <link rel="stylesheet" href="css/index.css">
 <link rel="stylesheet" href="css/review/review.css">
 <link rel="stylesheet" href="css/playlist/playlist.css">
@@ -16,7 +16,7 @@
 			<div id="index_header_hLeft">
 				<div id="index_hleft_title">
 					<a href="HomeC">
-						<h1 id="index_title_h1">Melon Musk</h1>
+						<h1 id="index_title_h1">MelonMusk</h1>
 					</a>
 				</div>
 			</div>
@@ -56,13 +56,15 @@
 		</header>
 	</div>
 	<div id="index_mWrapper">
+		<div id="detail_background">
+		</div>
 		<main>
 			<jsp:include page="${contentPage}"></jsp:include>
 		</main>
 	</div>
 	<div id="index_fWrapper">
 		<footer>
-			<span onclick="">&copy;semi project</span>
+			<span onclick="">&copy;melonmusk</span>
 		</footer>
 	</div>
 	<script type="text/javascript" src="js/index.js"></script>

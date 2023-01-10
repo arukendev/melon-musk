@@ -1,9 +1,11 @@
 @charset "UTF-8";
-@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400&family=Permanent+Marker&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;700&display=swap");
 @import "reset.css";
 @import "variable.css";
 
 @import "main/main.css";
+@import "main/detail.css";
+@import "chart/chart.css";
 
 .hidden {
   display: none;
@@ -15,14 +17,17 @@ body {
   grid-template-rows: 80px 1fr 80px;
   font-family: "Noto Sans KR", sans-serif;
   font-weight: 300;
+  color: var(--black);
 }
 
 a {
   text-decoration: none;
-  color: black;
+  color: var(--black);
 }
 
 header {
+  width: 1170px;
+  min-width: 1170px;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
 }
@@ -54,28 +59,13 @@ main {
 }
 
 #index_mWrapper {
+  position: relative;
   background-color: var(--white);
 }
 
 #index_fWrapper {
   background-color: var(--black);
   color: var(--white);
-}
-
-#index_title_h1 {
-  font-size: 40px;
-  font-family: "Permanent Marker", cursive;
-  background: linear-gradient(
-    45deg,
-    rgba(45, 52, 54, 1) 0%,
-    rgba(33, 140, 116, 1) 20%,
-    rgba(255, 82, 82, 1) 50%,
-    rgba(33, 140, 116, 1) 80%,
-    rgba(45, 52, 54, 1) 100%
-  );
-  color: transparent;
-  background-clip: text;
-  -webkit-background-clip: text;
 }
 
 #index_header_hLeft,
