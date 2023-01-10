@@ -132,7 +132,7 @@ public class AuthDAO {
 			pstmt = con.prepareStatement(sql);
 			
 			String path = request.getSession().getServletContext().getRealPath("files/auth");
-			
+			System.out.println(path);
 			
 			MultipartRequest mr = new MultipartRequest(request,path,20*1024*1024,"utf-8",new DefaultFileRenamePolicy());
 			
@@ -140,8 +140,6 @@ public class AuthDAO {
 			String id = mr.getParameter("id");
 			String pw = mr.getParameter("pw");
 			String name = mr.getParameter("name");
-		//	String gender = mr.getParameter("gender");
-		//	String addr = mr.getParameter("addr");
 			String[] interest = mr.getParameterValues("interest");
 			String introduce = mr.getParameter("introduce");
 			String file = mr.getFilesystemName("file");

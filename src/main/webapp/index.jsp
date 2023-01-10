@@ -9,6 +9,7 @@
 <link rel="stylesheet" href="css/review/review.css">
 <link rel="stylesheet" href="css/playlist/playlist.css">
 <link rel="stylesheet" href="css/auth/loginStyle.css">
+<link rel="stylesheet" href="css/auth/auth.css">
 </head>
 <body>
 	<div id="index_hWrapper">
