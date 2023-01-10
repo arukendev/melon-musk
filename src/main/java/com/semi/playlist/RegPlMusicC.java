@@ -1,4 +1,4 @@
-package com.semi.home;
+package com.semi.playlist;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -9,13 +9,22 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.semi.auth.AuthDAO;
 
-@WebServlet("/HomeC")
-public class HomeC extends HttpServlet {
+/**
+ * Servlet implementation class RegPlMusicC
+ */
+@WebServlet("/RegPlMusicC")
+public class RegPlMusicC extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		//플리에 음악등록을 위한 등록페이지로 이동
 		AuthDAO.loginCheck(request);
-		request.setAttribute("contentPage", "jsp/main/main.jsp");
+		
+		PlaylistDAO.getRdao().getAllPlMusic(request);
+		
+		request.setAttribute("contentPage", "jsp/playlist/regPlaylist.jsp");
 		request.getRequestDispatcher("index.jsp").forward(request, response);
+	
 	}
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	}
 

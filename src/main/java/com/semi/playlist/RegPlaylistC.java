@@ -18,7 +18,6 @@ public class RegPlaylistC extends HttpServlet {
 	
 	AuthDAO.loginCheck(request);
 	
-	PlaylistDAO.getRdao().getAllPlMusic(request);
 	request.setAttribute("contentPage", "jsp/playlist/regPlaylist.jsp");
 	request.getRequestDispatcher("index.jsp").forward(request, response);
 	
@@ -26,6 +25,21 @@ public class RegPlaylistC extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("utf-8");
+	
+		//플리 만들기
+		PlaylistDAO.getRdao().regPlaylist(request);
+		
+		AuthDAO.loginCheck(request);
+		
+		//만든 플리 조회하기
+		//조회한 플리에 음원 등록하기
+		PlaylistDAO.getRdao().getAllPlMusic(request);
+		request.setAttribute("contentPage", "jsp/playlist/regPlaylistMusic.jsp");
+		request.getRequestDispatcher("index.jsp").forward(request, response);
+	
+	
+	
 	}
 
 }

@@ -9,29 +9,28 @@
 <link rel="stylesheet" href="css/playlist/playlist.css">
 </head>
 <body>
-	<div class="playlist_contanier">
-		<div id="playlist_title">
-			<div class="playlist_title_title">나만의 플레이리스트 만들기</div>
-			<div class="playlist_title_title">
-				<a href="RegPlaylistC">[미정]</a>
-			</div>
-		</div>
-		<div id="playlist_content">
-			<c:forEach var="mu" items="${musics }">
-				<div class="playlist_content_playlists">
-					<div class="playlist_content_playlistitem" >
-						<a href="PlDetailC?pl_id=${mu.id}">
-						 <img src="${mu.link }"> </a>
-						</div>
-					<div class="playlist_content_playlistitem">${mu.name} </div>
-					<div class="playlist_content_playlistitem">${mu.arName }</div>
-					<div class="playlist_content_playlistitem">${mu.lyrics }</div>
+	<form action="RegPlaylistC" method="post">
+		<div class="playlist_contanier">
+			<div id="playlist_title">
+				<div class="playlist_title_title">나만의 플레이리스트 만들기</div>
+				<div class="playlist_title_title">
+					<button>[생성]</button>
 				</div>
-			</c:forEach>
-		</div>
+			</div>
+			<div class="playlist_content_playlists">
+				<div class="playlist_content_playlistitem">
+					플레이 리스트 이름 
+				</div>
+				<div class="playlist_content_playlistitem">
+					<input name="pl_name" id="pl_name" type="text">
+				</div>
+			</div>
+			
+			<div id="playlist_content">
 
 		
-
 		</div>
+		</div>
+	</form>
 </body>
 </html>
