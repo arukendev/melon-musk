@@ -33,6 +33,20 @@ text-align: center;
 .playlist_content_playlistitem img{
 height: 50px;
 }
+.playlist_addMusic{
+border: 1px solid red;
+position: absolute;
+top: 91vh;
+height: 100px;
+width: 800px;
+}
+.playlist_addMusic button{
+height: 20px;
+width: 100px;
+}
+
+
+
 
 
 

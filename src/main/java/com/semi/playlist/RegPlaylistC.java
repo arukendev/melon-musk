@@ -33,9 +33,8 @@ public class RegPlaylistC extends HttpServlet {
 		AuthDAO.loginCheck(request);
 		
 		//만든 플리 조회하기
-		//조회한 플리에 음원 등록하기
-		PlaylistDAO.getRdao().getAllPlMusic(request);
-		request.setAttribute("contentPage", "jsp/playlist/regPlaylistMusic.jsp");
+		PlaylistDAO.getRdao().getAllPlaylist(request);
+		request.setAttribute("contentPage", "jsp/playlist/playlist.jsp");	
 		request.getRequestDispatcher("index.jsp").forward(request, response);
 	
 	

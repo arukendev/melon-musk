@@ -34,7 +34,9 @@ public class PlaylistDAO {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "select pl_name,mu_al_img, mu_name, mu_ar_name, mu_lyrics from playlist, playlist_music, music where pm_pl_id = pl_id and pm_mu_id = mu_id and pl_id = ?";
+		String sql = "select pl_name,mu_al_img, mu_name, mu_ar_name, mu_lyrics "
+				+ "from playlist, playlist_music, music "
+				+ "where pm_pl_id = pl_id and pm_mu_id = mu_id and pl_id = ?";
 		
 		try {
 				con = DBManager.connect();
@@ -183,7 +185,10 @@ public  void updateReview(HttpServletRequest request) {
 
 
 	public void getAllPlMusic(HttpServletRequest request) {
-
+		
+		
+		System.out.println(request.getParameter("pl_id"));
+		
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;

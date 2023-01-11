@@ -26,15 +26,41 @@
   text-align: center;
 }
 
-.login_form button{
+#login_form button{
 	background-color: aqua;
-	 width: 60px;
+	 width: 100px;
+	 justify-content: center;
+}
+#profile_img {
+  background-color: #718093;
+  overflow: hidden;
+  width: 250px;
+  height: 250px;
+  border-radius: 25%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#profile_img img {
+  width: 250px;
 }
 
 
+#profile_wrapper {
+  display: flex;
+  justify-content: center;
+}
 
+#profile_box {
+  display: grid;
+  grid-template-rows: 300px repeat(6, 100px);
+}
 
-
+.profile_content:not(.profile_content:first-child) {
+  display: grid;
+  grid-template-columns: 200px 300px;
+}
 
 
 

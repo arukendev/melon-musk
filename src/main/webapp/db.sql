@@ -1,5 +1,5 @@
 --테이블 삭제
-drop table artist cascade constraint purge;
+drop table review_comment cascade constraint purge;
 
 --테이블 안에 모든 항목 삭제
 delete artist;

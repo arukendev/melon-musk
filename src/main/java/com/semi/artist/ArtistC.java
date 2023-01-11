@@ -20,6 +20,7 @@ public class ArtistC extends HttpServlet {
 			request.setAttribute("contentPage", "jsp/artist/artist_info.jsp");
 		} else {
 			Crawler.artistCrawler(request);
+			Crawler.artistTrackCrwaler(request);
 			ArtistDAO.setArtist(request);
 			request.setAttribute("contentPage", "jsp/artist/artist_reg.jsp");
 		}

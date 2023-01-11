@@ -11,6 +11,7 @@
 	
 	
 	<div id="login_form">
+		<div style="color:red">${alert }</div>
         <div class="login_form">
           <label for="id">ID</label>
           <input id="id" name="id" placeholder="ID를 입력해주세요" />

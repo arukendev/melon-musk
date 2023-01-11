@@ -17,6 +17,11 @@ public class MusicC extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		AuthDAO.loginCheck(request);
+		if (MusicDAO.loginCheck(request)) {
+			request.setAttribute("commentLoginCheck", "comment_input.jsp");
+		} else {
+			request.setAttribute("commentLoginCheck", "comment_no_input.jsp");
+		}
 		if (ChartDAO.musicIdCheck(request)) {
 			MusicDAO.getMusic(request);
 			request.setAttribute("contentPage", "jsp/music/music_info.jsp");

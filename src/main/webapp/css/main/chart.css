@@ -34,14 +34,20 @@
 }
 
 .list_boxs {
+  padding: 10px;
+  border-radius: 10px;
+  cursor: pointer;
   display: grid;
   grid-template-columns: 60px 80px repeat(3, 320px);
+}
+
+.list_boxs:hover {
+  background-color: rgba(246, 228, 142, 0.4);
 }
 
 .list_boxs_box {
   display: flex;
   align-items: center;
-  font-size: 18px;
 }
 
 .list_boxs_box:first-child {

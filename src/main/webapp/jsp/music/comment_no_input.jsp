@@ -7,7 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<button onclick="location.href='LoginC'" class="index_button index_login_button">로그인</button>
-	<button onclick="location.href='AuthC'" class="index_button index_join_button">회원가입</button>
+	<h1>로그인이 안되어있네요 로그인 해야 댓글 달수 있어요</h1>
 </body>
 </html>

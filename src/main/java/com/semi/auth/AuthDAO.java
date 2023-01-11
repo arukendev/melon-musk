@@ -264,18 +264,6 @@ public class AuthDAO {
 			String newFile =mr.getFilesystemName("img2");//사진을 새롭게 추가	
 			
 			
-//			String name = request.getParameter("name");
-//			String pw = request.getParameter("pw");
-//			
-//			String[] interest = request.getParameterValues("interest");
-//			String introduce = request.getParameter("introduce");
-//			
-			
-			
-			
-			
-			
-			
 			String interest2="";
 			
 			if(interest != null) {
@@ -291,6 +279,8 @@ public class AuthDAO {
 			if (introduce.equals("")) {
 				introduce="...";
 			}
+			System.out.println(oldFile);
+			System.out.println(newFile);
 			System.out.println(name);
 			System.out.println(pw);
 		
@@ -298,21 +288,23 @@ public class AuthDAO {
 			System.out.println(introduce);
 			
 			
-			pstmt.setString(2, name);
-			pstmt.setString(3, pw);
-			pstmt.setString(4, interest2);
-			pstmt.setString(5, introduce);
 			
 			if (newFile == null) {
 				pstmt.setString(1, oldFile);
 				a.setAu_img(oldFile);
-			} else {				
+			} else {
+				pstmt.setString(1, newFile);
 				a.setAu_img(newFile);
-				oldFile = oldFile.replace("files/auth/", "");
 				String delFile = path + "/" + oldFile;
 				File f = new File(delFile);
 				f.delete();
 			}
+			
+			
+			pstmt.setString(2, name);
+			pstmt.setString(3, pw);
+			pstmt.setString(4, interest2);
+			pstmt.setString(5, introduce);
 			
 			pstmt.setString(6, a.getAu_id());
 		if(a!=null) {	
@@ -323,7 +315,7 @@ public class AuthDAO {
 				request.setAttribute("iddd", a.getAu_id());
 				request.setAttribute("pwww", pw);
 				a.setAu_name(name);
-				a.setAu_pw(pw);
+			//	a.setAu_pw(pw);
 				a.setAu_interest(interest2);
 				a.setAu_introduce(introduce);
 				

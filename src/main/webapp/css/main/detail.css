@@ -11,17 +11,35 @@
 }
 
 .detail_titles_title {
-  font-size: 40px;
+  font-size: 30px;
   font-weight: 700;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
 }
 
-.artist_members {
+.detail_titles_subtitles {
+  font-size: 18px;
+  font-weight: 400;
+}
+
+.detail_titles_subtitles a,
+.detail_titles_subtitles span {
   color: var(--gray);
+  margin-right: 5px;
 }
 
 .detail_header_info {
-  font-size: 18px;
+  font-size: 16px;
+}
+
+.detail_header_info a {
+  color: var(--gray);
+}
+
+.detail_header_info > div {
+  display: grid;
+  grid-template-columns: 100px 500px;
+  margin-bottom: 10px;
+  color: var(--gray);
 }
 
 .detail_header_img {
@@ -38,12 +56,19 @@
 .detail_main {
   width: inherit;
   display: flex;
-  justify-content: flex-start;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 30px;
+  margin-bottom: 30px;
 }
 
 .detail_main h1 {
   font-size: 24px;
   font-weight: 400;
   margin-bottom: 20px;
-  color: #e1b12c;
+  color: var(--dYello);
+}
+
+.detail_main span {
+  line-height: 170%;
 }

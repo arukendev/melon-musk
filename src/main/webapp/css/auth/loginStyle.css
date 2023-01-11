@@ -9,20 +9,6 @@
   font-size: 16px;
 }
 
-#address {
-  width: 100%;
-  font-size: 16px;
-  padding: 0 10px;
-  border: 1px solid rgba(0, 0, 0, 0.2);
-  border-radius: 10px;
-  transition: border-color 0.3s ease-in-out;
-  appearance: none;
-}
-
-#address:focus {
-  outline: none;
-  border-color: #fbc531;
-}
 
 .fa-chevron-down {
   color: #eccc68;
@@ -86,8 +72,8 @@
 #reg-form input[type="submit"],
 #login_form button,
 .profile_button {
-  background-color: #fbc531;
-  color: #f5f6fa;
+  background-color: rgb(128, 255, 255);
+  color: rgb(0, 128, 255);
   cursor: pointer;
   font-size: 24px;
   width: 200px;
@@ -110,14 +96,14 @@
 #reg-form input[type="submit"]:hover,
 #login_form button:hover,
 .profile_button:hover {
-  background-color: #eccc68;
+  background-color: rgb(128, 255, 255);
 }
 
 #reg-form input[type="submit"]:focus,
 #login_form button:focus,
 .profile_button:focus {
   transform: translateY(4px);
-  box-shadow: 0 1px #e1b12c;
+  box-shadow: 0 1px rgb(128, 255, 255);
 }
 
 #reg-form input[type="submit"]:focus-visible,
@@ -163,9 +149,6 @@
   outline: 3px solid #fbc531;
 }
 
-#address-box {
-  position: relative;
-}
 
 #radio-box {
   display: flex;
@@ -190,7 +173,7 @@
 }
 
 .titles {
-  color: #dcdde1;
+  color: green;
   font-size: 14px;
 }
 

@@ -402,4 +402,23 @@ public class Crawler {
 		}
 	}
 
+	public static void artistTrackCrwaler(HttpServletRequest request) {
+		String URL = "https://www.melon.com/artist/song.htm?artistId=" +
+				request.getParameter("artistId") +
+				"#params%5BlistType%5D=A&params%5BorderBy%5D=POPULAR_SONG_LIST&params%5BartistId%5D=203912&po=pageObj&startIndex=1";
+
+		Connection con = Jsoup.connect(URL);
+		
+		try {
+			Document html = con.get();
+
+			Elements rankElms = html.select("tbody .no .wrap");
+			Elements musicElms = html.select("tbody .btn_icon_detail");
+			Elements artistElms = html.select("tbody .wrapArtistName .checkEllipsis a");
+			Elements albumElms = html.select(".rank03 a");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
 }
