@@ -8,26 +8,63 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h1>${album.type}</h1>
-	<h1>${album.name}</h1>
-	<img name="img" src="${album.img}">
-	<h1>
-		<c:forEach var="ar" items="${artists}">
-			<a href="ArtistC?artistId=${ar.id}">${ar.name}</a>
-		</c:forEach>
-	</h1>
-	<h1>발매일 : ${album.date}</h1>
-	<h1>장르 : ${album.genre}</h1>
-	<h1>발매사 : ${album.publisher}</h1>
-	<h1>기획사 : ${album.agency}</h1>
-	<h1>앨범정보</h1>
-	<c:choose>
-		<c:when test="${album.info eq 'none'}">
-			<h1>등록된 앨범 정보가 없습니다.</h1>
-		</c:when>
-		<c:otherwise>
-			<h1>${album.info}</h1>
-		</c:otherwise>
-	</c:choose>
+	<div class="detail_header">
+		<div class="detail_titles">
+			<div class="detail_titles_title">
+				<h1>${album.name}</h1>
+			</div>
+			<div class="detail_titles_subtitles">
+				<c:forEach var="ar" items="${artists}">
+					<c:choose>
+						<c:when test="${ar.id eq '0'}">
+							<span>${ar.name}</span>
+						</c:when>
+						<c:otherwise>
+							<a href="ArtistC?artistId=${ar.id}">${ar.name}</a>
+						</c:otherwise>
+					</c:choose>
+				</c:forEach>
+			</div>
+		</div>
+		<div class="detail_header_img">
+			<img src="${album.img}">
+		</div>
+		<div class="detail_header_info">
+			<div>
+				<span>앨범유형</span>
+				<span>${album.type}</span>
+			</div>
+			<div>
+				<span>발매일</span>
+				<span>${album.date}</span>
+			</div>
+			<div>
+				<span>장르</span>
+				<span>${album.genre}</span>
+			</div>
+			<div>
+				<span>발매사</span>
+				<span>${album.publisher}</span>
+			</div>
+			<div>
+				<span>기획사</span>
+				<span>${album.agency}</span>
+			</div>
+		</div>
+	</div>
+	<div class="detail_main">
+		<div class="detail_main_info">
+			<h1>앨범 정보</h1>
+			<c:choose>
+				<c:when test="${album.info eq 'none'}">
+					<p>등록된 앨범 정보가 없습니다.</p>
+				</c:when>
+				<c:otherwise>
+					<p>${album.info}</p>
+				</c:otherwise>
+			</c:choose>
+		</div>
+	</div>
+	<script type="text/javascript" src="js/main/detail.js"></script>
 </body>
 </html>

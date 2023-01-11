@@ -1,11 +1,11 @@
 @charset "UTF-8";
-@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@1,700&family=Noto+Sans+KR:wght@300;400;700&display=swap");
 @import "reset.css";
 @import "variable.css";
 
 @import "main/main.css";
 @import "main/detail.css";
-@import "chart/chart.css";
+@import "main/chart.css";
 
 .hidden {
   display: none;
@@ -46,6 +46,16 @@ main {
   justify-content: flex-start;
 }
 
+.index_button {
+  font-size: 1rem;
+  font-family: inherit;
+  font-weight: inherit;
+  background-color: inherit;
+  color: inherit;
+  border: none;
+  cursor: pointer;
+}
+
 #index_hWrapper,
 #index_mWrapper,
 #index_fWrapper {
@@ -54,8 +64,8 @@ main {
   justify-content: center;
 }
 
-#index_hWrapper {
-  background-color: #dcdde1;
+#index_hWrapper a {
+  color: var(--white);
 }
 
 #index_mWrapper {
@@ -63,6 +73,7 @@ main {
   background-color: var(--white);
 }
 
+#index_hWrapper,
 #index_fWrapper {
   background-color: var(--black);
   color: var(--white);
@@ -85,22 +96,31 @@ main {
   justify-content: flex-end;
 }
 
-#index_hCenter_search {
-  background-color: #dcdde1;
-  position: absolute;
-}
-
-.index_searchUl_li {
-  display: grid;
-  grid-template-columns: 64px 1fr;
-  grid-template-rows: 1fr 1fr;
-}
-
-.index_searchLi_img {
-  grid-row: 1 / span 2;
-}
-
 #index_hCenter_nav {
   display: flex;
+  align-items: center;
   gap: 20px;
+}
+
+#index_title_h1 a {
+  font-size: 40px;
+  font-family: "Chakra Petch", sans-serif;
+  background: linear-gradient(60deg, #e1b12c 0%, #f6e58d 100%);
+  color: transparent;
+  background-clip: text;
+  -webkit-background-clip: text;
+}
+
+.index_login_button,
+.index_join_button {
+  padding: 3px 10px;
+  margin: 0 5px;
+  border-radius: 5px;
+  border: 2px solid;
+}
+
+.index_join_button {
+  color: var(--black);
+  background-color: var(--dYello);
+  border-color: var(--dYello);
 }

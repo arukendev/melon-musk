@@ -7,7 +7,9 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<button onclick="location.href='LoginC'" class="index_button index_login_button">로그인</button>
-	<button onclick="location.href='AuthC'" class="index_button index_join_button">회원가입</button>
+	<form action="MusicCommentC">
+		<textarea name="txt"></textarea>
+		<button>전송</button>
+	</form>
 </body>
 </html>

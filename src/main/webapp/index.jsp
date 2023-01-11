@@ -17,9 +17,9 @@
 		<header>
 			<div id="index_header_hLeft">
 				<div id="index_hleft_title">
-					<a href="HomeC">
-						<h1 id="index_title_h1">MelonMusk</h1>
-					</a>
+					<h1 id="index_title_h1">
+						<a href="HomeC">MelonMusk</a>
+					</h1>
 				</div>
 			</div>
 			<div id="index_header_hCenter">
@@ -33,19 +33,19 @@
 				</div>
 				<div id="index_hCenter_nav">
 					<div class="index_nav_content">
-						<a href="ChartC">Charts</a>
+						<a href="ChartC">인기차트</a>
 					</div>
 					<div class="index_nav_content">
-						<a href="NewMusicC">New Musics</a>
+						<a href="NewMusicC">최신곡</a>
 					</div>
 					<div class="index_nav_content">
-						<a href="ReviewC">Reviews</a>
+						<a href="ReviewC">게시판</a>
 					</div>
 					<div class="index_nav_content">
-						<a href="PlaylistC">Library</a>
+						<a href="PlaylistC">플레이리스트</a>
 					</div>
 					<div class="index_nav_content">
-						<button>Search</button>
+						<button class="index_button"><i class="fas fa-search"></i></button>
 					</div>
 				</div>
 			</div>
@@ -70,5 +70,6 @@
 		</footer>
 	</div>
 	<script type="text/javascript" src="js/index.js"></script>
+	<script src="https://kit.fontawesome.com/772d40e343.js" crossorigin="anonymous"></script>
 </body>
 </html>
