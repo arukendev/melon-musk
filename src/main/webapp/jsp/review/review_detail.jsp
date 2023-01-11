@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,7 +12,7 @@
 <body>
 <div id="reviewReg_table">
 	<div class="review_table">
-		<div class="review_table_title">Review Detail</div>
+		<div class="review_table_title">Review Detail<br><span style="color:red">${alert }</span></div>
 		<div class="review_table_btns"><a href="ReviewC">목록</a></div>
 	</div>
 	<div class="reviewReg_table_row">
@@ -20,8 +21,17 @@
 		<div id="reviewDetail_row_viewsLike">
 			<div class="reviewDetail_viewsLike_items"><i class="fa-solid fa-eye"></i></div>
 			<div class="reviewDetail_viewsLike_items">${review.view +1 }</div>
-			<div class="reviewDetail_viewsLike_items"><button id="reviewDetail_items_likeBtn" onclick="pushLike('${a.au_id}',${review.id })"><i class="fa-regular fa-thumbs-up"></i></button></div>
-			<div class="reviewDetail_viewsLike_items">${review.like }</div>
+			<c:choose>
+			<c:when test="${sessionScope.account.au_id eq like.au_id}}">
+				좋아요 취소
+				<div class="reviewDetail_viewsLike_items"><button id="reviewDetail_items_likeBtn" onclick="location.href='ReviewLikeC?no=${review.id}'"><i class="fas fa-heart"></i></button></div>
+			</c:when>
+			<c:otherwise>
+				좋아요 등록
+				<div class="reviewDetail_viewsLike_items"><button id="reviewDetail_items_likeBtn" onclick="location.href='ReviewLikeC?no=${review.id}'"><i class="far fa-heart"></i></button></div>
+			</c:otherwise>
+		</c:choose>
+			<div class="reviewDetail_viewsLike_items" id="likeNumber">${review.like }</div>
 		</div>
 	</div>
 	<div class="reviewReg_table_row">
@@ -46,6 +56,7 @@
 		<button onclick="location.href='ReviewUpdateC?no=${review.id}'">수정하기</button>
 		<button onclick="location.href='ReviewDelC?no=${review.id}'">삭제하기</button>
 	</div>
+</form>
 	<div id="reviewDetail_comment">
 		<form action="ReviewCommentC" >
 			<span>${r }</span>
@@ -53,8 +64,8 @@
 			<button>전송</button>
 		</form>
 	</div>
-</div>
 <script src="https://kit.fontawesome.com/772d40e343.js" crossorigin="anonymous"></script>
-
+<script src="http://code.jquery.com/jquery-latest.js"></script> 
+<script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
 </body>
 </html>

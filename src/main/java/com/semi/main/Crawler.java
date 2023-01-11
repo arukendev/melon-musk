@@ -402,4 +402,18 @@ public class Crawler {
 		}
 	}
 
+	public static void artistTrackCrwaler(HttpServletRequest request) {
+		String URL = "https://www.melon.com/artist/song.htm?artistId=" +
+				request.getParameter("artistId") +
+				"#params%5BlistType%5D=A&params%5BorderBy%5D=POPULAR_SONG_LIST&params%5BartistId%5D=203912&po=pageObj&startIndex=1";
+
+		Connection con = Jsoup.connect(URL);
+		
+		try {
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
 }
