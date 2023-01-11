@@ -20,7 +20,7 @@ public class RegPlMusicC extends HttpServlet {
 		
 		PlaylistDAO.getRdao().getAllPlMusic(request);
 		
-		request.setAttribute("contentPage", "jsp/playlist/regPlaylist.jsp");
+		request.setAttribute("contentPage", "jsp/playlist/regPlaylistMusic.jsp");
 		request.getRequestDispatcher("index.jsp").forward(request, response);
 	
 	}
