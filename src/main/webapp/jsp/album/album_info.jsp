@@ -11,15 +11,19 @@
 	<div class="detail_header">
 		<div class="detail_titles">
 			<div class="detail_titles_title">
-				<h1>${album.type}</h1>
 				<h1>${album.name}</h1>
 			</div>
-			<div class="artist_members">
-				<h1>
-					<c:forEach var="ar" items="${artists}">
-						<a href="ArtistC?artistId=${ar.id}">${ar.name}</a>
-					</c:forEach>
-				</h1>
+			<div class="detail_titles_subtitles">
+				<c:forEach var="ar" items="${artists}">
+					<c:choose>
+						<c:when test="${ar.id eq '0'}">
+							<span>${ar.name}</span>
+						</c:when>
+						<c:otherwise>
+							<a href="ArtistC?artistId=${ar.id}">${ar.name}</a>
+						</c:otherwise>
+					</c:choose>
+				</c:forEach>
 			</div>
 		</div>
 		<div class="detail_header_img">
@@ -27,23 +31,25 @@
 		</div>
 		<div class="detail_header_info">
 			<div>
-				<span>발매일</span> <i class="fas fa-caret-right"></i> <span>${album.date}</span>
+				<span>앨범유형</span>
+				<span>${album.type}</span>
 			</div>
-			<c:if test="${artist.company != 'none'}">
-				<div>
-					<span>장르</span> <i class="fas fa-caret-right"></i> <span>${album.genre}</span>
-				</div>
-			</c:if>
-			<c:if test="${artist.debut != 'none'}">
-				<div>
-					<span>발매사</span> <i class="fas fa-caret-right"></i> <span>${album.publisher}</span>
-				</div>
-			</c:if>
-			<c:if test="${artist.birth != 'none'}">
-				<div>
-					<span>기획사</span> <i class="fas fa-caret-right"></i> <span>${album.agency}</span>
-				</div>
-			</c:if>
+			<div>
+				<span>발매일</span>
+				<span>${album.date}</span>
+			</div>
+			<div>
+				<span>장르</span>
+				<span>${album.genre}</span>
+			</div>
+			<div>
+				<span>발매사</span>
+				<span>${album.publisher}</span>
+			</div>
+			<div>
+				<span>기획사</span>
+				<span>${album.agency}</span>
+			</div>
 		</div>
 	</div>
 	<div class="detail_main">
@@ -51,15 +57,14 @@
 			<h1>앨범 정보</h1>
 			<c:choose>
 				<c:when test="${album.info eq 'none'}">
-					<h1>등록된 앨범 정보가 없습니다.</h1>
+					<p>등록된 앨범 정보가 없습니다.</p>
 				</c:when>
 				<c:otherwise>
-					<h1>${album.info}</h1>
+					<p>${album.info}</p>
 				</c:otherwise>
 			</c:choose>
 		</div>
 	</div>
 	<script type="text/javascript" src="js/main/detail.js"></script>
-	<script src="https://kit.fontawesome.com/772d40e343.js" crossorigin="anonymous"></script>
 </body>
 </html>

@@ -77,11 +77,11 @@
       </div>
     </form>
   	</div>
-    <script src="js/auth/acValueCheck.js?v=<%=System.currentTimeMillis() %>"></script>
-    <script src="js/auth/acValidCheck.js?v=<%=System.currentTimeMillis() %>"></script>
     <script
       src="https://kit.fontawesome.com/6478f529f2.js"
       crossorigin="anonymous"
     ></script>
+    <script src="js/auth/acValueCheck.js"></script>
+    <script src="js/auth/acValidCheck.js"></script>
 </body>
 </html>

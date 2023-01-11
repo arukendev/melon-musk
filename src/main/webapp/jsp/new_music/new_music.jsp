@@ -17,20 +17,20 @@
 	</div>
 	<div class="list_container">
 	<c:forEach var="n" items="${newMusic}">
-		<div class="list_boxs" onclick="location.href='MusicC?musicId=${n.musicId}'">
-				<div class="list_boxs_box">
+		<div class="list_boxs">
+				<div class="list_boxs_box" onclick="location.href='MusicC?musicId=${n.musicId}'">
 					<span>${n.rank}</span>
 				</div>
-				<div class="list_boxs_box">
+				<div class="list_boxs_box" onclick="location.href='MusicC?musicId=${n.musicId}'">
 					<img src="${n.img}">
 				</div>
-				<div class="list_boxs_box">
+				<div class="list_boxs_box" onclick="location.href='MusicC?musicId=${n.musicId}'">
 					<a href="MusicC?musicId=${n.musicId}">${n.music}</a>
 				</div>
-				<div class="list_boxs_box">
+				<div class="list_boxs_box" onclick="location.href='ArtistC?artistId=${n.artistId}'">
 					<a href="ArtistC?artistId=${n.artistId}">${n.artist}</a>
 				</div>
-				<div class="list_boxs_box">
+				<div class="list_boxs_box" onclick="location.href='AlbumC?albumId=${n.albumId}'">
 					<a href="AlbumC?albumId=${n.albumId}">${n.album}</a>
 				</div>
 			</div>

@@ -13,7 +13,7 @@
 			<div class="detail_titles_title">
 				<h1>${artist.name}</h1>
 			</div>
-			<div class="artist_members">
+			<div class="detail_titles_subtitles">
 				<c:forEach var="m" items="${members}">
 					<c:if test="${m.name != 'none'}">
 						<a href="ArtistC?artistId=${m.id}">${m.name}</a>
@@ -27,27 +27,23 @@
 		<div class="detail_header_info">
 			<div>
 				<span>활동유형</span>
-				<i class="fas fa-caret-right"></i>
 				<span>${artist.type}</span>
 			</div>
 			<c:if test="${artist.company != 'none'}">
 				<div>
 					<span>소속사</span>
-					<i class="fas fa-caret-right"></i>
 					<span>${artist.company}</span>
 				</div>
 			</c:if>
 			<c:if test="${artist.debut != 'none'}">
 				<div>
 					<span>데뷔</span>
-					<i class="fas fa-caret-right"></i>
 					<span>${artist.debut}</span>
 				</div>
 			</c:if>
 			<c:if test="${artist.birth != 'none'}">
 				<div>
 					<span>생일</span>
-					<i class="fas fa-caret-right"></i>
 					<span>${artist.birth}</span>
 				</div>
 			</c:if>
@@ -58,15 +54,14 @@
 			<h1>아티스트 정보</h1>
 			<c:choose>
 				<c:when test="${artist.info eq 'none'}">
-					<p>등록된 가수 정보가 없습니다.</p>
+					<span>등록된 가수 정보가 없습니다.</span>
 				</c:when>
 				<c:otherwise>
-					<p>${artist.info}</p>
+					<span>${artist.info}</span>
 				</c:otherwise>
 			</c:choose>
 		</div>
 	</div>
 	<script type="text/javascript" src="js/main/detail.js"></script>
-	<script src="https://kit.fontawesome.com/772d40e343.js" crossorigin="anonymous"></script>
 </body>
 </html>
