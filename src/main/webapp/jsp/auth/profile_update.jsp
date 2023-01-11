@@ -32,17 +32,16 @@
       </div>
       <div class="items" id="id-box">
         <label for="id" class="titles">ID</label>
-        <div id="id"><input hidden name="id" value="${sessionScope.account.au_id}">${sessionScope.account.au_id} </div>
-      </div>
+        <input hidden id="id" name="id" value="${sessionScope.account.au_id}">${sessionScope.account.au_id} </div>
+     
       <div class="items" id="pw-box" >
         <label for="pw" class="titles">Password</label>
         <input
           type="password"
           name="pw"
           id="pw"
-          placeholder="대문자, 소문자, 숫자 포함 3자 이상"
-         
-        />
+          placeholder="대문자, 소문자, 숫자 포함 3자 이상"/>
+          
       </div>
       <div class="items" id="pw-confirm-box" ">
         <label for="pw-confirm" class="titles">Password Confirm</label>
@@ -50,8 +49,7 @@
           type="password"
           name="pw-confirm"
           id="pw-confirm"
-          placeholder="비밀번호 확인"
-        />
+          placeholder="비밀번호 확인"/>
       </div>
       
       
@@ -77,8 +75,8 @@
       </div>
     </form>
   	</div>
-    <script src="js/auth/acValueCheck.js?v=<%=System.currentTimeMillis() %>"></script>
-    <script src="js/auth/acValidCheck.js?v=<%=System.currentTimeMillis() %>"></script>
+  	<script type="text/javascript" src="js/auth/acValidCheck.js"></script>
+	<script type="text/javascript" src="js/auth/acValueCheck.js"></script>
     <script
       src="https://kit.fontawesome.com/6478f529f2.js"
       crossorigin="anonymous"

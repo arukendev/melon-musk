@@ -3,7 +3,12 @@ function call() {
   const id = document.querySelector("#id");
   const pw = document.querySelector("#pw");
   const pwConfirm = document.querySelector("#pw-confirm");
-
+  const img = document.querySelector("#file");
+  
+	if (isEmpty(img)) {
+    alert("사진을 입력해 주세요!");
+    return false;
+  }
   if (isEmpty(name)) {
     alert("이름을 입력해 주세요!");
     name.focus();

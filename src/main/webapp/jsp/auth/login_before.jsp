@@ -7,7 +7,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<button onclick="location.href='LoginC'">login</button>
+	<button onclick="location.href='LoginC'">login</button> 
+	
 	<button onclick="location.href='AuthC'">join us</button>
 </body>
 </html>
