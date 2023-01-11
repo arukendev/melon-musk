@@ -37,5 +37,8 @@
 			<iframe width="560" height="315" src="${music.link}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 		</c:otherwise>
 	</c:choose>
+	<div class="music_comment_container">
+		<jsp:include page="${commentLoginCheck}"></jsp:include>
+	</div>
 </body>
 </html>

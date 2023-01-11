@@ -6,8 +6,10 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import com.semi.artist.Artists;
+import com.semi.auth.Auth;
 import com.semi.main.DBManager;
 
 public class MusicDAO {
@@ -100,6 +102,44 @@ public class MusicDAO {
 		} finally {
 			DBManager.close(con, pstmt, rs);
 		}
+	}
+	
+	public static boolean loginCheck(HttpServletRequest request) {
+		HttpSession hs = request.getSession();
+		Auth a =(Auth)hs.getAttribute("account");
+		if (a==null) {
+			return false;
+		}else {
+			return true;
+		}
+		
+	}
+
+	public static void setMusicComment(HttpServletRequest request) {
+			Auth a = (Auth) request.getSession().getAttribute("account");
+			Music m = (Music) request.getAttribute("music");
+		
+			Connection con = null;
+			PreparedStatement pstmt = null;
+			String sql = "insert into artist values (mu_comment_seq.nextval,?,?,?,sysdate)";
+			try {
+				con = DBManager.connect();
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, a.getAu_id());
+				pstmt.setString(2, m.getId());
+				pstmt.setString(3, request.getParameter("txt"));
+				
+				if(pstmt.executeUpdate() == 1) {
+					System.out.println("전송성공");
+				}
+				
+			} catch (Exception e) {
+				System.out.println("전송실패");
+				e.printStackTrace();
+			}finally {
+				DBManager.close(con, pstmt, null);
+			}
+		
 	}
 
 }
