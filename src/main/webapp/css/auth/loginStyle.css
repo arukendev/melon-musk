@@ -245,15 +245,6 @@
   margin-bottom: 50px;
 }
 
-#index_hRight_sign button{
-	background-color:aqua;
-	color: black;
-	width: 70px;
-	height: 30px;
-	 outline-offset: 1px;
-  outline: 2px solid #fbc531;
-}
-
 #result_txt {
   font-size: 15px;
   color: tomato;

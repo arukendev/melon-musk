@@ -68,7 +68,7 @@
 			</c:choose>
 		</div>
 	</div>
-  <div class="music_comment_container">
+  	<div class="music_comment_container">
 		<jsp:include page="${commentLoginCheck}"></jsp:include>
 	</div>
 	<script type="text/javascript" src="js/main/detail.js"></script>

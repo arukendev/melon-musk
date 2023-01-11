@@ -410,7 +410,12 @@ public class Crawler {
 		Connection con = Jsoup.connect(URL);
 		
 		try {
-			
+			Document html = con.get();
+
+			Elements rankElms = html.select("tbody .no .wrap");
+			Elements musicElms = html.select("tbody .btn_icon_detail");
+			Elements artistElms = html.select("tbody .wrapArtistName .checkEllipsis a");
+			Elements albumElms = html.select(".rank03 a");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
