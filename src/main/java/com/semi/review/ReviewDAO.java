@@ -250,30 +250,43 @@ public class ReviewDAO {
 		
 	}
 
-	public static void likeUpdate(HttpServletRequest request) {
-		int likes = Integer.parseInt(request.getParameter("likes"));
+
+	public static void reviewLike(HttpServletRequest request) {
+		HttpSession hs = request.getSession();
+		Auth a =(Auth)hs.getAttribute("account");
+		request.setAttribute("a", a);
 		
-		Connection con = null;
+		Connection con =null;
 		PreparedStatement pstmt = null;
 		
 		try {
 			con = DBManager.connect();
 			pstmt = con.prepareStatement(
-					"update review set re_like = ? where = re_id= ?"
+					"insert into review_like values(?,?)"
 					);
+			pstmt.setString(1, a.getAu_id());
+			pstmt.setString(2, request.getParameter("no"));
+			pstmt.executeUpdate();
 			
-			pstmt.setInt(1, Integer.parseInt(request.getParameter("likes")));
-			pstmt.setString(2, request.getParameter("id"));
+			Like l = new Like();
+			l.setAu_id(a.getAu_id());
+			l.setRe_id(Integer.parseInt(request.getParameter("no")));
 			
-			System.out.println(request.getParameter("likes") + request.getParameter("id"));
+			request.setAttribute("like", l);
 			
 			
 		} catch (Exception e) {
+			request.setAttribute("alert", "좋아요는 1번만 가능합니다.");
 			e.printStackTrace();
+		} 
+		
+		finally {
+			DBManager.close(con, pstmt, null);
 		}
 		
-		
 	}
+
+	
 	
 	
 
