@@ -117,14 +117,14 @@ public class MusicDAO {
 	}
 
 	public static void setComment(HttpServletRequest request) {
-			Auth a = (Auth) request.getSession().getAttribute("account");
-			Music m = (Music) request.getAttribute("music");
+			
+		Auth a = (Auth) request.getSession().getAttribute("account");
+		Music m = (Music) request.getAttribute("music");
 		
 			Connection con = null;
 			PreparedStatement pstmt = null;
 			String sql = "insert into music_comment values(mu_comment_seq.nextval,?,?,?,sysdate)";
 			try {
-				request.setCharacterEncoding("utf-8");
 				con = DBManager.connect();
 				pstmt = con.prepareStatement(sql);
 				pstmt.setString(1, a.getAu_id());

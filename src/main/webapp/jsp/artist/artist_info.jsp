@@ -62,6 +62,32 @@
 			</c:choose>
 		</div>
 	</div>
+	<div class="comment_container">
+		<div class="comment_input">
+			<jsp:include page="${commentLoginCheck}"></jsp:include>
+		</div>
+		<div class="comment_content">
+			<c:forEach var="c" items="${comments}">
+				<div class="comment_profileimg">
+					${c.img}
+				</div>
+				<div class="comment_auth">
+					${c.name}
+				</div>
+				<div class="comment_date">
+					${c.date}
+				</div>
+				<div class="comment_text">
+					${c.txt}
+				</div>
+				<c:if test="${c.authId eq sessionScope.account.au_id}">
+					<div>
+						<a href="ArtistCommentC?artistId=${artist.id}&commentId=${c.commentId}">삭제</a>
+					</div>
+				</c:if>
+			</c:forEach>
+		</div>
+	</div>
 	<script type="text/javascript" src="js/main/detail.js"></script>
 </body>
 </html>

@@ -8,30 +8,42 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.semi.auth.AuthDAO;
-import com.semi.chart.ChartDAO;
-import com.semi.main.Crawler;
 import com.semi.music.MusicDAO;
 
-@WebServlet("/AlbumC")
-public class AlbumC extends HttpServlet {
+
+@WebServlet("/AlbumCommentC")
+public class AlbumCommentC extends HttpServlet {
+	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		AuthDAO.loginCheck(request);
-		if (AlbumDAO.loginCheck(request)) {
-			request.setAttribute("commentLoginCheck", "comment_input.jsp");
-		} else {
-			request.setAttribute("commentLoginCheck", "comment_no_input.jsp");
-		}
-		if (ChartDAO.albumIdCheck(request)) {
+		if (request.getParameter("commentId") == null) {
+			AuthDAO.loginCheck(request);
 			AlbumDAO.getAlbum(request);
 			request.setAttribute("contentPage", "jsp/album/album_info.jsp");
+			if (AlbumDAO.loginCheck(request)) {
+				request.setAttribute("commentLoginCheck", "comment_input.jsp");
+			} else {
+				request.setAttribute("commentLoginCheck", "comment_no_input.jsp");
+			}
+			AlbumDAO.setComment(request);
+			
 		} else {
-			Crawler.albumCrawler(request);
-			AlbumDAO.setAlbum(request);
-			request.setAttribute("contentPage", "jsp/album/album_reg.jsp");
+			AuthDAO.loginCheck(request);
+			AlbumDAO.getAlbum(request);
+			request.setAttribute("contentPage", "jsp/album/album_info.jsp");
+			if (AlbumDAO.loginCheck(request)) {
+				request.setAttribute("commentLoginCheck", "comment_input.jsp");
+			} else {
+				request.setAttribute("commentLoginCheck", "comment_no_input.jsp");
+			}
+			AlbumDAO.delComment(request);
 		}
+		
 		AlbumDAO.getComment(request);
+		
 		request.getRequestDispatcher("index.jsp").forward(request, response);
 	}
+
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	}
 
