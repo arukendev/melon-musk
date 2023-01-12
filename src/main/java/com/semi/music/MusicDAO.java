@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 
 import com.semi.artist.Artists;
 import com.semi.auth.Auth;
+import com.semi.comment.Comment;
 import com.semi.main.DBManager;
 
 public class MusicDAO {
@@ -115,13 +116,14 @@ public class MusicDAO {
 		
 	}
 
-	public static void setMusicComment(HttpServletRequest request) {
-			Auth a = (Auth) request.getSession().getAttribute("account");
-			Music m = (Music) request.getAttribute("music");
+	public static void setComment(HttpServletRequest request) {
+			
+		Auth a = (Auth) request.getSession().getAttribute("account");
+		Music m = (Music) request.getAttribute("music");
 		
 			Connection con = null;
 			PreparedStatement pstmt = null;
-			String sql = "insert into artist values (mu_comment_seq.nextval,?,?,?,sysdate)";
+			String sql = "insert into music_comment values(mu_comment_seq.nextval,?,?,?,sysdate)";
 			try {
 				con = DBManager.connect();
 				pstmt = con.prepareStatement(sql);
@@ -140,6 +142,66 @@ public class MusicDAO {
 				DBManager.close(con, pstmt, null);
 			}
 		
+	}
+
+	public static void getComment(HttpServletRequest request) {
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "select au_id, au_img, au_name, muco_id, muco_date, muco_txt "
+				+ "from auth, music, music_comment "
+				+ "where muco_au_id = au_id and muco_mu_id = mu_id and mu_id = ?";
+		
+		try {
+			con = DBManager.connect();
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, request.getParameter("musicId"));
+			rs = pstmt.executeQuery();
+			
+			ArrayList<Comment> comments = new ArrayList<Comment>(); 
+			Comment c = null;
+			while (rs.next()) {
+				c = new Comment();
+				c.setAuthId(rs.getString("au_id"));
+				c.setImg(rs.getString("au_img"));
+				c.setName(rs.getString("au_name"));
+				c.setCommentId(rs.getString("muco_id"));
+				c.setDate(rs.getDate("muco_date"));
+				c.setTxt(rs.getString("muco_txt"));
+				comments.add(c);
+			}
+			
+			request.setAttribute("comments", comments);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBManager.close(con, pstmt, rs);
+		}
+		
+	}
+
+	public static void delComment(HttpServletRequest request) {
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		String sql = "delete music_comment where muco_id = ?";
+		
+		try {
+			con = DBManager.connect();
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, request.getParameter("commentId"));
+			
+			if (pstmt.executeUpdate() == 1) {
+				System.out.println("삭제성공");
+			}
+		} catch (Exception e) {
+			System.out.println("삭제실패");
+			e.printStackTrace();
+		}finally {
+			DBManager.close(con, pstmt, null);
+		}
 	}
 
 }

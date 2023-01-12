@@ -7,8 +7,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<form action="MusicCommentC">
-		<input hidden name="musicId" value="${music.id}">
+	<form action="ArtistCommentC">
+		<input hidden name="artistId" value="${artist.id}">
 		<textarea name="txt"></textarea>
 		<button>전송</button>
 	</form>
