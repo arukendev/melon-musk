@@ -19,6 +19,9 @@ public class ReviewDetailC extends HttpServlet {
 		Auth a =(Auth)hs.getAttribute("account");
 		request.setAttribute("a", a);
 		ReviewDAO.getReview(request);
+		if(a!=null) {
+		ReviewDAO.getLike(request);
+		}
 		
 		request.setAttribute("contentPage", "jsp/review/review_detail.jsp");
 		request.getRequestDispatcher("index.jsp").forward(request, response);
