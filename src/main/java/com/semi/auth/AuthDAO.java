@@ -335,9 +335,46 @@ public class AuthDAO {
 		}
 		
 	}
+	
+
+public int joinIdCheck(HttpServletRequest request){
+	int result = -1;
+	
+	Connection con = null;
+	PreparedStatement pstmt = null;
+	ResultSet rs = null;
+	String sql = "select * from auth where au_id=?";
+	
+	
+	
+	try {
+		//1. DB연결
+		con= DBManager.connect();
+		pstmt = con.prepareStatement(sql);
+		String id = request.getParameter("id");
+		pstmt.setString(1, id);
+		//3. 실행 -> select -> rs저장
+		rs = pstmt.executeQuery();
+
+		//4. 데이터처리
+
+		if(rs.next()){	
+			result = 0;
+		}else{
+			result = 1;
+		}
+
+		System.out.println("아이디 중복체크결과 : "+result);
+	} catch (Exception e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	} finally {
+		
 	}
-
-
+	return result;
+}
+}
+//joinIdCheck 메서드닫음
 //public static void getAccount(HttpServletRequest request) {
 ////1.세션가져오기
 //Account a =(Account)request.getSession().getAttribute("account");

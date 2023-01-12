@@ -50,13 +50,17 @@
 
 #reg-form input::placeholder,
 #login_form input::placeholder {
-  color: black;
+  color: #61F3EB;
+}
+#reg-form input[type="file"][accept="image/*"]{
+	background-color: #fbc531;
+	color: aqua;
 }
 
 #reg-form input[type="text"],
 #reg-form input[type="password"] {
-  background-color: black;
-  color: #f5f6fa;
+  background-color: #FAFAB4;
+  color: #0A82FF;
   border-bottom: 1px solid rgba(255, 255, 255, 0.2);
   transition: border-color 0.3s ease-in-out;
   padding: 5px 10px;
@@ -77,7 +81,7 @@
   cursor: pointer;
   font-size: 24px;
   width: 200px;
-  padding: 15px 0;
+  padding: 20px 0;
   border-radius: 10px;
   box-shadow: 0 5px #e1b12c;
   transition: background-color 0.3s ease-in-out;
@@ -135,7 +139,7 @@
   appearance: none;
   width: 15px;
   height: 15px;
-  border: 1px solid black;
+  border: 1px solid #fbc531;
   border-radius: 3px;
   transition: border 0.1s ease-in-out;
 }
@@ -225,8 +229,8 @@
 }
 
 #login_form input {
-  background-color: black;
-  color: #dcdde1;
+  background-color:#FAFAB4;
+  color: rgb(128, 255, 255);
   font-size: 16px;
   width: 250px;
   border: none;

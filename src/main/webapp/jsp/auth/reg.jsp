@@ -18,7 +18,7 @@
      
       <div class="items" id="file-box">
         <label for="file" class="titles">Profile Image</label>
-        <input type="file" name="file" id="file" accept="image/*" />
+        <label for="file"><input type="file" name="file" id="file" accept="image/*" /></label>
       </div>
      
       <div class="items" id="name-box">
@@ -27,12 +27,13 @@
       </div>
       <div class="items" id="id-box">
         <label for="id" class="titles">ID</label>
-        <input
+       <label for="id">  <input
           type="text"
           name="id"
           id="id"
           placeholder="영문, 숫자 5자 이상"
-        />
+        /> <button value="중복확인" class="dup" onclick="winopen()">중복확인</button> </label>
+ 
       </div>
       <div class="items" id="pw-box">
         <label for="pw" class="titles">Password</label>
