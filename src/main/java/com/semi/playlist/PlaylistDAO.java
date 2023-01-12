@@ -232,7 +232,7 @@ public  void updateReview(HttpServletRequest request) {
 			int seqPlusNum =0;
 			
 			for (String s : test) {
-				insertMu += "INTO playlist_music values(playlist_music_seq.nextval+"+ seqPlusNum +", playlist_seq.nextval,"+ s+") ";
+				insertMu += "INTO playlist_music values(getplmusicid, playlist_seq.nextval,"+ s+") ";
 				seqPlusNum++;
 			}
 			sql = "INSERT ALL INTO playlist VALUES(playlist_seq.nextval,?,0,0,sysdate) "+ insertMu +"SELECT * FROM DUAL";
