@@ -24,7 +24,7 @@
 <c:forEach var="review" items="${reviews }" varStatus="status">
 	<div class="review_table2_row">
 		<div style="width:100px; text-align: center;">${status.count }</div>
-		<a href="ReviewDetailC?no=${review.id }"><div>${review.name }	[코멘트수??]</div></a>
+		<a href="ReviewDetailC?no=${review.id }">${review.name }	[코멘트수??]</a>
 		<div>${review.date }</div>
 		<div style="width:50px; text-align: center">${review.view }</div>
 	</div>
