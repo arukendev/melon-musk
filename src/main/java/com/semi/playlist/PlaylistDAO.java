@@ -219,13 +219,27 @@ public  void updateReview(HttpServletRequest request) {
 	}
 
 	public void regPlaylist(HttpServletRequest request) {
+		
 		Connection con = null;
 		PreparedStatement pstmt = null;
-		String sql = "insert into playlist values(playlist_seq.nextval,?,0,0,sysdate)";
+		String sql = "";
+		
+		//String sql = "INSERT ALL INTO playlist VALUES(playlist_seq.nextval,?,0,0,sysdate) INTO playlist_music values(playlist_music_seq.nextval,playlist_seq.nextval,34819473) SELECT * FROM DUAL";
+		//String sql = "insert into playlist values(playlist_seq.nextval,?,0,0,sysdate)";
 		try {
+			String[] test=request.getParameterValues("mu_id");
+			String insertMu ="";
+			int seqPlusNum =0;
+			
+			for (String s : test) {
+				insertMu += "INTO playlist_music values(playlist_music_seq.nextval+"+ seqPlusNum +", playlist_seq.nextval,"+ s+") ";
+				seqPlusNum++;
+			}
+			sql = "INSERT ALL INTO playlist VALUES(playlist_seq.nextval,?,0,0,sysdate) "+ insertMu +"SELECT * FROM DUAL";
 				con = DBManager.connect();
 				pstmt = con.prepareStatement(sql);
 				pstmt.setString(1, request.getParameter("pl_name"));
+				
 				
 				if (pstmt.executeUpdate()==1) {
 					request.setAttribute("r", "등록성공!");
@@ -237,6 +251,10 @@ public  void updateReview(HttpServletRequest request) {
 		}finally {
 			DBManager.close(con, pstmt, null);
 		}
+	}
+
+	public void regPlMusic(HttpServletRequest request) {
+		
 	}
 		
 		
