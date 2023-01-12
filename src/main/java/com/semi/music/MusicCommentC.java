@@ -14,21 +14,34 @@ import com.semi.auth.AuthDAO;
 public class MusicCommentC extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-			AuthDAO.loginCheck(request);
-			if (MusicDAO.loginCheck(request)) {
-				request.setAttribute("commentLoginCheck", "jsp/comment/comment_input.jsp");
-			} else {
-				request.setAttribute("commentLoginCheck", "jsp/comment/comment_no_input.jsp");
-			}
-			MusicDAO.setMusicComment(request);
-			request.setAttribute("contentPage", "jsp/music/music_reg.jsp");
-			request.getRequestDispatcher("index.jsp").forward(request, response);
+		AuthDAO.loginCheck(request);
+		MusicDAO.getMusic(request);
+		request.setAttribute("contentPage", "jsp/music/music_info.jsp");
+		if (MusicDAO.loginCheck(request)) {
+			request.setAttribute("commentLoginCheck", "comment_input.jsp");
+		} else {
+			request.setAttribute("commentLoginCheck", "comment_no_input.jsp");
+		}
+		MusicDAO.delComment(request);
+		MusicDAO.getComment(request);
+		
+		request.getRequestDispatcher("index.jsp").forward(request, response);
 	}
 
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
+		AuthDAO.loginCheck(request);
+		MusicDAO.getMusic(request);
+		request.setAttribute("contentPage", "jsp/music/music_info.jsp");
+		if (MusicDAO.loginCheck(request)) {
+			request.setAttribute("commentLoginCheck", "comment_input.jsp");
+		} else {
+			request.setAttribute("commentLoginCheck", "comment_no_input.jsp");
+		}
+		MusicDAO.setComment(request);
+		MusicDAO.getComment(request);
 		
+		request.getRequestDispatcher("index.jsp").forward(request, response);	
 	}
 
 }

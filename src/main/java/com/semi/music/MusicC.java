@@ -30,6 +30,7 @@ public class MusicC extends HttpServlet {
 			MusicDAO.setMusic(request);
 			request.setAttribute("contentPage", "jsp/music/music_reg.jsp");
 		}
+		MusicDAO.getComment(request);
 		request.getRequestDispatcher("index.jsp").forward(request, response);
 	}
 
