@@ -262,11 +262,13 @@ public class ReviewDAO {
 		try {
 			con = DBManager.connect();
 			pstmt = con.prepareStatement(
-					"insert into review_like values(?,?)"
+					"insert into review_like values(review_like_seq.nextval, ?, ?)"
 					);
 			pstmt.setString(1, a.getAu_id());
 			pstmt.setString(2, request.getParameter("no"));
 			pstmt.executeUpdate();
+			
+			reviewLikeUpdate(request);
 			
 			Like l = new Like();
 			l.setAu_id(a.getAu_id());
@@ -284,6 +286,106 @@ public class ReviewDAO {
 			DBManager.close(con, pstmt, null);
 		}
 		
+	}
+
+	private static void reviewLikeUpdate(HttpServletRequest request) {
+		Connection con =null;
+		PreparedStatement pstmt = null;
+		
+		try {
+			con = DBManager.connect();
+			pstmt = con.prepareStatement(
+					"update review set re_like = re_like+1 where re_id = ?"
+					);
+			pstmt.setString(1, request.getParameter("no"));
+			pstmt.executeUpdate();
+			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBManager.close(con, pstmt, null);
+		}
+		
+	}
+	
+	private static void reviewLikeCancelUpdate(HttpServletRequest request) {
+		Connection con =null;
+		PreparedStatement pstmt = null;
+		
+		try {
+			con = DBManager.connect();
+			pstmt = con.prepareStatement(
+					"update review set re_like = re_like-1 where re_id = ?"
+					);
+			pstmt.setString(1, request.getParameter("no"));
+			pstmt.executeUpdate();
+			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBManager.close(con, pstmt, null);
+		}
+		
+	}
+
+	public static void getLike(HttpServletRequest request) {
+		HttpSession hs = request.getSession();
+		Auth a =(Auth)hs.getAttribute("account");
+		request.setAttribute("a", a);
+		
+		Connection con =null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			con = DBManager.connect();
+			pstmt = con.prepareStatement(
+					"select * from review_like where reli_au_id=? and reli_re_id=?"
+					);
+			pstmt.setString(1, a.getAu_id());
+			pstmt.setString(2, request.getParameter("no"));
+			rs = pstmt.executeQuery();
+			if(rs.next()) {			
+			Like l = new Like();
+			l.setAu_id(rs.getString("reli_au_id"));
+			l.setRe_id(rs.getInt("reli_re_id"));
+			System.out.println("like.au_id"+l.getAu_id());
+			request.setAttribute("like", l);
+			} 
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBManager.close(con, pstmt, rs);
+		}
+		
+	}
+
+	public static void reviewLikeCancel(HttpServletRequest request) {
+		HttpSession hs = request.getSession();
+		Auth a =(Auth)hs.getAttribute("account");
+		request.setAttribute("a", a);
+		
+		Connection con =null;
+		PreparedStatement pstmt = null;
+		
+		try {
+			con = DBManager.connect();
+			pstmt = con.prepareStatement(
+					"delete from review_like where reli_au_id=? and reli_re_id=?"
+					);
+			pstmt.setString(1, a.getAu_id());
+			pstmt.setString(2, request.getParameter("no"));
+			pstmt.executeUpdate();
+			reviewLikeCancelUpdate(request);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBManager.close(con, pstmt, null);
+		}
 	}
 
 	

@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<form action="LoginC" method="post">
+	<form action="LoginC" method="post" onsubmit="return call()">
 	
 	
 	<div id="login_form">
@@ -31,5 +31,7 @@
       </div>
 	
 	</form>
+	<script src="js/auth/acValueCheck.js"></script>
+    <script src="js/auth/acValidCheck.js"></script>
 </body>
 </html>

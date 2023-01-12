@@ -22,13 +22,11 @@
 			<div class="reviewDetail_viewsLike_items"><i class="fa-solid fa-eye"></i></div>
 			<div class="reviewDetail_viewsLike_items">${review.view +1 }</div>
 			<c:choose>
-			<c:when test="${sessionScope.account.au_id eq like.au_id}}">
-				좋아요 취소
-				<div class="reviewDetail_viewsLike_items"><button id="reviewDetail_items_likeBtn" onclick="location.href='ReviewLikeC?no=${review.id}'"><i class="fas fa-heart"></i></button></div>
+			<c:when test="${(sessionScope.account.au_id ne null) and (like.au_id ne null) and (sessionScope.account.au_id eq like.au_id)}">
+ 				<div class="reviewDetail_viewsLike_items"><button id="reviewDetail_items_likeBtn" onclick="location.href='ReviewLikeCancelC?no=${review.id}&wr=${review.au_id }'"><i class="fas fa-heart"></i></button></div>
 			</c:when>
 			<c:otherwise>
-				좋아요 등록
-				<div class="reviewDetail_viewsLike_items"><button id="reviewDetail_items_likeBtn" onclick="location.href='ReviewLikeC?no=${review.id}'"><i class="far fa-heart"></i></button></div>
+			<div class="reviewDetail_viewsLike_items"><button id="reviewDetail_items_likeBtn" onclick="like(${review.id}, '${review.au_id }', '${a.au_id }')"><i class="far fa-heart"></i></button></div>
 			</c:otherwise>
 		</c:choose>
 			<div class="reviewDetail_viewsLike_items" id="likeNumber">${review.like }</div>
@@ -53,10 +51,10 @@
 		<div class="reviewReg_row_txt">${review.text }</div>
 	</div>
 	<div id="reviewDetail_bttmBtns">
-		<button onclick="location.href='ReviewUpdateC?no=${review.id}'">수정하기</button>
-		<button onclick="location.href='ReviewDelC?no=${review.id}'">삭제하기</button>
+		<button onclick="update(${review.id}, '${review.au_id }', '${a.au_id }')">수정하기</button>
+		<button onclick="deleteReview(${review.id}, '${review.au_id }', '${a.au_id }')">삭제하기</button>
 	</div>
-</form>
+</div>
 	<div id="reviewDetail_comment">
 		<form action="ReviewCommentC" >
 			<span>${r }</span>
@@ -65,7 +63,5 @@
 		</form>
 	</div>
 <script src="https://kit.fontawesome.com/772d40e343.js" crossorigin="anonymous"></script>
-<script src="http://code.jquery.com/jquery-latest.js"></script> 
-<script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
 </body>
 </html>

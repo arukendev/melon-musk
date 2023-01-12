@@ -7,10 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<form action="MusicCommentC">
-		<input hidden name="musicId" value="${music.id}">
-		<textarea name="txt"></textarea>
-		<button>전송</button>
-	</form>
+	<h1>로그인이 안되어있네요 로그인 해야 댓글 달수 있어요</h1>
 </body>
 </html>
