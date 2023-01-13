@@ -11,6 +11,7 @@
     <form
       action="AuthC"
       id="reg-form"
+      name="reg-form"
       method="post"
       enctype="multipart/form-data"
       onsubmit="return call()"
@@ -32,7 +33,7 @@
           name="id"
           id="id"
           placeholder="영문, 숫자 5자 이상"
-        /> <button value="중복확인" class="dup" onclick="winopen()">중복확인</button> </label>
+        /> <input type="button" value="ID중복확인" onclick="idCheck()"> </label>
  
       </div>
       <div class="items" id="pw-box">
