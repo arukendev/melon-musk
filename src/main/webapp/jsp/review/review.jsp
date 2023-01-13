@@ -25,14 +25,16 @@
 </div>
 <div id="review_table2">
 <c:forEach var="review" items="${reviews }" varStatus="status">
-	<div class="review_table2_row">
-		<div class="review_label_no">${status.count }</div>
-		<a class="review_label_title" href="ReviewDetailC?no=${review.id }">${review.name }	[코멘트수??]</a>
-		<div class="review_label_writer">${review.au_id }</div>
-		<div class="review_label_date">${review.date }</div>
-		<div class="review_label_viewLike">${review.view }</div>
-		<div class="review_label_viewLike">${review.like }</div>
-	</div>
+	<a href="ReviewDetailC?no=${review.id }">
+		<div class="review_table2_row">
+			<div class="review_label_no">${status.count }</div>
+			<div class="review_label_title">${review.name }	[코멘트수??]</div>
+			<div class="review_label_writer">${review.au_id }</div>
+			<div class="review_label_date">${review.date }</div>
+			<div class="review_label_viewLike">${review.view }</div>
+			<div class="review_label_viewLike">${review.like }</div>
+		</div>
+	</a>
 </c:forEach>
 
 <div class="review_pageNum">
