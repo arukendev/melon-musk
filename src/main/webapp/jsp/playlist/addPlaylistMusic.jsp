@@ -9,12 +9,13 @@
 <link rel="stylesheet" href="css/playlist/playlist.css">
 </head>
 <body>
-	<form action="RegPlMusicC" method="post">
+	<form action="AddPlMusicC" method="post">
 		<div class="playlist_contanier">
 			<div id="playlist_title">
 				<div class="playlist_title_title">플리에 노래추가하기</div>
 				<div class="playlist_title_title">
 					<button>[추가]</button>
+					<input type="hidden" value="${param.pl_id }" name="pl_id">
 				</div>
 			</div>
 			<div class="playlist_content_playlists">
@@ -22,7 +23,7 @@
 					플레이 리스트 이름 
 				</div>
 				<div class="playlist_content_playlistitem">
-					<input name="pl_name" id="pl_name" type="text">
+					${playlistmusics[0].pl_name }
 				</div>
 			</div>
 			<div class="playlist_content_playlists">

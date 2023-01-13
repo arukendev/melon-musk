@@ -12,20 +12,32 @@ import com.semi.auth.AuthDAO;
 /**
  * Servlet implementation class RegPlMusicC
  */
-@WebServlet("/RegPlMusicC")
-public class RegPlMusicC extends HttpServlet {
+@WebServlet("/AddPlMusicC")
+public class AddPlMusicC extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//플리에 음악등록을 위한 등록페이지로 이동
 		AuthDAO.loginCheck(request);
 		
 		PlaylistDAO.getRdao().getAllPlMusic(request);
-		
-		request.setAttribute("contentPage", "jsp/playlist/regPlaylistMusic.jsp");
+		PlaylistDAO.getRdao().getPlaylist(request);
+		request.setAttribute("contentPage", "jsp/playlist/addPlaylistMusic.jsp");
 		request.getRequestDispatcher("index.jsp").forward(request, response);
 	
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	
+		AuthDAO.loginCheck(request);
+		//플리에 노래추가
+		PlaylistDAO.getRdao().addPlMusic(request);
+		
+		PlaylistDAO.getRdao().getPlaylist(request);
+		
+		request.setAttribute("contentPage", "jsp/playlist/playlistDetail.jsp");	
+		request.getRequestDispatcher("index.jsp").forward(request, response);
+	
+	
+	
 	}
 
 }
