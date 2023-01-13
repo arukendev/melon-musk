@@ -43,10 +43,15 @@
   border-radius: 10px;
 }
 
+.comment_input p {
+  height: 80px;
+}
+
 .comment_comment {
   margin: 50px 0;
   display: flex;
-  gap: 20px;
+  align-items: center;
+  gap: 30px;
 }
 
 .comment_profileimg {
@@ -62,4 +67,29 @@
 
 .comment_comment img {
   width: 80px;
+}
+
+.comment_contents {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.comment_top {
+  display: grid;
+  grid-template-columns: 100px 1fr;
+}
+
+.comment_bottom {
+  display: flex;
+  gap: 10px;
+}
+
+.comment_auth {
+  color: var(--dYello);
+  font-weight: 400;
+}
+
+.comment_date {
+  color: rgba(0,0,0, 0.5);
 }

@@ -84,25 +84,27 @@
 					<div class="comment_profileimg">
 						<img src="${c.img}">
 					</div>
-					<div class="comment_center">
-						<div class="comment_auth">
-							${c.name}
-						</div>
-						<div class="comment_text">
-							${c.txt}
-						</div>
-					</div>
-					<div class="comment_right">
-						<div class="comment_date">
-							<fmt:formatDate value="${c.date}" pattern="yyyy.MM.dd kk:mm:ss"/>
-						</div>
-						<c:if test="${c.authId eq sessionScope.account.au_id}">
-							<div>
-								<a href="ArtistCommentC?artistId=${artist.id}&commentId=${c.commentId}">
-									<i class="fas fa-trash-alt"></i>
-								</a>
+					<div class="comment_contents">
+						<div class="comment_top">
+							<div class="comment_auth">
+								${c.name}
 							</div>
-						</c:if>
+							<div class="comment_text">
+								${c.txt}
+							</div>
+						</div>
+						<div class="comment_bottom">
+							<div class="comment_date">
+								<fmt:formatDate value="${c.date}" pattern="yyyy.MM.dd kk:mm:ss"/>
+							</div>
+							<c:if test="${c.authId eq sessionScope.account.au_id}">
+								<div>
+									<a href="ArtistCommentC?artistId=${artist.id}&commentId=${c.commentId}">
+										<i class="fas fa-trash-alt"></i>
+									</a>
+								</div>
+							</c:if>
+						</div>
 					</div>
 				</div>
 			</c:forEach>
