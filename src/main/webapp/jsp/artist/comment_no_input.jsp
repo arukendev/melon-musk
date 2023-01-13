@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h1>로그인이 안되어있네요 로그인 해야 댓글 달수 있어요</h1>
+	<p>로그인 이용자만 댓글을 달 수 있습니다.</p>
 </body>
 </html>

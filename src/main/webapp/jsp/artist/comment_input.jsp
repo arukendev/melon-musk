@@ -10,7 +10,7 @@
 	<form action="ArtistCommentC">
 		<input hidden name="artistId" value="${artist.id}">
 		<textarea name="txt"></textarea>
-		<button>전송</button>
+		<button>등록</button>
 	</form>
 </body>
 </html>

@@ -6,11 +6,9 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
-import com.semi.album.Album;
 import com.semi.auth.Auth;
-import com.semi.comment.Comment;
+import com.semi.main.Comment;
 import com.semi.main.DBManager;
 
 public class ArtistDAO {
@@ -112,7 +110,7 @@ public class ArtistDAO {
 		
 			Connection con = null;
 			PreparedStatement pstmt = null;
-			String sql = "insert into artist_comment values(ar_comment_seq.nextval,?,?,?,sysdate)";
+			String sql = "insert into artist_comment values(ar_comment_seq.nextval,?,?,?,current_date)";
 			try {
 				con = DBManager.connect();
 				pstmt = con.prepareStatement(sql);
@@ -138,7 +136,8 @@ public class ArtistDAO {
 		ResultSet rs = null;
 		String sql = "select au_id, au_img, au_name, arco_id, arco_date, arco_txt "
 				+ "from auth, artist, artist_comment "
-				+ "where arco_au_id = au_id and arco_ar_id = ar_id and ar_id = ?";
+				+ "where arco_au_id = au_id and arco_ar_id = ar_id and ar_id = ? "
+				+ "order by arco_date desc";
 		
 		try {
 			con = DBManager.connect();
@@ -189,15 +188,5 @@ public class ArtistDAO {
 			DBManager.close(con, pstmt, null);
 		}
 		
-	}
-
-	public static boolean loginCheck(HttpServletRequest request) {
-		HttpSession hs = request.getSession();
-		Auth a =(Auth)hs.getAttribute("account");
-		if (a==null) {
-			return false;
-		}else {
-			return true;
-		}
 	}
 }

@@ -12,9 +12,9 @@
 	<form action="RegPlaylistC" method="post">
 		<div class="playlist_contanier">
 			<div id="playlist_title">
-				<div class="playlist_title_title">플리에 노래추가하기</div>
+				<div class="playlist_title_title">나만의 플레이리스트 만들기</div>
 				<div class="playlist_title_title">
-					<button>[추가]</button>
+					<button>[만들기]</button>
 				</div>
 			</div>
 			<div class="playlist_content_playlists">

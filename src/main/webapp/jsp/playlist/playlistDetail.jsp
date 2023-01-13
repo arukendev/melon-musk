@@ -7,10 +7,11 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="css/playlist/playlist.css">
+<script type="text/javascript" src="js/playlist/playlist.js"></script>
 </head>
 <body>
 
-	<form action="RegPlMusicC"  >
+	<form action="AddPlMusicC"  >
 	<div class="playlist_contanier">
 		<div id="playlist_title">
 			<div class="playlist_title_title">${playlistmusics[0].pl_name }님의 플레이리스트</div>
@@ -30,6 +31,8 @@
 			</c:forEach>
 			<div class="playlist_addMusic">
 			<button value="${plms.pl_id}">음원추가하기</button>
+			<button type="button" onclick="deleteplmusic(${param.pl_id})">음악삭제하기</button>
+			<button type="button" onclick="deleteplaylist(${param.pl_id})">플리삭제하기</button>
 		</div>
 		</div>
 	</div>

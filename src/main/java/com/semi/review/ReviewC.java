@@ -6,13 +6,17 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import com.semi.auth.Auth;
 import com.semi.auth.AuthDAO;
 
 @WebServlet("/ReviewC")
 public class ReviewC extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		AuthDAO.loginCheck(request);
+		HttpSession hs = request.getSession();
+		Auth a =(Auth)hs.getAttribute("account");
 		ReviewDAO.getAllReview(request);
 		ReviewDAO.paging(1, request);
 		request.setAttribute("contentPage", "jsp/review/review.jsp");

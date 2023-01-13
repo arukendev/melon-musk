@@ -42,6 +42,7 @@ public class ReviewDAO {
 					r.setView(rs.getInt("re_view"));
 					r.setLike(rs.getInt("re_like"));
 					r.setDate(rs.getDate("re_date"));
+					r.setAu_id(rs.getString("re_au_id"));
 					reviews.add(r);
 				}
 				request.setAttribute("reviews", reviews);

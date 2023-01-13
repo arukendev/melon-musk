@@ -8,6 +8,8 @@ import java.sql.ResultSet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.catalina.connector.Request;
+
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import com.semi.main.DBManager;
@@ -20,9 +22,11 @@ public class AuthDAO {
 				Auth a =(Auth)hs.getAttribute("account");
 				System.out.println(a);
 		if (a==null) {
+			request.setAttribute("commentLoginCheck", "comment_no_input.jsp");
 			request.setAttribute("loginPage", "jsp/auth/login_before.jsp");
 			return false;
 		}else {
+			request.setAttribute("commentLoginCheck", "comment_input.jsp");
 			request.setAttribute("loginPage", "jsp/auth/loginOK.jsp");
 			return true;
 		}
@@ -337,57 +341,31 @@ public class AuthDAO {
 	}
 	
 
-public int joinIdCheck(HttpServletRequest request){
-	int result = -1;
-	
-	Connection con = null;
-	PreparedStatement pstmt = null;
-	ResultSet rs = null;
-	String sql = "select * from auth where au_id=?";
-	
-	
-	
-	try {
-		//1. DB연결
-		con= DBManager.connect();
-		pstmt = con.prepareStatement(sql);
-		String id = request.getParameter("id");
-		pstmt.setString(1, id);
-		//3. 실행 -> select -> rs저장
-		rs = pstmt.executeQuery();
-
-		//4. 데이터처리
-
-		if(rs.next()){	
-			result = 0;
-		}else{
-			result = 1;
-		}
-
-		System.out.println("아이디 중복체크결과 : "+result);
-	} catch (Exception e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	} finally {
+	public static boolean duplecateID(String id){
 		
-	}
-	return result;
-}
-}
-//joinIdCheck 메서드닫음
-//public static void getAccount(HttpServletRequest request) {
-////1.세션가져오기
-//Account a =(Account)request.getSession().getAttribute("account");
-//a.getA_id();
-////2. 파라미터 실어주기
-//request.getParameter("id");
-//
-//Connection con = null;
-//PreparedStatement pstmt = null;
-//String sql = "select *from";
-//
-//}
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		
+		String sql="select * from auth where au_id=?";
+		ResultSet rs = null;
+		
+		try{
+	    	con=DBManager.connect();
+	        pstmt=con.prepareStatement(sql);
+	       pstmt.setString(1, id);
+	        
+	        rs= pstmt.executeQuery();
+	        while(rs.next()){
+	        	if (rs.getString("au_id").equals(id)) {
+					return true;
+				}
+	        }
+	    }catch(Exception e){
+	     	System.out.println("아이디 중복 확인 실패 : " + e);
+	    }//try end
+		return false;
 
+	}//duplecateID end
 	
-	
+}
 

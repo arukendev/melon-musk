@@ -14,32 +14,17 @@ import com.semi.auth.AuthDAO;
 public class MusicCommentC extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		AuthDAO.loginCheck(request);
+		MusicDAO.getMusic(request);
 		if (request.getParameter("commentId") == null) {
-			AuthDAO.loginCheck(request);
-			MusicDAO.getMusic(request);
-			request.setAttribute("contentPage", "jsp/music/music_info.jsp");
-			if (MusicDAO.loginCheck(request)) {
-				request.setAttribute("commentLoginCheck", "comment_input.jsp");
-			} else {
-				request.setAttribute("commentLoginCheck", "comment_no_input.jsp");
-			}
 			MusicDAO.setComment(request);
-			
 		} else {
-			AuthDAO.loginCheck(request);
-			MusicDAO.getMusic(request);
-			request.setAttribute("contentPage", "jsp/music/music_info.jsp");
-			if (MusicDAO.loginCheck(request)) {
-				request.setAttribute("commentLoginCheck", "comment_input.jsp");
-			} else {
-				request.setAttribute("commentLoginCheck", "comment_no_input.jsp");
-			}
 			MusicDAO.delComment(request);
 		}
 		
 		MusicDAO.getComment(request);
 		
+		request.setAttribute("contentPage", "jsp/music/music_info.jsp");
 		request.getRequestDispatcher("index.jsp").forward(request, response);
 		
 		

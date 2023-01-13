@@ -6,13 +6,11 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import com.semi.artist.Artists;
 import com.semi.auth.Auth;
-import com.semi.comment.Comment;
+import com.semi.main.Comment;
 import com.semi.main.DBManager;
-import com.semi.music.Music;
 
 public class AlbumDAO {
 
@@ -113,7 +111,7 @@ public class AlbumDAO {
 		
 			Connection con = null;
 			PreparedStatement pstmt = null;
-			String sql = "insert into album_comment values(al_comment_seq.nextval,?,?,?,sysdate)";
+			String sql = "insert into album_comment values(al_comment_seq.nextval,?,?,?,current_date)";
 			try {
 				con = DBManager.connect();
 				pstmt = con.prepareStatement(sql);
@@ -139,7 +137,8 @@ public class AlbumDAO {
 		ResultSet rs = null;
 		String sql = "select au_id, au_img, au_name, alco_id, alco_date, alco_txt "
 				+ "from auth, album, album_comment "
-				+ "where alco_au_id = au_id and alco_al_id = al_id and al_id = ?";
+				+ "where alco_au_id = au_id and alco_al_id = al_id and al_id = ? "
+				+ "order by alco_date desc";
 		
 		try {
 			con = DBManager.connect();
@@ -190,16 +189,6 @@ public class AlbumDAO {
 			DBManager.close(con, pstmt, null);
 		}
 		
-	}
-
-	public static boolean loginCheck(HttpServletRequest request) {
-		HttpSession hs = request.getSession();
-		Auth a =(Auth)hs.getAttribute("account");
-		if (a==null) {
-			return false;
-		}else {
-			return true;
-		}
 	}
 
 }

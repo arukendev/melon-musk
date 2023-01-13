@@ -22,12 +22,11 @@ public class ReviewLikeC extends HttpServlet {
 		Auth a =(Auth)hs.getAttribute("account");
 		request.setAttribute("a", a);
 		if(a==null) {
-			request.setAttribute("alert", "좋아요 하시려면 로그인 해주세요.");
 			request.setAttribute("contentPage", "jsp/auth/login.jsp");
 			request.getRequestDispatcher("index.jsp").forward(request, response);
 		} else {
 			ReviewDAO.reviewLike(request);
-			ReviewDAO.getReview(request);
+			ReviewDAO.getReview3(request);
 			
 			request.setAttribute("contentPage", "jsp/review/review_detail.jsp");
 			request.getRequestDispatcher("index.jsp").forward(request, response);
