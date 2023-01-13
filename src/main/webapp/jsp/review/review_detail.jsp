@@ -20,15 +20,22 @@
 		<div style="width: 300px">${review.name }</div>
 		<div id="reviewDetail_row_viewsLike">
 			<div class="reviewDetail_viewsLike_items"><i class="fa-solid fa-eye"></i></div>
-			<div class="reviewDetail_viewsLike_items">${review.view +1 }</div>
 			<c:choose>
-			<c:when test="${(sessionScope.account.au_id ne null) and (like.au_id ne null) and (sessionScope.account.au_id eq like.au_id)}">
- 				<div class="reviewDetail_viewsLike_items"><button id="reviewDetail_items_likeBtn" onclick="location.href='ReviewLikeCancelC?no=${review.id}&wr=${review.au_id }'"><i class="fas fa-heart"></i></button></div>
-			</c:when>
-			<c:otherwise>
-			<div class="reviewDetail_viewsLike_items"><button id="reviewDetail_items_likeBtn" onclick="like(${review.id}, '${review.au_id }', '${a.au_id }')"><i class="far fa-heart"></i></button></div>
-			</c:otherwise>
-		</c:choose>
+				<c:when test="${param.wr ne null }">
+					<div class="reviewDetail_viewsLike_items">${review.view }</div>
+				</c:when>
+				<c:otherwise>
+					<div class="reviewDetail_viewsLike_items">${review.view +1 }</div>
+				</c:otherwise>
+			</c:choose>
+			<c:choose>
+				<c:when test="${(sessionScope.account.au_id ne null) and (like.au_id ne null) and (sessionScope.account.au_id eq like.au_id)}">
+	 				<div class="reviewDetail_viewsLike_items"><button id="reviewDetail_items_likeBtn" onclick="location.href='ReviewLikeCancelC?no=${review.id}&wr=${review.au_id }'"><i class="fas fa-heart"></i></button></div>
+				</c:when>
+				<c:otherwise>
+				<div class="reviewDetail_viewsLike_items"><button id="reviewDetail_items_likeBtn" onclick="like(${review.id}, '${review.au_id }', '${a.au_id }')"><i class="far fa-heart"></i></button></div>
+				</c:otherwise>
+			</c:choose>
 			<div class="reviewDetail_viewsLike_items" id="likeNumber">${review.like }</div>
 		</div>
 	</div>
