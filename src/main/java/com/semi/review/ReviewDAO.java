@@ -189,13 +189,16 @@ public class ReviewDAO {
 			
 			try {
 				request.setCharacterEncoding("utf-8");
+				String text = request.getParameter("text");
+				text = text.replaceAll("\\r\\n", "<br>");
+				
 				con = DBManager.connect();
 				pstmt = con.prepareStatement(
 						"update review set re_name= ?, re_img= ?, re_text= ? where re_id= ?"
 						);
 				pstmt.setString(1, request.getParameter("name"));
 				pstmt.setString(2, request.getParameter("img"));
-				pstmt.setString(3, request.getParameter("text"));
+				pstmt.setString(3, text);
 				pstmt.setString(4, request.getParameter("no"));
 				
 				pstmt.executeUpdate();
