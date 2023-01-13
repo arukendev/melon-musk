@@ -46,7 +46,7 @@
 		</div>
 		<div class="reviewReg_row_index">Date</div>
 		<div class="reviewDetail_row_100">
-		<fmt:formatDate value="${review.date }" type="both" pattern="yyyy-MM-dd hh:mm:ss"></fmt:formatDate>
+		<fmt:formatDate value="${review.date }" type="both" pattern="yyyy-MM-dd HH:mm:ss"></fmt:formatDate>
 		</div>
 	</div>
 	<div class="reviewReg_table_row">

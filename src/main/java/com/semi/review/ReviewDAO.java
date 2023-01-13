@@ -64,15 +64,17 @@ public class ReviewDAO {
 		
 		try {
 			request.setCharacterEncoding("utf-8");
+			String text = request.getParameter("text");
+			text = text.replaceAll("\\r\\n", "<br>");
 
 			String sql = "insert into review values(review_seq.nextval,"
-					+ "?, ?, ?, 0, 0, sysdate, ?)";
+					+ "?, ?, ?, 0, 0, current_date, ?)";
 
 			con = DBManager.connect();
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, request.getParameter("name"));
 			pstmt.setString(2, request.getParameter("img"));
-			pstmt.setString(3, request.getParameter("text"));
+			pstmt.setString(3, text);
 			pstmt.setString(4, a.getAu_id());
 			
 			if(pstmt.executeUpdate() == 1) {
