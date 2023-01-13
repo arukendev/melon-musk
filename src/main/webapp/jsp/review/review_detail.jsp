@@ -12,12 +12,12 @@
 <body>
 <div id="reviewReg_table">
 	<div class="review_table">
-		<div class="review_table_title">Review Detail<br><span style="color:red">${alert }</span></div>
+		<div class="review_table_title">상&nbsp&nbsp&nbsp&nbsp&nbsp세&nbsp&nbsp&nbsp&nbsp&nbsp보&nbsp&nbsp&nbsp&nbsp&nbsp기<br><span style="color:red">${alert }</span></div>
 		<div class="review_table_btns"><a href="ReviewC">목록</a></div>
 	</div>
 	<div class="reviewReg_table_row">
 		<div class="reviewReg_row_index">Title</div>
-		<div class="reviewDetail_row_200">${review.name }</div>
+		<div style="width: 300px">${review.name }</div>
 		<div id="reviewDetail_row_viewsLike">
 			<div class="reviewDetail_viewsLike_items"><i class="fa-solid fa-eye"></i></div>
 			<div class="reviewDetail_viewsLike_items">${review.view +1 }</div>
