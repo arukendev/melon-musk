@@ -34,7 +34,7 @@ public class PlaylistDAO {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "select pl_name,mu_al_img, mu_name, mu_ar_name, mu_lyrics "
+		String sql = "select pl_name,mu_al_img, mu_name, mu_ar_name, mu_lyrics,mu_id "
 				+ "from playlist, playlist_music, music "
 				+ "where pm_pl_id = pl_id and pm_mu_id = mu_id and pl_id = ?";
 		
@@ -53,6 +53,7 @@ public class PlaylistDAO {
 							,rs.getString("mu_ar_name")
 							,rs.getString("mu_lyrics")
 							,request.getParameter("pl_id")
+							,rs.getString("mu_id")
 							);
 					playlistmusics.add(playlistmusic);
 				}
@@ -229,11 +230,9 @@ public  void updateReview(HttpServletRequest request) {
 		try {
 			String[] test=request.getParameterValues("mu_id");
 			String insertMu ="";
-			int seqPlusNum =0;
 			
 			for (String s : test) {
-				insertMu += "INTO playlist_music values(playlist_music_seq.nextval+"+ seqPlusNum +", playlist_seq.nextval,"+ s+") ";
-				seqPlusNum++;
+				insertMu += "INTO playlist_music values(getplmusicid, playlist_seq.nextval,"+ s+") ";
 			}
 			sql = "INSERT ALL INTO playlist VALUES(playlist_seq.nextval,?,0,0,sysdate) "+ insertMu +"SELECT * FROM DUAL";
 				con = DBManager.connect();
@@ -253,7 +252,132 @@ public  void updateReview(HttpServletRequest request) {
 		}
 	}
 
-	public void regPlMusic(HttpServletRequest request) {
+	public void addPlMusic(HttpServletRequest request) {
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		String sql = "";
+		try {
+			String[] test=request.getParameterValues("mu_id");
+			String insertMu ="";
+			
+			for (String s : test) {
+				insertMu += "INTO playlist_music values(getplmusicid,"+ request.getParameter("pl_id") +","+ s+") ";
+			}
+			sql = "INSERT ALL "+ insertMu +"SELECT * FROM DUAL";
+				con = DBManager.connect();
+				pstmt = con.prepareStatement(sql);
+				
+				
+				if (pstmt.executeUpdate()==1) {
+					request.setAttribute("r", "추가성공!");
+					System.out.println("추가성공");
+				}
+				
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			DBManager.close(con, pstmt, null);
+		}
+		
+		
+		
+		
+		
+		
+		
+	}
+
+	public void deletePlaylist(HttpServletRequest request) {
+		
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		String sql = "delete from playlist where pl_id=?";
+		try {
+				con = DBManager.connect();
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, request.getParameter("pl_id"));
+				
+				if (pstmt.executeUpdate()==1) {
+					System.out.println("플리삭제성공");
+						request.setAttribute("r", "삭제성공");
+						
+				}
+				
+				
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			DBManager.close(con, pstmt, null);
+		}
+		
+		
+	}
+
+	public void deletePlMusic(HttpServletRequest request) {
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		String sql = "delete from playlist_music where pm_pl_id=?";
+		try {
+				con = DBManager.connect();
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, request.getParameter("pl_id"));
+				
+				if (pstmt.executeUpdate()==1) {
+					System.out.println("음악삭제성공");
+					request.setAttribute("r", "전부삭제성공");
+				}
+				
+				
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			DBManager.close(con, pstmt, null);
+		}
+		
+		
+	}
+
+	public void removePlMusic(HttpServletRequest request) {
+		
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		String sql = "";
+		try {
+			String[] test=request.getParameterValues("mu_id");
+			String removePlMusic ="";
+			
+			for (String s : test) {
+				removePlMusic += " and pm_mu_id="+s;
+				System.out.println(removePlMusic);
+			}
+			sql = "delete from playlist_music where pm_pl_id=?"+ removePlMusic ;
+				con = DBManager.connect();
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, request.getParameter("pl_id"));
+				System.out.println(sql);
+				System.out.println(request.getParameter("pl_id"));
+				
+				if (pstmt.executeUpdate()==1) {
+					request.setAttribute("r", "제거성공!");
+					System.out.println("제거성공");
+				}
+				
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			DBManager.close(con, pstmt, null);
+		}
+		
+		
+		
+		
+		
+		
+		
 		
 	}
 		
