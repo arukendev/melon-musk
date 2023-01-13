@@ -9,6 +9,16 @@
 </head>
 <body>
 	<div class="detail_header">
+		<div class="detail_top">
+			<div class="detail_top_like">
+				<i class="fas fa-heart"></i>
+				<span>9,999,999</span>
+			</div>
+			<div class="detail_top_edit">
+				<i class="fas fa-pencil"></i>
+				<span>편집하기</span>
+			</div>
+		</div>
 		<div class="detail_titles">
 			<div class="detail_titles_title">
 				<h1>${music.name}</h1>
@@ -69,6 +79,7 @@
 		</div>
 	</div>
 	<div class="comment_container">
+		<h1>댓글</h1>
 		<div class="comment_input">
 			<jsp:include page="${commentLoginCheck}"></jsp:include>
 		</div>

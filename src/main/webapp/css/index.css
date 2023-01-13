@@ -6,6 +6,7 @@
 @import "main/main.css";
 @import "main/detail.css";
 @import "main/chart.css";
+@import "main/comment.css";
 
 .hidden {
   display: none;

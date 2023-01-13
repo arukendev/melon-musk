@@ -17,20 +17,14 @@ public class MusicC extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		AuthDAO.loginCheck(request);
-		if (MusicDAO.loginCheck(request)) {
-			request.setAttribute("commentLoginCheck", "comment_input.jsp");
-		} else {
-			request.setAttribute("commentLoginCheck", "comment_no_input.jsp");
-		}
 		if (ChartDAO.musicIdCheck(request)) {
 			MusicDAO.getMusic(request);
-			request.setAttribute("contentPage", "jsp/music/music_info.jsp");
 		} else {
 			Crawler.musicCrawler(request);
 			MusicDAO.setMusic(request);
-			request.setAttribute("contentPage", "jsp/music/music_reg.jsp");
 		}
 		MusicDAO.getComment(request);
+		request.setAttribute("contentPage", "jsp/music/music_info.jsp");
 		request.getRequestDispatcher("index.jsp").forward(request, response);
 	}
 

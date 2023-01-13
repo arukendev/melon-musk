@@ -6,11 +6,10 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import com.semi.artist.Artists;
 import com.semi.auth.Auth;
-import com.semi.comment.Comment;
+import com.semi.main.Comment;
 import com.semi.main.DBManager;
 
 public class MusicDAO {
@@ -104,17 +103,6 @@ public class MusicDAO {
 			DBManager.close(con, pstmt, rs);
 		}
 	}
-	
-	public static boolean loginCheck(HttpServletRequest request) {
-		HttpSession hs = request.getSession();
-		Auth a =(Auth)hs.getAttribute("account");
-		if (a==null) {
-			return false;
-		}else {
-			return true;
-		}
-		
-	}
 
 	public static void setComment(HttpServletRequest request) {
 			
@@ -123,7 +111,7 @@ public class MusicDAO {
 		
 			Connection con = null;
 			PreparedStatement pstmt = null;
-			String sql = "insert into music_comment values(mu_comment_seq.nextval,?,?,?,sysdate)";
+			String sql = "insert into music_comment values(mu_comment_seq.nextval,?,?,?,current_date)";
 			try {
 				con = DBManager.connect();
 				pstmt = con.prepareStatement(sql);
@@ -151,7 +139,8 @@ public class MusicDAO {
 		ResultSet rs = null;
 		String sql = "select au_id, au_img, au_name, muco_id, muco_date, muco_txt "
 				+ "from auth, music, music_comment "
-				+ "where muco_au_id = au_id and muco_mu_id = mu_id and mu_id = ?";
+				+ "where muco_au_id = au_id and muco_mu_id = mu_id and mu_id = ? "
+				+ "order by muco_date desc";
 		
 		try {
 			con = DBManager.connect();

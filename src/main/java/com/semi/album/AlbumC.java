@@ -16,20 +16,14 @@ import com.semi.music.MusicDAO;
 public class AlbumC extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		AuthDAO.loginCheck(request);
-		if (AlbumDAO.loginCheck(request)) {
-			request.setAttribute("commentLoginCheck", "comment_input.jsp");
-		} else {
-			request.setAttribute("commentLoginCheck", "comment_no_input.jsp");
-		}
 		if (ChartDAO.albumIdCheck(request)) {
 			AlbumDAO.getAlbum(request);
-			request.setAttribute("contentPage", "jsp/album/album_info.jsp");
 		} else {
 			Crawler.albumCrawler(request);
 			AlbumDAO.setAlbum(request);
-			request.setAttribute("contentPage", "jsp/album/album_reg.jsp");
 		}
 		AlbumDAO.getComment(request);
+		request.setAttribute("contentPage", "jsp/album/album_info.jsp");
 		request.getRequestDispatcher("index.jsp").forward(request, response);
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
