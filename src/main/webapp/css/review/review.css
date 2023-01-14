@@ -25,21 +25,15 @@
 	float: right;
 }
 
-#review_columnsWrap {
-	width: 100vw;
-	height: 30px;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	background-color: #DCDDE1;
-}
-
 #review_columnsWrap_label {
-	width: 75vw;
+	margin: 20px auto 0px auto;
+	width: 100%;
 	display: flex;
 	justify-content: space-between;
+	padding-bottom: 10px;
+	border-bottom: dashed;
 }
-#review_columnsWrap_label div{
+#review_columnsWrap_label > div{
 	text-align: center;
 }
 
@@ -48,6 +42,16 @@
 }
 .review_label_title {
 	width: 50%;
+	display: flex;
+	align-items: baseline;
+}
+.review_label_title div{
+	text-align: left;
+	margin: 0px 3px;
+}
+
+.review_title_commentN{
+	font-size: 10pt;
 }
 .review_label_writer {
  	width: 80px;	
@@ -60,7 +64,8 @@
 }
 
 #review_table2 {
-	width: 75vw;
+	width: 100%;
+	margin: 0px auto;
 }
 
 .review_table2_row {
@@ -82,17 +87,27 @@
 	text-align: center;
 }
 
-.review_pageNum {
+.review_bottom{
 	border-top: double 2px black;
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+}
+
+.review_bottom div {
 	text-align: center;
 	padding: 10px;
+}
+
+.review_bottom_btn{
+	width: 75px;
 }
 
 
 
 
 
-/* reviewReg.jsp ----------------------------------------------------------------  */
+/* review_reg.jsp ----------------------------------------------------------------  */
 #reviewReg_table {
 	width: 500px;
 	display: flex;
@@ -134,7 +149,12 @@
 	height: 400px;
 }
 
-/*--------------------------------------------------------------------------*/
+
+
+
+
+/* review_detail.jsp --------------------------------------------------------------------------*/
+
 #reviewDetail_row_viewsLike {
 	display: flex;
 	justify-content: flex-end;
@@ -170,4 +190,8 @@
 	width: 100%;
 	display: flex;
 	justify-content: flex-end;
+}
+
+#reviewDetail_comment{
+	margin: auto;
 }

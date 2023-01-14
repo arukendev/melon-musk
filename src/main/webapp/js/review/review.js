@@ -36,9 +36,16 @@ function deleteReview(no, writer, au_id) {
 	if(au_id!=writer){
 		alert('본인 글만 삭제할 수 있습니다.');
 	} else{
-		var really = confirm('정말 삭제하겠습니까?');
+		const really = confirm('정말 삭제하겠습니까?');
 		if(really){
 		location.href="ReviewDelC?no="+no;
 		}
+	}
+}
+
+function commentDel(re_id, reco_id){
+	const really = confirm('댓글을 삭제하시겠습니까?');
+	if(really){
+		location.href="ReviewCommentC?no="+re_id+"&commentId="+reco_id;
 	}
 }

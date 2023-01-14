@@ -35,7 +35,10 @@
 				<div class="review_label_no">${status.count + 10*(param.p-1) }</div>
 			</c:otherwise>
 			</c:choose>
-			<span class="review_label_title">${review.name }</span>
+			<div class="review_label_title">
+				<div>${review.name }</div>
+				<div class="review_title_commentN">[${review.comment }]</div>
+			</div>
 			<div class="review_label_writer">${review.au_id }</div>
 			<div class="review_label_date">${review.date }</div>
 			<div class="review_label_viewLike">${review.view }</div>
