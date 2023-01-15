@@ -27,6 +27,7 @@ public class ArtistCommentC extends HttpServlet {
 		ArtistDAO.getComment(request);
 		
 		request.setAttribute("contentPage", "jsp/artist/artist_info.jsp");
+		request.setAttribute("detailContentPage", "artist_main.jsp");
 		request.getRequestDispatcher("index.jsp").forward(request, response);
 	}
 

@@ -7,10 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<form action="AlbumCommentC">
-		<input hidden name="albumId" value="${album.id}">
-		<textarea name="txt"></textarea>
-		<button>전송</button>
-	</form>
+
 </body>
 </html>

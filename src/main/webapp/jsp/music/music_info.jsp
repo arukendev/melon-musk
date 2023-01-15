@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,12 +13,14 @@
 		<div class="detail_top">
 			<div class="detail_top_like">
 				<i class="fas fa-heart"></i>
-				<span>9,999,999</span>
+				<span>9</span>
 			</div>
-			<div class="detail_top_edit">
-				<i class="fas fa-pencil"></i>
-				<span>편집하기</span>
-			</div>
+			<c:if test="${sessionScope.account.au_id ne null}">
+				<div class="detail_top_edit">
+					<i class="fas fa-pencil"></i>
+					<span>편집하기</span>
+				</div>
+			</c:if>
 		</div>
 		<div class="detail_titles">
 			<div class="detail_titles_title">
@@ -81,27 +84,48 @@
 	<div class="comment_container">
 		<h1>댓글</h1>
 		<div class="comment_input">
-			<jsp:include page="${commentLoginCheck}"></jsp:include>
+			<c:choose>
+				<c:when test="${sessionScope.account.au_id ne null}">
+					<form action="MusicCommentC">
+						<input hidden name="musicId" value="${music.id}">
+						<textarea name="txt"></textarea>
+						<button>등록</button>
+					</form>
+				</c:when>
+				<c:otherwise>
+					<p>로그인 이용자만 댓글을 달 수 있습니다.</p>
+				</c:otherwise>
+			</c:choose>
 		</div>
-		<div class="comment_content">
+		<div class="comment_comments">
 			<c:forEach var="c" items="${comments}">
-				<div class="comment_profileimg">
-					${c.img}
-				</div>
-				<div class="comment_auth">
-					${c.name}
-				</div>
-				<div class="comment_date">
-					${c.date}
-				</div>
-				<div class="comment_text">
-					${c.txt}
-				</div>
-				<c:if test="${c.authId eq sessionScope.account.au_id}">
-					<div>
-						<a href="MusicCommentC?musicId=${music.id}&commentId=${c.commentId}">삭제</a>
+				<div class="comment_comment">
+					<div class="comment_profileimg">
+						<img src="${c.img}">
 					</div>
-				</c:if>
+					<div class="comment_contents">
+						<div class="comment_top">
+							<div class="comment_auth">
+								${c.name}
+							</div>
+							<div class="comment_text">
+								${c.txt}
+							</div>
+						</div>
+						<div class="comment_bottom">
+							<div class="comment_date">
+								<fmt:formatDate value="${c.date}" pattern="yyyy.MM.dd kk:mm:ss"/>
+							</div>
+							<c:if test="${c.authId eq sessionScope.account.au_id}">
+								<div>
+									<a href="MusicCommentC?musicId=${music.id}&commentId=${c.commentId}">
+										<i class="fas fa-trash-alt"></i>
+									</a>
+								</div>
+							</c:if>
+						</div>
+					</div>
+				</div>
 			</c:forEach>
 		</div>
 	</div>

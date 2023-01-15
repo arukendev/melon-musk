@@ -22,11 +22,9 @@ public class AuthDAO {
 				Auth a =(Auth)hs.getAttribute("account");
 				System.out.println(a);
 		if (a==null) {
-			request.setAttribute("commentLoginCheck", "comment_no_input.jsp");
 			request.setAttribute("loginPage", "jsp/auth/login_before.jsp");
 			return false;
 		}else {
-			request.setAttribute("commentLoginCheck", "comment_input.jsp");
 			request.setAttribute("loginPage", "jsp/auth/loginOK.jsp");
 			return true;
 		}

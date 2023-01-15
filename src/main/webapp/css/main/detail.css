@@ -8,15 +8,14 @@
   z-index: 1;
   display: grid;
   grid-template-columns: 320px 1fr;
-  grid-template-rows: 40px 112px 130px;
+  grid-template-rows: 30px 132px 120px;
 }
 
 .detail_top {
   display: flex;
-  justify-content: space-between;
+  gap: 15px;
   align-items: center;
   font-size: 20px;
-  padding-right: 50px;
 }
 
 .detail_top div {
@@ -44,6 +43,7 @@
 
 .detail_titles_subtitles {
   display: flex;
+  flex-wrap: wrap;
   gap: 10px;
   font-size: 18px;
   font-weight: 400;
