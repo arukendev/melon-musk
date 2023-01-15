@@ -125,7 +125,7 @@ public class ReviewDAO {
 			rs.next();
 			int viewCnt = rs.getInt("re_view");
 			viewCnt++;
-			Review r = new Review(rs.getInt("re_id"), rs.getString("re_name"), rs.getString("re_img"), rs.getString("re_text"), rs.getDate("re_date"), rs.getInt("re_view"), rs.getInt("re_like"),  rs.getString("re_au_id"), rs.getInt("re_comment"));
+			Review r = new Review(rs.getInt("re_id"), rs.getString("re_name"), rs.getString("re_img"), rs.getString("re_text"), rs.getDate("re_date"), viewCnt, rs.getInt("re_like"),  rs.getString("re_au_id"), rs.getInt("re_comment"));
 			countUpdate(viewCnt, rs.getInt("re_id"));
 			request.setAttribute("review", r);
 			
@@ -154,7 +154,7 @@ public class ReviewDAO {
 			int viewCnt = rs.getInt("re_view");
 			viewCnt++;
 			countUpdate(viewCnt, rs.getInt("re_id"));
-			Review r = new Review(rs.getInt("re_id"), rs.getString("re_name"), rs.getString("re_img"), rs.getString("re_text"), rs.getDate("re_date"), rs.getInt("re_view"), rs.getInt("re_like"), rs.getString("re_au_id"), rs.getInt("re_comment"));
+			Review r = new Review(rs.getInt("re_id"), rs.getString("re_name"), rs.getString("re_img"), rs.getString("re_text"), rs.getDate("re_date"), viewCnt, rs.getInt("re_like"), rs.getString("re_au_id"), rs.getInt("re_comment"));
 			request.setAttribute("review", r);
 			
 		} catch (Exception e) {
@@ -222,12 +222,14 @@ public class ReviewDAO {
 			pstmt = con.prepareStatement(
 			"delete from review where re_id = ?"
 					);
-			pstmt.setString(1, request.getParameter("no"));
+			String re_id = request.getParameter("no");
+			pstmt.setString(1, re_id);
 			if(pstmt.executeUpdate() == 1) {
-				request.setAttribute("result", "successfully deleted");
+				System.out.println("리뷰 삭제 완료");
+				deleteReviewComment(re_id);
 			}
 		} catch (Exception e) {
-			request.setAttribute("result", "db Error");
+			System.out.println("리뷰 삭제 실패");
 			e.printStackTrace();
 		} finally {
 			DBManager.close(con, pstmt, null);
@@ -235,6 +237,27 @@ public class ReviewDAO {
 		
 	}
 
+	private static void deleteReviewComment(String re_id) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		
+		try {
+			con = DBManager.connect();
+			pstmt = con.prepareStatement(
+					"delete from review_comment where reco_re_id = ?"
+					);
+			pstmt.setString(1, re_id);
+			if(pstmt.executeUpdate() >= 0) {
+				System.out.println("삭제글 댓글도 삭제완료");
+			}
+			
+		} catch (Exception e) {
+			System.out.println("삭제글 댓글 삭제 에러");
+			e.printStackTrace();
+		}
+	}
+
+	// getReview랑 똑같은데 조회수 안 올라감. 수정이나 좋아요, 댓글작성 등 할 때 조회수 올라가는 거 방지용.
 	public static void getReview3(HttpServletRequest request) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -359,7 +382,7 @@ public class ReviewDAO {
 			Like l = new Like();
 			l.setAu_id(rs.getString("reli_au_id"));
 			l.setRe_id(rs.getInt("reli_re_id"));
-			System.out.println("like.au_id"+l.getAu_id());
+			System.out.println("{$like.au_id} = "+l.getAu_id());
 			request.setAttribute("like", l);
 			} 
 			
@@ -399,6 +422,7 @@ public class ReviewDAO {
 	public static void setComment(HttpServletRequest request) {
 		HttpSession hs = request.getSession();
 		Auth a = (Auth) hs.getAttribute("account");
+		String re_id = request.getParameter("no");
 		
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -409,12 +433,12 @@ public class ReviewDAO {
 					"insert into review_comment values(re_comment_seq.nextval, ?, ?, ?, current_date)"
 					);
 			pstmt.setString(1, a.getAu_id());
-			pstmt.setString(2, request.getParameter("no"));
+			pstmt.setString(2, re_id);
 			pstmt.setString(3, request.getParameter("txt"));
 			
 			if(pstmt.executeUpdate()==1) {
 				System.out.println("전송성공");
-				reviewCommentUpdate(request);
+				reviewCommentUpdate(re_id);
 			}
 		} catch (Exception e) {
 			System.out.println("전송실패");
@@ -424,7 +448,7 @@ public class ReviewDAO {
 		}
 	}
 
-	private static void reviewCommentUpdate(HttpServletRequest request) {
+	private static void reviewCommentUpdate(String re_id) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		
@@ -433,7 +457,7 @@ public class ReviewDAO {
 			pstmt = con.prepareStatement(
 					"update review set re_comment = re_comment +1 where re_id = ?"
 					);
-			pstmt.setString(1, request.getParameter("no"));
+			pstmt.setString(1, re_id);
 			if(pstmt.executeUpdate()==1) {
 				System.out.println("댓글수 +1");
 			}
@@ -458,7 +482,7 @@ public class ReviewDAO {
 			
 			if (pstmt.executeUpdate() == 1) {
 				System.out.println("삭제성공");
-				reviewDeleteUpdate(request);
+				reviewDeleteUpdate(request.getParameter("no"));
 			}
 		} catch (Exception e) {
 			System.out.println("삭제실패");
@@ -468,7 +492,7 @@ public class ReviewDAO {
 		}
 	}
 
-	private static void reviewDeleteUpdate(HttpServletRequest request) {
+	private static void reviewDeleteUpdate(String re_id) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		
@@ -477,7 +501,7 @@ public class ReviewDAO {
 			pstmt = con.prepareStatement(
 					"update review set re_comment = re_comment -1 where re_id = ?"
 					);
-			pstmt.setString(1, request.getParameter("no"));
+			pstmt.setString(1, re_id);
 			if(pstmt.executeUpdate()==1) {
 				System.out.println("댓글수 -1");
 			}
