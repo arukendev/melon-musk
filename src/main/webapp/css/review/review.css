@@ -186,8 +186,13 @@
 	max-height: 30px;
 }
 
-#reviewDetail_bttmBtns {
+#reviewDetail_table_bottom{
 	width: 100%;
+	display: flex;
+	justify-content: space-between;
+}
+
+#reviewDetail_bottom_bttmBtns {
 	display: flex;
 	justify-content: flex-end;
 }

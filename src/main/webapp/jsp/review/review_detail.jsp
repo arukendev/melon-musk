@@ -13,7 +13,16 @@
 <div id="reviewReg_table">
 	<div class="review_table">
 		<div class="review_table_title">상&nbsp&nbsp&nbsp&nbsp&nbsp세&nbsp&nbsp&nbsp&nbsp&nbsp보&nbsp&nbsp&nbsp&nbsp&nbsp기<br><span style="color:red">${alert }</span></div>
-		<div class="review_table_btns"><a href="ReviewC">목록</a></div>
+		<div class="review_table_btns">
+			<c:choose>
+				<c:when test="${sessionScope.account.au_id eq 'admin' }">
+					<a href="ReviewReportedC">신고글 목록</a>
+				</c:when>
+				<c:otherwise>
+					<a href="ReviewC">목록</a>
+				</c:otherwise>
+			</c:choose>
+		</div>
 	</div>
 	<div class="reviewReg_table_row">
 		<div class="reviewReg_row_index">Title</div>
@@ -25,8 +34,11 @@
 				<c:when test="${(sessionScope.account.au_id ne null) and (like.au_id ne null) and (sessionScope.account.au_id eq like.au_id)}">
 	 				<div class="reviewDetail_viewsLike_items"><button id="reviewDetail_items_likeBtn" onclick="location.href='ReviewLikeCancelC?no=${review.id}&wr=${review.au_id }'"><i class="fas fa-heart"></i></button></div>
 				</c:when>
+				<c:when test="${sessionScope.account.au_id eq 'admin'}">
+	 				<div class="reviewDetail_viewsLike_items"><button id="reviewDetail_items_likeBtn" onclick="javascript:adminClickedButton()"><i class="fas fa-heart"></i></button></div>
+				</c:when>
 				<c:otherwise>
-				<div class="reviewDetail_viewsLike_items"><button id="reviewDetail_items_likeBtn" onclick="like(${review.id}, '${review.au_id }', '${a.au_id }')"><i class="far fa-heart"></i></button></div>
+					<div class="reviewDetail_viewsLike_items"><button id="reviewDetail_items_likeBtn" onclick="like(${review.id}, '${review.au_id }', '${a.au_id }')"><i class="far fa-heart"></i></button></div>
 				</c:otherwise>
 			</c:choose>
 			<div class="reviewDetail_viewsLike_items" id="likeNumber">${review.like }</div>
@@ -50,9 +62,14 @@
 		<div class="reviewReg_row_index">Content</div>
 		<div class="reviewReg_row_txt">${review.text }</div>
 	</div>
-	<div id="reviewDetail_bttmBtns">
-		<button onclick="update(${review.id}, '${review.au_id }', '${a.au_id }')">수정하기</button>
-		<button onclick="deleteReview(${review.id}, '${review.au_id }', '${a.au_id }')">삭제하기</button>
+	<div id="reviewDetail_table_bottom">
+		<div id="reviewDetail_bottom_report">
+			<button onclick="report(${review.id}, '${a.au_id }')">신고하기</button>
+		</div>
+		<div id="reviewDetail_bottom_bttmBtns">
+			<button onclick="update(${review.id}, '${review.au_id }', '${a.au_id }')">수정하기</button>
+			<button onclick="deleteReview(${review.id}, '${review.au_id }', '${a.au_id }')">삭제하기</button>
+		</div>
 	</div>
 </div>
 	<div class="comment_container">
@@ -65,7 +82,7 @@
 			<c:forEach var="c" items="${comments}">
 				<div class="comment_comment">
 					<div class="comment_profileimg">
-						<img src="${c.img}">
+						<img src="<%=request.getContextPath() %>/files/auth/${c.img}">
 					</div>
 					<div class="comment_contents">
 						<div class="comment_top">
