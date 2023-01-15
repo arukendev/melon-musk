@@ -28,6 +28,7 @@ public class ReviewLikeCancelC extends HttpServlet {
 		} else {
 			ReviewDAO.reviewLikeCancel(request);
 			ReviewDAO.getReview3(request);
+			ReviewDAO.getComment(request);
 			
 			request.setAttribute("contentPage", "jsp/review/review_detail.jsp");
 			request.getRequestDispatcher("index.jsp").forward(request, response);

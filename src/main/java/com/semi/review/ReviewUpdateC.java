@@ -31,15 +31,22 @@ public class ReviewUpdateC extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		AuthDAO.loginCheck(request);
-		ReviewDAO.updateReview(request);
-		ReviewDAO.getReview(request);
 		HttpSession hs = request.getSession();
 		Auth a =(Auth)hs.getAttribute("account");
 		request.setAttribute("a", a);
-		
+		if(a==null) {
+			request.setAttribute("alert", "세션이 만료되었습니다. 재로그인 해주세요.");
+			request.setAttribute("contentPage", "jsp/auth/login.jsp");
+			request.getRequestDispatcher("index.jsp").forward(request, response);
+		} else {
+		ReviewDAO.updateReview(request);
+		ReviewDAO.getReview3(request);
+		ReviewDAO.getComment(request);
+
+		request.setAttribute("editted", "1");
 		request.setAttribute("contentPage", "jsp/review/review_detail.jsp");
 		request.getRequestDispatcher("index.jsp").forward(request, response);
-		
+		}
 	}
 
 }
