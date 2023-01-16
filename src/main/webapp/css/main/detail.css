@@ -44,8 +44,7 @@
 .detail_titles_subtitles {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
-  font-size: 18px;
+  gap: 5px;
   font-weight: 400;
 }
 

@@ -18,6 +18,7 @@ import com.semi.artist.Artists;
 import com.semi.chart.Chart;
 import com.semi.music.Music;
 import com.semi.newMusic.NewMusic;
+import com.semi.search.SearchAlbum;
 import com.semi.search.SearchArtist;
 
 public class Crawler {
@@ -519,18 +520,21 @@ public class Crawler {
 			Elements albumImgElms = html.select(".wrap_album04 a:first-child img");
 			Elements albumIdElms = html.select(".wrap_album04 dt:first-child a");
 			Elements albumNameElms = html.select(".wrap_album04 dt:first-child a");
+			Elements albumTypeElms = html.select(".wrap_album04 dt:first-child .vdo_name");
 			Elements albumDateElms = html.select(".wrap_album04 .atist_info .wrap_btn .cnt_view");
 			Elements albumNumElms = html.select(".wrap_album04 .atist_info .wrap_btn .tot_song");
 						
 			Element albumImgElm = null;
 			Element albumIdElm = null;
 			Element albumNameElm = null;
+			Element albumTypeElm = null;
 			Element albumDateElm = null;
 			Element albumNumElm = null;
 			
 			String albumImg = "";
 			String albumId = "";
 			String albumName = "";
+			String albumType = "";
 			String albumDate = "";
 			String albumNum = "";
 			
@@ -542,12 +546,14 @@ public class Crawler {
 				albumImgElm = albumImgElms.get(i);
 				albumIdElm = albumIdElms.get(i);
 				albumNameElm = albumNameElms.get(i);
+				albumTypeElm = albumTypeElms.get(i);
 				albumDateElm = albumDateElms.get(i);
 				albumNumElm = albumNumElms.get(i);
 				
 				albumImg = albumImgElm.attr("src");
 				albumId = albumIdElm.attr("href").replaceAll("[^0-9]", "");
 				albumName = albumNameElm.text();
+				albumType = albumTypeElm.text().replace("[", "").replace("]", "");
 				albumDate = albumDateElm.text();
 				albumNum = albumNumElm.text();
 				
@@ -582,7 +588,7 @@ public class Crawler {
 			Document html = con.get();
 			Elements cdElms = html.select(".cd strong");
 			Elements musicIdElms = html.select("tr[data-group-items=cd1] td:nth-child(3) a");
-			Elements musicNameElms = html.select(".wrap_song_info div:first-child a");
+			Elements musicNameElms = html.select("tr[data-group-items=cd1] td:nth-child(3) a");
 			Elements musicArtistIdElms = html.select(".wrap_song_info .rank02 a:first-child");
 			Elements musicArtistElms = html.select(".wrap_song_info .rank02 a:first-child");
 			
@@ -602,7 +608,7 @@ public class Crawler {
 			if (cdElms.size() != 0) {
 				for (int i = 0; i < cdElms.size(); i++) {
 					musicIdElms = html.select("tr[data-group-items=cd" + (i + 1) + "] td:nth-child(3) a");
-					musicNameElms = html.select("tr[data-group-items=cd" + (i + 1) + "] .wrap_song_info div:first-child a");
+					musicNameElms = html.select("tr[data-group-items=cd" + (i + 1) + "] td:nth-child(3) a");
 					musicArtistIdElms = html.select("tr[data-group-items=cd" + (i + 1) + "] .wrap_song_info .rank02 a:first-child");
 					musicArtistElms = html.select("tr[data-group-items=cd" + (i + 1) + "] .wrap_song_info .rank02 a:first-child");
 					cdIndex.add(i + 1);
@@ -613,7 +619,7 @@ public class Crawler {
 						musicArtistElm = musicArtistElms.get(j);
 						
 						musicId = musicIdElm.attr("href").replaceAll("[^0-9]", "");
-						musicName = musicNameElm.text();
+						musicName = musicNameElm.attr("title").replace(" 곡정보", "");
 						musicArtistId = musicArtistIdElm.attr("href").replaceAll("[^0-9]", "");
 						musicArtist = musicArtistElm.text();
 						
@@ -636,7 +642,7 @@ public class Crawler {
 					musicArtistElm = musicArtistElms.get(i);
 					
 					musicId = musicIdElm.attr("href").replaceAll("[^0-9]", "");
-					musicName = musicNameElm.text();
+					musicName = musicNameElm.attr("title").replace(" 곡정보", "");
 					musicArtistId = musicArtistIdElm.attr("href").replaceAll("[^0-9]", "");
 					musicArtist = musicArtistElm.text();
 					
@@ -662,17 +668,118 @@ public class Crawler {
 	}
 
 	public static void searchCrawler(HttpServletRequest request) {
-		String URL = "";
+
+		String URL = "https://www.melon.com/search/artist/listArtists.htm?startIndex=1&pageSize=20&q="
+				+ request.getParameter("result")
+				+ "&sq=&sort=weight&section=all&sex=&actType=&domestic=&genreCd=&actYear=";
 		
 		String[] sels = request.getParameterValues("sel");
 		for (String sel : sels) {
-			if (sel.equals("ar")) {
-				URL = "https://www.melon.com/search/artist/listArtists.htm?startIndex=1&pageSize=20&q="
+			if (sel.equals("al")) {
+				URL = "https://www.melon.com/search/album/index.htm?startIndex=1&pageSize=21&q="
 						+ request.getParameter("result")
-						+ "&sq=&sort=weight&section=all&sex=&actType=&domestic=&genreCd=&actYear=";
+						+ "&sortorder=&section=all&sectionId=&genreDir=&sort=hit&mwkLogType=T";
 				Connection con = Jsoup.connect(URL);
-
 				try {
+					Document html = con.get();
+					
+					Elements albumImgElms = html.select(".wrap_album04 a:first-child img");
+					Elements albumTypeElms = html.select(".wrap_album04 dt span:first-child");
+					Elements albumIdElms = html.select(".wrap_album04 dt a");
+					Elements albumNameElms = html.select(".wrap_album04 dt a");
+					Elements albumDateElms = html.select(".wrap_album04 .cnt_view");
+					Elements albumNumElms = html.select(".wrap_album04 .tot_song");
+					Elements artistIdElms = html.select(".wrap_album04 .atistname a:first-child");
+					Elements artistNameElms = html.select(".wrap_album04 .atistname a:first-child");
+					
+					Element albumImgElm = null;
+					Element albumTypeElm = null;
+					Element albumIdElm = null;
+					Element albumNameElm = null;
+					Element albumDateElm = null;
+					Element albumNumElm = null;
+					Element artistIdElm = null;
+					Element artistNameElm = null;
+					
+					String albumImg = "";
+					String albumType = "";
+					String albumId = "";
+					String albumName = "";
+					String albumDate = "";
+					String albumNum = "";
+					String artistId = "";
+					String artistName = "";
+					
+					ArrayList<SearchAlbum> sals = new ArrayList<SearchAlbum>();
+					SearchAlbum sal = null;
+					
+					for (int i = 0; i < albumIdElms.size(); i++) {
+						albumImgElm = albumImgElms.get(i);
+						albumTypeElm = albumTypeElms.get(i);
+						albumIdElm = albumIdElms.get(i);
+						albumNameElm = albumNameElms.get(i);
+						albumDateElm = albumDateElms.get(i);
+						albumNumElm = albumNumElms.get(i);
+						artistIdElm = artistIdElms.get(i);
+						artistNameElm = artistNameElms.get(i);
+						
+						albumImg = albumImgElm.attr("src");
+						albumType = albumTypeElm.text().replace("[", "").replace("]", "");
+						albumId = albumIdElm.attr("href");
+						albumName = albumNameElm.text();
+						albumDate = albumDateElm.text();
+						albumNum = albumNumElm.text();
+						artistId = artistIdElm.attr("href");
+						artistName = artistNameElm.text();
+						
+						albumId = artistId.substring(artistId.indexOf(";")).replaceAll("[^0-9]", "");
+						artistId = artistId.substring(0, artistId.indexOf(";")).replaceAll("[^0-9]", "");
+						
+						sal = new SearchAlbum();
+						sal.setImg(albumImg);
+						sal.setType(albumType);
+						sal.setId(albumId);
+						sal.setName(albumName);
+						sal.setDate(albumDate);
+						sal.setNum(albumNum);
+						sal.setArtistId(artistId);
+						sal.setArtistName(artistName);
+						sals.add(sal);
+					}
+					
+					request.setAttribute("searchAlbums", sals);
+					request.setAttribute("contentPage", "jsp/search/search_album.jsp");
+					
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				
+			} else if (sel.equals("mu")){
+				
+				URL = "https://www.melon.com/search/song/index.htm?startIndex=1&pageSize=50&q="
+						+ request.getParameter("result")
+						+ "&sort=hit&section=all&sectionId=&genreDir=&mwkLogType=T";
+				
+				Connection con = Jsoup.connect(URL);
+				try {
+					
+					Document html = con.get();
+					
+					Elements artistImgElms = html.select("tbody tr .t_left:first-child a");
+					Elements artistIdElms = html.select(".wrap_atist12 dt a");
+					Elements artistNameElms = html.select(".wrap_atist12 dt a");
+					Elements artistInfoElms = html.select(".wrap_atist12 .gubun");
+					
+					System.out.println(artistImgElms);
+					
+					request.setAttribute("contentPage", "jsp/search/search_music.jsp");
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			} else {
+				Connection con = Jsoup.connect(URL);
+				try {
+					
 					Document html = con.get();
 					
 					Elements artistImgElms = html.select(".wrap_atist12 a:first-child img");
@@ -706,16 +813,14 @@ public class Crawler {
 					}
 					
 					request.setAttribute("searchArtists", sars);
+					request.setAttribute("contentPage", "jsp/search/search_artist.jsp");
 					
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
-			} else if(sel.equals("al")) {
-				
-			} else {
-				
 			}
 		}
+		
 		
 	}
 
