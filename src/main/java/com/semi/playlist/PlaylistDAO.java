@@ -350,11 +350,18 @@ public  void updateReview(HttpServletRequest request) {
 			String[] test=request.getParameterValues("mu_id");
 			String removePlMusic ="";
 			
-			for (String s : test) {
-				removePlMusic += " and pm_mu_id="+s;
-				System.out.println(removePlMusic);
+		
+			
+			for (int i = 0; i < test.length; i++) {
+				if (test.length==1 || test.length-i==1 ) {
+					removePlMusic += test[i];
+				}else {
+					removePlMusic += test[i]+",";
+				}
 			}
-			sql = "delete from playlist_music where pm_pl_id=?"+ removePlMusic ;
+			
+			
+			sql = "delete from playlist_music where pm_pl_id=? and pm_mu_id in("+ removePlMusic +")";
 				con = DBManager.connect();
 				pstmt = con.prepareStatement(sql);
 				pstmt.setString(1, request.getParameter("pl_id"));
