@@ -11,12 +11,16 @@ public class Review {
 	private int view;
 	private int like;
 	private String au_id;
+	private int comment;
+	private int reported;
 	
 	public Review() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Review(int id, String name, String img, String text, Date date, int view, int like, String au_id) {
+
+	public Review(int id, String name, String img, String text, Date date, int view, int like, String au_id,
+			int comment, int reported) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -26,6 +30,8 @@ public class Review {
 		this.view = view;
 		this.like = like;
 		this.au_id = au_id;
+		this.comment = comment;
+		this.reported = reported;
 	}
 
 	public int getId() {
@@ -92,5 +98,23 @@ public class Review {
 		this.au_id = au_id;
 	}
 
+	public int getComment() {
+		return comment;
+	}
+
+	public void setComment(int comment) {
+		this.comment = comment;
+	}
+
+
+	public int getReported() {
+		return reported;
+	}
+
+
+	public void setReported(int reported) {
+		this.reported = reported;
+	}
+	
 	
 }
