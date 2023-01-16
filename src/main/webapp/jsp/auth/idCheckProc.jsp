@@ -25,7 +25,7 @@
     	function apply(id){
             //2) 중복확인 id를 부모창에 적용
             //부모창 opener
-            opener.document.reg-form.id.value=id;
+            opener.document.regform.id.value=id;
             window.close(); //창닫기
         }//apply () end
     </script>

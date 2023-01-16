@@ -11,7 +11,7 @@
     <form
       action="AuthC"
       id="reg-form"
-      name="reg-form"
+      name="regform"
       method="post"
       enctype="multipart/form-data"
       onsubmit="return call()"
@@ -28,8 +28,9 @@
       </div>
       <div class="items" id="id-box">
         <label for="id" class="titles">ID</label>
-       <label for="id">  <input
-          type="text"
+       <label for="id">  <input 
+         type="text"
+         readonly
           name="id"
           id="id"
           placeholder="영문, 숫자 5자 이상"
