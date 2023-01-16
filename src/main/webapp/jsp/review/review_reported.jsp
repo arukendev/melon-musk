@@ -10,10 +10,10 @@
 </head>
 <body>
 <div class="list_title">
-		<h1>리뷰게시판</h1>
+		<h1>신고글</h1>
 </div>
 <div class="list_subtitle">
-	<h6><a href="javascript:write('${sessionScope.account.au_id }')">글쓰기</a></h6>
+	<h6></h6>
 </div>
 <div id="review_columnsWrap_label">
 	<div class="review_label_no">글번호</div>
@@ -22,10 +22,11 @@
 	<div class="review_label_date">작성일</div>
 	<div class="review_label_viewLike"><i class="fa-solid fa-eye"></i></div>
 	<div class="review_label_viewLike"><i class="fas fa-heart"></i></div>
+	<div>누적신고수</div>
 </div>
 <div id="review_table2">
 <c:forEach var="review" items="${reviews }" varStatus="status">
-	<a href="ReviewDetailC?no=${review.id }">
+	<a href="ReviewReportDetailC?no=${review.id }">
 		<div class="review_table2_row">
 			<c:choose>
 			<c:when test="${param.p eq null}">
@@ -43,27 +44,21 @@
 			<div class="review_label_date">${review.date }</div>
 			<div class="review_label_viewLike">${review.view }</div>
 			<div class="review_label_viewLike">${review.like }</div>
+			<div style="width:74px;">${review.reported }</div>
 		</div>
 	</a>
 </c:forEach>
 
 <div class="review_bottom">
 	<div class="review_bottom_btn">
-		<c:choose>
-			<c:when test="${sessionScope.account.au_id eq 'admin' }">
-				<button onclick="location.href='ReviewReportedC'">신고글</button>
-			</c:when>
-			<c:otherwise>
-				<button onclick="location.href='ReviewBestC'">추천글</button>
-			</c:otherwise>
-		</c:choose>
+		<button onclick="location.href='ReviewC'">전체글</button>
 	</div>
 	<div>
-		<a href="ReviewPageC?p=1">[맨 처음]</a>
+		<a href="ReviewReportedC?p=1">[맨 처음]</a>
 		<c:forEach var="i" begin="1" end="${pageCount }">
-			<a href="ReviewPageC?p=${i }">[${i }]</a>
+			<a href="ReviewReportedC?p=${i }">[${i }]</a>
 		</c:forEach>
-		<a href="ReviewPageC?p=${pageCount }">[맨 뒤]</a>
+		<a href="ReviewReportedC?p=${pageCount }">[맨 뒤]</a>
 	</div>
 	<div class="review_bottom_btn">
 	

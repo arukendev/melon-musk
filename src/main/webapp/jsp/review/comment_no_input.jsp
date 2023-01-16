@@ -7,10 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<form action="AlbumCommentC">
-		<input hidden name="albumId" value="${album.id}">
-		<textarea name="txt"></textarea>
-		<button>전송</button>
-	</form>
+	<span><a href="LoginC">로그인 이용자만 댓글을 달 수 있습니다.</a></span>
 </body>
 </html>

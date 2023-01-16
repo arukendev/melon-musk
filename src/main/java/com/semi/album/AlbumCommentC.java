@@ -17,13 +17,13 @@ public class AlbumCommentC extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		AuthDAO.loginCheck(request);
+		AlbumDAO.getAlbum(request);
 		if (request.getParameter("commentId") == null) {
 			AlbumDAO.setComment(request);
 		} else {
 			AlbumDAO.delComment(request);
 		}
 		
-		AlbumDAO.getAlbum(request);
 		AlbumDAO.getComment(request);
 		
 		request.setAttribute("contentPage", "jsp/album/album_info.jsp");

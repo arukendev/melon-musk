@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import com.semi.auth.Auth;
+import com.semi.main.Comment;
 import com.semi.main.DBManager;
 import com.semi.review.Review;
 
@@ -43,6 +44,8 @@ public class ReviewDAO {
 					r.setLike(rs.getInt("re_like"));
 					r.setDate(rs.getDate("re_date"));
 					r.setAu_id(rs.getString("re_au_id"));
+					r.setComment(rs.getInt("re_comment"));
+					r.setReported(rs.getInt("re_report"));
 					reviews.add(r);
 				}
 				request.setAttribute("reviews", reviews);
@@ -64,22 +67,24 @@ public class ReviewDAO {
 		
 		try {
 			request.setCharacterEncoding("utf-8");
+			String text = request.getParameter("text");
+			text = text.replaceAll("\\r\\n", "<br>");
 
 			String sql = "insert into review values(review_seq.nextval,"
-					+ "?, ?, ?, 0, 0, sysdate, ?)";
+					+ "?, ?, ?, 0, 0, current_date, ?, 0, 0)";
 
 			con = DBManager.connect();
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, request.getParameter("name"));
 			pstmt.setString(2, request.getParameter("img"));
-			pstmt.setString(3, request.getParameter("text"));
+			pstmt.setString(3, text);
 			pstmt.setString(4, a.getAu_id());
 			
 			if(pstmt.executeUpdate() == 1) {
 				System.out.println("등록성공");
 			}
 			
-			getReview2(request);
+			getReview2(request, text);
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -121,7 +126,7 @@ public class ReviewDAO {
 			rs.next();
 			int viewCnt = rs.getInt("re_view");
 			viewCnt++;
-			Review r = new Review(rs.getInt("re_id"), rs.getString("re_name"), rs.getString("re_img"), rs.getString("re_text"), rs.getDate("re_date"), rs.getInt("re_view"), rs.getInt("re_like"),  rs.getString("re_au_id"));
+			Review r = new Review(rs.getInt("re_id"), rs.getString("re_name"), rs.getString("re_img"), rs.getString("re_text"), rs.getDate("re_date"), viewCnt, rs.getInt("re_like"),  rs.getString("re_au_id"), rs.getInt("re_comment"), rs.getInt("re_report"));
 			countUpdate(viewCnt, rs.getInt("re_id"));
 			request.setAttribute("review", r);
 			
@@ -133,7 +138,8 @@ public class ReviewDAO {
 		
 	}
 	
-	public static void getReview2(HttpServletRequest request) {
+	// 작성 후 리뷰페이지가 아닌 작성글로 가기 위해서 re_id가 아닌 값들로 review 가져옴.
+	public static void getReview2(HttpServletRequest request, String text) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -144,13 +150,13 @@ public class ReviewDAO {
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, request.getParameter("name"));
 			pstmt.setString(2, request.getParameter("img"));
-			pstmt.setString(3, request.getParameter("text"));
+			pstmt.setString(3, text);
 			rs = pstmt.executeQuery();
 			rs.next();
 			int viewCnt = rs.getInt("re_view");
 			viewCnt++;
 			countUpdate(viewCnt, rs.getInt("re_id"));
-			Review r = new Review(rs.getInt("re_id"), rs.getString("re_name"), rs.getString("re_img"), rs.getString("re_text"), rs.getDate("re_date"), rs.getInt("re_view"), rs.getInt("re_like"), rs.getString("re_au_id"));
+			Review r = new Review(rs.getInt("re_id"), rs.getString("re_name"), rs.getString("re_img"), rs.getString("re_text"), rs.getDate("re_date"), viewCnt, rs.getInt("re_like"), rs.getString("re_au_id"), rs.getInt("re_comment"), rs.getInt("re_report"));
 			request.setAttribute("review", r);
 			
 		} catch (Exception e) {
@@ -189,13 +195,16 @@ public class ReviewDAO {
 			
 			try {
 				request.setCharacterEncoding("utf-8");
+				String text = request.getParameter("text");
+				text = text.replaceAll("\\r\\n", "<br>");
+				
 				con = DBManager.connect();
 				pstmt = con.prepareStatement(
 						"update review set re_name= ?, re_img= ?, re_text= ? where re_id= ?"
 						);
 				pstmt.setString(1, request.getParameter("name"));
 				pstmt.setString(2, request.getParameter("img"));
-				pstmt.setString(3, request.getParameter("text"));
+				pstmt.setString(3, text);
 				pstmt.setString(4, request.getParameter("no"));
 				
 				pstmt.executeUpdate();
@@ -215,12 +224,14 @@ public class ReviewDAO {
 			pstmt = con.prepareStatement(
 			"delete from review where re_id = ?"
 					);
-			pstmt.setString(1, request.getParameter("no"));
+			String re_id = request.getParameter("no");
+			pstmt.setString(1, re_id);
 			if(pstmt.executeUpdate() == 1) {
-				request.setAttribute("result", "successfully deleted");
+				System.out.println("리뷰 삭제 완료");
+				deleteReviewComment(re_id);
 			}
 		} catch (Exception e) {
-			request.setAttribute("result", "db Error");
+			System.out.println("리뷰 삭제 실패");
 			e.printStackTrace();
 		} finally {
 			DBManager.close(con, pstmt, null);
@@ -228,6 +239,27 @@ public class ReviewDAO {
 		
 	}
 
+	private static void deleteReviewComment(String re_id) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		
+		try {
+			con = DBManager.connect();
+			pstmt = con.prepareStatement(
+					"delete from review_comment where reco_re_id = ?"
+					);
+			pstmt.setString(1, re_id);
+			if(pstmt.executeUpdate() >= 0) {
+				System.out.println("삭제글 댓글도 삭제완료");
+			}
+			
+		} catch (Exception e) {
+			System.out.println("삭제글 댓글 삭제 에러");
+			e.printStackTrace();
+		}
+	}
+
+	// getReview랑 똑같은데 조회수 안 올라감. 수정이나 좋아요, 댓글작성 등 할 때 조회수 올라가는 거 방지용.
 	public static void getReview3(HttpServletRequest request) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -240,7 +272,7 @@ public class ReviewDAO {
 			pstmt.setString(1, request.getParameter("no"));
 			rs = pstmt.executeQuery();
 			rs.next();
-			Review r = new Review(rs.getInt("re_id"), rs.getString("re_name"), rs.getString("re_img"), rs.getString("re_text"), rs.getDate("re_date"), rs.getInt("re_view"), rs.getInt("re_like"),  rs.getString("re_au_id"));
+			Review r = new Review(rs.getInt("re_id"), rs.getString("re_name"), rs.getString("re_img"), rs.getString("re_text"), rs.getDate("re_date"), rs.getInt("re_view"), rs.getInt("re_like"),  rs.getString("re_au_id"), rs.getInt("re_comment"), rs.getInt("re_report"));
 			request.setAttribute("review", r);
 			
 		} catch (Exception e) {
@@ -352,7 +384,7 @@ public class ReviewDAO {
 			Like l = new Like();
 			l.setAu_id(rs.getString("reli_au_id"));
 			l.setRe_id(rs.getInt("reli_re_id"));
-			System.out.println("like.au_id"+l.getAu_id());
+			System.out.println("{$like.au_id} = "+l.getAu_id());
 			request.setAttribute("like", l);
 			} 
 			
@@ -389,8 +421,238 @@ public class ReviewDAO {
 		}
 	}
 
+	public static void setComment(HttpServletRequest request) {
+		HttpSession hs = request.getSession();
+		Auth a = (Auth) hs.getAttribute("account");
+		String re_id = request.getParameter("no");
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		
+		try {
+			con = DBManager.connect();
+			pstmt = con.prepareStatement(
+					"insert into review_comment values(re_comment_seq.nextval, ?, ?, ?, current_date)"
+					);
+			pstmt.setString(1, a.getAu_id());
+			pstmt.setString(2, re_id);
+			pstmt.setString(3, request.getParameter("txt"));
+			
+			if(pstmt.executeUpdate()==1) {
+				System.out.println("전송성공");
+				reviewCommentUpdate(re_id);
+			}
+		} catch (Exception e) {
+			System.out.println("전송실패");
+			e.printStackTrace();
+		} finally {
+			DBManager.close(con, pstmt, null);
+		}
+	}
+
+	private static void reviewCommentUpdate(String re_id) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		
+		try {
+			con = DBManager.connect();
+			pstmt = con.prepareStatement(
+					"update review set re_comment = re_comment +1 where re_id = ?"
+					);
+			pstmt.setString(1, re_id);
+			if(pstmt.executeUpdate()==1) {
+				System.out.println("댓글수 +1");
+			}
+			
+		} catch (Exception e) {
+			System.out.println("댓글수 업그레이드 실패");
+			e.printStackTrace();
+		}
+		
+	}
+
+	public static void delComment(HttpServletRequest request) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		
+		try {
+			con = DBManager.connect();
+			pstmt = con.prepareStatement(
+					"delete review_comment where reco_id = ?"
+					);
+			pstmt.setString(1, request.getParameter("commentId"));
+			
+			if (pstmt.executeUpdate() == 1) {
+				System.out.println("삭제성공");
+				reviewDeleteUpdate(request.getParameter("no"));
+			}
+		} catch (Exception e) {
+			System.out.println("삭제실패");
+			e.printStackTrace();
+		}finally {
+			DBManager.close(con, pstmt, null);
+		}
+	}
+
+	private static void reviewDeleteUpdate(String re_id) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		
+		try {
+			con = DBManager.connect();
+			pstmt = con.prepareStatement(
+					"update review set re_comment = re_comment -1 where re_id = ?"
+					);
+			pstmt.setString(1, re_id);
+			if(pstmt.executeUpdate()==1) {
+				System.out.println("댓글수 -1");
+			}
+			
+		} catch (Exception e) {
+			System.out.println("댓글수 업그레이드 실패");
+			e.printStackTrace();
+		}
+	}
+
+	public static void getComment(HttpServletRequest request) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "select au_id, au_img, au_name, reco_id, reco_date, reco_txt "
+				+ "from auth, review, review_comment "
+				+ "where reco_au_id = au_id and reco_re_id = re_id and re_id = ? "
+				+ "order by reco_date desc";
+		
+		try {
+			con = DBManager.connect();
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, request.getParameter("no"));
+			rs = pstmt.executeQuery();
+			
+			ArrayList<Comment> comments = new ArrayList<Comment>(); 
+			Comment c = null;
+			while (rs.next()) {
+				c = new Comment();
+				c.setAuthId(rs.getString("au_id"));
+				c.setImg(rs.getString("au_img"));
+				c.setName(rs.getString("au_name"));
+				c.setCommentId(rs.getString("reco_id"));
+				c.setDate(rs.getDate("reco_date"));
+				c.setTxt(rs.getString("reco_txt"));
+				comments.add(c);
+			}
+			
+			request.setAttribute("comments", comments);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBManager.close(con, pstmt, rs);
+		}
+	}
+
+	public static void getBestReview(HttpServletRequest request) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		reviews = new ArrayList<Review>();
+		try {
+			con = DBManager.connect();
+			pstmt = con.prepareStatement(
+					"select * from review where re_like >= 3 order by re_id"
+					);
+			rs = pstmt.executeQuery();
+			
+			Review r = null;
+			while(rs.next()) {
+				r = new Review();
+				r.setId(rs.getInt("re_id"));
+				r.setName(rs.getString("re_name"));
+				r.setImg(rs.getString("re_img"));
+				r.setText(rs.getString("re_text"));
+				r.setView(rs.getInt("re_view"));
+				r.setLike(rs.getInt("re_like"));
+				r.setDate(rs.getDate("re_date"));
+				r.setAu_id(rs.getString("re_au_id"));
+				r.setComment(rs.getInt("re_comment"));
+				r.setReported(rs.getInt("re_report"));
+
+				reviews.add(r);
+			}
+			request.setAttribute("reviews", reviews);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBManager.close(con, pstmt, rs);
+		}
+		
+	}
+
+	public static void reportReview(HttpServletRequest request) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		
+		try {
+			con = DBManager.connect();
+			pstmt = con.prepareStatement(
+					"update review set re_report = re_report +1 where re_id = ?"
+					);
+			pstmt.setString(1, request.getParameter("no"));
+			if(pstmt.executeUpdate()==1) {
+				System.out.println("신고 +1");
+			} 
+			
+		} catch (Exception e) {
+			System.out.println("db error");
+			e.printStackTrace();
+		} finally {
+			DBManager.close(con, pstmt, null);
+		}
+	}
+
+	public static void getReportedReview(HttpServletRequest request) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		reviews = new ArrayList<Review>();
+		try {
+			con = DBManager.connect();
+			pstmt = con.prepareStatement(
+					"select * from review where re_report >= 1 order by re_id"
+					);
+			rs = pstmt.executeQuery();
+			
+			Review r = null;
+			while(rs.next()) {
+				r = new Review();
+				r.setId(rs.getInt("re_id"));
+				r.setName(rs.getString("re_name"));
+				r.setImg(rs.getString("re_img"));
+				r.setText(rs.getString("re_text"));
+				r.setView(rs.getInt("re_view"));
+				r.setLike(rs.getInt("re_like"));
+				r.setDate(rs.getDate("re_date"));
+				r.setAu_id(rs.getString("re_au_id"));
+				r.setComment(rs.getInt("re_comment"));
+				r.setReported(rs.getInt("re_report"));
+
+				reviews.add(r);
+			}
+			request.setAttribute("reviews", reviews);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBManager.close(con, pstmt, rs);
+		}
+		
+	}	
+	
+}
+
 	
 	
 	
 
-}
+

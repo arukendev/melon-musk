@@ -1,5 +1,4 @@
-
-package com.semi.home;
+package com.semi.artist;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -9,15 +8,23 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.semi.auth.AuthDAO;
+import com.semi.main.Crawler;
 
-@WebServlet("/HomeC")
-public class HomeC extends HttpServlet {
+@WebServlet("/ArtistAlbumC")
+public class ArtistAlbumC extends HttpServlet {
+	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		AuthDAO.loginCheck(request);
-		request.setAttribute("contentPage", "jsp/main/main.jsp");
+		Crawler.artistAlbumCrwaler(request);
+		Crawler.pageCrawler(request);
+		ArtistDAO.getArtist(request);
+		request.setAttribute("contentPage", "jsp/artist/artist_info.jsp");
+		request.setAttribute("detailContentPage", "artist_album.jsp");
 		request.getRequestDispatcher("index.jsp").forward(request, response);
 	}
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 	}
 
 }

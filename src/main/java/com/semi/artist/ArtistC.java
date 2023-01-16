@@ -17,6 +17,8 @@ public class ArtistC extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		AuthDAO.loginCheck(request);
+		Crawler.artistMusicCrwaler(request);
+		Crawler.artistAlbumCrwaler(request);
 		
 		if (ChartDAO.artistIdCheck(request)) {
 			ArtistDAO.getArtist(request);
@@ -26,6 +28,7 @@ public class ArtistC extends HttpServlet {
 		}
 		ArtistDAO.getComment(request);
 		request.setAttribute("contentPage", "jsp/artist/artist_info.jsp");
+		request.setAttribute("detailContentPage", "artist_main.jsp");
 		request.getRequestDispatcher("index.jsp").forward(request, response);
 	}
 

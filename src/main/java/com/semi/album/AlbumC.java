@@ -16,6 +16,7 @@ import com.semi.music.MusicDAO;
 public class AlbumC extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		AuthDAO.loginCheck(request);
+		Crawler.albumMusicCrawler(request);
 		if (ChartDAO.albumIdCheck(request)) {
 			AlbumDAO.getAlbum(request);
 		} else {

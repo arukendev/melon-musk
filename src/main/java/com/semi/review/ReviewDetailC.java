@@ -22,7 +22,7 @@ public class ReviewDetailC extends HttpServlet {
 		if(a!=null) {
 		ReviewDAO.getLike(request);
 		}
-		
+		ReviewDAO.getComment(request);
 		request.setAttribute("contentPage", "jsp/review/review_detail.jsp");
 		request.getRequestDispatcher("index.jsp").forward(request, response);
 	}
