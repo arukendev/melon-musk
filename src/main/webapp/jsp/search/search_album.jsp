@@ -19,9 +19,7 @@
 				</a>
 			</div>
 			<div>
-				<a href="ArtistC?artistId=${sals.artistId}">
-					${sals.artistName}
-				</a>
+				<span>${sals.artist}</span>
 			</div>
 			<div>
 				<span>

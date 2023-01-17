@@ -6,20 +6,21 @@ public class ArtistAlbum {
 	private String name;
 	private String date;
 	private String num;
-	
+	private String type;
 	
 	public ArtistAlbum() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public ArtistAlbum(String id, String img, String name, String date, String num) {
+	public ArtistAlbum(String id, String img, String name, String date, String num, String type) {
 		super();
 		this.id = id;
 		this.img = img;
 		this.name = name;
 		this.date = date;
 		this.num = num;
+		this.type = type;
 	}
 
 	public String getId() {
@@ -60,6 +61,14 @@ public class ArtistAlbum {
 
 	public void setNum(String num) {
 		this.num = num;
+	}
+	
+	public String getType() {
+		return type;
+	}
+	
+	public void setType(String type) {
+		this.type = type;
 	}
 	
 	

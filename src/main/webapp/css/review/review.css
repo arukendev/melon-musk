@@ -68,6 +68,15 @@
 	margin: 0px auto;
 }
 
+.review_table2_notice{
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	width: 100%;
+	height: 30px;
+	border-bottom:  dotted silver;
+}
+
 .review_table2_row {
 	display: flex;
 	justify-content: space-between;
@@ -79,11 +88,11 @@
 }
 
 
-.review_table2_row:hover {
+.review_table2_row:hover, .review_table2_notice:hover {
 	background-color: rgba(246, 228, 142, 0.4);
 }
 
-.review_table2_row div {
+.review_table2_row div, .review_table2_notice div {
 	text-align: center;
 }
 
@@ -197,6 +206,3 @@
 	justify-content: flex-end;
 }
 
-#reviewDetail_comment{
-	margin: auto;
-}

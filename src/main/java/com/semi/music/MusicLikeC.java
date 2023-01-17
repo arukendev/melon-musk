@@ -1,4 +1,4 @@
-package com.semi.playlist;
+package com.semi.music;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -7,30 +7,26 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.semi.auth.Auth;
 import com.semi.auth.AuthDAO;
+import com.semi.chart.ChartDAO;
+import com.semi.main.Crawler;
 
-/**
- * Servlet implementation class PlDetailC
- */
-@WebServlet("/PlDetailC")
-public class PlDetailC extends HttpServlet {
+@WebServlet("/MusicLikeC")
+public class MusicLikeC extends HttpServlet {
+	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
-		
 		AuthDAO.loginCheck(request);
-		//플리 뮤직이 없는 경우 
-		PlaylistDAO.getRdao().increaseView(request);
-		PlaylistDAO.getRdao().getPlaylist(request);
-		
-		request.setAttribute("contentPage", "jsp/playlist/playlistDetail.jsp");	
+		MusicDAO.getMusic(request);
+		MusicDAO.getComment(request);
+		MusicDAO.setLike(request);
+		MusicDAO.getAllLike(request);
+		MusicDAO.delLike(request);
+		request.setAttribute("contentPage", "jsp/music/music_info.jsp");
 		request.getRequestDispatcher("index.jsp").forward(request, response);
-	
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
-	
+		
 	}
 
 }

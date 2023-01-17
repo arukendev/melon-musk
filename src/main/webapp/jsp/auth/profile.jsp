@@ -36,7 +36,7 @@
 	  		</div>
 	  		<div>
 	  			<button class="profile_button" onclick="location.href='UpdateC'">수정</button>
-	  			<button class="profile_button" onclick="location.href='DeleteC'">삭제</button>
+	  			<button class="profile_button" onclick="location.href='pwCheck()'">삭제</button>
 	  		</div>
   		</div>
     </div>

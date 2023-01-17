@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import com.semi.main.DBManager;
 import com.semi.music.Music;
+import com.semi.review.Review;
 
 
 public class PlaylistDAO {
@@ -168,19 +169,28 @@ public  void updateReview(HttpServletRequest request) {
 		
 		req.setAttribute("curPageNo", page);
 		
-		int cnt =5; //�� �������� ������ ����
-		int total = playlists.size(); //�� ������ ����
-		int pageCount = (int) Math.ceil((double)total/cnt); //�� ������ ��
-		req.setAttribute("pageCount", pageCount);
-		int start = total- (cnt*(page - 1));
-		int end = (page==pageCount) ? -1 : start-(cnt+1);
-		ArrayList<Playlist> items = new ArrayList<Playlist>();
+		int cnt =7; 
+		int total = musics.size(); 
+		int pageCount = (int) Math.ceil((double)total/cnt); 
 		
-		for (int i = start-1; i > end; i--) {
-			items.add(playlists.get(i));
+		
+		int start = cnt * (page - 1) + 1;
+		int end = (page == pageCount) ? total : start + cnt - 1;
+		
+		ArrayList<PlaylistDBMusic> items = new ArrayList<PlaylistDBMusic>();
+		
+		for (int i = start-1 ; i < end; i++) {
+			items.add(musics.get(i));
 		}
 		
-		req.setAttribute("reviews", items);
+		
+		req.setAttribute("musics", items);
+		req.setAttribute("pageCount", pageCount);
+		
+		
+		
+		
+		
 		
 	}
 
@@ -188,7 +198,6 @@ public  void updateReview(HttpServletRequest request) {
 	public void getAllPlMusic(HttpServletRequest request) {
 		
 		
-		System.out.println(request.getParameter("pl_id"));
 		
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -383,6 +392,32 @@ public  void updateReview(HttpServletRequest request) {
 		
 		
 		
+		
+		
+		
+	}
+
+	public void increaseView(HttpServletRequest request) {
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		try {
+			
+			String sql = "update PLAYLIST set PL_VIEW=NVL(PL_VIEW, 0)+ 1  where PL_ID=?";
+				con = DBManager.connect();
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, request.getParameter("pl_id"));
+				
+				if (pstmt.executeUpdate()==1) {
+					request.setAttribute("r", "업데이트성공!");
+					System.out.println("업데이트성공");
+				}
+				
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			DBManager.close(con, pstmt, null);
+		}
 		
 		
 		

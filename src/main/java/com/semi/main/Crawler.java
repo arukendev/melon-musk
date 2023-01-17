@@ -20,6 +20,7 @@ import com.semi.music.Music;
 import com.semi.newMusic.NewMusic;
 import com.semi.search.SearchAlbum;
 import com.semi.search.SearchArtist;
+import com.semi.search.SearchMusic;
 
 public class Crawler {
 
@@ -427,11 +428,11 @@ public class Crawler {
 			String musicNumber = musicNumberElm.text().replaceAll("[^0-9]", "");
 			int musicNumberPages = Integer.parseInt(musicNumber) / 50 + 1;
 			int musicNumberValues = 0;
-			ArrayList<Index> ins = new ArrayList<Index>();
-			Index in = null;
+			ArrayList<IndexNum> ins = new ArrayList<IndexNum>();
+			IndexNum in = null;
 			for (int i = 0; i < musicNumberPages; i++) {
 				musicNumberValues = i * 50 + 1;
-				in = new Index();
+				in = new IndexNum();
 				in.setNumber(i + 1);
 				in.setValue(musicNumberValues);
 				ins.add(in);
@@ -562,6 +563,7 @@ public class Crawler {
 				aa.setName(albumName);
 				aa.setDate(albumDate);
 				aa.setNum(albumNum);
+				aa.setType(albumType);
 				aaList.add(aa);
 				
 				if (alIndex == null) {
@@ -589,8 +591,8 @@ public class Crawler {
 			Elements cdElms = html.select(".cd strong");
 			Elements musicIdElms = html.select("tr[data-group-items=cd1] td:nth-child(3) a");
 			Elements musicNameElms = html.select("tr[data-group-items=cd1] td:nth-child(3) a");
-			Elements musicArtistIdElms = html.select(".wrap_song_info .rank02 a:first-child");
-			Elements musicArtistElms = html.select(".wrap_song_info .rank02 a:first-child");
+			Elements musicArtistIdElms = html.select(".wrap_song_info .rank02 span a:first-child");
+			Elements musicArtistElms = html.select(".wrap_song_info .rank02 span");
 			
 			Element musicIdElm = null;
 			Element musicNameElm = null;
@@ -689,16 +691,14 @@ public class Crawler {
 					Elements albumNameElms = html.select(".wrap_album04 dt a");
 					Elements albumDateElms = html.select(".wrap_album04 .cnt_view");
 					Elements albumNumElms = html.select(".wrap_album04 .tot_song");
-					Elements artistIdElms = html.select(".wrap_album04 .atistname a:first-child");
-					Elements artistNameElms = html.select(".wrap_album04 .atistname a:first-child");
-					
+					Elements artistNameElms = html.select(".wrap_album04 .atistname .checkEllipsisSearchAlbum");
+										
 					Element albumImgElm = null;
 					Element albumTypeElm = null;
 					Element albumIdElm = null;
 					Element albumNameElm = null;
 					Element albumDateElm = null;
 					Element albumNumElm = null;
-					Element artistIdElm = null;
 					Element artistNameElm = null;
 					
 					String albumImg = "";
@@ -707,7 +707,6 @@ public class Crawler {
 					String albumName = "";
 					String albumDate = "";
 					String albumNum = "";
-					String artistId = "";
 					String artistName = "";
 					
 					ArrayList<SearchAlbum> sals = new ArrayList<SearchAlbum>();
@@ -720,7 +719,6 @@ public class Crawler {
 						albumNameElm = albumNameElms.get(i);
 						albumDateElm = albumDateElms.get(i);
 						albumNumElm = albumNumElms.get(i);
-						artistIdElm = artistIdElms.get(i);
 						artistNameElm = artistNameElms.get(i);
 						
 						albumImg = albumImgElm.attr("src");
@@ -729,11 +727,9 @@ public class Crawler {
 						albumName = albumNameElm.text();
 						albumDate = albumDateElm.text();
 						albumNum = albumNumElm.text();
-						artistId = artistIdElm.attr("href");
 						artistName = artistNameElm.text();
 						
-						albumId = artistId.substring(artistId.indexOf(";")).replaceAll("[^0-9]", "");
-						artistId = artistId.substring(0, artistId.indexOf(";")).replaceAll("[^0-9]", "");
+						albumId = albumId.substring(albumId.indexOf(";")).replaceAll("[^0-9]", "");
 						
 						sal = new SearchAlbum();
 						sal.setImg(albumImg);
@@ -742,8 +738,7 @@ public class Crawler {
 						sal.setName(albumName);
 						sal.setDate(albumDate);
 						sal.setNum(albumNum);
-						sal.setArtistId(artistId);
-						sal.setArtistName(artistName);
+						sal.setArtist(artistName);
 						sals.add(sal);
 					}
 					
@@ -765,13 +760,52 @@ public class Crawler {
 					
 					Document html = con.get();
 					
-					Elements artistImgElms = html.select("tbody tr .t_left:first-child a");
-					Elements artistIdElms = html.select(".wrap_atist12 dt a");
-					Elements artistNameElms = html.select(".wrap_atist12 dt a");
-					Elements artistInfoElms = html.select(".wrap_atist12 .gubun");
+					Elements musicElms = html.select("tbody tr td:nth-child(3) .btn_icon_detail");
+					Elements artistElms = html.select("tbody tr td:nth-child(4) a:last-child");
+					Elements albumElms = html.select("tbody tr td:nth-child(5) a:last-child");
 					
-					System.out.println(artistImgElms);
+					Element musicElm = null;
+					Element artistElm = null;
+					Element albumElm = null;
 					
+					String musicId = "";
+					String musicName = "";
+					String artistId = "";
+					String artistName = "";
+					String albumId = "";
+					String albumName = "";
+					
+					SearchMusic sm = null;
+					ArrayList<SearchMusic> sms = new ArrayList<SearchMusic>();
+					
+					for (int i = 0; i < musicElms.size(); i++) {
+						musicElm = musicElms.get(i);
+						artistElm = artistElms.get(i);
+						albumElm = albumElms.get(i);
+						
+						musicId = musicElm.attr("href");
+						musicName = musicElm.text();
+						artistId = artistElm.attr("href");
+						artistName = artistElm.text();
+						albumId = albumElm.attr("href");
+						albumName = albumElm.text();
+						
+						
+						musicId = musicId.substring(musicId.indexOf(";")).replaceAll("[^0-9]", "");
+						musicName = musicName.replace(" 상세정보 페이지 이동", "");
+						artistId = artistId.substring(0, artistId.indexOf(";")).replaceAll("[^0-9]", "");
+						albumId = albumId.substring(albumId.indexOf(";")).replaceAll("[^0-9]", "");
+						
+						sm = new SearchMusic();
+						sm.setMusicId(musicId);
+						sm.setMusicName(musicName);
+						sm.setArtistId(artistId);
+						sm.setArtistName(artistName);
+						sm.setAlbumId(albumId);
+						sm.setAlbumName(albumName);
+						sms.add(sm);
+					}
+					request.setAttribute("serachMusics", sms);
 					request.setAttribute("contentPage", "jsp/search/search_music.jsp");
 				} catch (Exception e) {
 					e.printStackTrace();

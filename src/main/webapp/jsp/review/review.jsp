@@ -24,6 +24,23 @@
 	<div class="review_label_viewLike"><i class="fas fa-heart"></i></div>
 </div>
 <div id="review_table2">
+<c:forEach var="review" items="${reviews }" varStatus="status" >
+	<c:if test="${review.au_id eq 'admin' }">
+		<a href="ReviewDetailC?no=${review.id }">
+			<div class="review_table2_notice">
+				<div class="review_label_no">공지</div>
+				<div class="review_label_title">
+					<div>${review.name }</div>
+					<div class="review_title_commentN">[${review.comment }]</div>
+				</div>
+				<div class="review_label_writer">${review.au_id }</div>
+				<div class="review_label_date">${review.date }</div>
+				<div class="review_label_viewLike">${review.view }</div>
+				<div class="review_label_viewLike">${review.like }</div>
+			</div>
+		</a>
+	</c:if>
+</c:forEach>
 <c:forEach var="review" items="${reviews }" varStatus="status">
 	<a href="ReviewDetailC?no=${review.id }">
 		<div class="review_table2_row">
