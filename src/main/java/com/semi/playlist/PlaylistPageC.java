@@ -7,30 +7,26 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.semi.auth.Auth;
 import com.semi.auth.AuthDAO;
+import com.semi.review.ReviewDAO;
 
-/**
- * Servlet implementation class PlDetailC
- */
-@WebServlet("/PlDetailC")
-public class PlDetailC extends HttpServlet {
+@WebServlet("/PlaylistPageC")
+public class PlaylistPageC extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		AuthDAO.loginCheck(request);
+		
+		PlaylistDAO.getRdao().getAllPlMusic(request);
+		PlaylistDAO.getRdao().paging(Integer.parseInt(request.getParameter("p")), request);
 	
 		
-		AuthDAO.loginCheck(request);
-		//플리 뮤직이 없는 경우 
-		PlaylistDAO.getRdao().increaseView(request);
-		PlaylistDAO.getRdao().getPlaylist(request);
-		
-		request.setAttribute("contentPage", "jsp/playlist/playlistDetail.jsp");	
+		request.setAttribute("contentPage", "jsp/playlist/regPlaylistMusic_test.jsp");
 		request.getRequestDispatcher("index.jsp").forward(request, response);
+		
+		
 	
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
-	
 	}
 
 }
