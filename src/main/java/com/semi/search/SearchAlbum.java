@@ -7,14 +7,12 @@ public class SearchAlbum {
 	private String name = "";
 	private String date = "";
 	private String num = "";
-	private String artistId = "";
-	private String artistName = "";
+	private String artist = "";
 	public SearchAlbum() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public SearchAlbum(String img, String type, String id, String name, String date, String num, String artistId,
-			String artistName) {
+	public SearchAlbum(String img, String type, String id, String name, String date, String num, String artist) {
 		super();
 		this.img = img;
 		this.type = type;
@@ -22,8 +20,7 @@ public class SearchAlbum {
 		this.name = name;
 		this.date = date;
 		this.num = num;
-		this.artistId = artistId;
-		this.artistName = artistName;
+		this.artist = artist;
 	}
 	public String getImg() {
 		return img;
@@ -61,17 +58,11 @@ public class SearchAlbum {
 	public void setNum(String num) {
 		this.num = num;
 	}
-	public String getArtistId() {
-		return artistId;
+	public String getArtist() {
+		return artist;
 	}
-	public void setArtistId(String artistId) {
-		this.artistId = artistId;
-	}
-	public String getArtistName() {
-		return artistName;
-	}
-	public void setArtistName(String artistName) {
-		this.artistName = artistName;
+	public void setArtist(String artist) {
+		this.artist = artist;
 	}
 	
 	

@@ -11,27 +11,22 @@ import com.semi.auth.AuthDAO;
 import com.semi.chart.ChartDAO;
 import com.semi.main.Crawler;
 
-
-@WebServlet("/MusicC")
-public class MusicC extends HttpServlet {
+@WebServlet("/MusicLikeC")
+public class MusicLikeC extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		AuthDAO.loginCheck(request);
-		if (ChartDAO.musicIdCheck(request)) {
-			MusicDAO.getMusic(request);
-		} else {
-			Crawler.musicCrawler(request);
-			MusicDAO.setMusic(request);
-		}
-		MusicDAO.getAllLike(request);
+		MusicDAO.getMusic(request);
 		MusicDAO.getComment(request);
+		MusicDAO.setLike(request);
+		MusicDAO.getAllLike(request);
+		MusicDAO.delLike(request);
 		request.setAttribute("contentPage", "jsp/music/music_info.jsp");
 		request.getRequestDispatcher("index.jsp").forward(request, response);
 	}
 
-	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		
 	}
 
 }

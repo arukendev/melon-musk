@@ -80,9 +80,7 @@
 							</a>
 						</div>
 						<div>
-							<a href="ArtistC?artistId=${am.artistId}">
-								${am.artist}
-							</a>
+							<span>${am.artist}</span>
 						</div>
 					</c:forEach>
 				</c:when>
@@ -100,9 +98,7 @@
 									</a>
 								</div>
 								<div>
-									<a href="ArtistC?artistId=${am.artistId}">
-										${am.artist}
-									</a>
+									<span>${am.artist}</span>
 								</div>
 							</c:if>
 						</c:forEach>

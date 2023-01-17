@@ -11,10 +11,22 @@
 <body>
 	<div class="detail_header">
 		<div class="detail_top">
-			<div class="detail_top_like">
-				<i class="fas fa-heart"></i>
-				<span>9</span>
-			</div>
+			<c:choose>
+				<c:when test="${sessionScope.account.au_id ne null}">
+					<div class="detail_top_like">
+						<a href="MusicLikeC?musicId=${music.id}">
+							<i class="far fa-heart"></i>
+						</a>
+						<span>${count}</span>
+					</div>
+				</c:when>
+				<c:otherwise>
+					<div class="detail_top_like">
+						<i class="fas fa-heart"></i>
+						<span>${count}</span>
+					</div>
+				</c:otherwise>
+			</c:choose>
 			<c:if test="${sessionScope.account.au_id ne null}">
 				<div class="detail_top_edit">
 					<i class="fas fa-pencil"></i>

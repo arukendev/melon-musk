@@ -192,5 +192,61 @@ public class MusicDAO {
 			DBManager.close(con, pstmt, null);
 		}
 	}
+	
+	public static void setLike(HttpServletRequest request) {
+		Auth a = (Auth) request.getSession().getAttribute("account");
+		Music m = (Music) request.getAttribute("music");
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		String sql = "insert into music_like values(mu_like_seq.nextval, ?, ?)";
+		
+		try {
+			con = DBManager.connect();
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, a.getAu_id());
+			pstmt.setString(2, m.getId());
+			if (pstmt.executeUpdate() == 1) {
+				System.out.println("좋아요 추가");
+			}
+		} catch (Exception e) {
+			System.out.println("좋아요 실패");
+			e.printStackTrace();
+		} finally {
+			DBManager.close(con, pstmt, null);
+		}
+		
+	}
+
+	public static void delLike(HttpServletRequest request) {
+		
+	}
+
+	public static void getAllLike(HttpServletRequest request) {
+		Music m = (Music) request.getAttribute("music");
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "select count(*) from music_like where muli_mu_id = ?";
+		
+		try {
+			con = DBManager.connect();
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, m.getId());
+			rs = pstmt.executeQuery();
+			
+			if (rs.next()) {
+				request.setAttribute("count", rs.getInt("count(*)"));
+				System.out.println("조회 성공");
+			}
+			
+		} catch (Exception e) {
+			System.out.println("조회 실패");
+			e.printStackTrace();
+		} finally {
+			DBManager.close(con, pstmt, rs);
+		}
+	}
 
 }

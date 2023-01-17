@@ -1,13 +1,13 @@
 package com.semi.main;
 
-public class Index {
+public class IndexNum {
 	private int number;
 	private int value;
-	public Index() {
+	public IndexNum() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Index(int number, int value) {
+	public IndexNum(int number, int value) {
 		super();
 		this.number = number;
 		this.value = value;
