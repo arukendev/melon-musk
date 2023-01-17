@@ -83,3 +83,66 @@ function commentDel(re_id, reco_id){
 function adminClickedButton(){
 	alert('관리자님??????????????????');
 }
+
+
+
+
+
+/* validCheck -----------------------------------------------------------------------------------------*/
+
+function isEmpty(input){
+	return !input.value;
+}
+
+function isNotType(input){
+	return (input.value.indexOf(".jpg") == -1)&&(input.value.indexOf(".jpeg") == -1)&&(input.value.indexOf(".gif") == -1)&&(input.value.indexOf(".png") == -1);
+}
+
+function moreThan(input, length){
+	return input.value.length > length;
+}
+
+
+
+/* valueCheck -------------------------------------------------------------------------------- */
+
+function call(){
+	const name = document.getElementById("nameInput");
+	const img = document.getElementById("imgInput");
+	const text = document.getElementById("textInput");
+	
+	if(isEmpty(name)){
+		alert('제목은 필수 입력 사항입니다.');
+		return false;
+	}
+	if(moreThan(name, 100)){
+		alert('제목은 100자를 초과할 수 없습니다.');
+		return false;
+	}
+	
+	if(isEmpty(img)){
+		alert('사진은 필수 입력 사항입니다.');
+		return false;
+	}
+	
+	if(isNotType(img)){
+		alert('이미지는 jpg, png, gif 확장자 파일만 업로드 가능합니다.');
+		return false;
+	}
+	if(moreThan(img, 200)){
+		alert('첨부 이미지 파일명 허용 길이 초과');
+		return false;
+	}
+	
+	if(isEmpty(text)){
+		alert('내용은 필수 입력 사항입니다.');
+		return false;
+	}
+	
+	if(moreThan(text, 1000)){
+		alert('내용은 1000자를 초과할 수 없습니다.');
+		return false;
+	}
+	
+	
+}

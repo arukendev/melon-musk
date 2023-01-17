@@ -73,10 +73,20 @@
 	</div>
 </div>
 	<div class="comment_container">
-	<div id="reviewDetail_comment">
 		<h1>댓글</h1>
 		<div class="comment_input">
-			<jsp:include page="${commentLoginCheck}"></jsp:include>
+			<c:choose>
+				<c:when test="${sessionScope.account.au_id ne null}">
+					<form action="ReviewCommentC">
+						<input hidden name="no" value="${review.id}">
+						<textarea name="txt"></textarea>
+						<button>등록</button>
+					</form>
+				</c:when>
+				<c:otherwise>
+					<p>로그인 이용자만 댓글을 달 수 있습니다.</p>
+				</c:otherwise>
+			</c:choose>
 		</div>
 		<div class="comment_comments">
 			<c:forEach var="c" items="${comments}">
@@ -109,7 +119,6 @@
 				</div>
 			</c:forEach>
 		</div>
-	</div>
 	</div>
 <script src="https://kit.fontawesome.com/772d40e343.js" crossorigin="anonymous"></script>
 </body>
