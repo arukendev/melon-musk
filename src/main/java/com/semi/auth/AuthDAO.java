@@ -365,5 +365,31 @@ public class AuthDAO {
 
 	}//duplecateID end
 	
+	public static boolean duplecatePW(String pw){
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		
+		String sql="select * from auth where au_pw=?";
+		ResultSet rs = null;
+		
+		try{
+			con=DBManager.connect();
+			pstmt=con.prepareStatement(sql);
+			pstmt.setString(1, pw);
+			
+			rs= pstmt.executeQuery();
+			while(rs.next()){
+				if (rs.getString("au_pw").equals(pw)) {
+					return true;
+				}
+			}
+		}catch(Exception e){
+			System.out.println("비번다름 " + e);
+		}//try end
+		return false;
+		
+	}//duplecateID end
+	
 }
 
