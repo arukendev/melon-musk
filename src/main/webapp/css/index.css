@@ -111,7 +111,7 @@ main {
   background-clip: text;
   -webkit-background-clip: text;
 }
-
+.loginBtn,
 .index_login_button,
 .index_join_button {
   padding: 3px 10px;

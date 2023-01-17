@@ -18,7 +18,7 @@
     >
      
       <div class="items" id="file-box">
-        <label for="file" class="titles">Profile Image</label>
+        <label for="file" class="titles" >Profile Image</label>
         <label for="file"><input type="file" name="file" id="file" accept="image/*" /></label>
       </div>
      
