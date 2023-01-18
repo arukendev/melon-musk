@@ -25,6 +25,9 @@ public class ReviewReportC extends HttpServlet {
 		} else {
 			ReviewDAO.reportReview(request);
 			ReviewDAO.getReview3(request);
+			if(a!=null) {
+				ReviewDAO.getLike(request);
+			}
 			ReviewDAO.getComment(request);
 			
 			request.setAttribute("contentPage", "jsp/review/review_detail.jsp");

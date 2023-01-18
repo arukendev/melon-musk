@@ -23,6 +23,7 @@ public class ReviewDelC extends HttpServlet {
 			request.getRequestDispatcher("index.jsp").forward(request, response);
 		} else {
 		ReviewDAO.deleteReview(request);
+		ReviewDAO.getNotice(request);
 		ReviewDAO.getAllReview(request);
 		ReviewDAO.paging(1, request);
 		request.setAttribute("contentPage", "jsp/review/review.jsp");

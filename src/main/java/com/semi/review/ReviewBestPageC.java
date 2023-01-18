@@ -14,6 +14,7 @@ public class ReviewBestPageC extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		AuthDAO.loginCheck(request);
 		ReviewDAO.getBestReview(request);
+		ReviewDAO.getNotice(request);
 		ReviewDAO.paging(Integer.parseInt(request.getParameter("p")), request);
 		
 		request.setAttribute("contentPage", "jsp/review/review_best.jsp");

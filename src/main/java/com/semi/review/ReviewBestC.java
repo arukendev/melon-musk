@@ -17,6 +17,7 @@ public class ReviewBestC extends HttpServlet {
 		AuthDAO.loginCheck(request);
 		HttpSession hs = request.getSession();
 		Auth a =(Auth)hs.getAttribute("account");
+		ReviewDAO.getNotice(request);
 		ReviewDAO.getBestReview(request);
 		ReviewDAO.paging(1, request);
 		request.setAttribute("contentPage", "jsp/review/review_best.jsp");
