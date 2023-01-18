@@ -47,9 +47,10 @@
 			</c:choose>
 			<c:if test="${sessionScope.account.au_id ne null}">
 				<div class="detail_top_edit">
-					<form action="">
+					<form action="MusicUpdateC">
+						<input hidden name="musicId" value="${music.id}">
 						<button>
-							<i class="fas fa-pencil"></i>
+							<i class="fas fa-pencil-alt"></i>
 							<span>편집하기</span>
 						</button>
 					</form>

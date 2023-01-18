@@ -49,7 +49,7 @@
 				<div class="detail_top_edit">
 					<form action="">
 						<button>
-							<i class="fas fa-pencil"></i>
+							<i class="fas fa-pencil-alt"></i>
 							<span>편집하기</span>
 						</button>
 					</form>

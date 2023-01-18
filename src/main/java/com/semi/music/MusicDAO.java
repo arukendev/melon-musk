@@ -269,17 +269,19 @@ public class MusicDAO {
 
 	public static void getLikeInfo(HttpServletRequest request) {
 		Music m = (Music) request.getAttribute("music");
+		Auth a = (Auth) request.getSession().getAttribute("account");
 		
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		
-		String sql = "select * from music_like where muli_mu_id = ?";
+		String sql = "select * from music_like where muli_mu_id = ? and muli_au_id = ?";
 		
 		try {
 			con = DBManager.connect();
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, m.getId());
+			pstmt.setString(2, a.getAu_id());
 			rs = pstmt.executeQuery();
 			
 			while (rs.next()) {

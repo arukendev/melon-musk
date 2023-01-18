@@ -243,6 +243,7 @@ public class ArtistDAO {
 	public static void getLikeCount(HttpServletRequest request) {
 		Artist a = (Artist) request.getAttribute("artist");
 		
+		
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -267,17 +268,19 @@ public class ArtistDAO {
 
 	public static void getLikeInfo(HttpServletRequest request) {
 		Artist a = (Artist) request.getAttribute("artist");
+		Auth au = (Auth) request.getSession().getAttribute("account");
 		
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		
-		String sql = "select * from artist_like where arli_ar_id = ?";
+		String sql = "select * from artist_like where arli_ar_id = ? and arli_au_id = ?";
 		
 		try {
 			con = DBManager.connect();
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, a.getId());
+			pstmt.setString(2, au.getAu_id());
 			rs = pstmt.executeQuery();
 			
 			while (rs.next()) {
