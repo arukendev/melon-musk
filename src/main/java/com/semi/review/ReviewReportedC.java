@@ -19,6 +19,7 @@ public class ReviewReportedC extends HttpServlet {
 		Auth a =(Auth)hs.getAttribute("account");
 		
 		if(request.getParameter("p")==null) {
+			ReviewDAO.getNotice(request);
 			ReviewDAO.getReportedReview(request);
 			ReviewDAO.paging(1, request);
 			request.setAttribute("contentPage", "jsp/review/review_reported.jsp");

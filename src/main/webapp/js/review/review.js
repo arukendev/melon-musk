@@ -57,19 +57,23 @@ function deleteReview(no, writer, au_id) {
 	}
 }
 
-function report(no, au_id){
+function report(no, writer, au_id){
 	if(au_id==""){
 		alert('신고하려면 로그인 해주세요.');
 		location.href="LoginC";
 	} else {
-		if(au_id=='admin') {
-		alert('관리자님????????????');
+		if(writer=='admin'){
+			alert('공지는 신고할 수 없습니다.');
 		} else{
-			const really = confirm('정말 신고하겠습니까?');
-			if(really){
-			location.href="ReviewReportC?no="+no;
-			}
-		}	
+			if(au_id=='admin') {
+			alert('관리자님????????????');
+			} else{
+				const really = confirm('정말 신고하겠습니까?');
+				if(really){
+				location.href="ReviewReportC?no="+no;
+				}
+			}	
+		}
 	}
 }
 
@@ -82,6 +86,10 @@ function commentDel(re_id, reco_id){
 
 function adminClickedButton(){
 	alert('관리자님??????????????????');
+}
+
+function calcChars(){
+	document.getElementById('chars').value=document.getElementById('textInput').value.length;
 }
 
 
