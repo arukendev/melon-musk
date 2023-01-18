@@ -23,6 +23,8 @@ public class AlbumC extends HttpServlet {
 			Crawler.albumCrawler(request);
 			AlbumDAO.setAlbum(request);
 		}
+		AlbumDAO.getLikeCount(request);
+		AlbumDAO.getLikeInfo(request);
 		AlbumDAO.getComment(request);
 		request.setAttribute("contentPage", "jsp/album/album_info.jsp");
 		request.getRequestDispatcher("index.jsp").forward(request, response);

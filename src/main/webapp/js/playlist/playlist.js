@@ -1,5 +1,4 @@
 
-
 function deleteplaylist(n){
 	let ok= confirm("삭제하시겠습니까?");
 	if(ok){
@@ -7,7 +6,6 @@ function deleteplaylist(n){
 	}else{
 	alert('삭제를 취소하였습니다.')	
 	}
-	
 	
 };
 

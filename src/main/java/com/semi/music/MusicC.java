@@ -23,7 +23,8 @@ public class MusicC extends HttpServlet {
 			Crawler.musicCrawler(request);
 			MusicDAO.setMusic(request);
 		}
-		MusicDAO.getAllLike(request);
+		MusicDAO.getLikeCount(request);
+		MusicDAO.getLikeInfo(request);
 		MusicDAO.getComment(request);
 		request.setAttribute("contentPage", "jsp/music/music_info.jsp");
 		request.getRequestDispatcher("index.jsp").forward(request, response);

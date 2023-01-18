@@ -7,3 +7,4 @@ background.style.cssText = `
     height: 400px;
     background: linear-gradient(180deg, rgba(246,229,141,1) 0%, rgba(245,246,250,1) 100%);
 `;
+

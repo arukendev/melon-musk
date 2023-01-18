@@ -16,18 +16,14 @@ public class ArtistCommentC extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		AuthDAO.loginCheck(request);
-		ArtistDAO.getArtist(request);
-
 		if (request.getParameter("commentId") == null) {
 			ArtistDAO.setComment(request);
 		} else {
 			ArtistDAO.delComment(request);
 		}
 		
-		ArtistDAO.getComment(request);
-		
-		request.setAttribute("contentPage", "jsp/artist/artist_info.jsp");
-		request.setAttribute("detailContentPage", "artist_main.jsp");
+		request.setAttribute("parameter", request.getParameter("artistId"));
+		request.setAttribute("contentPage", "jsp/main/loading.jsp");
 		request.getRequestDispatcher("index.jsp").forward(request, response);
 	}
 

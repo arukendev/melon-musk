@@ -13,7 +13,14 @@
 		<h1>리뷰게시판</h1>
 </div>
 <div class="list_subtitle">
-	<h6><a href="javascript:write('${sessionScope.account.au_id }')">글쓰기</a></h6>
+	<c:choose>
+		<c:when test="${sessionScope.account.au_id eq 'admin' }">
+			<h6><a href="javascript:write('${sessionScope.account.au_id }')">공지작성</a></h6>
+		</c:when>
+		<c:otherwise>
+			<h6><a href="javascript:write('${sessionScope.account.au_id }')">글쓰기</a></h6>
+		</c:otherwise>
+	</c:choose>
 </div>
 <div id="review_columnsWrap_label">
 	<div class="review_label_no">글번호</div>
@@ -24,22 +31,20 @@
 	<div class="review_label_viewLike"><i class="fas fa-heart"></i></div>
 </div>
 <div id="review_table2">
-<c:forEach var="review" items="${reviews }" varStatus="status" >
-	<c:if test="${review.au_id eq 'admin' }">
-		<a href="ReviewDetailC?no=${review.id }">
+<c:forEach var="notice" items="${notices }">
+		<a href="ReviewDetailC?no=${notice.id }">
 			<div class="review_table2_notice">
 				<div class="review_label_no">공지</div>
 				<div class="review_label_title">
-					<div>${review.name }</div>
-					<div class="review_title_commentN">[${review.comment }]</div>
+					<div>${notice.name }</div>
+					<div class="review_title_commentN">[${notice.comment }]</div>
 				</div>
-				<div class="review_label_writer">${review.au_id }</div>
-				<div class="review_label_date">${review.date }</div>
-				<div class="review_label_viewLike">${review.view }</div>
-				<div class="review_label_viewLike">${review.like }</div>
+				<div class="review_label_writer">${notice.au_id }</div>
+				<div class="review_label_date">${notice.date }</div>
+				<div class="review_label_viewLike">${notice.view }</div>
+				<div class="review_label_viewLike">${notice.like }</div>
 			</div>
 		</a>
-	</c:if>
 </c:forEach>
 <c:forEach var="review" items="${reviews }" varStatus="status">
 	<a href="ReviewDetailC?no=${review.id }">

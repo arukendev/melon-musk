@@ -15,16 +15,14 @@ public class MusicCommentC extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		AuthDAO.loginCheck(request);
-		MusicDAO.getMusic(request);
 		if (request.getParameter("commentId") == null) {
 			MusicDAO.setComment(request);
 		} else {
 			MusicDAO.delComment(request);
 		}
 		
-		MusicDAO.getComment(request);
-		
-		request.setAttribute("contentPage", "jsp/music/music_info.jsp");
+		request.setAttribute("parameter", request.getParameter("musicId"));
+		request.setAttribute("contentPage", "jsp/main/loading.jsp");
 		request.getRequestDispatcher("index.jsp").forward(request, response);
 		
 		

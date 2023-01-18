@@ -8,12 +8,14 @@
 <script type="text/javascript" src="js/review/review.js"></script>
 </head>
 <body>
+<div class="list_title">
+		<h1>리뷰작성</h1>
+</div>
+<div class="list_subtitle">
+			<h6><a href="ReviewC">목록</a></h6>
+</div>
 <form action="ReviewRegC" method="post" onsubmit="return call()">
 	<div id="reviewReg_table">
-		<div class="review_table">
-			<div class="review_table_title">리&nbsp&nbsp&nbsp&nbsp&nbsp뷰&nbsp&nbsp&nbsp&nbsp&nbsp작&nbsp&nbsp&nbsp&nbsp&nbsp성</div>
-			<div class="review_table_btns"><a href="ReviewC">목록</a></div>
-		</div>
 		<div class="reviewReg_table_row">
 			<div class="reviewReg_row_index">제목</div>
 			<div><input id="nameInput" class="reviewReg_row_input" name="name"/></div>
@@ -28,10 +30,12 @@
 		</div>
 		<div class="reviewReg_table_row">
 			<div class="reviewReg_row_index">내용</div>
-			<div><textarea id="textInput" class="reviewReg_row_txt" name="text" maxlength="1000"></textarea></div>
+				<textarea id="textInput" class="reviewReg_row_txt" name="text" maxlength="1000" onkeydown="calcChars()" onkeyup="calcChars()" onkeypress="calcChars()"></textarea>
 		</div>
-		
-		<button>등록</button>
+		<div style="width:inherit; display:flex; justify-content:flex-end; align-items:center;">
+			<button>등록</button>
+			<div style="display:flex; width:85px; text-align:center; margin-left:125px;"><input style="width: 40px; text-align: right; border:none; background-color:var(--white)" type="number" id="chars" value="0" readonly><div>/1000</div></div>
+		</div>
 	</div>
 	
 </form>
