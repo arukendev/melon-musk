@@ -7,7 +7,9 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
+import com.semi.auth.Auth;
 import com.semi.main.DBManager;
 import com.semi.music.Music;
 import com.semi.review.Review;
@@ -35,7 +37,7 @@ public class PlaylistDAO {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "select pl_name,mu_al_img, mu_name, mu_ar_name, mu_lyrics,mu_id "
+		String sql = "select pl_name,mu_al_img, mu_name, mu_ar_name, mu_lyrics,mu_id,pl_au_id "
 				+ "from playlist, playlist_music, music "
 				+ "where pm_pl_id = pl_id and pm_mu_id = mu_id and pl_id = ?";
 		
@@ -55,12 +57,13 @@ public class PlaylistDAO {
 							,rs.getString("mu_lyrics")
 							,request.getParameter("pl_id")
 							,rs.getString("mu_id")
+							,rs.getString("pl_au_id")
 							);
 					playlistmusics.add(playlistmusic);
 				}
+				
 				request.setAttribute("playlistmusics", playlistmusics);
 				
-			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally {
@@ -229,7 +232,8 @@ public  void updateReview(HttpServletRequest request) {
 	}
 
 	public void regPlaylist(HttpServletRequest request) {
-		
+		HttpSession hs = request.getSession();
+		Auth a =(Auth)hs.getAttribute("account");
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		String sql = "";
@@ -243,10 +247,11 @@ public  void updateReview(HttpServletRequest request) {
 			for (String s : test) {
 				insertMu += "INTO playlist_music values(getplmusicid, playlist_seq.nextval,"+ s+") ";
 			}
-			sql = "INSERT ALL INTO playlist VALUES(playlist_seq.nextval,?,0,0,sysdate) "+ insertMu +"SELECT * FROM DUAL";
+			sql = "INSERT ALL INTO playlist VALUES(playlist_seq.nextval,?,0,0,sysdate,?) "+ insertMu +"SELECT * FROM DUAL";
 				con = DBManager.connect();
 				pstmt = con.prepareStatement(sql);
 				pstmt.setString(1, request.getParameter("pl_name"));
+				pstmt.setString(2, a.getAu_id());
 				
 				
 				if (pstmt.executeUpdate()==1) {

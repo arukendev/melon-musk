@@ -6,7 +6,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import com.semi.auth.Auth;
 import com.semi.auth.AuthDAO;
 
 /**
@@ -18,12 +20,24 @@ public class RegPlaylistC extends HttpServlet {
 	
 	AuthDAO.loginCheck(request);
 	
+	HttpSession hs = request.getSession();
+	Auth a =(Auth)hs.getAttribute("account");
+	
+	
 	PlaylistDAO.getRdao().getAllPlMusic(request);
 	PlaylistDAO.getRdao().paging(1, request);
-	request.setAttribute("contentPage", "jsp/playlist/regPlaylistMusic_test.jsp");
 	
-	//request.setAttribute("contentPage", "jsp/playlist/regPlaylist.jsp");
+	if(a==null) {
+		request.setAttribute("alert", "세션이 만료되었습니다. 재로그인 해주세요.");
+		request.setAttribute("contentPage", "jsp/auth/login.jsp");
+		request.getRequestDispatcher("index.jsp").forward(request, response);
+	} else {
+	request.setAttribute("a", a);
+	request.setAttribute("contentPage", "jsp/playlist/regPlaylistMusic_test.jsp");
 	request.getRequestDispatcher("index.jsp").forward(request, response);
+	}
+	
+	
 	
 	
 	}

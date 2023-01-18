@@ -9,12 +9,14 @@ public class PlaylistMusic {
 	private String mu_lyrics;
 	private String pl_id;
 	private String mu_id;
+	private String pl_au_id;
 	
 	public PlaylistMusic() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public PlaylistMusic(String pl_name,String al_img, String mu_name, String ar_name, String mu_lyrics,String pl_id,String mu_id) {
+	public PlaylistMusic(String pl_name,String al_img, String mu_name, 
+			String ar_name, String mu_lyrics,String pl_id,String mu_id,String pl_au_id) {
 		super();
 		this.pl_name = pl_name;
 		this.al_img = al_img;
@@ -23,9 +25,16 @@ public class PlaylistMusic {
 		this.mu_lyrics = mu_lyrics;
 		this.pl_id = pl_id;
 		this.mu_id = mu_id;
+		this.pl_au_id = pl_au_id;
 	}
 	
 	
+	public String getPl_au_id() {
+		return pl_au_id;
+	}
+	public void setPl_au_id(String pl_au_id) {
+		this.pl_au_id = pl_au_id;
+	}
 	public String getAl_img() {
 		return al_img;
 	}
