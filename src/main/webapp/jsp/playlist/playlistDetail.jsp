@@ -7,42 +7,14 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="css/playlist/playlist.css">
-<script type="text/javascript">
-//heart 좋아요 클릭시! 하트 뿅
-$(function(){
-    var $likeBtn =$('.icon.heart');
-
-        $likeBtn.click(function(){
-        $likeBtn.toggleClass('active');
-
-        if($likeBtn.hasClass('active')){          
-           $(this).find('img').attr({
-              'src': 'https://cdn-icons-png.flaticon.com/512/803/803087.png',
-               alt:'찜하기 완료'
-                });
-          
-          
-         }else{
-            $(this).find('i').removeClass('fas').addClass('far')
-           $(this).find('img').attr({
-              'src': 'https://cdn-icons-png.flaticon.com/512/812/812327.png',
-              alt:"찜하기"
-           })
-         }
-     })
-});</script>
+<script type="text/javascript" src="js/playlist/playlist.js"></script>
 </head>
 <body>
 
 	<form action="AddPlMusicC"  >
 	<div class="playlist_contanier">
 		<div id="playlist_title">
-			<div class="playlist_title_title">${playlistmusics[0].pl_name }님의 플레이리스트</div>
-			<div class="right_area">
-  <a href="javascript:void(0)" onclick='like()' class="icon heart">
-     <img src="https://cdn-icons-png.flaticon.com/512/812/812327.png" alt="찜하기">
-  </a>
-</div>
+			<div class="playlist_title_title">'${sessionScope.account.au_id }'님의 플레이리스트 :  ${playlistmusics[0].pl_name } </div>
 		</div>
 		 <div id="playlist_content">
 			<input name="pl_id" value="${param.pl_id}" type="hidden" >
@@ -68,6 +40,5 @@ $(function(){
 	
 	
 	</form>
-	<script type="text/javascript" src="js/playlist/playlist.js"></script>
 </body>
 </html>

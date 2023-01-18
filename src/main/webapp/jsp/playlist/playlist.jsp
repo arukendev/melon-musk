@@ -18,14 +18,16 @@
 		</div>
 		<div id="playlist_content">
 			<c:forEach var="playlists" items="${playlists }">
+				<a href="PlDetailC?pl_id=${playlists.pl_id}">
 				<div class="playlist_content_playlists">
 					<div class="playlist_content_playlistitem" >
-						<a href="PlDetailC?pl_id=${playlists.pl_id}">${playlists.pl_name }</a>
+						${playlists.pl_name }
 						</div>
 					<div class="playlist_content_playlistitem">${playlists.pl_view } </div>
 					<div class="playlist_content_playlistitem">${playlists.pl_like }</div>
 					<div class="playlist_content_playlistitem">${playlists.pl_date }</div>
 				</div>
+					</a>
 			</c:forEach>
 		</div>
 
