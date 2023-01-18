@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import com.semi.auth.Auth;
 import com.semi.main.Comment;
 import com.semi.main.DBManager;
+import com.semi.music.Music;
 
 public class ArtistDAO {
 
@@ -106,7 +107,6 @@ public class ArtistDAO {
 
 	public static void setComment(HttpServletRequest request) {
 		Auth a = (Auth) request.getSession().getAttribute("account");
-		Artist ar = (Artist) request.getAttribute("artist");
 		
 			Connection con = null;
 			PreparedStatement pstmt = null;
@@ -115,7 +115,7 @@ public class ArtistDAO {
 				con = DBManager.connect();
 				pstmt = con.prepareStatement(sql);
 				pstmt.setString(1, a.getAu_id());
-				pstmt.setString(2, ar.getId());
+				pstmt.setString(2, request.getParameter("artistId"));
 				pstmt.setString(3, request.getParameter("txt"));
 				
 				if(pstmt.executeUpdate() == 1) {
@@ -188,5 +188,105 @@ public class ArtistDAO {
 			DBManager.close(con, pstmt, null);
 		}
 		
+	}
+	
+	public static void setLike(HttpServletRequest request) {
+		Auth a = (Auth) request.getSession().getAttribute("account");
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		String sql = "insert into artist_like values(ar_like_seq.nextval, ?, ?)";
+		
+		try {
+			con = DBManager.connect();
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, a.getAu_id());
+			pstmt.setString(2, request.getParameter("artistId"));
+			if (pstmt.executeUpdate() == 1) {
+				System.out.println("좋아요 추가");
+			}
+		} catch (Exception e) {
+			System.out.println("좋아요 실패");
+			e.printStackTrace();
+		} finally {
+			DBManager.close(con, pstmt, null);
+		}
+		
+	}
+
+	public static void delLike(HttpServletRequest request) {
+		
+		Auth a = (Auth) request.getSession().getAttribute("account");
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		String sql = "delete artist_like where arli_au_id = ? and arli_ar_id = ?";
+		
+		try {
+			con = DBManager.connect();
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, a.getAu_id());
+			pstmt.setString(2, request.getParameter("artistId"));
+			if (pstmt.executeUpdate() == 1) {
+				System.out.println("삭제 성공");
+			}
+			
+		} catch (Exception e) {
+			System.out.println("삭제 실패");
+			e.printStackTrace();
+		} finally {
+			DBManager.close(con, pstmt, null);
+		}
+		
+	}
+
+	public static void getLikeCount(HttpServletRequest request) {
+		Artist a = (Artist) request.getAttribute("artist");
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "select count(*) from artist_like where arli_ar_id = ?";
+		
+		try {
+			con = DBManager.connect();
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, a.getId());
+			rs = pstmt.executeQuery();
+			
+			if (rs.next()) {
+				request.setAttribute("likeCount", rs.getInt("count(*)"));
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBManager.close(con, pstmt, rs);
+		}
+	}
+
+	public static void getLikeInfo(HttpServletRequest request) {
+		Artist a = (Artist) request.getAttribute("artist");
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		String sql = "select * from artist_like where arli_ar_id = ?";
+		
+		try {
+			con = DBManager.connect();
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, a.getId());
+			rs = pstmt.executeQuery();
+			
+			while (rs.next()) {
+				request.setAttribute("likeAuth", rs.getString("arli_au_id"));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBManager.close(con, pstmt, rs);
+		}
 	}
 }

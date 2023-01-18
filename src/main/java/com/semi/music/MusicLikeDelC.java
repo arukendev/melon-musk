@@ -10,27 +10,16 @@ import javax.servlet.http.HttpServletResponse;
 import com.semi.auth.AuthDAO;
 
 
-@WebServlet("/MusicCommentC")
-public class MusicCommentC extends HttpServlet {
-
+@WebServlet("/MusicLikeDelC")
+public class MusicLikeDelC extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	}
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		MusicDAO.delLike(request);
 		AuthDAO.loginCheck(request);
-		if (request.getParameter("commentId") == null) {
-			MusicDAO.setComment(request);
-		} else {
-			MusicDAO.delComment(request);
-		}
-		
 		request.setAttribute("parameter", request.getParameter("musicId"));
 		request.setAttribute("contentPage", "jsp/main/loading.jsp");
 		request.getRequestDispatcher("index.jsp").forward(request, response);
-		
-		
-	}
-
-	
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-			
 	}
 
 }

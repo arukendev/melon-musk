@@ -7,30 +7,6 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="css/playlist/playlist.css">
-<script type="text/javascript">
-//heart 좋아요 클릭시! 하트 뿅
-$(function(){
-    var $likeBtn =$('.icon.heart');
-
-        $likeBtn.click(function(){
-        $likeBtn.toggleClass('active');
-
-        if($likeBtn.hasClass('active')){          
-           $(this).find('img').attr({
-              'src': 'https://cdn-icons-png.flaticon.com/512/803/803087.png',
-               alt:'찜하기 완료'
-                });
-          
-          
-         }else{
-            $(this).find('i').removeClass('fas').addClass('far')
-           $(this).find('img').attr({
-              'src': 'https://cdn-icons-png.flaticon.com/512/812/812327.png',
-              alt:"찜하기"
-           })
-         }
-     })
-});</script>
 </head>
 <body>
 
@@ -64,9 +40,6 @@ $(function(){
 		</div>
 		</div>
 	</div>
-	
-	
-	
 	</form>
 	<script type="text/javascript" src="js/playlist/playlist.js"></script>
 </body>

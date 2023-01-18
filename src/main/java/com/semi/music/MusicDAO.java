@@ -107,7 +107,6 @@ public class MusicDAO {
 	public static void setComment(HttpServletRequest request) {
 			
 		Auth a = (Auth) request.getSession().getAttribute("account");
-		Music m = (Music) request.getAttribute("music");
 		
 			Connection con = null;
 			PreparedStatement pstmt = null;
@@ -116,7 +115,7 @@ public class MusicDAO {
 				con = DBManager.connect();
 				pstmt = con.prepareStatement(sql);
 				pstmt.setString(1, a.getAu_id());
-				pstmt.setString(2, m.getId());
+				pstmt.setString(2, request.getParameter("musicId"));
 				pstmt.setString(3, request.getParameter("txt"));
 				
 				if(pstmt.executeUpdate() == 1) {
@@ -195,7 +194,6 @@ public class MusicDAO {
 	
 	public static void setLike(HttpServletRequest request) {
 		Auth a = (Auth) request.getSession().getAttribute("account");
-		Music m = (Music) request.getAttribute("music");
 		
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -205,7 +203,7 @@ public class MusicDAO {
 			con = DBManager.connect();
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, a.getAu_id());
-			pstmt.setString(2, m.getId());
+			pstmt.setString(2, request.getParameter("musicId"));
 			if (pstmt.executeUpdate() == 1) {
 				System.out.println("좋아요 추가");
 			}
@@ -220,9 +218,31 @@ public class MusicDAO {
 
 	public static void delLike(HttpServletRequest request) {
 		
+		Auth a = (Auth) request.getSession().getAttribute("account");
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		String sql = "delete music_like where muli_au_id = ? and muli_mu_id = ?";
+		
+		try {
+			con = DBManager.connect();
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, a.getAu_id());
+			pstmt.setString(2, request.getParameter("musicId"));
+			if (pstmt.executeUpdate() == 1) {
+				System.out.println("삭제 성공");
+			}
+			
+		} catch (Exception e) {
+			System.out.println("삭제 실패");
+			e.printStackTrace();
+		} finally {
+			DBManager.close(con, pstmt, null);
+		}
+		
 	}
 
-	public static void getAllLike(HttpServletRequest request) {
+	public static void getLikeCount(HttpServletRequest request) {
 		Music m = (Music) request.getAttribute("music");
 		
 		Connection con = null;
@@ -237,12 +257,35 @@ public class MusicDAO {
 			rs = pstmt.executeQuery();
 			
 			if (rs.next()) {
-				request.setAttribute("count", rs.getInt("count(*)"));
-				System.out.println("조회 성공");
+				request.setAttribute("likeCount", rs.getInt("count(*)"));
 			}
 			
 		} catch (Exception e) {
-			System.out.println("조회 실패");
+			e.printStackTrace();
+		} finally {
+			DBManager.close(con, pstmt, rs);
+		}
+	}
+
+	public static void getLikeInfo(HttpServletRequest request) {
+		Music m = (Music) request.getAttribute("music");
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		String sql = "select * from music_like where muli_mu_id = ?";
+		
+		try {
+			con = DBManager.connect();
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, m.getId());
+			rs = pstmt.executeQuery();
+			
+			while (rs.next()) {
+				request.setAttribute("likeAuth", rs.getString("muli_au_id"));
+			}
+		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			DBManager.close(con, pstmt, rs);

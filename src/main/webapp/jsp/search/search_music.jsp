@@ -11,12 +11,7 @@
 	<c:forEach var="sm" items="${serachMusics}">
 		<div>
 			<a href="MusicC?musicId=${sm.musicId}">${sm.musicName}</a>
-		</div>
-		<div>
-			<a href="ArtistC?artistId=${sm.artistId}">${sm.artistName}</a>
-		</div>
-		<div>
-			<a href="AlbumC?albumId=${sm.albumId}">${sm.albumName}</a>
+			<span>${sm.artistName}</span>
 		</div>
 	</c:forEach>
 </body>
