@@ -55,7 +55,7 @@ function idCheck(){
 }
 function pwCheck(){
   //새창 만들기
-  window.open("jsp/auth/joinIdCheck.jsp", "idwin", "width=400, height=350");
+  window.open("jsp/auth/joinpwCheck.jsp", "pwwin", "width=400, height=350");
 }
 	
 
