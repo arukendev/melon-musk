@@ -25,6 +25,12 @@
 	justify-content: space-around;
 	flex-wrap: wrap;
 }
+.playlist_content_playlists:hover{
+	background-color: rgba(246, 228, 142, 0.4);
+}
+
+
+
 .playlist_content_playlistitem{
 flex: 1 1 10%;
 border: 1px solid black;

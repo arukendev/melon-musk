@@ -17,6 +17,7 @@ public class ReviewC extends HttpServlet {
 		AuthDAO.loginCheck(request);
 		HttpSession hs = request.getSession();
 		Auth a =(Auth)hs.getAttribute("account");
+		ReviewDAO.getNotice(request);
 		ReviewDAO.getAllReview(request);
 		ReviewDAO.paging(1, request);
 		request.setAttribute("contentPage", "jsp/review/review.jsp");

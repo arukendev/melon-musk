@@ -6,6 +6,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.semi.auth.Auth;
 import com.semi.auth.AuthDAO;
@@ -20,8 +21,12 @@ public class PlDetailC extends HttpServlet {
 		
 		AuthDAO.loginCheck(request);
 		//플리 뮤직이 없는 경우 
+		HttpSession hs = request.getSession();
+		Auth a =(Auth)hs.getAttribute("account");
+		
 		PlaylistDAO.getRdao().increaseView(request);
 		PlaylistDAO.getRdao().getPlaylist(request);
+		
 		
 		request.setAttribute("contentPage", "jsp/playlist/playlistDetail.jsp");	
 		request.getRequestDispatcher("index.jsp").forward(request, response);

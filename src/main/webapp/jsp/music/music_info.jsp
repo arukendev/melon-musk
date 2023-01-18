@@ -12,25 +12,48 @@
 	<div class="detail_header">
 		<div class="detail_top">
 			<c:choose>
-				<c:when test="${sessionScope.account.au_id ne null}">
+				<c:when test="${sessionScope.account.au_id eq null}">
 					<div class="detail_top_like">
-						<a href="MusicLikeC?musicId=${music.id}">
+						<form action="LoginC">
+						<button>
 							<i class="far fa-heart"></i>
-						</a>
-						<span>${count}</span>
+							<span>${likeCount}</span>
+						</button>
+						</form>
+					</div>
+				</c:when>
+				<c:when test="${sessionScope.account.au_id ne likeAuth}">
+					<div class="detail_top_like">
+						<form action="MusicLikeAddC" method="post">
+							<input hidden name="musicId" value="${music.id}">
+							<button>
+								<i class="far fa-heart"></i>
+								<span>${likeCount}</span>
+							</button>
+						</form>
 					</div>
 				</c:when>
 				<c:otherwise>
 					<div class="detail_top_like">
-						<i class="fas fa-heart"></i>
-						<span>${count}</span>
+						<form action="MusicLikeDelC" method="post">
+							<input hidden name="musicId" value="${music.id}">
+							<button>
+								<i class="fas fa-heart"></i>
+								<span>${likeCount}</span>
+							</button>
+						</form>
 					</div>
 				</c:otherwise>
 			</c:choose>
 			<c:if test="${sessionScope.account.au_id ne null}">
 				<div class="detail_top_edit">
-					<i class="fas fa-pencil"></i>
-					<span>편집하기</span>
+					<form action="MusicUpdateC">
+						<input hidden name="musicId" value="${music.id}">
+						<button>
+							<i class="fas fa-pencil-alt"></i>
+							<span>편집하기</span>
+						</button>
+					</form>
 				</div>
 			</c:if>
 		</div>

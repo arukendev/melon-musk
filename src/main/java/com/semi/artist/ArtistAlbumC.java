@@ -18,6 +18,8 @@ public class ArtistAlbumC extends HttpServlet {
 		Crawler.artistAlbumCrwaler(request);
 		Crawler.pageCrawler(request);
 		ArtistDAO.getArtist(request);
+		ArtistDAO.getLikeInfo(request);
+		ArtistDAO.getLikeCount(request);
 		request.setAttribute("contentPage", "jsp/artist/artist_info.jsp");
 		request.setAttribute("detailContentPage", "artist_album.jsp");
 		request.getRequestDispatcher("index.jsp").forward(request, response);

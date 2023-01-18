@@ -26,6 +26,8 @@ public class ArtistC extends HttpServlet {
 			Crawler.artistCrawler(request);
 			ArtistDAO.setArtist(request);
 		}
+		ArtistDAO.getLikeInfo(request);
+		ArtistDAO.getLikeCount(request);
 		ArtistDAO.getComment(request);
 		request.setAttribute("contentPage", "jsp/artist/artist_info.jsp");
 		request.setAttribute("detailContentPage", "artist_main.jsp");

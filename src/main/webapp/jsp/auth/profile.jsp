@@ -36,9 +36,16 @@
 	  		</div>
 	  		<div>
 	  			<button class="profile_button" onclick="location.href='UpdateC'">수정</button>
-	  			<button class="profile_button" onclick="location.href='pwCheck()'">삭제</button>
+	  			 <input type="button" value="ID중복확인" onclick="pwCheck()">
+	  			<!--  <button class="profile_button" onclick="pwCheck()">삭제</button>-->
 	  		</div>
   		</div>
     </div>
+    <script src="js/auth/acValueCheck.js"></script>
+    <script src="js/auth/acValidCheck.js"></script>
+    <script
+      src="https://kit.fontawesome.com/6478f529f2.js"
+      crossorigin="anonymous"
+    ></script>
 </body>
 </html>

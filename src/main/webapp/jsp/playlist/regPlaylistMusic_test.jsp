@@ -110,11 +110,11 @@
 				</c:forEach>
 			</div>
 			<div>
-		<a href="PlaylistPageC?p=1">[맨 처음]</a>
+		<a href="PlaylistPageC?p=1&mu_id=${mu.id }">[맨 처음]</a>
 		<c:forEach var="i" begin="1" end="${pageCount }">
-			<a href="PlaylistPageC?p=${i }">[${i }]</a>
+			<a href="PlaylistPageC?p=${i }&mu_id=${mu.id }">[${i }]</a>
 		</c:forEach>
-		<a href="PlaylistPageC?p=${pageCount }">[맨 뒤]</a>
+		<a href="PlaylistPageC?p=${pageCount }&mu_id=${mu.id }">[맨 뒤]</a>
 	</div>
 
 

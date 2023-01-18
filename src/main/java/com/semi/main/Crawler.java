@@ -761,19 +761,14 @@ public class Crawler {
 					Document html = con.get();
 					
 					Elements musicElms = html.select("tbody tr td:nth-child(3) .btn_icon_detail");
-					Elements artistElms = html.select("tbody tr td:nth-child(4) a:last-child");
-					Elements albumElms = html.select("tbody tr td:nth-child(5) a:last-child");
+					Elements artistElms = html.select("tbody tr td:nth-child(4) .checkEllipsisSongdefaultList");
 					
 					Element musicElm = null;
 					Element artistElm = null;
-					Element albumElm = null;
 					
 					String musicId = "";
 					String musicName = "";
-					String artistId = "";
 					String artistName = "";
-					String albumId = "";
-					String albumName = "";
 					
 					SearchMusic sm = null;
 					ArrayList<SearchMusic> sms = new ArrayList<SearchMusic>();
@@ -781,28 +776,19 @@ public class Crawler {
 					for (int i = 0; i < musicElms.size(); i++) {
 						musicElm = musicElms.get(i);
 						artistElm = artistElms.get(i);
-						albumElm = albumElms.get(i);
 						
 						musicId = musicElm.attr("href");
 						musicName = musicElm.text();
-						artistId = artistElm.attr("href");
 						artistName = artistElm.text();
-						albumId = albumElm.attr("href");
-						albumName = albumElm.text();
 						
 						
 						musicId = musicId.substring(musicId.indexOf(";")).replaceAll("[^0-9]", "");
 						musicName = musicName.replace(" 상세정보 페이지 이동", "");
-						artistId = artistId.substring(0, artistId.indexOf(";")).replaceAll("[^0-9]", "");
-						albumId = albumId.substring(albumId.indexOf(";")).replaceAll("[^0-9]", "");
 						
 						sm = new SearchMusic();
 						sm.setMusicId(musicId);
 						sm.setMusicName(musicName);
-						sm.setArtistId(artistId);
 						sm.setArtistName(artistName);
-						sm.setAlbumId(albumId);
-						sm.setAlbumName(albumName);
 						sms.add(sm);
 					}
 					request.setAttribute("serachMusics", sms);

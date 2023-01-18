@@ -11,14 +11,48 @@
 <body>
 	<div class="detail_header">
 		<div class="detail_top">
-			<div class="detail_top_like">
-				<i class="fas fa-heart"></i>
-				<span>9,999,999</span>
-			</div>
+			<c:choose>
+				<c:when test="${sessionScope.account.au_id eq null}">
+					<div class="detail_top_like">
+						<form action="LoginC">
+						<button>
+							<i class="far fa-heart"></i>
+							<span>${likeCount}</span>
+						</button>
+						</form>
+					</div>
+				</c:when>
+				<c:when test="${sessionScope.account.au_id ne likeAuth}">
+					<div class="detail_top_like">
+						<form action="ArtistLikeAddC" method="post">
+							<input hidden name="artistId" value="${artist.id}">
+							<button>
+								<i class="far fa-heart"></i>
+								<span>${likeCount}</span>
+							</button>
+						</form>
+					</div>
+				</c:when>
+				<c:otherwise>
+					<div class="detail_top_like">
+						<form action="ArtistLikeDelC" method="post">
+							<input hidden name="artistId" value="${artist.id}">
+							<button>
+								<i class="fas fa-heart"></i>
+								<span>${likeCount}</span>
+							</button>
+						</form>
+					</div>
+				</c:otherwise>
+			</c:choose>
 			<c:if test="${sessionScope.account.au_id ne null}">
 				<div class="detail_top_edit">
-					<i class="fas fa-pencil"></i>
-					<span>편집하기</span>
+					<form action="">
+						<button>
+							<i class="fas fa-pencil-alt"></i>
+							<span>편집하기</span>
+						</button>
+					</form>
 				</div>
 			</c:if>
 		</div>

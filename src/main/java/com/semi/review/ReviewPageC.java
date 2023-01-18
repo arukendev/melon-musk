@@ -13,6 +13,7 @@ import com.semi.auth.AuthDAO;
 public class ReviewPageC extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		AuthDAO.loginCheck(request);
+		ReviewDAO.getNotice(request);
 		ReviewDAO.getAllReview(request);
 		ReviewDAO.paging(Integer.parseInt(request.getParameter("p")), request);
 		

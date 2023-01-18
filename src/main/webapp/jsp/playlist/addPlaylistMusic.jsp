@@ -54,52 +54,20 @@
 						<div class="playlist_content_playlistitem">${mu.name}</div>
 						<div class="playlist_content_playlistitem">${mu.arName }</div>
 						<div class="playlist_content_playlistitem">
-
-							<div class="wrap">
-								<a href="#pop_info_1" class="btn_open">가사 보기</a>
-
-
-								<div id="pop_info_1" class="pop_wrap" style="display: none;">
-									<div class="pop_inner">
-										<p class="dsc">${mu.lyrics }</p>
-										<button type="button" class="btn_close">닫기</button>
-									</div>
-								</div>
-							</div>
-
-							<script type="text/javascript">
-								var target = document
-										.querySelectorAll('.btn_open');
-								var btnPopClose = document
-										.querySelectorAll('.pop_wrap .btn_close');
-								var targetID;
-
-								// 팝업 열기
-								for (var i = 0; i < target.length; i++) {
-									target[i]
-											.addEventListener(
-													'click',
-													function() {
-														targetID = this
-																.getAttribute('href');
-														document
-																.querySelector(targetID).style.display = 'block';
-													});
-								}
-
-								// 팝업 닫기
-								for (var j = 0; j < target.length; j++) {
-									btnPopClose[j]
-											.addEventListener(
-													'click',
-													function() {
-														this.parentNode.parentNode.style.display = 'none';
-													});
-								}
-							</script>
+						<div class="wrap">
+						
+  <a href="#pop_info_1" class="btn_open">팝업 열기1</a>
 
 
-
+  <div id="pop_info_1" class="pop_wrap" style="display:none;">
+    <div class="pop_inner">
+      <p class="dsc">${mu.lyrics }</p>
+      <button type="button" class="btn_close">닫기</button>
+    </div>
+  </div>
+</div>	
+							
+							
 						</div>
 						<div class="playlist_content_playlistitem">
 							<label><input type="checkbox" name="mu_id" 
