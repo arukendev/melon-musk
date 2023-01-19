@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,7 +22,16 @@
 	</div>
 	<div class="reviewReg_table_row">
 	<div class="reviewReg_row_index">사진 첨부</div>
-	<div><input class="reviewReg_row_input" value="${review.img }" name="img"/></div>
+		<div>
+			<c:choose>
+				<c:when test="${fn:contains(review.img, '*file^')  }">
+					<input class="reviewReg_row_input" value="${fn:replace(review.img,'*file^','') }" name="img" type="file"/>
+				</c:when>
+				<c:otherwise>
+					<input class="reviewReg_row_input" value="${review.img }" name="img" type="file"/>
+				</c:otherwise>
+			</c:choose>
+		</div>
 	</div>
 	<div class="reviewReg_table_row">
 	<div class="reviewReg_row_index">내용</div>

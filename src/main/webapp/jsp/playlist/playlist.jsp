@@ -9,17 +9,25 @@
 <link rel="stylesheet" href="css/playlist/playlist.css">
 </head>
 <body>
-	<div class="playlist_contanier">
-		<div id="playlist_title">
-			<div class="playlist_title_title">플레이리스트 페이지</div>
-			<div class="playlist_title_title">
-				<a href="RegPlaylistC">플리 만들기!</a>
-			</div>
+		<div class="list_title" >
+		<h1>플레이리스트</h1>
 		</div>
+		<div class="list_subtitle">
+		<a href="RegPlaylistC"><h6>
+		플리만들기
+		
+		</h6>
+		<img src="https://cdn-icons-png.flaticon.com/512/175/175655.png?w=826&t=st=1674040400~exp=1674041000~hmac=946371d3e4114268e432fdc8e78818c271f2ddb2c006aa9adc7ddd3a14a1cecc">
+	</a></div>
+		
+	<div class="list_container">
 		<div id="playlist_content">
 			<c:forEach var="playlists" items="${playlists }">
 				<a href="PlDetailC?pl_id=${playlists.pl_id}">
 				<div class="playlist_content_playlists">
+					<div class="list_boxs_box" >
+						<img style="width: 60px; height: 60px;"  src="files/playlist/${playlists.pl_img }">
+						</div>
 					<div class="playlist_content_playlistitem" >
 						${playlists.pl_name }
 						</div>
@@ -30,13 +38,14 @@
 					</a>
 			</c:forEach>
 		</div>
-
-		<a href="ReviewPageC?p=1">[맨처음]</a>
+<div>
+		<a href="PlaylistPageC?p=1">[맨 처음]</a>
 		<c:forEach var="i" begin="1" end="${pageCount }">
-			<a href="ReviewPageC?p=${i}"> [${i}] </a>
+			<a href="PlaylistPageC?p=${i }">[${i }]</a>
 		</c:forEach>
-		<a href="ReviewPageC?p=${pageCount }">[맨끝]</a>
-
+		<a href="PlaylistPageC?p=${pageCount } }">[맨 뒤]</a>
+	</div>
+		
 
 	</div>
 </body>

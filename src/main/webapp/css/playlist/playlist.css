@@ -1,19 +1,39 @@
 @charset "UTF-8";
 
 
+body {
+  height: 100vh;
+  display: grid;
+  grid-template-rows: 80px 1fr 80px;
+  font-family: "Noto Sans KR", sans-serif;
+  font-weight: 300;
+  color: var(--black);
+}
+.list_subtitle a {
+  width: inherit;
+  display: flex;
+  font-size: 20px;
+  justify-content: flex-end;
+  align-items: flex-end;
+}
+
+
+
+
 .playlist_contanier {
-	display: flex;
-	width: 800px;
-	height: 100vh;
-	border: 3px solid black;
-	flex-direction: column;
+	 width: inherit;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 30px;
+	
+	
 }
 
 
  #playlist_title{
  	display: flex;
  	justify-content: space-around;
- 	border: 3px solid blue;
  }
 .playlist_title_title{
 	border: 3px solid yellow;
@@ -24,6 +44,13 @@
 	display: flex;
 	justify-content: space-around;
 	flex-wrap: wrap;
+	
+padding: 10px;
+  border-radius: 10px;
+  cursor: pointer;
+  grid-template-columns: 60px 80px repeat(3, 320px);
+	
+	
 }
 .playlist_content_playlists:hover{
 	background-color: rgba(246, 228, 142, 0.4);
@@ -33,12 +60,11 @@
 
 .playlist_content_playlistitem{
 flex: 1 1 10%;
-border: 1px solid black;
-text-align: center;
+  align-items: center;
+  text-align: center;
+
 }
-.playlist_content_playlistitem img{
-height: 50px;
-}
+
 .playlist_addMusic{
 border: 1px solid red;
 position: absolute;
@@ -50,6 +76,177 @@ width: 800px;
 height: 20px;
 width: 100px;
 }
+/* playlistdetail.jsp ----------------------------------------------------------------  */
+
+
+
+.pd_contanier {
+width: inherit;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 30px;
+}
+.pd_title {
+	display: block;
+	width: 90vw;
+	height: 100px;
+	
+	
+	}
+.pd_title_item {
+    font-size: 21px;
+    font-weight: normal;
+    color: #3A3635;
+    line-height: 30px;
+    zoom: 1;
+    line-height: 100px;
+   
+	}
+.pd_info{
+	display: flex;
+	width: 90vw;
+	height: 200px;
+}
+
+#pd_info_item1{
+	width: 80px;
+	height: 80px;
+	
+}
+#pd_info_item1 img{
+	width: 200px;
+	height: 200px;
+	margin-left: 195px;	
+	border-radius: 10px;
+}
+.pd_info_items{
+	margin-left: 355px;	
+	margin-top: 5px;
+	font-size: 18px;
+    font-weight: normal;
+    color: #3A3635;
+    line-height: 30px;
+    zoom: 1;
+	
+}
+#pd_info_text{
+	margin-top: 80px;
+	font-size: 18px;
+    font-weight: normal;
+    color: #3A3635;
+    line-height: 30px;
+    zoom: 1;
+    height: 120px;
+    width: 900px;
+    position: relative;
+    right: 167px;
+}
+.pd_music {
+	display: block;
+	width: 90vw;
+	height: 100px;
+	
+	
+	}
+.pd_music_title {
+    font-size: 21px;
+    font-weight: normal;
+    color: #3A3635;
+    line-height: 30px;
+    zoom: 1;
+    line-height: 100px;
+   
+	}
+.pd_music_sub {
+    font-size: 21px;
+    font-weight: normal;
+    color: #3A3635;
+    line-height: 30px;
+    zoom: 1;
+    line-height: 100px;
+    position: absolute;
+    left: 1300px;
+   	top: 320px;
+	}
+	.pd_music_subtitle {
+    font-size: 15px;
+    font-weight: normal;
+    color: #3A3635;
+    line-height: 10px;
+    zoom: 1;
+    line-height: 30px;
+    border: 1px solid black;
+    height: 30px;
+    width: 1300px;
+    position: relative;
+    left: 180px;
+    bottom: 12px;
+	}
+
+.pd_content_playlists{
+	display: flex;
+	justify-content: space-around;
+	flex-wrap: wrap;
+	position: relative;
+	left:180px;
+	padding: 10px;
+  	border-radius: 10px;
+  	cursor: pointer;
+	width: 1300px;
+	flex: 1 1 0;
+}
+.pd_content_playlists1{
+	display: flex;
+	justify-content: space-around;
+	flex-wrap: wrap;
+	position: relative;
+	left:180px;
+	padding: 10px;
+  	border-radius: 10px;
+  	cursor: pointer;
+	width: 1300px;
+	flex: 1 1 0;
+	background-color: rgba(246, 228, 142, 0.4);
+	color:  #3A3635;
+}
+.pd_content_playlists:hover{
+	background-color: rgba(266, 200, 142, 0.4);
+}
+
+
+
+.pd_content_playlistitem{
+flex: 1 1 10%;
+  align-items: center;
+  text-align: center;
+
+}
+.pd_content_playlistitem1{
+flex: 1 1 10%;
+  align-items: center;
+  text-align: center;
+
+}
+.pd_content_playlistitem1:nth-child(1){
+position: absolute;
+left: 30px;
+}
+.pd_content_playlistitem1:nth-child(2){
+	position: absolute;
+	left: 220px;
+}
+.pd_content_playlistitem1:nth-child(3){
+	position: absolute;
+	left: 528px;
+}
+.pd_content_playlistitem1:nth-child(4){
+	position: absolute;
+	left: 834px;
+}
+.pd_content_playlistitem1:nth-child(5){
+	margin-left: 990px;
+
+}
 
 
 
@@ -58,6 +255,10 @@ width: 100px;
 
 
 
+
+
+
+/* other ----------------------------------------------------------------  */
 .wrap{padding:10px;}
 
 .btn_open{font-weight:bold; margin:5px; padding:4px 6px; background:#000; color:#fff;}

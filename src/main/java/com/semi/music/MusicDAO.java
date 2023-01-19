@@ -281,7 +281,11 @@ public class MusicDAO {
 			con = DBManager.connect();
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, m.getId());
-			pstmt.setString(2, a.getAu_id());
+			if (a == null) {
+				pstmt.setString(2, "");
+			} else {
+				pstmt.setString(2, a.getAu_id());
+			}
 			rs = pstmt.executeQuery();
 			
 			while (rs.next()) {
@@ -291,6 +295,34 @@ public class MusicDAO {
 			e.printStackTrace();
 		} finally {
 			DBManager.close(con, pstmt, rs);
+		}
+	}
+
+	public static void updateMusic(HttpServletRequest request) {
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		
+		String sql = "update music set mu_lyrics = ?, mu_link = ? where mu_id = ?";
+		
+		try {
+			request.setCharacterEncoding("utf-8");
+			String lyrics = request.getParameter("lyrics");
+			String link = request.getParameter("link");
+			
+			con = DBManager.connect();
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, lyrics.replaceAll("\r\n", "<br>"));
+			pstmt.setString(2, link.substring(link.length() - 11,link.length()));
+			pstmt.setString(3, request.getParameter("musicId"));
+			if (pstmt.executeUpdate() == 1) {
+				System.out.println("수정완료");
+			}
+		} catch (Exception e) {
+			System.out.println("수정실패");
+			e.printStackTrace();
+		} finally {
+			DBManager.close(con, pstmt, null);
 		}
 	}
 

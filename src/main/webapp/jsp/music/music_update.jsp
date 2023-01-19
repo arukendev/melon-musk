@@ -8,16 +8,15 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<form class="detail_form" action="MusicUpdateC" method="post">
 	<div class="detail_header">
 		<div class="detail_top">
 			<c:if test="${sessionScope.account.au_id ne null}">
 				<div class="detail_top_edit">
-					<form action="">
-						<button>
-							<i class="fas fa-pencil-alt"></i>
-							<span>편집완료</span>
-						</button>
-					</form>
+					<button>
+						<i class="fas fa-check"></i>
+						<span>편집완료</span>
+					</button>
 				</div>
 			</c:if>
 		</div>
@@ -27,14 +26,7 @@
 			</div>
 			<div class="detail_titles_subtitles">
 				<c:forEach var="ar" items="${artists}">
-					<c:choose>
-						<c:when test="${ar.id eq '0'}">
-							<span>${ar.name}</span>
-						</c:when>
-						<c:otherwise>
-							<a href="ArtistC?artistId=${ar.id}">${ar.name}</a>
-						</c:otherwise>
-					</c:choose>
+					<span>${ar.name}</span>
 				</c:forEach>
 			</div>
 		</div>
@@ -44,7 +36,7 @@
 		<div class="detail_header_info">
 			<div>
 				<span>앨범</span>
-				<span><a href="AlbumC?albumId=${music.alId}">${music.alName}</a></span>
+				<span>${music.alName}</span>
 			</div>
 			<div>
 				<span>발매일</span>
@@ -57,6 +49,7 @@
 		</div>
 	</div>
 	<div class="detail_main">
+	<input hidden name="musicId" value="${music.id}">
 		<div class="detail_main_link">
 			<h1>유튜브 링크</h1>
 			<c:choose>
@@ -80,7 +73,8 @@
 			</c:choose>
 		</div>
 	</div>
-	<script type="text/javascript" src="js/main/edit.js"></script>
+	</form>
+	<script type="text/javascript" src="js/music/musicEdit.js"></script>
 	<script type="text/javascript" src="js/main/detail.js"></script>
 </body>
 </html>

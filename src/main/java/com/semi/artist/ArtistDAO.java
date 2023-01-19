@@ -7,6 +7,8 @@ import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import com.semi.auth.Auth;
 import com.semi.main.Comment;
 import com.semi.main.DBManager;
@@ -280,7 +282,11 @@ public class ArtistDAO {
 			con = DBManager.connect();
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, a.getId());
-			pstmt.setString(2, au.getAu_id());
+			if (au == null) {
+				pstmt.setString(2, "");
+			} else {				
+				pstmt.setString(2, au.getAu_id());
+			}
 			rs = pstmt.executeQuery();
 			
 			while (rs.next()) {
@@ -290,6 +296,28 @@ public class ArtistDAO {
 			e.printStackTrace();
 		} finally {
 			DBManager.close(con, pstmt, rs);
+		}
+	}
+
+	public static void updateArtist(HttpServletRequest request) {
+		try {
+			request.setCharacterEncoding("utf-8");
+			String path = request.getServletContext().getRealPath("files/artist");
+			MultipartRequest mr = new MultipartRequest(
+				request,
+				path,
+				31457280,
+				"utf-8",
+				new DefaultFileRenamePolicy()
+			);
+			String company = mr.getParameter("company");
+			String debut = mr.getParameter("debut");
+			String birth = mr.getParameter("birth").replace("-", ".");
+			String info = mr.getParameter("info");
+			
+		} catch (Exception e) {
+			System.out.println("수정실패");
+			e.printStackTrace();
 		}
 	}
 }

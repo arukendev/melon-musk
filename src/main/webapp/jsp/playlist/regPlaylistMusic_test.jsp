@@ -9,7 +9,7 @@
 <link rel="stylesheet" href="css/playlist/playlist.css">
 </head>
 <body>
-	<form action="RegPlaylistC" method="post">
+	<form action="RegPlaylistC" method="post" enctype="multipart/form-data">
 		<div class="playlist_contanier">
 			<div id="playlist_title">
 				<div class="playlist_title_title">나만의 플레이리스트 만들기</div>
@@ -23,6 +23,22 @@
 				</div>
 				<div class="playlist_content_playlistitem">
 					<input name="pl_name" id="pl_name" type="text">
+				</div>
+			</div>
+			<div class="playlist_content_playlists">
+				<div class="playlist_content_playlistitem">
+					플레이 리스트 소개글 
+				</div>
+				<div class="playlist_content_playlistitem">
+					<textarea  name="pl_text" rows="5"></textarea>
+				</div>
+			</div>
+			<div class="playlist_content_playlists">
+				<div class="playlist_content_playlistitem">
+					플레이 리스트 이미지
+				</div>
+				<div class="playlist_content_playlistitem">
+					<input name="pl_img" id="pl_img" type="file">
 				</div>
 			</div>
 			<div class="playlist_content_playlists">
@@ -47,7 +63,7 @@
 				<c:forEach var="mu" items="${musics }">
 					<div class="playlist_content_playlists">
 						<div class="playlist_content_playlistitem">
-							<a href="PlDetailC?pl_id=${mu.id}"> <img src="${mu.alImg }">
+							<a href="PlDetailC?pl_id=${mu.id}"> <img src=${mu.alImg }>
 							</a>
 						</div>
 						<div class="playlist_content_playlistitem">${mu.name}</div>
@@ -109,13 +125,7 @@
 					</div>
 				</c:forEach>
 			</div>
-			<div>
-		<a href="PlaylistPageC?p=1&mu_id=${mu.id }">[맨 처음]</a>
-		<c:forEach var="i" begin="1" end="${pageCount }">
-			<a href="PlaylistPageC?p=${i }&mu_id=${mu.id }">[${i }]</a>
-		</c:forEach>
-		<a href="PlaylistPageC?p=${pageCount }&mu_id=${mu.id }">[맨 뒤]</a>
-	</div>
+			
 
 
 		</div>

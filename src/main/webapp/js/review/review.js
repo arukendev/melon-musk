@@ -103,7 +103,7 @@ function isEmpty(input){
 }
 
 function isNotType(input){
-	return (input.value.indexOf(".jpg") == -1)&&(input.value.indexOf(".jpeg") == -1)&&(input.value.indexOf(".gif") == -1)&&(input.value.indexOf(".png") == -1);
+	return (input.value.indexOf(".jpg") == -1)&&(input.value.indexOf(".jpeg") == -1)&&(input.value.indexOf(".gif") == -1)&&(input.value.indexOf(".png") == -1)&&(input.value.indexOf(".JPG") == -1)&&(input.value.indexOf(".GIF") == -1)&&(input.value.indexOf(".PNG") == -1)&&(input.value.indexOf(".JPEG") == -1);
 }
 
 function moreThan(input, length){
@@ -114,7 +114,7 @@ function moreThan(input, length){
 
 /* valueCheck -------------------------------------------------------------------------------- */
 
-function call(){
+function reviewCall(){
 	const name = document.getElementById("nameInput");
 	const img = document.getElementById("imgInput");
 	const text = document.getElementById("textInput");
@@ -128,20 +128,6 @@ function call(){
 		return false;
 	}
 	
-	if(isEmpty(img)){
-		alert('사진은 필수 입력 사항입니다.');
-		return false;
-	}
-	
-	if(isNotType(img)){
-		alert('이미지는 jpg, png, gif 확장자 파일만 업로드 가능합니다.');
-		return false;
-	}
-	if(moreThan(img, 200)){
-		alert('첨부 이미지 파일명 허용 길이 초과');
-		return false;
-	}
-	
 	if(isEmpty(text)){
 		alert('내용은 필수 입력 사항입니다.');
 		return false;
@@ -152,5 +138,17 @@ function call(){
 		return false;
 	}
 	
+	if(isNotType(img)){
+		if(isEmpty(img)){
+			return true;
+		} else{
+		alert('이미지는 jpg, png, gif 확장자 파일만 업로드 가능합니다.');
+		return false;
+		}
+	}
+	if(moreThan(img, 200)){
+		alert('첨부 이미지 파일명 허용 길이 초과');
+		return false;
+	}
 	
 }

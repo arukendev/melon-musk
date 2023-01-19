@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import com.semi.auth.Auth;
 import com.semi.main.Comment;
 import com.semi.main.DBManager;
@@ -67,16 +69,23 @@ public class ReviewDAO {
 		
 		try {
 			request.setCharacterEncoding("utf-8");
-			String text = request.getParameter("text");
-			text = text.replaceAll("\\r\\n", "<br>");
+			
 
 			String sql = "insert into review values(review_seq.nextval,"
 					+ "?, ?, ?, 0, 0, current_date, ?, 0, 0)";
-
+			
+			String path = request.getSession().getServletContext().getRealPath("files/review");
+			System.out.println(path);
+			
+			MultipartRequest mr = new MultipartRequest(request,path,20*1024*1024,"utf-8",new DefaultFileRenamePolicy());
+			String text = mr.getParameter("text");
+			text = text.replaceAll("\\r\\n", "<br>");
+			String img="*file^"+mr.getFilesystemName("img");
+			
 			con = DBManager.connect();
 			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, request.getParameter("name"));
-			pstmt.setString(2, request.getParameter("img"));
+			pstmt.setString(1, mr.getParameter("name"));
+			pstmt.setString(2, img);
 			pstmt.setString(3, text);
 			pstmt.setString(4, a.getAu_id());
 			
@@ -84,7 +93,7 @@ public class ReviewDAO {
 				System.out.println("등록성공");
 			}
 			
-			getReview2(request, text);
+			getReview2(request, mr);
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -139,18 +148,16 @@ public class ReviewDAO {
 	}
 	
 	// 작성 후 리뷰페이지가 아닌 작성글로 가기 위해서 re_id가 아닌 값들로 review 가져옴.
-	public static void getReview2(HttpServletRequest request, String text) {
+	public static void getReview2(HttpServletRequest request, MultipartRequest mr) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		
-		String sql = "select * from review where re_name = ? and re_img= ? and re_text= ?";
+		String sql = "select * from review where re_name = ? order by re_date desc";
 		try {
 			con = DBManager.connect();
 			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, request.getParameter("name"));
-			pstmt.setString(2, request.getParameter("img"));
-			pstmt.setString(3, text);
+			pstmt.setString(1, mr.getParameter("name"));
 			rs = pstmt.executeQuery();
 			rs.next();
 			int viewCnt = rs.getInt("re_view");
@@ -195,17 +202,22 @@ public class ReviewDAO {
 			
 			try {
 				request.setCharacterEncoding("utf-8");
-				String text = request.getParameter("text");
+				String path = request.getSession().getServletContext().getRealPath("files/review");
+				System.out.println(path);
+				
+				MultipartRequest mr = new MultipartRequest(request,path,20*1024*1024,"utf-8",new DefaultFileRenamePolicy());
+				String text = mr.getParameter("text");
 				text = text.replaceAll("\\r\\n", "<br>");
+				String img="*file^"+mr.getFilesystemName("img");
 				
 				con = DBManager.connect();
 				pstmt = con.prepareStatement(
 						"update review set re_name= ?, re_img= ?, re_text= ? where re_id= ?"
 						);
-				pstmt.setString(1, request.getParameter("name"));
-				pstmt.setString(2, request.getParameter("img"));
+				pstmt.setString(1, mr.getParameter("name"));
+				pstmt.setString(2, img);
 				pstmt.setString(3, text);
-				pstmt.setString(4, request.getParameter("no"));
+				pstmt.setString(4, mr.getParameter("no"));
 				
 				pstmt.executeUpdate();
 				

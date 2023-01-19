@@ -1,5 +1,9 @@
 @charset "UTF-8";
 
+.detail_form {
+	z-index: 1;
+}
+
 .detail_header {
   margin-top: 30px;
   margin-bottom: 50px;
@@ -25,6 +29,9 @@
   font-size: 20px;
   color: var(--black);
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 5px;
 }
 
 .detail_top span {
