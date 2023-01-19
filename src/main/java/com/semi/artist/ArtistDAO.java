@@ -280,7 +280,11 @@ public class ArtistDAO {
 			con = DBManager.connect();
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, a.getId());
-			pstmt.setString(2, au.getAu_id());
+			if (au == null) {
+				pstmt.setString(2, "");
+			} else {				
+				pstmt.setString(2, au.getAu_id());
+			}
 			rs = pstmt.executeQuery();
 			
 			while (rs.next()) {
@@ -290,6 +294,18 @@ public class ArtistDAO {
 			e.printStackTrace();
 		} finally {
 			DBManager.close(con, pstmt, rs);
+		}
+	}
+
+	public static void updateArtist(HttpServletRequest request) {
+		
+		try {
+			request.setCharacterEncoding("utf-8");
+			System.out.println(request.getParameter("birth"));
+			
+		} catch (Exception e) {
+			System.out.println("수정실패");
+			e.printStackTrace();
 		}
 	}
 }
