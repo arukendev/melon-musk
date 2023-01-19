@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import com.semi.auth.Auth;
 import com.semi.main.DBManager;
 import com.semi.music.Music;
@@ -37,7 +39,8 @@ public class PlaylistDAO {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "select pl_name,mu_al_img, mu_name, mu_ar_name, mu_lyrics,mu_id,pl_au_id "
+		String sql = "select pl_name,mu_al_img, mu_name, mu_ar_name, mu_lyrics,mu_id,pl_au_id"
+				+ ",pl_text,pl_img,pl_date,mu_al_name "
 				+ "from playlist, playlist_music, music "
 				+ "where pm_pl_id = pl_id and pm_mu_id = mu_id and pl_id = ?";
 		
@@ -58,6 +61,10 @@ public class PlaylistDAO {
 							,request.getParameter("pl_id")
 							,rs.getString("mu_id")
 							,rs.getString("pl_au_id")
+							,rs.getString("pl_text")
+							,rs.getString("pl_img")
+							,rs.getDate("pl_date")
+							,rs.getString("mu_al_name")
 							);
 					playlistmusics.add(playlistmusic);
 				}
@@ -90,7 +97,9 @@ public class PlaylistDAO {
 				playlists = new ArrayList<Playlist>();
 				while (rs.next()) {
 					playlist = new Playlist(rs.getInt("pl_id"), rs.getString("pl_name")
-							,rs.getInt("pl_view"),rs.getInt("pl_like"), rs.getDate("pl_date"));
+							,rs.getInt("pl_view"),rs.getInt("pl_like"), rs.getDate("pl_date")
+							, rs.getString("pl_au_id"), rs.getString("pl_text"), rs.getString("pl_img")
+							);
 					playlists.add(playlist);
 				}
 			
@@ -190,12 +199,33 @@ public  void updateReview(HttpServletRequest request) {
 		req.setAttribute("musics", items);
 		req.setAttribute("pageCount", pageCount);
 		
+	}
+	
+public void pl_paging(int page,HttpServletRequest req) {
+		
+		req.setAttribute("curPageNo", page);
+		
+		int cnt =7; 
+		int total = playlists.size(); 
+		int pageCount = (int) Math.ceil((double)total/cnt); 
 		
 		
+		int start = cnt * (page - 1) + 1;
+		int end = (page == pageCount) ? total : start + cnt - 1;
+		
+		ArrayList<Playlist> items = new ArrayList<Playlist>();
+		
+		for (int i = start-1 ; i < end; i++) {
+			items.add(playlists.get(i));
+		}
 		
 		
+		req.setAttribute("playlists", items);
+		req.setAttribute("pageCount", pageCount);
 		
 	}
+
+	
 
 
 	public void getAllPlMusic(HttpServletRequest request) {
@@ -234,6 +264,9 @@ public  void updateReview(HttpServletRequest request) {
 	public void regPlaylist(HttpServletRequest request) {
 		HttpSession hs = request.getSession();
 		Auth a =(Auth)hs.getAttribute("account");
+		
+		
+		
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		String sql = "";
@@ -241,17 +274,25 @@ public  void updateReview(HttpServletRequest request) {
 		//String sql = "INSERT ALL INTO playlist VALUES(playlist_seq.nextval,?,0,0,sysdate) INTO playlist_music values(playlist_music_seq.nextval,playlist_seq.nextval,34819473) SELECT * FROM DUAL";
 		//String sql = "insert into playlist values(playlist_seq.nextval,?,0,0,sysdate)";
 		try {
-			String[] test=request.getParameterValues("mu_id");
+			String path = request.getSession().getServletContext().getRealPath("files/playlist");
+			System.out.println(path);
+			
+			MultipartRequest mr = new MultipartRequest(request,path,20*1024*1024,"utf-8",new DefaultFileRenamePolicy());
+			
+			
+			String[] test =mr.getParameterValues("mu_id");
 			String insertMu ="";
 			
 			for (String s : test) {
 				insertMu += "INTO playlist_music values(getplmusicid, playlist_seq.nextval,"+ s+") ";
 			}
-			sql = "INSERT ALL INTO playlist VALUES(playlist_seq.nextval,?,0,0,sysdate,?) "+ insertMu +"SELECT * FROM DUAL";
+			sql = "INSERT ALL INTO playlist VALUES(playlist_seq.nextval,?,0,0,sysdate,?,?,?) "+ insertMu +"SELECT * FROM DUAL";
 				con = DBManager.connect();
 				pstmt = con.prepareStatement(sql);
-				pstmt.setString(1, request.getParameter("pl_name"));
+				pstmt.setString(1, mr.getParameter("pl_name"));
 				pstmt.setString(2, a.getAu_id());
+				pstmt.setString(3, mr.getParameter("pl_text"));
+				pstmt.setString(4, mr.getFilesystemName("pl_img"));
 				
 				
 				if (pstmt.executeUpdate()==1) {
