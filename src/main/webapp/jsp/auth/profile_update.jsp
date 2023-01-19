@@ -24,7 +24,7 @@
 	  		  <div class="items" id="file-box">
         <label for="file" class="titles">Profile Image</label>
         <input hidden name="img" value="${sessionScope.account.au_img}">
-        <input type="file" name="img2" id="file" accept="image/*" />
+        <input type="file" name="img2" id="filee" accept="image/*" />
       </div>
       <div class="items" id="name-box">
         <label for="name" class="titles">Name</label>
@@ -32,7 +32,7 @@
       </div>
       <div class="items" id="id-box">
         <label for="id" class="titles">ID</label>
-        <input hidden id="id" name="id" value="${sessionScope.account.au_id}">${sessionScope.account.au_id} </div>
+        <input readonly="readonly" type="text" id="id" name="id" value="${sessionScope.account.au_id}"> </div>
      
       <div class="items" id="pw-box" >
         <label for="pw" class="titles">Password</label>

@@ -23,7 +23,7 @@
 	  		</div>
 	  		<div class="profile_content">
 	  			<div class="profile_title">ID</div>
-	  			<div class="profile_result">${sessionScope.account.au_id}</div>
+	  			<div id="profile_result">${sessionScope.account.au_id}</div>
 	  		</div>
 	  		
 	  		<div class="profile_content">
@@ -36,8 +36,7 @@
 	  		</div>
 	  		<div>
 	  			<button class="profile_button" onclick="location.href='UpdateC'">수정</button>
-	  			 <input type="button" value="ID중복확인" onclick="pwCheck()">
-	  			<!--  <button class="profile_button" onclick="pwCheck()">삭제</button>-->
+	  			 <input class="profile_button" type="button" value="회원탈퇴" onclick="pwCheck()">
 	  		</div>
   		</div>
     </div>
