@@ -13,6 +13,14 @@ function deleteplmusic(n){
 	location.href='DeletePlMusicC?pl_id='+n
 }
 
+function img(n){
+	if(n==null){
+		n='https://img.freepik.com/free-vector/realistic-question-box-mockup_23-2149489472.jpg?w=1380&t=st=1674105523~exp=1674106123~hmac=d456c089cf50ec912aab4ef03df38e3a85e7205fc5c96890913ef5b0b695f714';
+	}
+}
+
+
+
 
 var target = document.querySelectorAll('.btn_open');
 var btnPopClose = document.querySelectorAll('.pop_wrap .btn_close');

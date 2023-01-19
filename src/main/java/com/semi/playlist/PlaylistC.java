@@ -16,7 +16,6 @@ public class PlaylistC extends HttpServlet {
 		
 	AuthDAO.loginCheck(request);
 	PlaylistDAO.getRdao().getAllPlaylist(request);
-		
 	request.setAttribute("contentPage", "jsp/playlist/playlist.jsp");	
 	request.getRequestDispatcher("index.jsp").forward(request, response);
 	
