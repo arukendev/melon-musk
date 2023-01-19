@@ -14,23 +14,19 @@
 <div class="list_subtitle">
 			<h6><a href="ReviewC">목록</a></h6>
 </div>
-<form action="ReviewRegC" method="post" onsubmit="return call()">
+<form action="ReviewRegC" method="post" enctype="multipart/form-data" onsubmit="return reviewCall()">
 	<div id="reviewReg_table">
 		<div class="reviewReg_table_row">
 			<div class="reviewReg_row_index">제목</div>
 			<div><input id="nameInput" class="reviewReg_row_input" name="name"/></div>
 		</div>
 		<div class="reviewReg_table_row">
-			<div class="reviewReg_row_index">작성자</div>
-			<div><div class="reviewReg_row_writer" name="auth">${a.au_id }</div></div>
+			<div class="reviewReg_row_index">내용</div>
+				<textarea id="textInput" class="reviewReg_row_txt" name="text" maxlength="1000" onkeydown="calcChars()" onkeyup="calcChars()" onkeypress="calcChars()"></textarea>
 		</div>
 		<div class="reviewReg_table_row">
 			<div class="reviewReg_row_index">사진 첨부</div>
-			<div><input id="imgInput" class="reviewReg_row_input" name="img"/></div>
-		</div>
-		<div class="reviewReg_table_row">
-			<div class="reviewReg_row_index">내용</div>
-				<textarea id="textInput" class="reviewReg_row_txt" name="text" maxlength="1000" onkeydown="calcChars()" onkeyup="calcChars()" onkeypress="calcChars()"></textarea>
+			<div><input id="imgInput" class="reviewReg_row_input" name="img" type="file" accept="image/*"/></div>
 		</div>
 		<div style="width:inherit; display:flex; justify-content:flex-end; align-items:center;">
 			<button>등록</button>
