@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -49,13 +50,42 @@
 	<fmt:formatDate value="${review.date }" type="both" pattern="yyyy-MM-dd HH:mm:ss"></fmt:formatDate>
 	</div>
 </div>
-	<div class="reviewReg_table_row">
+	<%-- <div class="reviewReg_table_row">
 		<div class="reviewReg_row_index">사진</div>
-		<div class="reviewDetail_row_400"><img src="${review.img }" id="reviewDetail_row_img"><a href="${review.img }" target="blank"><i class="fa-solid fa-magnifying-glass-plus"></i></a></div>
-	</div>
-	<div class="reviewReg_table_row">
-		<div class="reviewReg_row_index">내용</div>
-		<div class="reviewReg_row_txt">${review.text }</div>
+		<c:choose>
+			<c:when test="${fn:contains(review.img, '*file^')  }">
+				<div class="reviewDetail_row_400">
+					<img src="<%=request.getContextPath() %>/files/review/${fn:replace(review.img,'*file^','') }" id="reviewDetail_row_img"><a href="<%=request.getContextPath() %>/files/review/${fn:replace(review.img,'*file^','') }" target="blank"><i class="fa-solid fa-magnifying-glass-plus"></i></a>
+				</div>
+			</c:when>
+			<c:otherwise>
+				<div class="reviewDetail_row_400">
+					<img src="${review.img }" id="reviewDetail_row_img"><a href="${review.img }" target="blank"><i class="fa-solid fa-magnifying-glass-plus"></i></a>
+				</div>
+			</c:otherwise>
+		</c:choose>
+	</div> --%>
+	<div class="reviewDetail_table_content">
+		<div class="reviewDetail_content_label">내용</div>
+		<div class="reviewDetail_content_txt">
+			<div>
+				<c:choose>
+					<c:when test="${fn:contains(review.img, '*file^')  }">
+						<div class="reviewDetail_row_400">
+							<img src="<%=request.getContextPath() %>/files/review/${fn:replace(review.img,'*file^','') }" id="reviewDetail_row_img"><a href="<%=request.getContextPath() %>/files/review/${fn:replace(review.img,'*file^','') }" target="blank"><i class="fa-solid fa-magnifying-glass-plus"></i></a>
+						</div>
+					</c:when>
+					<c:otherwise>
+						<div class="reviewDetail_row_400">
+							<img src="${review.img }" id="reviewDetail_row_img"><a href="${review.img }" target="blank"><i class="fa-solid fa-magnifying-glass-plus"></i></a>
+						</div>
+					</c:otherwise>
+				</c:choose>
+			</div>
+			<div id="reviewDetail_text_text">
+				${review.text }
+			</div>
+		</div>
 	</div>
 	<div id="reviewDetail_table_bottom">
 		<div id="reviewDetail_bottom_report">
