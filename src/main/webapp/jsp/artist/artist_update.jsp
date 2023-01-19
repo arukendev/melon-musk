@@ -8,17 +8,16 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<form class="detail_form" action="ArtistUpdateC" method="post" enctype="multipart/form-data">
 	<div class="detail_header">
 		<div class="detail_top">
 			<c:if test="${sessionScope.account.au_id ne null}">
 				<div class="detail_top_edit">
-					<form action="ArtistUpdateC" method="post">
-						<input hidden name="artistId" value="${artist.id}">
-						<button>
-							<i class="fas fa-check"></i>
-							<span>편집완료</span>
-						</button>
-					</form>
+					<input hidden name="artistId" value="${artist.id}">
+					<button>
+						<i class="fas fa-check"></i>
+						<span>편집완료</span>
+					</button>
 				</div>
 			</c:if>
 		</div>
@@ -36,6 +35,7 @@
 		</div>
 		<div class="detail_header_img">
 			<img src="${artist.img}">
+			<input type="file" name="img">
 		</div>
 		<div class="detail_header_info">
 			<div>
@@ -102,6 +102,7 @@
 			</c:choose>
 		</div>
 	</div>
+	</form>
 	<script type="text/javascript" src="js/artist/artistEdit.js"></script>
 	<script type="text/javascript" src="js/main/detail.js"></script>
 	<script src="https://kit.fontawesome.com/772d40e343.js" crossorigin="anonymous"></script>

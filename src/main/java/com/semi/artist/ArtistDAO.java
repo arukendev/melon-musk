@@ -7,6 +7,8 @@ import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import com.semi.auth.Auth;
 import com.semi.main.Comment;
 import com.semi.main.DBManager;
@@ -298,10 +300,20 @@ public class ArtistDAO {
 	}
 
 	public static void updateArtist(HttpServletRequest request) {
-		
 		try {
 			request.setCharacterEncoding("utf-8");
-			System.out.println(request.getParameter("birth"));
+			String path = request.getServletContext().getRealPath("files/artist");
+			MultipartRequest mr = new MultipartRequest(
+				request,
+				path,
+				31457280,
+				"utf-8",
+				new DefaultFileRenamePolicy()
+			);
+			String company = mr.getParameter("company");
+			String debut = mr.getParameter("debut");
+			String birth = mr.getParameter("birth").replace("-", ".");
+			String info = mr.getParameter("info");
 			
 		} catch (Exception e) {
 			System.out.println("수정실패");
