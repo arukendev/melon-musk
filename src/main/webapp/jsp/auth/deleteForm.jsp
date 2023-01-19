@@ -9,7 +9,7 @@
 </head>
 <body>
 
-	<form action="../../DeleteC" method="get">
+	<!-- <form action="../../DeleteC" method="get"> -->
 <div style="text-align: center"></div>
 	<h3>* 비밀번호 확인 결과 *</h3>
 <%
@@ -22,12 +22,11 @@
 	out.println("<a href='javascript:apply(\"" + pw + "\")'>[적용]</a>");
 
 %>
-	<button onclick="location.href='../DeleteC'" >삭제</button>
 	<script>
     	function apply(){
             //2) 중복확인 id를 부모창에 적용
             //부모창 opener
-    		opener.parent.location='../main/main.jsp'();
+    		window.opener.location='../../DeleteC';
     		window.close();
         }//apply () end
     </script>
@@ -35,7 +34,7 @@
  	}else{
     	out.println("<p style='color: red'>비밀번호가 틀려요.</p>");
     }//if end
- %></form>
+ %>
  <hr>
  <a href="javascript:history.back()">[다시시도]</a>
  &nbsp; &nbsp;
