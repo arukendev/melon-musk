@@ -37,7 +37,7 @@
 				<div class="review_label_no">공지</div>
 				<div class="review_label_title">
 					<div>${notice.name }</div>
-					<div class="review_title_commentN">[${notice.comment }]</div>
+					<%-- <div class="review_title_commentN">[${notice.comment }]</div> --%>
 				</div>
 				<div class="review_label_writer">${notice.au_id }</div>
 				<div class="review_label_date">${notice.date }</div>
@@ -59,7 +59,7 @@
 			</c:choose>
 			<div class="review_label_title">
 				<div>${review.name }</div>
-				<div class="review_title_commentN">[${review.comment }]</div>
+				<%-- <div class="review_title_commentN">[${review.comment }]</div> --%>
 			</div>
 			<div class="review_label_writer">${review.au_id }</div>
 			<div class="review_label_date">${review.date }</div>
