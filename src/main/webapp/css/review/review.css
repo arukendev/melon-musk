@@ -111,8 +111,9 @@
 .review_bottom_btn{
 	width: 75px;
 }
-
-
+.review_bottom_btn a:hover{
+	text-decoration:underline; 
+}
 
 
 
@@ -162,6 +163,11 @@
 
 
 /* review_detail.jsp --------------------------------------------------------------------------*/
+.reviewDetail_table_row{
+	width:100%;
+	display: flex;	
+}
+
 
 #reviewDetail_row_viewsLike {
 	display: flex;

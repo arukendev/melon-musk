@@ -20,9 +20,9 @@
 		</c:if>
 			<h6><a href="ReviewC">목록</a></h6>
 </div>
-<div class="reviewReg_table_row">
-	<div class="reviewReg_row_index">제목</div>
-	<div style="width: 300px">${review.name }</div>
+<div class="reviewDetail_table_row">
+	<div style="width: 70%; font-size: 25pt">${review.name }</div>
+	<div style="width: 75px;">작성자  <span>${review.au_id }</span></div>
 	<div id="reviewDetail_row_viewsLike">
 		<div class="reviewDetail_viewsLike_items"><i class="fa-solid fa-eye"></i></div>
 		<div class="reviewDetail_viewsLike_items">${review.view }</div>
@@ -40,7 +40,7 @@
 		<div class="reviewDetail_viewsLike_items" id="likeNumber">${review.like }</div>
 	</div>
 </div>
-<div class="reviewReg_table_row">
+<div class="reviewDetail_table_row">
 	<div class="reviewReg_row_index">작성자</div>
 	<div class="reviewDetail_row_200">
 	${review.au_id }
@@ -50,21 +50,6 @@
 	<fmt:formatDate value="${review.date }" type="both" pattern="yyyy-MM-dd HH:mm:ss"></fmt:formatDate>
 	</div>
 </div>
-	<%-- <div class="reviewReg_table_row">
-		<div class="reviewReg_row_index">사진</div>
-		<c:choose>
-			<c:when test="${fn:contains(review.img, '*file^')  }">
-				<div class="reviewDetail_row_400">
-					<img src="<%=request.getContextPath() %>/files/review/${fn:replace(review.img,'*file^','') }" id="reviewDetail_row_img"><a href="<%=request.getContextPath() %>/files/review/${fn:replace(review.img,'*file^','') }" target="blank"><i class="fa-solid fa-magnifying-glass-plus"></i></a>
-				</div>
-			</c:when>
-			<c:otherwise>
-				<div class="reviewDetail_row_400">
-					<img src="${review.img }" id="reviewDetail_row_img"><a href="${review.img }" target="blank"><i class="fa-solid fa-magnifying-glass-plus"></i></a>
-				</div>
-			</c:otherwise>
-		</c:choose>
-	</div> --%>
 	<div class="reviewDetail_table_content">
 		<div class="reviewDetail_content_label">내용</div>
 		<div class="reviewDetail_content_txt">
