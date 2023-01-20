@@ -281,12 +281,14 @@ public void pl_paging(int page,HttpServletRequest req) {
 			
 			
 			String[] test =mr.getParameterValues("mu_id");
-			String insertMu ="";
+			//String insertMu ="";
 			
-			for (String s : test) {
-				insertMu += "INTO playlist_music values(getplmusicid, playlist_seq.nextval,"+ s+") ";
-			}
-			sql = "INSERT ALL INTO playlist VALUES(playlist_seq.nextval,?,0,0,sysdate,?,?,?) "+ insertMu +"SELECT * FROM DUAL";
+			//for (String s : test) {
+				//insertMu += "INTO playlist_music values(getplmusicid, playlist_seq.nextval,"+ s+") ";
+			//}
+			//sql = "INSERT ALL INTO playlist VALUES(playlist_seq.nextval,?,0,0,sysdate,?,?,?) "+ insertMu +"SELECT * FROM DUAL";
+		
+			sql = "INSERT INTO playlist VALUES(playlist_seq.nextval,?,0,0,sysdate,?,?,?) ";
 				con = DBManager.connect();
 				pstmt = con.prepareStatement(sql);
 				pstmt.setString(1, mr.getParameter("pl_name"));

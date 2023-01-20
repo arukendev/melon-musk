@@ -24,7 +24,6 @@ public class RegPlaylistC extends HttpServlet {
 	Auth a =(Auth)hs.getAttribute("account");
 	
 	
-	PlaylistDAO.getRdao().getAllPlMusic(request);
 	
 	if(a==null) {
 		request.setAttribute("alert", "세션이 만료되었습니다. 재로그인 해주세요.");

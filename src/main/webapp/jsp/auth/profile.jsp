@@ -23,7 +23,7 @@
 	  		</div>
 	  		<div class="profile_content">
 	  			<div class="profile_title">ID</div>
-	  			<div id="profile_result">${sessionScope.account.au_id}</div>
+	  			<div class="profile_result">${sessionScope.account.au_id}</div>
 	  		</div>
 	  		
 	  		<div class="profile_content">

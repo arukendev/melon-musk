@@ -257,10 +257,11 @@
 	border: 3px solid #fbc531;
   border-radius: 15px;
   transition: border 0.01s ease-in-out;
-  width: 100px;
+  width: 200px;
   height: 50px;
-  justify-content: center;
+
   text-align: center;
+
 }
 
 #result_txt {
@@ -271,3 +272,51 @@
 #infoP {
   font-size: 15px;
 }
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.loginBtn{
+	 width: 100px;
+    font-size: 16px;
+    font-weight: 200;
+    color: #fff;
+    cursor: pointer;
+    margin: 0px;
+    height: 30px;
+    text-align:center;
+    border: none;
+    background-size: 300% 100%;
+
+    border-radius: 50px;
+    /* moz-transition: all .4s ease-in-out; */
+    -o-transition: all .4s ease-in-out;
+    -webkit-transition: all .4s ease-in-out;
+    transition: all .4s ease-in-out;
+}
+
+.loginBtn:hover {
+    background-position: 100% 0;
+    moz-transition: all .4s ease-in-out;
+    -o-transition: all .4s ease-in-out;
+    -webkit-transition: all .4s ease-in-out;
+    transition: all .4s ease-in-out;
+}
+
+.loginBtn:focus{
+	outline: none;
+}
+.loginBtn.my {
+    background-image: linear-gradient(to right, #009245, #FCEE21, #00A8C5, #D9E021);
+    box-shadow: 0 4px 15px 0 rgba(83, 176, 57, 0.75);
+}
+
+.loginBtn.out {
+    background-image: linear-gradient(to right, #667eea, #764ba2, #6B8DD6, #8E37D7);
+    box-shadow: 0 4px 15px 0 rgba(116, 79, 168, 0.75);
+}
+
+
+

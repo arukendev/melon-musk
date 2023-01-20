@@ -15,7 +15,7 @@
 <%
     //1) 사용가능한 아이디일 경우, 아이디 입력 폼에 넣기 위함
     String pw=request.getParameter("pw");
-    out.println("입력 ID : <strong>" + pw + "</stong>");
+    out.println("입력 PW : <strong>" + pw + "</stong>");
     if(AuthDAO.duplecatePW(pw)==true){
 
     	out.println("<p>삭제하시겠습니까?.</p>");

@@ -11,14 +11,13 @@
 	<form class="detail_form" action="MusicUpdateC" method="post">
 	<div class="detail_header">
 		<div class="detail_top">
-			<c:if test="${sessionScope.account.au_id ne null}">
-				<div class="detail_top_edit">
-					<button>
-						<i class="fas fa-check"></i>
-						<span>편집완료</span>
-					</button>
-				</div>
-			</c:if>
+			<div class="detail_top_edit">
+				<input hidden name="musicId" value="${music.id}">
+				<button>
+					<i class="fas fa-check"></i>
+					<span>편집완료</span>
+				</button>
+			</div>
 		</div>
 		<div class="detail_titles">
 			<div class="detail_titles_title">
@@ -49,7 +48,6 @@
 		</div>
 	</div>
 	<div class="detail_main">
-	<input hidden name="musicId" value="${music.id}">
 		<div class="detail_main_link">
 			<h1>유튜브 링크</h1>
 			<c:choose>

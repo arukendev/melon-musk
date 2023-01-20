@@ -310,10 +310,22 @@ public class MusicDAO {
 			String lyrics = request.getParameter("lyrics");
 			String link = request.getParameter("link");
 			
+			if (link.equals("")) {
+				link = "none";
+			} else {
+				link = link.substring(link.length() - 11,link.length());
+			}
+			
+			if (lyrics.equals("")) {
+				lyrics = "none";
+			} else {
+				lyrics = lyrics.replaceAll("\r\n", "<br>");
+			}
+			
 			con = DBManager.connect();
 			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, lyrics.replaceAll("\r\n", "<br>"));
-			pstmt.setString(2, link.substring(link.length() - 11,link.length()));
+			pstmt.setString(1, lyrics);
+			pstmt.setString(2, link);
 			pstmt.setString(3, request.getParameter("musicId"));
 			if (pstmt.executeUpdate() == 1) {
 				System.out.println("수정완료");

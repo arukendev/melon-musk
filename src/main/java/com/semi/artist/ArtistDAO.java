@@ -1,5 +1,6 @@
 package com.semi.artist;
 
+import java.io.File;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -300,9 +301,18 @@ public class ArtistDAO {
 	}
 
 	public static void updateArtist(HttpServletRequest request) {
+		
+		Connection con  = null;
+		PreparedStatement pstmt = null;
+		String sql = "update artist "
+				+ "set ar_img = ?, ar_company = ?, ar_debut = ?, ar_birth = ?, ar_info = ? "
+				+ "where ar_id = ?";
+		
+		String path = request.getServletContext().getRealPath("files/artist");
+		System.out.println(path);
+		
 		try {
 			request.setCharacterEncoding("utf-8");
-			String path = request.getServletContext().getRealPath("files/artist");
 			MultipartRequest mr = new MultipartRequest(
 				request,
 				path,
@@ -310,14 +320,89 @@ public class ArtistDAO {
 				"utf-8",
 				new DefaultFileRenamePolicy()
 			);
+			String artistId = mr.getParameter("artistId");
+			String oldImg = mr.getParameter("oldImg");
+			String img = mr.getFilesystemName("img");
 			String company = mr.getParameter("company");
 			String debut = mr.getParameter("debut");
-			String birth = mr.getParameter("birth").replace("-", ".");
+			String birth = mr.getParameter("birth");
 			String info = mr.getParameter("info");
+			
+			if (company == null || company.equals("")) {
+				company = "none";
+			}
+			if (debut == null || debut.equals("")) {
+				debut = "none";
+			}
+			if (birth == null || birth.equals("")) {
+				birth = "none";
+			} else {
+				birth = birth.replace("-", ".");
+			}
+			if (info.equals("")) {
+				info = "none";
+			} else {
+				info = info.replaceAll("\r\n", "<br>");
+			}
+			
+			con = DBManager.connect();
+			pstmt = con.prepareStatement(sql);
+			if (img == null) {
+				pstmt.setString(1, oldImg);
+			} else {
+				pstmt.setString(1, "files/artist/" + img);
+				if (oldImg.contains("files/artist/")) {
+					oldImg = oldImg.replace("files/artist/", "");
+					String delImg = path + "/" + oldImg;
+					File f = new File(delImg);
+					f.delete();
+				}
+			}
+			pstmt.setString(2, company);
+			pstmt.setString(3, debut);
+			pstmt.setString(4, birth);
+			pstmt.setString(5, info);
+			pstmt.setString(6, artistId);
+			
+			request.setAttribute("parameter", mr.getParameter("artistId"));
+			
+			if (pstmt.executeUpdate() == 1) {
+				System.out.println("수정성공");
+			}
 			
 		} catch (Exception e) {
 			System.out.println("수정실패");
 			e.printStackTrace();
+		} finally {
+			DBManager.close(con, pstmt, null);
+		}
+		
+	}
+
+	public static void delArtist(HttpServletRequest request) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		String sql = "delete artist where ar_id = ?";
+		String path = request.getServletContext().getRealPath("files/artist");
+		String oldImg = request.getParameter("i");
+		if (oldImg.contains("files/artist/")) {
+			oldImg = oldImg.replace("files/artist/", "");
+			String delImg = path + "/" + oldImg;
+			File f = new File(delImg);
+			f.delete();
+		}
+		try {
+			con = DBManager.connect();
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, request.getParameter("artistId"));
+			if (pstmt.executeUpdate() == 1) {
+				System.out.println("삭제성공");
+			}
+		} catch (Exception e) {
+			System.out.println("삭제실패");
+			e.printStackTrace();
+		} finally {
+			DBManager.close(con, pstmt, null);
 		}
 	}
 }

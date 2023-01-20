@@ -88,9 +88,7 @@
 		<a href="ReviewPageC?p=${pageCount }">[맨 뒤]</a>
 	</div>
 	<div class="review_bottom_btn">
-		<c:if test="${sessionScope.account.au_id ne null }">
-			<a href='MyReviewsC'">내가 쓴 글</a>
-		</c:if>
+		<a href='ReviewC'">전체글</a>
 	</div>
 </div>
 
