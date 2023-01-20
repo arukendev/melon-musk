@@ -111,8 +111,9 @@
 .review_bottom_btn{
 	width: 75px;
 }
-
-
+.review_bottom_btn a:hover{
+	text-decoration:underline; 
+}
 
 
 
