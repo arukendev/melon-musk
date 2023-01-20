@@ -22,7 +22,7 @@
 </div>
 <div class="reviewDetail_table_row">
 	<div style="width: 70%; font-size: 25pt">${review.name }</div>
-	<div>작성자 <span>${review.au_id }</span></div>
+	<div style="width: 75px;">작성자  <span>${review.au_id }</span></div>
 	<div id="reviewDetail_row_viewsLike">
 		<div class="reviewDetail_viewsLike_items"><i class="fa-solid fa-eye"></i></div>
 		<div class="reviewDetail_viewsLike_items">${review.view }</div>
