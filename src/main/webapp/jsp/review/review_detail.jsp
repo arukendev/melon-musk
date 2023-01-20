@@ -20,9 +20,9 @@
 		</c:if>
 			<h6><a href="ReviewC">목록</a></h6>
 </div>
-<div class="reviewReg_table_row">
-	<div class="reviewReg_row_index">제목</div>
-	<div style="width: 300px">${review.name }</div>
+<div class="reviewDetail_table_row">
+	<div style="width: 70%; font-size: 25pt">${review.name }</div>
+	<div>작성자 <span>${review.au_id }</span></div>
 	<div id="reviewDetail_row_viewsLike">
 		<div class="reviewDetail_viewsLike_items"><i class="fa-solid fa-eye"></i></div>
 		<div class="reviewDetail_viewsLike_items">${review.view }</div>
@@ -40,7 +40,7 @@
 		<div class="reviewDetail_viewsLike_items" id="likeNumber">${review.like }</div>
 	</div>
 </div>
-<div class="reviewReg_table_row">
+<div class="reviewDetail_table_row">
 	<div class="reviewReg_row_index">작성자</div>
 	<div class="reviewDetail_row_200">
 	${review.au_id }
