@@ -294,4 +294,33 @@ public class AlbumDAO {
 		}
 	}
 
+	public static void updateAlbum(HttpServletRequest request) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		
+		String sql = "update album set al_info = ? where al_id = ?";
+		
+		try {
+			request.setCharacterEncoding("utf-8");
+			String info = request.getParameter("info");
+			if (info.equals("")) {
+				info = "none";
+			} else {
+				info = info.replaceAll("\r\n", "<br>");
+			}
+			con = DBManager.connect();
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, info);
+			pstmt.setString(2, request.getParameter("albumId"));
+			if (pstmt.executeUpdate() == 1) {
+				System.out.println("수정완료");
+			}
+		} catch (Exception e) {
+			System.out.println("수정실패");
+			e.printStackTrace();
+		} finally {
+			DBManager.close(con, pstmt, null);
+		}
+	}
+
 }

@@ -10,27 +10,30 @@
 </head>
 <body>
 	<div class="detail_main">
-		<div class="artist_populars">
-			<h1>인기 곡</h1>
+		<div class="artist_musics">
+			<div class="artist_musics_title">
+				<h1>인기 곡</h1>
+				<a href="ArtistMusicC?artistId=${artist.id}&muIndex=1">더 보기</a>
+			</div>
 			<c:forEach var="am" items="${artistMusic}">
-				<div class="artist_popular">
+				<div class="artist_music">
 					<span>${am.rank}</span>
 					<a href="MusicC?musicId=${am.id}">${am.name}</a>
 				</div>
 			</c:forEach>
-			<a href="ArtistMusicC?artistId=${artist.id}&muIndex=1">더 보기</a>
 		</div>
-		<div class="artist_recent_album">
-			<div>
+		<div class="artist_albums">
+			<div class="artist_album_title">
 				<h1>최신 앨범</h1>
 				<a href="ArtistAlbumC?artistId=${artist.id}&alIndex=1">더 보기</a>
 			</div>
-			<div>
+			<div class="artist_album">
 				<c:forEach var="aa" items="${artistAlbum}">
-					<div>
+					<div class="artist_album_info">
 						<a href="AlbumC?albumId=${aa.id}">
 							<img src="${aa.img}">
 						</a>
+						<span>${aa.type}</span>
 						<a href="AlbumC?albumId=${aa.id}">
 							${aa.name}
 						</a>
@@ -44,10 +47,10 @@
 			<h1>아티스트 정보</h1>
 			<c:choose>
 				<c:when test="${artist.info eq 'none'}">
-					<span>등록된 가수 정보가 없습니다.</span>
+					<p>등록된 가수 정보가 없습니다.</p>
 				</c:when>
 				<c:otherwise>
-					<span>${artist.info}</span>
+					<p>${artist.info}</p>
 				</c:otherwise>
 			</c:choose>
 		</div>

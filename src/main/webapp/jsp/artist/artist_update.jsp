@@ -11,15 +11,18 @@
 	<form class="detail_form" action="ArtistUpdateC" method="post" enctype="multipart/form-data">
 	<div class="detail_header">
 		<div class="detail_top">
-			<c:if test="${sessionScope.account.au_id ne null}">
-				<div class="detail_top_edit">
-					<input hidden name="artistId" value="${artist.id}">
-					<button>
-						<i class="fas fa-check"></i>
-						<span>편집완료</span>
-					</button>
-				</div>
-			</c:if>
+			<div class="detail_top_edit">
+				<input hidden name="artistId" value="${artist.id}">
+				<button>
+					<i class="fas fa-check"></i>
+					<span>편집완료</span>
+				</button>
+			</div>
+			<div>
+				<button type="button" onclick="location.href='ArtistResetC?artistId=${artist.id}&i=${artist.img}'">
+					멜론에서 다시 가져오기
+				</button>
+			</div>
 		</div>
 		<div class="detail_titles">
 			<div class="detail_titles_title">
@@ -35,7 +38,6 @@
 		</div>
 		<div class="detail_header_img">
 			<img src="${artist.img}">
-			<input type="file" name="img">
 		</div>
 		<div class="detail_header_info">
 			<div>
@@ -90,6 +92,11 @@
 		</div>
 	</div>
 	<div class="detail_main">
+		<div>
+			<h1>프로필 사진</h1>
+			<input hidden name="oldImg" value="${artist.img}">
+			<input type="file" name="img">
+		</div>
 		<div class="detail_main_info">
 			<h1>아티스트 정보</h1>
 			<c:choose>

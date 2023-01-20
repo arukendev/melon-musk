@@ -47,7 +47,8 @@
 			</c:choose>
 			<c:if test="${sessionScope.account.au_id ne null}">
 				<div class="detail_top_edit">
-					<form action="">
+					<form action="AlbumUpdateC">
+						<input hidden name="albumId" value="${album.id}">
 						<button>
 							<i class="fas fa-pencil-alt"></i>
 							<span>편집하기</span>
@@ -100,38 +101,42 @@
 		</div>
 	</div>
 	<div class="detail_main">
-		<div>
-			<h1>트랙 리스트</h1>
+		<div class="album_tracks">
+		<h1>트랙 리스트</h1>
 			<c:choose>
 				<c:when test="${cdIndex.size() == 0}">
 					<c:forEach var="am" items="${albumMusics}">
-						<div>
-							<span>${am.num}</span>
-						</div>
-						<div>
-							<a href="MusicC?musicId=${am.id}">
-								${am.name}
-							</a>
-						</div>
-						<div>
-							<span>${am.artist}</span>
+						<div class="album_track">
+							<div class="album_track_num">
+								<span>${am.num}</span>
+							</div>
+							<div class="album_track_music">
+								<a href="MusicC?musicId=${am.id}">
+									${am.name}
+								</a>
+							</div>
+							<div class="album_track_artist">
+								<span>${am.artist}</span>
+							</div>
 						</div>
 					</c:forEach>
 				</c:when>
 				<c:otherwise>
 					<c:forEach var="ci" items="${cdIndex}">
-						<div>CD${ci}</div>
+						<div class="album_track_cdnum">
+							<span>CD${ci}</span>
+						</div>
 						<c:forEach var="am" items="${albumMusics}">
 							<c:if test="${ci == am.cd}">
-								<div>
+								<div class="album_track_num">
 									<span>${am.num}</span>
 								</div>
-								<div>
+								<div class="album_track_music">
 									<a href="MusicC?musicId=${am.id}">
 										${am.name}
 									</a>
 								</div>
-								<div>
+								<div class="album_track_artist">
 									<span>${am.artist}</span>
 								</div>
 							</c:if>

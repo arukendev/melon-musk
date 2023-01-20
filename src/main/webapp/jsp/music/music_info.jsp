@@ -97,7 +97,7 @@
 			<h1>유튜브 링크</h1>
 			<c:choose>
 				<c:when test="${music.link eq 'none'}">
-					<span>등록된 링크가 없습니다.</span>
+					<p>등록된 링크가 없습니다.</p>
 				</c:when>
 				<c:otherwise>
 					<iframe width="560" height="315" src="https://www.youtube.com/embed/${music.link}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
@@ -108,10 +108,10 @@
 			<h1>가사</h1>
 			<c:choose>
 				<c:when test="${music.lyrics eq 'none'}">
-					<span>등록된 가사 정보가 없습니다.</span>
+					<p>등록된 가사 정보가 없습니다.</p>
 				</c:when>
 				<c:otherwise>
-					<span>${music.lyrics}</span>
+					<p>${music.lyrics}</p>
 				</c:otherwise>
 			</c:choose>
 		</div>
