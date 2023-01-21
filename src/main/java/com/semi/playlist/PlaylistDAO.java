@@ -45,9 +45,10 @@ public class PlaylistDAO {
 				+ "where pm_pl_id = pl_id and pm_mu_id = mu_id and pl_id = ?";
 		
 		try {
+				System.out.println(request.getAttribute("pl_id"));
 				con = DBManager.connect();
 				pstmt = con.prepareStatement(sql);
-				pstmt.setString(1, request.getParameter("pl_id"));
+				pstmt.setString(1, (String) request.getAttribute("pl_id"));
 				rs=pstmt.executeQuery();
 				PlaylistMusic playlistmusic = null;
 				playlistmusics = new ArrayList<PlaylistMusic>();
@@ -313,8 +314,29 @@ public void pl_paging(int page,HttpServletRequest req) {
 		
 		Connection con = null;
 		PreparedStatement pstmt = null;
+		
 		String sql = "";
 		try {
+			//if 차트에서 음악을 플리에 추가하는 경우
+			if (request.getParameter("musicId")!=null) {
+				sql= "INSERT INTO PLAYLIST_MUSIC VALUES(getplmusicid,?,?)";
+				con = DBManager.connect();
+				pstmt = con.prepareStatement(sql);
+				
+				String muAndPlid = request.getParameter("musicId");
+				String[] muId_plid = muAndPlid.split("\\+");
+				String muId = muId_plid[0];
+				String plId = muId_plid[1];
+				
+				System.out.println(muId);
+				System.out.println(plId);
+				request.setAttribute("pl_id", plId);
+				
+				pstmt.setString(1, plId);
+				pstmt.setString(2, muId);
+			}
+			//else 플리에서 음원추가버튼을 통해 노래를 추가하는 경우
+			else {
 			String[] test=request.getParameterValues("mu_id");
 			String insertMu ="";
 			
@@ -322,14 +344,17 @@ public void pl_paging(int page,HttpServletRequest req) {
 				insertMu += "INTO playlist_music values(getplmusicid,"+ request.getParameter("pl_id") +","+ s+") ";
 			}
 			sql = "INSERT ALL "+ insertMu +"SELECT * FROM DUAL";
-				con = DBManager.connect();
-				pstmt = con.prepareStatement(sql);
+			con = DBManager.connect();
+			pstmt = con.prepareStatement(sql);
+			
+			}
 				
 				
 				if (pstmt.executeUpdate()==1) {
 					request.setAttribute("r", "추가성공!");
 					System.out.println("추가성공");
 				}
+				
 				
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -466,6 +491,55 @@ public void pl_paging(int page,HttpServletRequest req) {
 		}finally {
 			DBManager.close(con, pstmt, null);
 		}
+		
+		
+		
+	}
+
+	public void getMyPlaylist(HttpServletRequest request) {
+		
+		
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		HttpSession hs = request.getSession();
+		Auth a =(Auth)hs.getAttribute("account");
+		
+		String sql = "select * from playlist where pl_au_id=?";
+		try {
+				con = DBManager.connect();
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, a.getAu_id());
+				rs=pstmt.executeQuery();
+				Playlist playlist = null;
+				playlists = new ArrayList<Playlist>();
+				while (rs.next()) {
+					playlist = new Playlist(rs.getInt("pl_id"), rs.getString("pl_name")
+							,rs.getInt("pl_view"),rs.getInt("pl_like"), rs.getDate("pl_date")
+							, rs.getString("pl_au_id"), rs.getString("pl_text"), rs.getString("pl_img")
+							);
+					playlists.add(playlist);
+				}
+			
+					request.setAttribute("playlists", playlists);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			DBManager.close(con, pstmt, rs);
+		}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		
 		
 		

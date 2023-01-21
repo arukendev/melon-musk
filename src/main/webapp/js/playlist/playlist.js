@@ -19,6 +19,11 @@ function img(n){
 	}
 }
 
+function PostAddPlChartMusicC(){
+  document.getElementById('mypl_form').submit();
+}
+
+
 
 
 

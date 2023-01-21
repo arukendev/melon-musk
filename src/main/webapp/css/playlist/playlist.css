@@ -248,8 +248,11 @@ left: 30px;
 
 }
 
+/* playlistdetail.jsp ----------------------------------------------------------------  */
+#chartmusicId input:checked + label::before {
 
-
+  background-color: rgba(266, 280, 142, 0.4);
+}
 
 
 
@@ -259,6 +262,10 @@ left: 30px;
 
 
 /* other ----------------------------------------------------------------  */
+
+
+
+
 .wrap{padding:10px;}
 
 .btn_open{font-weight:bold; margin:5px; padding:4px 6px; background:#000; color:#fff;}
