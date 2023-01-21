@@ -45,9 +45,10 @@ public class PlaylistDAO {
 				+ "where pm_pl_id = pl_id and pm_mu_id = mu_id and pl_id = ?";
 		
 		try {
+				System.out.println(request.getAttribute("pl_id"));
 				con = DBManager.connect();
 				pstmt = con.prepareStatement(sql);
-				pstmt.setString(1, request.getParameter("pl_id"));
+				pstmt.setString(1, (String) request.getAttribute("pl_id"));
 				rs=pstmt.executeQuery();
 				PlaylistMusic playlistmusic = null;
 				playlistmusics = new ArrayList<PlaylistMusic>();
@@ -321,8 +322,18 @@ public void pl_paging(int page,HttpServletRequest req) {
 				sql= "INSERT INTO PLAYLIST_MUSIC VALUES(getplmusicid,?,?)";
 				con = DBManager.connect();
 				pstmt = con.prepareStatement(sql);
-				pstmt.setString(1, request.getParameter("pl_id"));
-				pstmt.setString(2, request.getParameter("musicId"));
+				
+				String muAndPlid = request.getParameter("musicId");
+				String[] muId_plid = muAndPlid.split("\\+");
+				String muId = muId_plid[0];
+				String plId = muId_plid[1];
+				
+				System.out.println(muId);
+				System.out.println(plId);
+				request.setAttribute("pl_id", plId);
+				
+				pstmt.setString(1, plId);
+				pstmt.setString(2, muId);
 			}
 			//else 플리에서 음원추가버튼을 통해 노래를 추가하는 경우
 			else {
