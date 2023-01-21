@@ -46,9 +46,17 @@ public class PlaylistDAO {
 		
 		try {
 				System.out.println(request.getAttribute("pl_id"));
+				String pl_id="";
+				if (request.getAttribute("pl_id")!=null) {
+					pl_id=(String) request.getAttribute("pl_id");
+				}else {
+					pl_id=request.getParameter("pl_id");
+				}
+				
+				
 				con = DBManager.connect();
 				pstmt = con.prepareStatement(sql);
-				pstmt.setString(1, (String) request.getAttribute("pl_id"));
+				pstmt.setString(1, pl_id);
 				rs=pstmt.executeQuery();
 				PlaylistMusic playlistmusic = null;
 				playlistmusics = new ArrayList<PlaylistMusic>();
