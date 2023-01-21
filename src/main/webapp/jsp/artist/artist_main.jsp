@@ -17,8 +17,13 @@
 			</div>
 			<c:forEach var="am" items="${artistMusic}">
 				<div class="artist_music">
-					<span>${am.rank}</span>
-					<a href="MusicC?musicId=${am.id}">${am.name}</a>
+					<div class="artist_music_num">
+						<span>${am.rank}</span>
+					</div>
+					<div class="artist_music_info">
+						<a href="MusicC?musicId=${am.id}">${am.name}</a>
+						<span>${am.artist}</span>
+					</div>
 				</div>
 			</c:forEach>
 		</div>

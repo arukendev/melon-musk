@@ -4,16 +4,46 @@
   width: inherit;
   display: flex;
   flex-direction: column;
+  gap: 10px;
 }
 
 .album_track {
-  font-size: 20px;
-  padding: 20px 0;
-  width: inherit;
-  display: grid;
-  grid-template-columns: 50px 500px 500px;
+  padding: 10px 0;
+  display: flex;
+  gap: 20px;
+  align-items: center;
 }
 
-.album_track span:first-child {
-  font-size: 18px;
+.album_track_num {
+  width: 40px;
+  text-align: center;
+  font-size: 24px;
+  font-weight: 400;
+  color: var(--gray);
+}
+
+.album_track_music {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  width: inherit;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.album_track_music a {
+  font-size: 20px;
+  font-weight: 400;
+}
+
+.album_track_music span {
+  color: var(--gray);
+  font-size: 14px;
+}
+
+.album_track_cdnum {
+  padding: 10px 0;
+  font-size: 22px;
+  color: var(--dYello);
 }

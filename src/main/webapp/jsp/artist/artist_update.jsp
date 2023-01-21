@@ -18,9 +18,10 @@
 					<span>편집완료</span>
 				</button>
 			</div>
-			<div>
+			<div class="detail_top_reset">
 				<button type="button" onclick="location.href='ArtistResetC?artistId=${artist.id}&i=${artist.img}'">
-					멜론에서 다시 가져오기
+					<i class="fas fa-undo-alt"></i>
+					<span>리셋하기</span>
 				</button>
 			</div>
 		</div>

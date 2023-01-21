@@ -15,6 +15,7 @@ public class SearchC extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		AuthDAO.loginCheck(request);
 		Crawler.searchCrawler(request);
+		Crawler.searchPage(request);
 		
 		request.getRequestDispatcher("index.jsp").forward(request, response);
 	}

@@ -1,0 +1,92 @@
+#index_hCenter_search {
+  position: absolute;
+}
+
+#index_hCenter_search form {
+  display: flex;
+  gap: 10px;
+  padding: 0 10px;
+  align-items: center;
+  border: 1px solid var(--gray);
+  border-radius: 10px;
+}
+
+#index_hCenter_search input {
+  background-color: var(--black);
+  color: var(--white);
+  width: 400px;
+  height: 40px;
+  font-size: 18px;
+  border: none;
+}
+
+#index_hCenter_search input:focus {
+  outline: none;
+}
+
+#index_hCenter_search select {
+  background-color: var(--black);
+  color: var(--white);
+  border: none;
+}
+
+.search_artist_container,
+.search_album_container {
+  margin: 50px 0;
+  display: flex;
+  flex-direction: column;
+  width: inherit;
+  justify-content: baseline;
+}
+
+.search_artist_box {
+  padding: 20px 0;
+  display: flex;
+  gap: 30px;
+}
+
+.search_artist_img {
+  width: 240px;
+  height: 240px;
+  border-radius: 10px;
+  overflow: hidden;
+  background-color: white;
+  box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.search_artist_box img {
+  width: 240px;
+}
+
+.search_artist_info {
+  display: flex;
+  padding: 10px 0;
+  flex-direction: column;
+  gap: 20px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.search_artist_info a {
+  font-size: 30px;
+  font-weight: 400;
+}
+
+.search_artist_info span {
+  font-size: 20px;
+  color: var(--gray);
+}
+
+.result_num {
+  font-size: 20px;
+  font-weight: 400;
+  margin-bottom: 20px;
+}
+
+.result_num span {
+  color: var(--dYello);
+}

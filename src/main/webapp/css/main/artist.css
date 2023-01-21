@@ -1,8 +1,10 @@
 @charset "UTF-8";
 
 .artist_musics {
+  width: inherit;
   display: flex;
   flex-direction: column;
+  gap: 10px;
 }
 
 .artist_music {
@@ -12,18 +14,32 @@
   padding: 10px 0;
 }
 
-.artist_music span {
-  width: 20px;
-  font-size: 18px;
+.artist_music_num {
+  width: 40px;
   text-align: center;
+  font-size: 24px;
+  font-weight: 400;
+  color: var(--gray);
 }
 
-.artist_music a {
+.artist_music_info {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  width: inherit;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.artist_music_info a {
   font-size: 20px;
+  font-weight: 400;
 }
 
-.artist_music a:hover {
-  color: var(--dYello);
+.artist_music_info span {
+  color: var(--gray);
+  font-size: 14px;
 }
 
 .artist_musics_title,

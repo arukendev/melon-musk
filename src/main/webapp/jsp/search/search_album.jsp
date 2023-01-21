@@ -8,28 +8,38 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<c:forEach var="sals" items="${searchAlbums}">
-		<div>
-			<div>
-				<img src="${sals.img}">
-			</div>
-			<div>
-				<a href="AlbumC?albumId=${sals.id}">
-					${sals.name}
-				</a>
-			</div>
-			<div>
-				<span>${sals.artist}</span>
-			</div>
-			<div>
-				<span>
-					${sals.date}
-				</span>
-				<span>
-					${sals.num}
-				</span>
-			</div>
+	<div class="search_album_container">
+		<div class="result_num">
+			<h1>검색 결과 <span>${number}</span>건</h1>
 		</div>
-	</c:forEach>
+		<div class="search_album_list">
+			<c:forEach var="sals" items="${searchAlbums}">
+				<div class="search_album_box">
+					<div class="search_album_img">
+						<a href="AlbumC?albumId=${sals.id}">
+							<img src="${sals.img}">
+						</a>
+					</div>
+					<div class="search_album_info">
+						<span>
+							${sals.type}
+						</span>
+						<a href="AlbumC?albumId=${sals.id}">
+							${sals.name}
+						</a>
+						<span>
+							${sals.artist}
+						</span>
+						<span>
+							${sals.date}
+						</span>
+						<span>
+							${sals.num}
+						</span>
+					</div>
+				</div>
+			</c:forEach>
+		</div>
+	</div>
 </body>
 </html>

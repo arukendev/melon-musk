@@ -1,0 +1,67 @@
+input[name="link"] {
+  font-family: "Noto Sans KR", sans-serif;
+  padding: 5px 0;
+  background-color: inherit;
+  border: none;
+  border-bottom: 1px solid var(--grey);
+  color: var(--black);
+  font-size: 18px;
+  width: 400px;
+  transition: border 0.5s ease-in-out;
+}
+
+input[name="link"]:focus {
+  outline: none;
+  border-color: var(--dYello);
+}
+
+textarea[name="lyrics"],
+textarea[name="info"] {
+  font-family: "Noto Sans KR", sans-serif;
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 14px;
+  width: 600px;
+  height: 1000px;
+  border: 1px solid var(--grey);
+  resize: none;
+  transition: border 0.5s ease-in-out;
+}
+
+textarea[name="info"] {
+  width: 1000px;
+  height: 600px;
+}
+
+textarea[name="lyrics"]:focus,
+textarea[name="info"]:focus {
+  outline: none;
+  border-color: var(--dYello);
+}
+
+.detail_header_info input {
+  color: var(--black);
+  width: 400px;
+  height: 18px;
+  font-family: "Noto Sans KR", sans-serif;
+  padding: 0;
+  padding-bottom: 3px;
+  border: none;
+  border-bottom: 1px solid var(--grey);
+  font-size: 14px;
+  background-color: rgba(0, 0, 0, 0);
+  transition: border 0.5s ease-in-out;
+}
+
+.detail_header_info input:focus {
+  border-color: var(--dYello);
+  outline: none;
+}
+
+input[type="date"] {
+  width: 100px;
+}
+
+.detail_top_reset img {
+  height: 18px;
+}

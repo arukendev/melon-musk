@@ -114,8 +114,6 @@
 								<a href="MusicC?musicId=${am.id}">
 									${am.name}
 								</a>
-							</div>
-							<div class="album_track_artist">
 								<span>${am.artist}</span>
 							</div>
 						</div>
@@ -128,16 +126,16 @@
 						</div>
 						<c:forEach var="am" items="${albumMusics}">
 							<c:if test="${ci == am.cd}">
-								<div class="album_track_num">
-									<span>${am.num}</span>
-								</div>
-								<div class="album_track_music">
-									<a href="MusicC?musicId=${am.id}">
-										${am.name}
-									</a>
-								</div>
-								<div class="album_track_artist">
-									<span>${am.artist}</span>
+								<div class="album_track">
+									<div class="album_track_num">
+										<span>${am.num}</span>
+									</div>
+									<div class="album_track_music">
+										<a href="MusicC?musicId=${am.id}">
+											${am.name}
+										</a>
+										<span>${am.artist}</span>
+									</div>
 								</div>
 							</c:if>
 						</c:forEach>

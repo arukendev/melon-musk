@@ -42,10 +42,20 @@
   color: var(--pink);
 }
 
+.detail_titles {
+  width: 850px;
+}
+
 .detail_titles_title {
   font-size: 30px;
   font-weight: 700;
   margin-bottom: 10px;
+}
+
+.detail_titles_title h1 {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .detail_titles_subtitles {

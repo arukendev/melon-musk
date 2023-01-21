@@ -70,7 +70,14 @@
 			</div>
 		</div>
 		<div class="detail_header_img">
-			<img src="${artist.img}">
+			<c:choose>
+				<c:when test="${artist.img eq 'none'}">
+					<img src="files/main/mark.png">
+				</c:when>
+				<c:otherwise>
+					<img src="${artist.img}">
+				</c:otherwise>
+			</c:choose>
 		</div>
 		<div class="detail_header_info">
 			<div>

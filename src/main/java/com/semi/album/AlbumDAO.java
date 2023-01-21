@@ -281,7 +281,11 @@ public class AlbumDAO {
 			con = DBManager.connect();
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, a.getId());
-			pstmt.setString(2, au.getAu_id());
+			if (au == null) {
+				pstmt.setString(2, "");
+			} else {				
+				pstmt.setString(2, au.getAu_id());
+			}
 			rs = pstmt.executeQuery();
 			
 			while (rs.next()) {
