@@ -90,3 +90,56 @@
 .result_num span {
   color: var(--dYello);
 }
+
+.search_album_list {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.search_album_box {
+  width: 390px;
+  height: 180px;
+  display: flex;
+  gap: 10px;
+  margin: 10px 0;
+}
+
+.search_album_img {
+  width: 180px;
+  height: 180px;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 4px 4px 4px rgb(0, 0, 0, 0.2);
+}
+
+.search_album_img img {
+  width: 180px;
+}
+
+.search_album_info {
+  width: 200px;
+  display: flex;
+  flex-direction: column;
+  line-height: 170%;
+}
+
+.search_album_info span:first-child {
+  color: var(--grey);
+}
+
+.search_album_info a {
+  color: var(--dYello);
+  font-weight: 400;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.search_album_info span:nth-child(3),
+.search_album_info span:nth-child(4),
+.search_album_info span:nth-child(5) {
+  color: var(--gray);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
