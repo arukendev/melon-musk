@@ -6,3 +6,7 @@ textarea.value = lyrics;
 
 const link = "https://youtu.be/" + linkInput.value;
 linkInput.value = link;
+
+if (linkInput.value === "https://youtu.be/") {
+  linkInput.value = "";
+}

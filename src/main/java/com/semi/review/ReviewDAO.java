@@ -26,7 +26,7 @@ public class ReviewDAO {
 			PreparedStatement pstmt = null;
 			ResultSet rs = null;
 			
-			String sql = "select * from review order by re_id";
+			String sql = "select * from review order by re_id desc";
 
 			reviews = new ArrayList<Review>();
 			try {
@@ -691,6 +691,45 @@ public class ReviewDAO {
 				reviews.add(r);
 			}
 			request.setAttribute("notices", reviews);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBManager.close(con, pstmt, rs);
+		}
+	}
+
+	public static void getMyReviews(HttpServletRequest request) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		String sql = "select * from review where re_au_id = ? order by re_id desc";
+
+		reviews = new ArrayList<Review>();
+		try {
+			con = DBManager.connect();
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, ((Auth)request.getSession().getAttribute("account")).getAu_id());
+			rs = pstmt.executeQuery();
+			
+			Review r = null;
+			while(rs.next()) {
+				// Bean
+				r = new Review();
+				r.setId(rs.getInt("re_id"));
+				r.setName(rs.getString("re_name"));
+				r.setImg(rs.getString("re_img"));
+				r.setText(rs.getString("re_text"));
+				r.setView(rs.getInt("re_view"));
+				r.setLike(rs.getInt("re_like"));
+				r.setDate(rs.getDate("re_date"));
+				r.setAu_id(rs.getString("re_au_id"));
+				r.setComment(rs.getInt("re_comment"));
+				r.setReported(rs.getInt("re_report"));
+				reviews.add(r);
+			}
+			request.setAttribute("reviews", reviews);
 			
 		} catch (Exception e) {
 			e.printStackTrace();

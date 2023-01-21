@@ -5,6 +5,8 @@
 <head>
 <meta charset="UTF-8">
 <title>MelonMusk</title>
+<link rel="shortcut icon" href="files/favi/favicon.ico" type="image/x-icon">
+<link rel="icon" href="files/favi/favicon.ico" type="image/x-icon">
 <link rel="stylesheet" href="css/index.css">
 <link rel="stylesheet" href="css/review/review.css">
 <link rel="stylesheet" href="css/playlist/playlist.css">
@@ -17,7 +19,9 @@
 			<div id="index_header_hLeft">
 				<div id="index_hleft_title">
 					<h1 id="index_title_h1">
-						<a href="HomeC">MelonMusk</a>
+						<a href="HomeC">
+							<img src="files/main/logo.png">
+						</a>
 					</h1>
 				</div>
 			</div>

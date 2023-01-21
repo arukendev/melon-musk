@@ -10,6 +10,7 @@ if (
 
 if (
   location.href.includes("ArtistUpdate") ||
+  location.href.includes("ArtistReset") ||
   location.href.includes("ArtistComment") ||
   location.href.includes("ArtistLike")
 ) {

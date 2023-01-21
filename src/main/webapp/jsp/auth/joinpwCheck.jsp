@@ -11,7 +11,7 @@
 <div style="text-align: center">
 	<h3>* 삭제하시려면 비밀번호를 입력하세요 *</h3>
     <form method="post" action="deleteForm.jsp" onsubmit="return blankCheck(this)">
-    아이디 : <input type="text" name="pw" maxlength="10" autofocus>
+    비밀번호 : <input type="password" name="pw" maxlength="10" autofocus>
     <input type="submit" value="중복확인">
     </form>
     </div>
