@@ -56,6 +56,19 @@
 					</form>
 				</div>
 			</c:if>
+			
+			<!--임시 추가 부분  -->
+			<div class="detail_top_edit">
+					<form action="AddPlChartMusicC">
+						<input hidden name="musicId" value="${music.id}">
+						<button>
+							<i class="fas fa-pencil-alt"></i>
+							<span>플리추가하기</span>
+						</button>
+					</form>
+				</div>
+			<!--임시 추가 부분 끝  -->	
+			
 		</div>
 		<div class="detail_titles">
 			<div class="detail_titles_title">
