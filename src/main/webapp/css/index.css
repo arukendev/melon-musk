@@ -11,6 +11,7 @@
 @import "main/album.css";
 @import "main/search.css";
 @import "main/edit.css";
+@import "main/music.css";
 
 .hidden {
   display: none;
@@ -47,6 +48,7 @@ footer {
 }
 
 main {
+  height: 100%;
   flex-direction: column;
   justify-content: flex-start;
 }

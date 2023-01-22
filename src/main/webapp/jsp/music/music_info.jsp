@@ -15,10 +15,10 @@
 				<c:when test="${sessionScope.account.au_id eq null}">
 					<div class="detail_top_like">
 						<form action="LoginC">
-						<button>
-							<i class="far fa-heart"></i>
-							<span>${likeCount}</span>
-						</button>
+							<button>
+								<i class="far fa-heart"></i>
+								<span>${likeCount}</span>
+							</button>
 						</form>
 					</div>
 				</c:when>
@@ -45,6 +45,15 @@
 					</div>
 				</c:otherwise>
 			</c:choose>
+			<div class="detail_top_add">
+				<form action="AddPlChartMusicC">
+					<input hidden name="musicId" value="${music.id}">
+					<button>
+						<i class="fas fa-plus"></i>
+						<span>리스트에 추가</span>
+					</button>
+				</form>
+			</div>
 			<c:if test="${sessionScope.account.au_id ne null}">
 				<div class="detail_top_edit">
 					<form action="MusicUpdateC">
@@ -56,19 +65,6 @@
 					</form>
 				</div>
 			</c:if>
-			
-			<!--임시 추가 부분  -->
-			<div class="detail_top_edit">
-					<form action="AddPlChartMusicC">
-						<input hidden name="musicId" value="${music.id}">
-						<button>
-							<i class="fas fa-pencil-alt"></i>
-							<span>플리추가하기</span>
-						</button>
-					</form>
-				</div>
-			<!--임시 추가 부분 끝  -->	
-			
 		</div>
 		<div class="detail_titles">
 			<div class="detail_titles_title">

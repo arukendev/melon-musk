@@ -16,6 +16,7 @@ public class SearchC extends HttpServlet {
 		AuthDAO.loginCheck(request);
 		Crawler.searchCrawler(request);
 		Crawler.searchPage(request);
+		SearchDAO.setPage(Integer.parseInt(request.getParameter("page")), request);
 		
 		request.getRequestDispatcher("index.jsp").forward(request, response);
 	}

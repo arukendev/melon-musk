@@ -35,6 +35,7 @@
 							<option value="mu">음악</option>
 						</select>
 						<input name="result">
+						<input hidden name="page" value="1">
 						<input hidden name="index" value="1">
 						<button class="index_button">
 							<i class="fas fa-search"></i>

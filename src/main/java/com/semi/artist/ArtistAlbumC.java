@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.semi.auth.AuthDAO;
 import com.semi.main.Crawler;
+import com.semi.search.SearchDAO;
 
 @WebServlet("/ArtistAlbumC")
 public class ArtistAlbumC extends HttpServlet {
@@ -20,6 +21,7 @@ public class ArtistAlbumC extends HttpServlet {
 		ArtistDAO.getArtist(request);
 		ArtistDAO.getLikeInfo(request);
 		ArtistDAO.getLikeCount(request);
+		SearchDAO.setPage(Integer.parseInt(request.getParameter("page")), request);
 		request.setAttribute("contentPage", "jsp/artist/artist_info.jsp");
 		request.setAttribute("detailContentPage", "artist_album.jsp");
 		request.getRequestDispatcher("index.jsp").forward(request, response);

@@ -442,7 +442,7 @@ public class Crawler {
 				in.setValue(musicNumberValues);
 				ins.add(in);
 			}
-			request.setAttribute("indexs", ins);
+			request.setAttribute("indexes", ins);
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -696,7 +696,9 @@ public class Crawler {
 		String[] sels = request.getParameterValues("sel");
 		for (String sel : sels) {
 			if (sel.equals("al")) {
-				URL = "https://www.melon.com/search/album/index.htm?startIndex=1&pageSize=21&q="
+				URL = "https://www.melon.com/search/album/index.htm?startIndex="
+						+ request.getParameter("index")
+						+ "&pageSize=21&q="
 						+ request.getParameter("result")
 						+ "&sortorder=&section=all&sectionId=&genreDir=&sort=hit&mwkLogType=T";
 				Connection con = Jsoup.connect(URL);
@@ -769,7 +771,9 @@ public class Crawler {
 				
 			} else if (sel.equals("mu")){
 				
-				URL = "https://www.melon.com/search/song/index.htm?startIndex=1&pageSize=50&q="
+				URL = "https://www.melon.com/search/song/index.htm?startIndex="
+						+ request.getParameter("index")
+						+ "&pageSize=50&q="
 						+ request.getParameter("result")
 						+ "&sort=hit&section=all&sectionId=&genreDir=&mwkLogType=T";
 				
@@ -778,12 +782,16 @@ public class Crawler {
 					
 					Document html = con.get();
 					
+					
+					Elements numberElms = html.select("tbody .no .wrap");
 					Elements musicElms = html.select("tbody tr td:nth-child(3) .btn_icon_detail");
 					Elements artistElms = html.select("tbody tr td:nth-child(4) .checkEllipsisSongdefaultList");
 					
+					Element numberElm = null;
 					Element musicElm = null;
 					Element artistElm = null;
 					
+					String number = "";
 					String musicId = "";
 					String musicName = "";
 					String artistName = "";
@@ -792,18 +800,20 @@ public class Crawler {
 					ArrayList<SearchMusic> sms = new ArrayList<SearchMusic>();
 					
 					for (int i = 0; i < musicElms.size(); i++) {
+						numberElm = numberElms.get(i);
 						musicElm = musicElms.get(i);
 						artistElm = artistElms.get(i);
 						
+						number = numberElm.text();
 						musicId = musicElm.attr("href");
 						musicName = musicElm.text();
 						artistName = artistElm.text();
-						
 						
 						musicId = musicId.substring(musicId.indexOf(";")).replaceAll("[^0-9]", "");
 						musicName = musicName.replace(" 상세정보 페이지 이동", "");
 						
 						sm = new SearchMusic();
+						sm.setNumber(number);
 						sm.setMusicId(musicId);
 						sm.setMusicName(musicName);
 						sm.setArtistName(artistName);
@@ -904,13 +914,45 @@ public class Crawler {
 						in.setValue(numberValues);
 						ins.add(in);
 					}
-					request.setAttribute("indexs", ins);
+					request.setAttribute("indexes", ins);
 					request.setAttribute("number", number);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			} else if (sel.equals("mu")) {
+				URL = "https://www.melon.com/search/song/index.htm?q="
+						+ request.getParameter("result")
+						+ "&section=&searchGnbYn=Y&kkoSpl=N&kkoDpType=";
 				
+				Connection con = Jsoup.connect(URL);
+				
+				try {
+					Document html = con.get();
+					Elements numberElms = html.select(".serch_totcnt em");
+					
+					Element numberElm = numberElms.first();
+					String number = numberElm.text().replace(",", "");
+					int numberPages = 0;
+					if (Integer.parseInt(number) % 50 == 0) {
+						numberPages = Integer.parseInt(number) / 50;
+					} else {
+						numberPages = Integer.parseInt(number) / 50 + 1;
+					}
+					int numberValues = 0;
+					ArrayList<IndexNum> ins = new ArrayList<IndexNum>();
+					IndexNum in = null;
+					for (int i = 0; i < numberPages; i++) {
+						numberValues = i * 50 + 1;
+						in = new IndexNum();
+						in.setNumber(i + 1);
+						in.setValue(numberValues);
+						ins.add(in);
+					}
+					request.setAttribute("indexes", ins);
+					request.setAttribute("number", number);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 			} else {
 				Connection con = Jsoup.connect(URL);
 				
@@ -936,7 +978,7 @@ public class Crawler {
 						in.setValue(numberValues);
 						ins.add(in);
 					}
-					request.setAttribute("indexs", ins);
+					request.setAttribute("indexes", ins);
 					request.setAttribute("number", number);
 				} catch (Exception e) {
 					e.printStackTrace();

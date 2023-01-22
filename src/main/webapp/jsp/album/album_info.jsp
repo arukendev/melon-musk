@@ -106,9 +106,24 @@
 			<c:choose>
 				<c:when test="${cdIndex.size() == 0}">
 					<c:forEach var="am" items="${albumMusics}">
-						<div class="album_track">
+						<div class="album_track" onclick="location.href='MusicC?musicId=${am.id}'">
 							<div class="album_track_num">
 								<span>${am.num}</span>
+							</div>
+							<div class="music_like">
+								<form action="LoginC">
+									<button>
+										<i class="far fa-heart"></i>
+									</button>
+								</form>
+							</div>
+							<div class="music_add">
+								<form action="AddPlChartMusicC">
+									<input hidden name="musicId" value="${am.id}">
+									<button>
+										<i class="fas fa-plus"></i>
+									</button>
+								</form>
 							</div>
 							<div class="album_track_music">
 								<a href="MusicC?musicId=${am.id}">
@@ -126,9 +141,24 @@
 						</div>
 						<c:forEach var="am" items="${albumMusics}">
 							<c:if test="${ci == am.cd}">
-								<div class="album_track">
+								<div class="album_track" onclick="location.href='MusicC?musicId=${am.id}'">
 									<div class="album_track_num">
 										<span>${am.num}</span>
+									</div>
+									<div class="music_like">
+										<form action="LoginC">
+											<button>
+												<i class="far fa-heart"></i>
+											</button>
+										</form>
+									</div>
+									<div class="music_add">
+										<form action="AddPlChartMusicC">
+											<input hidden name="musicId" value="${am.id}">
+											<button>
+												<i class="fas fa-plus"></i>
+											</button>
+										</form>
 									</div>
 									<div class="album_track_music">
 										<a href="MusicC?musicId=${am.id}">

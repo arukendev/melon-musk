@@ -31,12 +31,16 @@
 }
 
 .search_artist_container,
-.search_album_container {
+.search_album_container,
+.search_music_container {
   margin: 50px 0;
   display: flex;
   flex-direction: column;
   width: inherit;
-  justify-content: baseline;
+  height: inherit;
+  gap: 50px;
+  align-items: baseline;
+  justify-content: space-between;
 }
 
 .search_artist_box {
@@ -62,23 +66,28 @@
 }
 
 .search_artist_info {
+  width: 900px;
   display: flex;
   padding: 10px 0;
   flex-direction: column;
   gap: 20px;
+}
+
+.search_artist_info a {
+  line-height: 35px;
+  font-size: 30px;
+  font-weight: 400;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
-.search_artist_info a {
-  font-size: 30px;
-  font-weight: 400;
-}
-
 .search_artist_info span {
   font-size: 20px;
   color: var(--gray);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .result_num {
@@ -117,7 +126,7 @@
 }
 
 .search_album_info {
-  width: 200px;
+  width: 180px;
   display: flex;
   flex-direction: column;
   line-height: 170%;
@@ -142,4 +151,53 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.search_music {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  padding: 10px 0;
+  cursor: pointer;
+  border-radius: 10px;
+}
+
+.search_music:hover {
+  background-color: rgba(246, 228, 142, 0.4);
+}
+
+.search_music_num {
+  width: 50px;
+  text-align: center;
+  font-size: 24px;
+  font-weight: 400;
+  color: var(--gray);
+}
+
+.search_music_info {
+  width: 1050px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.search_music_info a {
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 26px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.search_music_info span {
+  color: var(--gray);
+  font-size: 14px;
+  line-height: 18px;
+}
+
+.search_paging {
+  display: flex;
+  gap: 10px;
+  align-self: center;
 }

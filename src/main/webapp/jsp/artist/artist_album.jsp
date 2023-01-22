@@ -29,9 +29,29 @@
 				</c:forEach>
 			</div>
 		</div>
-		<c:forEach var="in" items="${indexs}">
-			<a href="ArtistAlbumC?artistId=${param.artistId}&alIndex=${in.value}">${in.number}</a>
-		</c:forEach>
+		<div class="search_paging">
+			<c:choose>
+				<c:when test="${curPageNo == 1}">
+				</c:when>
+				<c:otherwise>
+					<a href="ArtistAlbumC?artistId=${param.artistId}&alIndex=${500 * curPageNo - 999}&page=${curPageNo - 1}">
+						<i class="fas fa-chevron-left"></i>
+					</a>
+				</c:otherwise>
+			</c:choose>
+			<c:forEach var="in" items="${indexes}">
+				<a href="ArtistAlbumC?artistId=${param.artistId}&alIndex=${in.value}&page=${curPageNo}">${in.number}</a>
+			</c:forEach>
+			<c:choose>
+				<c:when test="${curPageNo == pageCount}">
+				</c:when>
+				<c:otherwise>
+					<a href="ArtistAlbumC?artistId=${param.artistId}&alIndex=${500 * curPageNo + 1}&page=${curPageNo + 1}">
+						<i class="fas fa-chevron-right"></i>
+					</a>
+				</c:otherwise>
+			</c:choose>
+		</div>
 	</div>
 </body>
 </html>
