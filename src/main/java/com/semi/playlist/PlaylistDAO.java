@@ -79,7 +79,7 @@ public class PlaylistDAO {
 				}
 				
 				request.setAttribute("playlistmusics", playlistmusics);
-				
+				request.setAttribute("plAuId",playlistmusics.get(0).getPl_au_id() );
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally {
