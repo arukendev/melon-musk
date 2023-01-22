@@ -10,8 +10,14 @@
 <body>
 	<div class="search_music_container">
 		<div>
-			<div class="result_num">
-				<h1>검색 결과 <span>${number}</span>건</h1>
+			<div class="search_title">
+				<div class="result_num">
+					<h1>검색 결과 <span>${number}</span>건</h1>
+				</div>
+				<div class="result_melon">
+					<h6>Powered by</h6>
+					<img src="files/main/melon.png">
+				</div>
 			</div>
 			<c:forEach var="sm" items="${serachMusics}">
 				<div class="search_music" onclick="location.href='MusicC?musicId=${sm.musicId}'">

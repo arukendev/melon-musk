@@ -201,3 +201,19 @@
   gap: 10px;
   align-self: center;
 }
+
+.search_title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.result_melon {
+  display: flex;
+  gap: 5px;
+  margin-bottom: 20px;
+}
+
+.result_melon img {
+  height: 16px;
+}

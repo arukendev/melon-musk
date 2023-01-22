@@ -16,7 +16,7 @@ public class NewMusicC extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		AuthDAO.loginCheck(request);
 		Crawler.newMusicCrawler(request);
-		request.setAttribute("contentPage", "jsp/new_music/new_music.jsp");
+		request.setAttribute("contentPage", "jsp/chart/new_music.jsp");
 		request.getRequestDispatcher("index.jsp").forward(request, response);
 	}
 

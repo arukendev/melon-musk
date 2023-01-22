@@ -96,7 +96,7 @@
 		<div>
 			<h1>프로필 사진</h1>
 			<input hidden name="oldImg" value="${artist.img}">
-			<input type="file" name="img">
+			<input type="file" name="img" accept="image/*">
 		</div>
 		<div class="detail_main_info">
 			<h1>아티스트 정보</h1>

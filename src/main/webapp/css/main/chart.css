@@ -1,67 +1,102 @@
 @charset "UTF-8";
 
-.list_title {
-  margin-top: 30px;
-  width: inherit;
-  font-size: 24px;
+.list_wrapper {
+  margin: 50px 0;
+  width: 100%;
+  height: 100%;
+}
+
+.list_titles {
   display: flex;
-  justify-content: flex-start;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.list_title {
+  font-size: 20px;
+  font-weight: 400;
 }
 
 .list_subtitle {
-  width: inherit;
   display: flex;
-  font-size: 20px;
-  justify-content: flex-end;
-  align-items: flex-end;
-}
-
-.list_subtitle h6 {
-  padding-bottom: 12px;
+  gap: 5px;
 }
 
 .list_subtitle img {
-  margin-left: 5px;
-  height: 50px;
-}
-
-.list_container {
-  width: inherit;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  margin-bottom: 30px;
+  height: 16px;
 }
 
 .list_boxs {
-  padding: 10px;
-  border-radius: 10px;
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  padding: 10px 0;
   cursor: pointer;
-  display: grid;
-  grid-template-columns: 60px 80px repeat(3, 320px);
+  border-radius: 10px;
 }
 
 .list_boxs:hover {
   background-color: rgba(246, 228, 142, 0.4);
 }
 
-.list_boxs_box {
+.list_boxs_num {
+  width: 50px;
+  text-align: center;
+  font-size: 30px;
+  font-weight: 400;
+  color: var(--gray);
+}
+
+.list_buttons {
+  width: 50px;
   display: flex;
+  flex-direction: column;
+  justify-content: center;
   align-items: center;
+  text-align: center;
+  gap: 10px;
 }
 
-.list_boxs_box:first-child {
-  padding-left: 10px;
+.list_buttons button {
+  font-family: inherit;
+  font-size: 18px;
+  padding: 0;
+  border: none;
+  background-color: inherit;
 }
 
-.list_boxs_box:nth-child(3),
-.list_boxs_box:nth-child(4),
-.list_boxs_box:nth-child(5) {
-  padding-left: 20px;
-}
-
-.list_boxs_box img {
+.list_boxs_img {
   width: 80px;
+  height: 80px;
+  overflow: hidden;
+  box-shadow: 2px 2px 2px rgb(0, 0, 0, 0.2);
   border-radius: 5px;
-  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);
+  margin-right: 20px;
+}
+
+.list_boxs_img img {
+  width: 80px;
+}
+
+.list_boxs_info {
+  width: 900px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.list_boxs_info a {
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 26px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.list_boxs_info span {
+  color: var(--gray);
+  font-size: 14px;
+  line-height: 18px;
 }

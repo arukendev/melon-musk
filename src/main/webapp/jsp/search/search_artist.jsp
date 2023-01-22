@@ -10,8 +10,14 @@
 <body>
 	<div class="search_artist_container">
 		<div class="search_artist_content">
-			<div class="result_num">
-				<h1>검색 결과 <span>${number}</span>건</h1>
+			<div class="search_title">
+				<div class="result_num">
+					<h1>검색 결과 <span>${number}</span>건</h1>
+				</div>
+				<div class="result_melon">
+					<h6>Powered by</h6>
+					<img src="files/main/melon.png">
+				</div>
 			</div>
 			<c:forEach var="sars" items="${searchArtists}">
 				<div class="search_artist_box">

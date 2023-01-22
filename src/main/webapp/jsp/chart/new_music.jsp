@@ -11,7 +11,7 @@
 	<div class="list_wrapper">
 		<div class="list_titles">
 			<div class="list_title">
-				<h1>TOP 100</h1>
+				<h1>국내 최신곡</h1>
 			</div>
 			<div class="list_subtitle">
 				<h6>Powered by</h6>
@@ -19,10 +19,10 @@
 			</div>
 		</div>
 		<div class="list_container">
-			<c:forEach var="c" items="${charts}">
-				<div class="list_boxs" onclick="location.href='MusicC?musicId=${c.musicId}'">
+		<c:forEach var="n" items="${newMusic}">
+			<div class="list_boxs" onclick="location.href='MusicC?musicId=${n.musicId}'">
 					<div class="list_boxs_num">
-						<span>${c.rank}</span>
+						<span>${n.rank}</span>
 					</div>
 					<div class="list_buttons">
 						<div class="list_music_like">
@@ -34,7 +34,7 @@
 						</div>
 						<div class="list_music_add">
 							<form action="AddPlChartMusicC">
-								<input hidden name="musicId" value="${c.musicId}">
+								<input hidden name="musicId" value="${n.musicId}">
 								<button>
 									<i class="fas fa-plus"></i>
 								</button>
@@ -42,16 +42,16 @@
 						</div>
 					</div>
 					<div class="list_boxs_img">
-						<a href="AlbumC?albumId=${c.albumId}">
-							<img src="${c.img}">
+						<a href="AlbumC?albumId=${n.albumId}">
+							<img src="${n.img}">
 						</a>
 					</div>
 					<div class="list_boxs_info">
-						<a href="MusicC?musicId=${c.musicId}">${c.music}</a>
-						<span>${c.artist}</span>
+						<a href="MusicC?musicId=${n.musicId}">${n.music}</a>
+						<span>${n.artist}</span>
 					</div>
 				</div>
-			</c:forEach>
+		</c:forEach>
 		</div>
 	</div>
 </body>
