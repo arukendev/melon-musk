@@ -7,11 +7,12 @@ public class AlbumMusic {
 	private String name;
 	private String artistId;
 	private String artist;
+	private int like;
 	public AlbumMusic() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public AlbumMusic(int cd, int num, String id, String name, String artistId, String artist) {
+	public AlbumMusic(int cd, int num, String id, String name, String artistId, String artist, int like) {
 		super();
 		this.cd = cd;
 		this.num = num;
@@ -19,6 +20,7 @@ public class AlbumMusic {
 		this.name = name;
 		this.artistId = artistId;
 		this.artist = artist;
+		this.like = like;
 	}
 	public int getCd() {
 		return cd;
@@ -55,6 +57,13 @@ public class AlbumMusic {
 	}
 	public void setArtist(String artist) {
 		this.artist = artist;
+	}
+	
+	public int getLike() {
+		return like;
+	}
+	public void setLike(int like) {
+		this.like = like;
 	}
 	
 	

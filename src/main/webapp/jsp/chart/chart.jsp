@@ -25,13 +25,37 @@
 						<span>${c.rank}</span>
 					</div>
 					<div class="list_buttons">
-						<div class="list_music_like">
-							<form action="LoginC">
-								<button>
-									<i class="far fa-heart"></i>
-								</button>
-							</form>
-						</div>
+						<c:choose>
+							<c:when test="${sessionScope.account.au_id eq null}">
+								<div class="list_music_like">
+									<form action="LoginC">
+										<button>
+											<i class="far fa-heart"></i>
+										</button>
+									</form>
+								</div>
+							</c:when>
+							<c:when test="${c.like ne 1}">
+								<div class="list_music_like">
+									<form action="MusicLikeAddC" method="post">
+										<input hidden name="musicId" value="${c.musicId}">
+										<button>
+											<i class="far fa-heart"></i>
+										</button>
+									</form>
+								</div>
+							</c:when>
+							<c:otherwise>
+								<div class="list_music_like">
+									<form action="MusicLikeDelC" method="post">
+										<input hidden name="musicId" value="${c.musicId}">
+										<button>
+											<i class="fas fa-heart"></i>
+										</button>
+									</form>
+								</div>
+							</c:otherwise>
+						</c:choose>
 						<div class="list_music_add">
 							<form action="AddPlChartMusicC">
 								<input hidden name="musicId" value="${c.musicId}">

@@ -24,13 +24,37 @@
 					<div class="search_music_num">
 						<span>${sm.number}</span>
 					</div>
-					<div class="music_like">
-						<form action="LoginC">
-							<button>
-								<i class="far fa-heart"></i>
-							</button>
-						</form>
-					</div>
+					<c:choose>
+						<c:when test="${sessionScope.account.au_id eq null}">
+							<div class="music_like">
+								<form action="LoginC">
+									<button>
+										<i class="far fa-heart"></i>
+									</button>
+								</form>
+							</div>
+						</c:when>
+						<c:when test="${sm.like ne 1}">
+							<div class="music_like">
+								<form action="MusicLikeAddC" method="post">
+									<input hidden name="musicId" value="${sm.musicId}">
+									<button>
+										<i class="far fa-heart"></i>
+									</button>
+								</form>
+							</div>
+						</c:when>
+						<c:otherwise>
+							<div class="music_like">
+								<form action="MusicLikeDelC" method="post">
+									<input hidden name="musicId" value="${sm.musicId}">
+									<button>
+										<i class="fas fa-heart"></i>
+									</button>
+								</form>
+							</div>
+						</c:otherwise>
+					</c:choose>
 					<div class="music_add">
 						<form action="AddPlChartMusicC">
 							<input hidden name="musicId" value="${sm.musicId}">

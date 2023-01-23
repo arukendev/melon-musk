@@ -6,24 +6,21 @@ public class NewMusic {
 	private String music;
 	private String musicId;
 	private String artist;
-	private String artistId;
-	private String album;
 	private String albumId;
+	private int like;
 	public NewMusic() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public NewMusic(int rank, String img, String music, String musicId, String artist, String artistId, String album,
-			String albumId) {
+	public NewMusic(int rank, String img, String music, String musicId, String artist, String albumId, int like) {
 		super();
 		this.rank = rank;
 		this.img = img;
 		this.music = music;
 		this.musicId = musicId;
 		this.artist = artist;
-		this.artistId = artistId;
-		this.album = album;
 		this.albumId = albumId;
+		this.like = like;
 	}
 	public int getRank() {
 		return rank;
@@ -55,24 +52,17 @@ public class NewMusic {
 	public void setArtist(String artist) {
 		this.artist = artist;
 	}
-	public String getArtistId() {
-		return artistId;
-	}
-	public void setArtistId(String artistId) {
-		this.artistId = artistId;
-	}
-	public String getAlbum() {
-		return album;
-	}
-	public void setAlbum(String album) {
-		this.album = album;
-	}
 	public String getAlbumId() {
 		return albumId;
 	}
 	public void setAlbumId(String albumId) {
 		this.albumId = albumId;
 	}
-	
+	public int getLike() {
+		return like;
+	}
+	public void setLike(int like) {
+		this.like = like;
+	}
 	
 }

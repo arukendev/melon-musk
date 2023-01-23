@@ -19,19 +19,43 @@
 			</div>
 		</div>
 		<div class="list_container">
-		<c:forEach var="n" items="${newMusic}">
-			<div class="list_boxs" onclick="location.href='MusicC?musicId=${n.musicId}'">
+			<c:forEach var="n" items="${newMusic}">
+				<div class="list_boxs" onclick="location.href='MusicC?musicId=${n.musicId}'">
 					<div class="list_boxs_num">
 						<span>${n.rank}</span>
 					</div>
 					<div class="list_buttons">
-						<div class="list_music_like">
-							<form action="LoginC">
-								<button>
-									<i class="far fa-heart"></i>
-								</button>
-							</form>
-						</div>
+						<c:choose>
+							<c:when test="${sessionScope.account.au_id eq null}">
+								<div class="list_music_like">
+									<form action="LoginC">
+										<button>
+											<i class="far fa-heart"></i>
+										</button>
+									</form>
+								</div>
+							</c:when>
+							<c:when test="${n.like ne 1}">
+								<div class="list_music_like">
+									<form action="MusicLikeAddC" method="post">
+										<input hidden name="musicId" value="${n.musicId}">
+										<button>
+											<i class="far fa-heart"></i>
+										</button>
+									</form>
+								</div>
+							</c:when>
+							<c:otherwise>
+								<div class="list_music_like">
+									<form action="MusicLikeDelC" method="post">
+										<input hidden name="musicId" value="${n.musicId}">
+										<button>
+											<i class="fas fa-heart"></i>
+										</button>
+									</form>
+								</div>
+							</c:otherwise>
+						</c:choose>
 						<div class="list_music_add">
 							<form action="AddPlChartMusicC">
 								<input hidden name="musicId" value="${n.musicId}">
@@ -51,7 +75,7 @@
 						<span>${n.artist}</span>
 					</div>
 				</div>
-		</c:forEach>
+			</c:forEach>
 		</div>
 	</div>
 </body>

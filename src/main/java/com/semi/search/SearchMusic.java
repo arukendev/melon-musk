@@ -5,16 +5,18 @@ public class SearchMusic {
 	private String musicId;
 	private String musicName;
 	private String artistName;
+	private int like;
 	public SearchMusic() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public SearchMusic(String number, String musicId, String musicName, String artistName) {
+	public SearchMusic(String number, String musicId, String musicName, String artistName, int like) {
 		super();
 		this.number = number;
 		this.musicId = musicId;
 		this.musicName = musicName;
 		this.artistName = artistName;
+		this.like = like;
 	}
 	public String getNumber() {
 		return number;
@@ -39,6 +41,12 @@ public class SearchMusic {
 	}
 	public void setArtistName(String artistName) {
 		this.artistName = artistName;
+	}
+	public int getLike() {
+		return like;
+	}
+	public void setLike(int like) {
+		this.like = like;
 	}
 	
 }

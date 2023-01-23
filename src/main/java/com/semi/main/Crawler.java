@@ -17,9 +17,11 @@ import com.semi.artist.ArtistMusic;
 import com.semi.artist.Artists;
 import com.semi.chart.Chart;
 import com.semi.music.Music;
+import com.semi.music.MusicDAO;
 import com.semi.newMusic.NewMusic;
 import com.semi.search.SearchAlbum;
 import com.semi.search.SearchArtist;
+import com.semi.search.SearchDAO;
 import com.semi.search.SearchMusic;
 
 public class Crawler {
@@ -35,7 +37,7 @@ public class Crawler {
 			Elements imgElms = html.select(".image_typeAll img");
 			Elements musicInfoElms = html.select(".song_info");
 			Elements musicElms = html.select(".rank01 a");
-			Elements artistElms = html.select(".rank02 span a:first-child");
+			Elements artistElms = html.select(".rank02 span");
 			Elements albumElms = html.select(".rank03 a");
 
 			Element imgElm = null;
@@ -48,8 +50,6 @@ public class Crawler {
 			String musicTxt = "";
 			String musicLink = "";
 			String artistTxt = "";
-			String artistLink = "";
-			String albumTxt = "";
 			String albumLink = "";
 			
 			ArrayList<Chart> charts = new ArrayList<Chart>();
@@ -65,8 +65,6 @@ public class Crawler {
 				musicTxt = musicElm.text();
 				musicLink = musicInfoElm.attr("href").replaceAll("[^0-9]", "");
 				artistTxt = artistElm.text();
-				artistLink = artistElm.attr("href").replaceAll("[^0-9]", "");
-				albumTxt = albumElm.text();
 				albumLink = albumElm.attr("href").replaceAll("[^0-9]", "");
 				c = new Chart();
 				c.setRank(i + 1);
@@ -74,8 +72,6 @@ public class Crawler {
 				c.setMusic(musicTxt);
 				c.setMusicId(musicLink);
 				c.setArtist(artistTxt);
-				c.setArtistId(artistLink);
-				c.setAlbum(albumTxt);
 				c.setAlbumId(albumLink);
 				charts.add(c);
 			}
@@ -98,7 +94,7 @@ public class Crawler {
 			Elements imgElms = html.select(".image_typeAll img");
 			Elements musicInfoElms = html.select(".song_info");
 			Elements musicElms = html.select(".rank01 a");
-			Elements artistElms = html.select(".rank02 span a:first-child");
+			Elements artistElms = html.select(".rank02 span");
 			Elements albumElms = html.select(".rank03 a");
 			
 			Element imgElm = null;
@@ -111,8 +107,6 @@ public class Crawler {
 			String musicTxt = "";
 			String musicLink = "";
 			String artistTxt = "";
-			String artistLink = "";
-			String albumTxt = "";
 			String albumLink = "";
 			
 			ArrayList<NewMusic> newMusics = new ArrayList<NewMusic>();
@@ -127,8 +121,6 @@ public class Crawler {
 				musicTxt = musicElm.text();
 				musicLink = musicInfoElm.attr("href").replaceAll("[^0-9]", "");
 				artistTxt = artistElm.text();
-				artistLink = artistElm.attr("href").replaceAll("[^0-9]", "");
-				albumTxt = albumElm.text();
 				albumLink = albumElm.attr("href").replaceAll("[^0-9]", "");
 				n = new NewMusic();
 				n.setRank(i + 1);
@@ -136,8 +128,6 @@ public class Crawler {
 				n.setMusic(musicTxt);
 				n.setMusicId(musicLink);
 				n.setArtist(artistTxt);
-				n.setArtistId(artistLink);
-				n.setAlbum(albumTxt);
 				n.setAlbumId(albumLink);
 				newMusics.add(n);
 			}
@@ -510,7 +500,7 @@ public class Crawler {
 			}
 			
 			request.setAttribute("artistMusic", apList);
-			
+			MusicDAO.artistMusicLike(apList, request);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -678,7 +668,7 @@ public class Crawler {
 			
 			request.setAttribute("cdIndex", cdIndex);
 			request.setAttribute("albumMusics", ams);
-			
+			MusicDAO.albumMusicLike(ams, request);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -821,6 +811,7 @@ public class Crawler {
 					}
 					request.setAttribute("serachMusics", sms);
 					request.setAttribute("contentPage", "jsp/search/search_music.jsp");
+					SearchDAO.getLikeInfo(request);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
