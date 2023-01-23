@@ -17,11 +17,15 @@ public class AlbumLikeDelC extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		AuthDAO.loginCheck(request);
-		AlbumDAO.delLike(request);
-		request.setAttribute("parameter", request.getParameter("albumId"));
-		request.setAttribute("contentPage", "jsp/main/loading.jsp");
-		request.getRequestDispatcher("index.jsp").forward(request, response);
+		if (AuthDAO.loginCheck(request)) {
+			AlbumDAO.delLike(request);
+			request.setAttribute("parameter", request.getParameter("albumId"));
+			request.setAttribute("contentPage", "jsp/main/loading.jsp");
+			request.getRequestDispatcher("index.jsp").forward(request, response);
+		} else {
+			request.setAttribute("contentPage", "jsp/auth/login.jsp");
+			request.getRequestDispatcher("index.jsp").forward(request, response);
+		}
 	}
 
 }

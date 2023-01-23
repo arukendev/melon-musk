@@ -64,6 +64,7 @@
   padding: 0;
   border: none;
   background-color: inherit;
+  cursor: pointer;
 }
 
 .list_boxs_img {

@@ -84,6 +84,7 @@
 
 .search_artist_info span {
   font-size: 20px;
+  line-height: 25px;
   color: var(--gray);
   white-space: nowrap;
   overflow: hidden;

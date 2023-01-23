@@ -15,6 +15,7 @@ import com.semi.artist.Artist;
 import com.semi.artist.ArtistAlbum;
 import com.semi.artist.ArtistMusic;
 import com.semi.artist.Artists;
+import com.semi.auth.AuthDAO;
 import com.semi.chart.Chart;
 import com.semi.music.Music;
 import com.semi.music.MusicDAO;
@@ -375,7 +376,7 @@ public class Crawler {
 			String alName = alNameElm.text();
 			String alImg = alImgElm.attr("src");
 			String date = dateElm.text();
-			String name = nameElm.text().replace("곡명 ", "");
+			String name = nameElm.text().replace("곡명 ", "").replace("19금 ", "");
 			String genre = genreElm.text();
 			
 			Music m = new Music();
@@ -811,7 +812,9 @@ public class Crawler {
 					}
 					request.setAttribute("serachMusics", sms);
 					request.setAttribute("contentPage", "jsp/search/search_music.jsp");
-					SearchDAO.getLikeInfo(request);
+					if (AuthDAO.loginCheck(request)) {
+						SearchDAO.getLikeInfo(request);
+					}
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

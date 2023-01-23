@@ -14,9 +14,13 @@ import com.semi.main.Crawler;
 public class SearchC extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		AuthDAO.loginCheck(request);
-		Crawler.searchCrawler(request);
-		Crawler.searchPage(request);
-		SearchDAO.setPage(Integer.parseInt(request.getParameter("page")), request);
+		if (request.getParameter("result").equals("")) {
+			request.setAttribute("contentPage", "jsp/search/no_search.jsp");
+		} else {
+			Crawler.searchCrawler(request);
+			Crawler.searchPage(request);
+			SearchDAO.setPage(Integer.parseInt(request.getParameter("page")), request);
+		}
 		
 		request.getRequestDispatcher("index.jsp").forward(request, response);
 	}

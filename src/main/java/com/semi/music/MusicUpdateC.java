@@ -13,18 +13,26 @@ import com.semi.auth.AuthDAO;
 public class MusicUpdateC extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		AuthDAO.loginCheck(request);
-		MusicDAO.getMusic(request);
-		request.setAttribute("contentPage", "jsp/music/music_update.jsp");
-		request.getRequestDispatcher("index.jsp").forward(request, response);
+		if (AuthDAO.loginCheck(request)) {
+			MusicDAO.getMusic(request);
+			request.setAttribute("contentPage", "jsp/music/music_update.jsp");
+			request.getRequestDispatcher("index.jsp").forward(request, response);
+		} else {
+			request.setAttribute("contentPage", "jsp/auth/login.jsp");
+			request.getRequestDispatcher("index.jsp").forward(request, response);
+		}
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		AuthDAO.loginCheck(request);
-		MusicDAO.updateMusic(request);
-		request.setAttribute("parameter", request.getParameter("musicId"));
-		request.setAttribute("contentPage", "jsp/main/loading.jsp");
-		request.getRequestDispatcher("index.jsp").forward(request, response);
+		if (AuthDAO.loginCheck(request)) {
+			MusicDAO.updateMusic(request);
+			request.setAttribute("parameter", request.getParameter("musicId"));
+			request.setAttribute("contentPage", "jsp/main/loading.jsp");
+			request.getRequestDispatcher("index.jsp").forward(request, response);
+		} else {
+			request.setAttribute("contentPage", "jsp/auth/login.jsp");
+			request.getRequestDispatcher("index.jsp").forward(request, response);
+		}
 	}
 
 }

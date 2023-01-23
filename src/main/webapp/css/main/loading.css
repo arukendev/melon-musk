@@ -1,0 +1,16 @@
+@charset "UTF-8";
+
+.loading_box {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  justify-self: center;
+  gap: 20px;
+}
+
+.loading_box span {
+  font-size: 40px;
+  font-weight: 700;
+}

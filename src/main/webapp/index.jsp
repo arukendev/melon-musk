@@ -50,7 +50,7 @@
 						<a href="NewMusicC">최신곡</a>
 					</div>
 					<div class="index_nav_content">
-						<a href="ReviewC">게시판</a>
+						<a href="ReviewC">리뷰</a>
 					</div>
 					<div class="index_nav_content">
 						<a href="PlaylistC">플레이리스트</a>

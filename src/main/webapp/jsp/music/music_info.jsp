@@ -12,17 +12,7 @@
 	<div class="detail_header">
 		<div class="detail_top">
 			<c:choose>
-				<c:when test="${sessionScope.account.au_id eq null}">
-					<div class="detail_top_like">
-						<form action="LoginC">
-							<button>
-								<i class="far fa-heart"></i>
-								<span>${likeCount}</span>
-							</button>
-						</form>
-					</div>
-				</c:when>
-				<c:when test="${sessionScope.account.au_id ne likeAuth}">
+				<c:when test="${(sessionScope.account.au_id ne likeAuth) or (sessionScope.account.au_id eq null)}">
 					<div class="detail_top_like">
 						<form action="MusicLikeAddC" method="post">
 							<input hidden name="musicId" value="${music.id}">

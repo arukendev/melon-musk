@@ -13,9 +13,10 @@ import com.semi.main.Crawler;
 @WebServlet("/ChartC")
 public class ChartC extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		AuthDAO.loginCheck(request);
 		Crawler.chartCrawler(request);
-		ChartDAO.getLikeInfo(request);
+		if (AuthDAO.loginCheck(request)) {
+			ChartDAO.getLikeInfo(request);
+		}
 		request.setAttribute("contentPage", "jsp/chart/chart.jsp");
 		request.getRequestDispatcher("index.jsp").forward(request, response);
 	}

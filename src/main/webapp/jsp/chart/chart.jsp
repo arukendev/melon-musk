@@ -26,15 +26,6 @@
 					</div>
 					<div class="list_buttons">
 						<c:choose>
-							<c:when test="${sessionScope.account.au_id eq null}">
-								<div class="list_music_like">
-									<form action="LoginC">
-										<button>
-											<i class="far fa-heart"></i>
-										</button>
-									</form>
-								</div>
-							</c:when>
 							<c:when test="${c.like ne 1}">
 								<div class="list_music_like">
 									<form action="MusicLikeAddC" method="post">

@@ -10,6 +10,9 @@ import javax.servlet.http.HttpSession;
 
 import com.semi.auth.Auth;
 import com.semi.auth.AuthDAO;
+import com.semi.chart.ChartDAO;
+import com.semi.main.Crawler;
+import com.semi.music.MusicDAO;
 
 @WebServlet("/AddPlChartMusicC")
 public class AddPlChartMusicC extends HttpServlet {
@@ -30,6 +33,10 @@ public class AddPlChartMusicC extends HttpServlet {
 			request.setAttribute("contentPage", "jsp/auth/login.jsp");
 			request.getRequestDispatcher("index.jsp").forward(request, response);
 		} else {
+			if (!ChartDAO.musicIdCheck(request)) {
+				Crawler.musicCrawler(request);
+				MusicDAO.setMusic(request);
+			}
 		request.setAttribute("a", a);
 		PlaylistDAO.getRdao().getMyPlaylist(request);
 		request.setAttribute("contentPage", "jsp/playlist/myPlaylist.jsp");
