@@ -501,7 +501,9 @@ public class Crawler {
 			}
 			
 			request.setAttribute("artistMusic", apList);
-			MusicDAO.artistMusicLike(apList, request);
+			if (AuthDAO.loginCheck(request)) {
+				MusicDAO.artistMusicLike(apList, request);
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -669,7 +671,9 @@ public class Crawler {
 			
 			request.setAttribute("cdIndex", cdIndex);
 			request.setAttribute("albumMusics", ams);
-			MusicDAO.albumMusicLike(ams, request);
+			if (AuthDAO.loginCheck(request)) {
+				MusicDAO.albumMusicLike(ams, request);
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -753,8 +757,14 @@ public class Crawler {
 						sals.add(sal);
 					}
 					
-					request.setAttribute("searchAlbums", sals);
-					request.setAttribute("contentPage", "jsp/search/search_album.jsp");
+					if (sals.size() == 0) {
+						request.setAttribute("searchAlbums", sals);
+						request.setAttribute("contentPage", "jsp/search/no_search.jsp");
+					} else {
+						request.setAttribute("searchAlbums", sals);
+						request.setAttribute("contentPage", "jsp/search/search_album.jsp");
+					}
+					
 					
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -810,8 +820,13 @@ public class Crawler {
 						sm.setArtistName(artistName);
 						sms.add(sm);
 					}
-					request.setAttribute("serachMusics", sms);
-					request.setAttribute("contentPage", "jsp/search/search_music.jsp");
+					if (sms.size() == 0) {
+						request.setAttribute("serachMusics", sms);
+						request.setAttribute("contentPage", "jsp/search/no_search.jsp");
+					} else {
+						request.setAttribute("serachMusics", sms);
+						request.setAttribute("contentPage", "jsp/search/search_music.jsp");
+					}
 					if (AuthDAO.loginCheck(request)) {
 						SearchDAO.getLikeInfo(request);
 					}
@@ -857,8 +872,14 @@ public class Crawler {
 						sars.add(sar);
 					}
 					
-					request.setAttribute("searchArtists", sars);
-					request.setAttribute("contentPage", "jsp/search/search_artist.jsp");
+					if (sars.size() == 0) {
+						request.setAttribute("searchArtists", sars);
+						request.setAttribute("contentPage", "jsp/search/no_search.jsp");
+					} else {
+						request.setAttribute("searchArtists", sars);
+						request.setAttribute("contentPage", "jsp/search/search_artist.jsp");
+					}
+					
 					
 				} catch (Exception e) {
 					e.printStackTrace();

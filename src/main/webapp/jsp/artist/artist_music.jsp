@@ -60,24 +60,25 @@
 				<c:when test="${curPageNo == 1}">
 				</c:when>
 				<c:otherwise>
-					<a href="ArtistMusicC?artistId=${param.artistId}&muIndex=${500 * curPageNo - 999}&page=${curPageNo - 1}">
+					<a href="ArtistMusicC?artistId=${param.artistId}&page=${curPageNo - 1}&muIndex=${500 * curPageNo - 999}">
 						<i class="fas fa-chevron-left"></i>
 					</a>
 				</c:otherwise>
 			</c:choose>
 			<c:forEach var="in" items="${indexes}">
-				<a href="ArtistMusicC?artistId=${param.artistId}&muIndex=${in.value}&page=${curPageNo}">${in.number}</a>
+				<a class="indexes" href="ArtistMusicC?artistId=${param.artistId}&page=${curPageNo}&muIndex=${in.value}">${in.number}</a>
 			</c:forEach>
 			<c:choose>
 				<c:when test="${curPageNo == pageCount}">
 				</c:when>
 				<c:otherwise>
-					<a href="ArtistMusicC?artistId=${param.artistId}&muIndex=${500 * curPageNo + 1}&page=${curPageNo + 1}">
+					<a href="ArtistMusicC?artistId=${param.artistId}&page=${curPageNo + 1}&muIndex=${500 * curPageNo + 1}">
 						<i class="fas fa-chevron-right"></i>
 					</a>
 				</c:otherwise>
 			</c:choose>
 		</div>
 	</div>
+	<script type="text/javascript" src="js/main/mainPaging.js"></script>
 </body>
 </html>

@@ -42,24 +42,25 @@
 				<c:when test="${curPageNo == 1}">
 				</c:when>
 				<c:otherwise>
-					<a href="SearchC?sel=ar&result=${param.result}&index=${200 * curPageNo - 399}&page=${curPageNo - 1}">
+					<a href="SearchC?sel=ar&result=${param.result}&page=${curPageNo - 1}&index=${200 * curPageNo - 399}">
 						<i class="fas fa-chevron-left"></i>
 					</a>
 				</c:otherwise>
 			</c:choose>
 			<c:forEach var="in" items="${indexes}">
-				<a href="SearchC?sel=ar&result=${param.result}&index=${in.value}&page=${curPageNo}">${in.number}</a>
+				<a class="indexes" href="SearchC?sel=ar&result=${param.result}&page=${curPageNo}&index=${in.value}">${in.number}</a>
 			</c:forEach>
 			<c:choose>
 				<c:when test="${curPageNo == pageCount}">
 				</c:when>
 				<c:otherwise>
-					<a href="SearchC?sel=ar&result=${param.result}&index=${200 * curPageNo + 1}&page=${curPageNo + 1}">
+					<a href="SearchC?sel=ar&result=${param.result}&page=${curPageNo + 1}&index=${200 * curPageNo + 1}">
 						<i class="fas fa-chevron-right"></i>
 					</a>
 				</c:otherwise>
 			</c:choose>
 		</div>
 	</div>
+	<script type="text/javascript" src="js/main/artistPaging.js"></script>
 </body>
 </html>

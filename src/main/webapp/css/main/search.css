@@ -43,6 +43,17 @@
   justify-content: space-between;
 }
 
+.noSearch_container {
+  margin: 50px 0;
+  display: flex;
+  flex-direction: column;
+  width: inherit;
+  height: inherit;
+  gap: 50px;
+  align-items: baseline;
+  justify-content: baseline;
+}
+
 .search_artist_box {
   padding: 20px 0;
   display: flex;
@@ -99,6 +110,10 @@
 
 .result_num span {
   color: var(--dYello);
+}
+
+.search_album_wrapper {
+  width: inherit;
 }
 
 .search_album_list {
@@ -204,6 +219,7 @@
 }
 
 .search_title {
+  width: inherit;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -217,4 +233,11 @@
 
 .result_melon img {
   height: 16px;
+}
+
+.noSearch_content {
+  width: inherit;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

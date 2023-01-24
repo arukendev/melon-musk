@@ -13,7 +13,7 @@
 		<div class="artist_musics">
 			<div class="artist_musics_title">
 				<h1>인기 곡</h1>
-				<a href="ArtistMusicC?artistId=${artist.id}&muIndex=1&page=1">더 보기</a>
+				<a href="ArtistMusicC?artistId=${artist.id}&page=1&muIndex=1">더 보기</a>
 			</div>
 			<c:forEach var="am" items="${artistMusic}">
 				<div class="artist_music" onclick="location.href='MusicC?musicId=${am.id}'">
@@ -60,7 +60,7 @@
 		<div class="artist_albums">
 			<div class="artist_album_title">
 				<h1>최신 앨범</h1>
-				<a href="ArtistAlbumC?artistId=${artist.id}&alIndex=1&page=1">더 보기</a>
+				<a href="ArtistAlbumC?artistId=${artist.id}&page=1&alIndex=1">더 보기</a>
 			</div>
 			<div class="artist_album">
 				<c:forEach var="aa" items="${artistAlbum}">

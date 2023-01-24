@@ -9,7 +9,7 @@
 </head>
 <body>
 	<div class="search_album_container">
-		<div>
+		<div class="search_album_wrapper">
 			<div class="search_title">
 				<div class="result_num">
 					<h1>검색 결과 <span>${number}</span>건</h1>
@@ -53,24 +53,25 @@
 				<c:when test="${curPageNo == 1}">
 				</c:when>
 				<c:otherwise>
-					<a href="SearchC?sel=al&result=${param.result}&index=${210 * curPageNo - 419}&page=${curPageNo - 1}">
+					<a href="SearchC?sel=al&result=${param.result}&page=${curPageNo - 1}&index=${210 * curPageNo - 419}">
 						<i class="fas fa-chevron-left"></i>
 					</a>
 				</c:otherwise>
 			</c:choose>
 			<c:forEach var="in" items="${indexes}">
-				<a href="SearchC?sel=al&result=${param.result}&index=${in.value}&page=${curPageNo}">${in.number}</a>
+				<a href="SearchC?sel=al&result=${param.result}&page=${curPageNo}&index=${in.value}">${in.number}</a>
 			</c:forEach>
 			<c:choose>
 				<c:when test="${curPageNo == pageCount}">
 				</c:when>
 				<c:otherwise>
-					<a href="SearchC?sel=al&result=${param.result}&index=${210 * curPageNo + 1}&page=${curPageNo + 1}">
+					<a href="SearchC?sel=al&result=${param.result}&page=${curPageNo + 1}&index=${210 * curPageNo + 1}">
 						<i class="fas fa-chevron-right"></i>
 					</a>
 				</c:otherwise>
 			</c:choose>
 		</div>
 	</div>
+	<script type="text/javascript" src="js/main/albumPaging.js"></script>
 </body>
 </html>
