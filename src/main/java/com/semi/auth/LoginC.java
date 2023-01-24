@@ -12,14 +12,14 @@ public class LoginC extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		AuthDAO.logout(request);
-		request.setAttribute("contentPage", "jsp/auth/login.jsp");
+		request.setAttribute("contentPage", "jsp/main/main.jsp");
 		request.getRequestDispatcher("index.jsp").forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		AuthDAO.login(request);
 		AuthDAO.loginCheck(request);
-		request.setAttribute("contentPage", "jsp/main/main.jsp");
+		request.setAttribute("contentPage", "jsp/main/main_login.jsp");
 		request.getRequestDispatcher("index.jsp").forward(request, response);
 	
 	}

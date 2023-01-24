@@ -232,7 +232,7 @@
 			<c:forEach var="c" items="${comments}">
 				<div class="comment_comment">
 					<div class="comment_profileimg">
-						<img src="${c.img}">
+						<img src="files/auth/${c.img}">
 					</div>
 					<div class="comment_contents">
 						<div class="comment_top">
