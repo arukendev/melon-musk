@@ -59,7 +59,7 @@
 				</c:otherwise>
 			</c:choose>
 			<c:forEach var="in" items="${indexes}">
-				<a href="SearchC?sel=al&result=${param.result}&page=${curPageNo}&index=${in.value}">${in.number}</a>
+				<a class="indexes" href="SearchC?sel=al&result=${param.result}&page=${curPageNo}&index=${in.value}">${in.number}</a>
 			</c:forEach>
 			<c:choose>
 				<c:when test="${curPageNo == pageCount}">
