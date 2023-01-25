@@ -11,10 +11,10 @@
 <script type="text/javascript" src="js/review/review.js"></script>
 </head>
 <body>
-<div class="list_title">
+<div class="review_list_title">
 		<h1>상세보기</h1>
 </div>
-<div class="reviewDetail_list_subtitle">
+<div class="review_list_subtitle">
 		<c:if test="${sessionScope.account.au_id eq 'admin' }">
 			<h6><a style="margin-right:15px;" href="ReviewReportedC">신고글목록</a></h6>
 		</c:if>

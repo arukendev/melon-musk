@@ -9,10 +9,10 @@
 <script type="text/javascript" src="js/review/review.js"></script>
 </head>
 <body>
-<div class="list_title">
+<div class="review_list_title">
 		<h1>리뷰게시판</h1>
 </div>
-<div class="list_subtitle">
+<div class="review_list_subtitle">
 	<c:choose>
 		<c:when test="${sessionScope.account.au_id eq 'admin' }">
 			<h6><a href="javascript:write('${sessionScope.account.au_id }')">공지작성</a></h6>

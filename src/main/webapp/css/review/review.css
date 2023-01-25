@@ -8,6 +8,35 @@
 }
 
 /* review.jsp ----------------------------------------------------------------  */
+.review_list_title {
+  margin-top: 30px;
+  width: inherit;
+  font-size: 24px;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.review_list_subtitle {
+  width: inherit;
+  display: flex;
+  font-size: 20px;
+  justify-content: flex-end;
+  align-items: flex-end;
+}
+
+.review_list_subtitle a:hover {
+	text-decoration: underline;
+}
+
+.review_list_subtitle h6 {
+  padding-bottom: 12px;
+}
+
+.review_list_subtitle img {
+  margin-left: 5px;
+  height: 50px;
+}
+
 .review_table {
 	width: 100vw;
 	height: 60px;
@@ -226,16 +255,7 @@
 	width:inherit;
 	margin: 30px 0px;
 }
-.reviewDetail_list_subtitle{
-  width: inherit;
-  display: flex;
-  font-size: 20px;
-  justify-content: flex-end;
-  align-items: flex-end;
-}
-.reviewDetail_list_subtitle a:hover {
-	text-decoration: underline;
-}
+
 .reviewDetail_table_titleRow {
 	width:100%;
 	display: flex;	
