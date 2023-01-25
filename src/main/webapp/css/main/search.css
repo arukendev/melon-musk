@@ -1,0 +1,243 @@
+#index_hCenter_search {
+  position: absolute;
+}
+
+#index_hCenter_search form {
+  display: flex;
+  gap: 10px;
+  padding: 0 10px;
+  align-items: center;
+  border: 1px solid var(--gray);
+  border-radius: 10px;
+}
+
+#index_hCenter_search input {
+  background-color: var(--black);
+  color: var(--white);
+  width: 400px;
+  height: 40px;
+  font-size: 18px;
+  border: none;
+}
+
+#index_hCenter_search input:focus {
+  outline: none;
+}
+
+#index_hCenter_search select {
+  background-color: var(--black);
+  color: var(--white);
+  border: none;
+}
+
+.search_artist_container,
+.search_album_container,
+.search_music_container {
+  margin: 50px 0;
+  display: flex;
+  flex-direction: column;
+  width: inherit;
+  height: inherit;
+  gap: 50px;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+.noSearch_container {
+  margin: 50px 0;
+  display: flex;
+  flex-direction: column;
+  width: inherit;
+  height: inherit;
+  gap: 50px;
+  align-items: baseline;
+  justify-content: baseline;
+}
+
+.search_artist_box {
+  padding: 20px 0;
+  display: flex;
+  gap: 30px;
+}
+
+.search_artist_img {
+  width: 240px;
+  height: 240px;
+  border-radius: 10px;
+  overflow: hidden;
+  background-color: white;
+  box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.search_artist_box img {
+  width: 240px;
+}
+
+.search_artist_info {
+  width: 900px;
+  display: flex;
+  padding: 10px 0;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.search_artist_info a {
+  line-height: 35px;
+  font-size: 30px;
+  font-weight: 400;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.search_artist_info span {
+  font-size: 20px;
+  line-height: 25px;
+  color: var(--gray);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.result_num {
+  font-size: 20px;
+  font-weight: 400;
+  margin-bottom: 20px;
+}
+
+.result_num span {
+  color: var(--dYello);
+}
+
+.search_album_wrapper {
+  width: inherit;
+}
+
+.search_album_list {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.search_album_box {
+  width: 390px;
+  height: 180px;
+  display: flex;
+  gap: 10px;
+  margin: 10px 0;
+}
+
+.search_album_img {
+  width: 180px;
+  height: 180px;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 4px 4px 4px rgb(0, 0, 0, 0.2);
+}
+
+.search_album_img img {
+  width: 180px;
+}
+
+.search_album_info {
+  width: 180px;
+  display: flex;
+  flex-direction: column;
+  line-height: 170%;
+}
+
+.search_album_info span:first-child {
+  color: var(--grey);
+}
+
+.search_album_info a {
+  color: var(--dYello);
+  font-weight: 400;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.search_album_info span:nth-child(3),
+.search_album_info span:nth-child(4),
+.search_album_info span:nth-child(5) {
+  color: var(--gray);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.search_music {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  padding: 10px 0;
+  cursor: pointer;
+  border-radius: 10px;
+}
+
+.search_music:hover {
+  background-color: rgba(246, 228, 142, 0.4);
+}
+
+.search_music_num {
+  width: 50px;
+  text-align: center;
+  font-size: 24px;
+  font-weight: 400;
+  color: var(--gray);
+}
+
+.search_music_info {
+  width: 1050px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.search_music_info a {
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 26px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.search_music_info span {
+  color: var(--gray);
+  font-size: 14px;
+  line-height: 18px;
+}
+
+.search_paging {
+  display: flex;
+  gap: 10px;
+  align-self: center;
+}
+
+.search_title {
+  width: inherit;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.result_melon {
+  display: flex;
+  gap: 5px;
+  margin-bottom: 20px;
+}
+
+.result_melon img {
+  height: 16px;
+}
+
+.noSearch_content {
+  width: inherit;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

@@ -17,35 +17,48 @@
 
 .detail_top {
   display: flex;
-  gap: 30px;
+  gap: 15px;
   align-items: center;
   font-size: 20px;
 }
 
 .detail_top button {
+  font-family: "Noto Sans KR", sans-serif;
   background-color: inherit;
   border: none;
   padding: 0;
-  font-size: 20px;
   color: var(--black);
   cursor: pointer;
   display: flex;
   align-items: center;
+  font-size: 18px;
   gap: 5px;
 }
 
-.detail_top span {
+.detail_top button span {
   font-size: 18px;
+  font-weight: 400;
 }
 
 .fa-heart {
   color: var(--pink);
 }
 
+.detail_titles {
+  width: 850px;
+}
+
 .detail_titles_title {
   font-size: 30px;
   font-weight: 700;
   margin-bottom: 10px;
+  line-height: 40px;
+}
+
+.detail_titles_title h1 {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .detail_titles_subtitles {

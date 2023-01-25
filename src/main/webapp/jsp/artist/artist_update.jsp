@@ -18,9 +18,10 @@
 					<span>편집완료</span>
 				</button>
 			</div>
-			<div>
+			<div class="detail_top_reset">
 				<button type="button" onclick="location.href='ArtistResetC?artistId=${artist.id}&i=${artist.img}'">
-					멜론에서 다시 가져오기
+					<i class="fas fa-undo-alt"></i>
+					<span>리셋하기</span>
 				</button>
 			</div>
 		</div>
@@ -95,7 +96,7 @@
 		<div>
 			<h1>프로필 사진</h1>
 			<input hidden name="oldImg" value="${artist.img}">
-			<input type="file" name="img">
+			<input type="file" name="img" accept="image/*">
 		</div>
 		<div class="detail_main_info">
 			<h1>아티스트 정보</h1>

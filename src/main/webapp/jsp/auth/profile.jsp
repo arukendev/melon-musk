@@ -35,6 +35,7 @@
 	  			<div class="profile_result">${sessionScope.account.au_introduce}</div>
 	  		</div>
 	  		<div>
+	  			<button class="profile_button" onclick="location.href='MyPlaylistC'">플리</button>
 	  			<button class="profile_button" onclick="location.href='UpdateC'">수정</button>
 	  			 <input class="profile_button" type="button" value="회원탈퇴" onclick="pwCheck()">
 	  		</div>

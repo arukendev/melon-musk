@@ -17,11 +17,15 @@ public class ArtistLikeAddC extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		AuthDAO.loginCheck(request);
-		ArtistDAO.setLike(request);
-		request.setAttribute("parameter", request.getParameter("artistId"));
-		request.setAttribute("contentPage", "jsp/main/loading.jsp");
-		request.getRequestDispatcher("index.jsp").forward(request, response);
+		if (AuthDAO.loginCheck(request)) {
+			ArtistDAO.setLike(request);
+			request.setAttribute("parameter", request.getParameter("artistId"));
+			request.setAttribute("contentPage", "jsp/main/loading.jsp");
+			request.getRequestDispatcher("index.jsp").forward(request, response);
+		} else {
+			request.setAttribute("contentPage", "jsp/auth/login.jsp");
+			request.getRequestDispatcher("index.jsp").forward(request, response);
+		}
 	}
 
 }

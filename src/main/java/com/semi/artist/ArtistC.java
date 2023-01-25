@@ -17,6 +17,7 @@ public class ArtistC extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		AuthDAO.loginCheck(request);
+		
 		Crawler.artistMusicCrwaler(request);
 		Crawler.artistAlbumCrwaler(request);
 		
@@ -26,6 +27,7 @@ public class ArtistC extends HttpServlet {
 			Crawler.artistCrawler(request);
 			ArtistDAO.setArtist(request);
 		}
+		
 		ArtistDAO.getLikeInfo(request);
 		ArtistDAO.getLikeCount(request);
 		ArtistDAO.getComment(request);

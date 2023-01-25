@@ -19,7 +19,7 @@ public class LoginC extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		AuthDAO.login(request);
 		AuthDAO.loginCheck(request);
-		request.setAttribute("contentPage", "jsp/main/main.jsp");
+		request.setAttribute("contentPage", "jsp/main/main_login.jsp");
 		request.getRequestDispatcher("index.jsp").forward(request, response);
 	
 	}

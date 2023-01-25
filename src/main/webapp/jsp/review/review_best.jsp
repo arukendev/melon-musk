@@ -64,7 +64,7 @@
 
 <div class="review_bottom">
 	<div class="review_bottom_btn">
-		<button onclick="location.href='ReviewC'">전체글</button>
+		<a href="ReviewC">전체글</a>
 	</div>
 	<div>
 		<a href="ReviewBestPageC?p=1">[맨 처음]</a>
