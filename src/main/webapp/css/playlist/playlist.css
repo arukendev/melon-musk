@@ -135,6 +135,7 @@
   justify-content: center;
   align-items: center;
   background-color: white;
+  margin: 0 10px;
   box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.2);
 }
 
@@ -144,7 +145,7 @@
 
 .playlist_first {
   display: grid;
-  grid-template-columns: 80px 1fr 100px 100px;
+  grid-template-columns: 100px 1fr 100px 100px;
   text-align: center;
   padding: 10px 0;
   border-radius: 10px;
@@ -153,7 +154,7 @@
 
 .playlist_content_playlists {
   display: grid;
-  grid-template-columns: 80px 1fr 100px 100px;
+  grid-template-columns: 100px 1fr 100px 100px;
   text-align: center;
   align-items: center;
   padding: 10px 0;
