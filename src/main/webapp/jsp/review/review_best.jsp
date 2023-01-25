@@ -9,10 +9,10 @@
 <script type="text/javascript" src="js/review/review.js"></script>
 </head>
 <body>
-<div class="list_title">
+<div class="review_list_title">
 		<h1>리뷰베스트</h1>
 </div>
-<div class="list_subtitle">
+<div class="review_list_subtitle">
 	<h6></h6>
 </div>
 <div id="review_columnsWrap_label">

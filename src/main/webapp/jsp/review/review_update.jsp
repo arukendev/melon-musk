@@ -10,13 +10,13 @@
 <script type="text/javascript" src="js/review/review.js"></script>
 </head>
 <body onload="calcChars2()">
-<div class="list_title">
+<div class="review_list_title">
 		<h1>리뷰수정</h1>
 </div>
-<div class="list_subtitle">
+<div class="review_list_subtitle">
 			<h6><a class="reviewReg_golist" href="ReviewC">목록</a></h6>
 </div>
-<form class="reviewReg_form" action="ReviewUpdateC?no=${review.id }" method="post">
+<form class="reviewReg_form" action="ReviewUpdateC?no=${review.id }" method="post" enctype="multipart/form-data">
 	<div class="reviewReg_table">
 		<div class="reviewReg_table_row">
 			<input id="reviewReg_row_nameInput" value="${review.name }" name="name"/>
