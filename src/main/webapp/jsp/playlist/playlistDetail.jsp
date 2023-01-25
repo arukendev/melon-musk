@@ -83,6 +83,7 @@
 				</div>
 		</c:forEach>
 	</div>
+	</div>
 	</form>
 </body>
 </html>

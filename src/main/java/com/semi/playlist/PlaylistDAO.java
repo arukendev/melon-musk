@@ -307,7 +307,6 @@ public void pl_paging(int page,HttpServletRequest req) {
 				
 				
 				if (pstmt.executeUpdate()==1) {
-					request.setAttribute("r", "등록성공!");
 					System.out.println("등록성공");
 				}
 				
@@ -359,7 +358,6 @@ public void pl_paging(int page,HttpServletRequest req) {
 				
 				
 				if (pstmt.executeUpdate()==1) {
-					request.setAttribute("r", "추가성공!");
 					System.out.println("추가성공");
 				}
 				
@@ -391,7 +389,6 @@ public void pl_paging(int page,HttpServletRequest req) {
 				
 				if (pstmt.executeUpdate()==1) {
 					System.out.println("플리삭제성공");
-						request.setAttribute("r", "삭제성공");
 						
 				}
 				
@@ -417,7 +414,6 @@ public void pl_paging(int page,HttpServletRequest req) {
 				
 				if (pstmt.executeUpdate()==1) {
 					System.out.println("음악삭제성공");
-					request.setAttribute("r", "전부삭제성공");
 				}
 				
 				
@@ -459,7 +455,6 @@ public void pl_paging(int page,HttpServletRequest req) {
 				System.out.println(request.getParameter("pl_id"));
 				
 				if (pstmt.executeUpdate()==1) {
-					request.setAttribute("r", "제거성공!");
 					System.out.println("제거성공");
 				}
 				
@@ -490,7 +485,6 @@ public void pl_paging(int page,HttpServletRequest req) {
 				pstmt.setString(1, request.getParameter("pl_id"));
 				
 				if (pstmt.executeUpdate()==1) {
-					request.setAttribute("r", "업데이트성공!");
 					System.out.println("업데이트성공");
 				}
 				
