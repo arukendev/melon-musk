@@ -29,7 +29,7 @@ function update(no, writer, au_id) {
 		alert('리뷰를 수정하려면 로그인 해주세요.');
 		location.href="ReviewLikeC";
 	} else {
-		if(au_id=='admin'){
+		if((au_id=='admin')&&(writer!='admin')){
 			alert('관리자님은 게시글 삭제 권한만 있습니다.');
 		} else{
 			if(au_id!=writer){
@@ -67,7 +67,12 @@ function report(no, writer, au_id){
 		} else{
 			if(au_id=='admin') {
 			alert('관리자님????????????');
-			} else{
+			} else if(au_id==writer){
+				const really = confirm('본인 글을 정말 신고하겠습니까?');
+				if(really){
+				location.href="ReviewReportC?no="+no;
+				}
+				} else {
 				const really = confirm('정말 신고하겠습니까?');
 				if(really){
 				location.href="ReviewReportC?no="+no;
@@ -89,9 +94,11 @@ function adminClickedButton(){
 }
 
 function calcChars(){
-	document.getElementById('chars').value=document.getElementById('textInput').value.length;
+	document.getElementById('chars').value=document.getElementById('reviewReg_row_textInput').value.length;
 }
-
+function calcChars2(){
+	document.getElementById('chars').value=document.getElementById('reviewUpdate_row_textInput').value.length;
+}
 
 
 
@@ -115,18 +122,20 @@ function moreThan(input, length){
 /* valueCheck -------------------------------------------------------------------------------- */
 
 function reviewCall(){
-	const name = document.getElementById("nameInput");
-	const img = document.getElementById("imgInput");
-	const text = document.getElementById("textInput");
+	const name = document.getElementById("reviewReg_row_nameInput");
+	const img = document.getElementById("reviewReg_row_imgInput");
+	const text = document.getElementById("reviewReg_row_textInput");
 	
 	if(isEmpty(name)){
 		alert('제목은 필수 입력 사항입니다.');
 		return false;
 	}
+	
 	if(moreThan(name, 100)){
 		alert('제목은 100자를 초과할 수 없습니다.');
 		return false;
 	}
+	
 	
 	if(isEmpty(text)){
 		alert('내용은 필수 입력 사항입니다.');
@@ -137,7 +146,6 @@ function reviewCall(){
 		alert('내용은 1000자를 초과할 수 없습니다.');
 		return false;
 	}
-	
 	if(isNotType(img)){
 		if(isEmpty(img)){
 			return true;
@@ -146,9 +154,39 @@ function reviewCall(){
 		return false;
 		}
 	}
+	
 	if(moreThan(img, 200)){
 		alert('첨부 이미지 파일명 허용 길이 초과');
 		return false;
 	}
 	
+}
+
+/*-----------------------------------------------------------------------------------*/
+if (
+  location.href.includes("ReviewLike") ||
+  location.href.includes("ReviewComment")
+) {
+  location.href = "ReviewDetailC?no=" + getParam('no');
+}
+
+
+function getParam(paramName) {
+
+    var params = location.search.substr(location.search.indexOf("?") + 1);
+
+    var sval = "";
+
+    params = params.split("&");
+
+    for (var i = 0; i < params.length; i++) {
+
+        temp = params[i].split("=");
+
+        if ([temp[0]] == paramName) { sval = temp[1]; }
+
+    }
+
+    return sval;
+
 }
