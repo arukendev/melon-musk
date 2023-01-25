@@ -26,7 +26,6 @@ public class RegPlaylistC extends HttpServlet {
 	
 	
 	if(a==null) {
-		request.setAttribute("alert", "세션이 만료되었습니다. 재로그인 해주세요.");
 		request.setAttribute("contentPage", "jsp/auth/login.jsp");
 		request.getRequestDispatcher("index.jsp").forward(request, response);
 	} else {
