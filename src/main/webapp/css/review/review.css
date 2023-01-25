@@ -399,3 +399,106 @@
 .reviewDetail_bttmBtns_btn:active{
 	box-shadow: none;
 }
+
+.reviewDetail_comment_container {
+  width: inherit;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 30px;
+}
+
+.reviewDetail_comment_container h1 {
+  font-size: 24px;
+  font-weight: 400;
+  margin-bottom: 20px;
+  color: var(--dYello);
+}
+
+.reviewDetail_comment_input form {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.reviewDetail_comment_input textarea {
+  padding: 5px;
+  font-family: "Noto Sans KR", sans-serif;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  resize: none;
+  width: 600px;
+  height: 80px;
+}
+
+.reviewDetail_comment_input textarea:focus {
+  outline: none;
+  border-color: var(--dYello);
+}
+
+.reviewDetail_comment_input button {
+  background-color: var(--lYello);
+  font-size: 20px;
+  color: var(--black);
+  padding: 25px 30px;
+  border: none;
+  border-radius: 10px;
+  box-shadow: 1px 1px 3px;
+  cursor: pointer;
+}
+.reviewDetail_comment_input button:hover{
+	background-color: var(--dYello);
+}
+.reviewDetail_comment_input button:active{
+	box-shadow:none;
+}
+.reviewDetail_comment_input p {
+  height: 80px;
+}
+
+.reviewDetail_comment_comment {
+  margin: 50px 0;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.reviewDetail_comment_profileimg {
+  width: 70px;
+  height: 70px;
+  background-color: var(--white);
+  border-radius: 50%;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.reviewDetail_comment_comment img {
+  width: 80px;
+}
+
+.reviewDetail_comment_contents {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.reviewDetail_comment_top {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.reviewDetail_comment_bottom {
+  display: flex;
+  gap: 10px;
+}
+
+.reviewDetail_comment_auth {
+  color: var(--dYello);
+  font-weight: 400;
+}
+
+.reviewDetail_comment_date {
+  color: rgba(0,0,0, 0.5);
+}

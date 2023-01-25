@@ -81,14 +81,14 @@
 		</div>
 	</div>
 </div>	
-<div class="comment_container">
+<div class="reviewDetail_comment_container">
 	<h1>댓글</h1>
-	<div class="comment_input">
+	<div class="reviewDetail_comment_input">
 		<c:choose>
 			<c:when test="${sessionScope.account.au_id ne null}">
-				<form action="ReviewCommentC">
+				<form action="ReviewCommentC" onsubmit="return reviewCommentCall()">
 					<input hidden name="no" value="${review.id}">
-					<textarea name="txt"></textarea>
+					<textarea id="reviewDetail_comment_txt" name="txt"></textarea>
 					<button>등록</button>
 				</form>
 			</c:when>
@@ -97,23 +97,23 @@
 			</c:otherwise>
 		</c:choose>
 	</div>
-	<div class="comment_comments">
+	<div class="reviewDetail_comment_comments">
 		<c:forEach var="c" items="${comments}">
-			<div class="comment_comment">
+			<div class="reviewDetail_comment_comment">
 				<div class="comment_profileimg">
 					<img src="<%=request.getContextPath() %>/files/auth/${c.img}">
 				</div>
-				<div class="comment_contents">
-					<div class="comment_top">
-						<div class="comment_auth">
+				<div class="reviewDetail_comment_contents">
+					<div class="reviewDetail_comment_top">
+						<div class="reviewDetail_comment_auth">
 							${c.name}
 						</div>
-						<div class="comment_text">
+						<div class="reviewDetail_comment_text">
 							${c.txt}
 						</div>
 					</div>
-					<div class="comment_bottom">
-						<div class="comment_date">
+					<div class="reviewDetail_comment_bottom">
+						<div class="reviewDetail_comment_date">
 							<fmt:formatDate value="${c.date}" pattern="yyyy.MM.dd kk:mm:ss"/>
 						</div>
 						<c:if test="${(c.authId eq sessionScope.account.au_id) or (sessionScope.account.au_id eq 'admin')}">
