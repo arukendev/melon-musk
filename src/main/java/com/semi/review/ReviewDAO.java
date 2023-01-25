@@ -348,7 +348,7 @@ public class ReviewDAO {
 		try {
 			con = DBManager.connect();
 			pstmt = con.prepareStatement(
-					"update review set re_like = re_like+1 where re_id = ?"
+					"update review set re_like = re_like+1, re_view = re_view-1 where re_id = ?"
 					);
 			pstmt.setString(1, request.getParameter("no"));
 			pstmt.executeUpdate();
@@ -369,7 +369,7 @@ public class ReviewDAO {
 		try {
 			con = DBManager.connect();
 			pstmt = con.prepareStatement(
-					"update review set re_like = re_like-1 where re_id = ?"
+					"update review set re_like = re_like-1, re_view = re_view -1 where re_id = ?"
 					);
 			pstmt.setString(1, request.getParameter("no"));
 			pstmt.executeUpdate();
@@ -477,7 +477,7 @@ public class ReviewDAO {
 		try {
 			con = DBManager.connect();
 			pstmt = con.prepareStatement(
-					"update review set re_comment = re_comment +1 where re_id = ?"
+					"update review set re_comment = re_comment +1, re_view= re_view - 1 where re_id = ?"
 					);
 			pstmt.setString(1, re_id);
 			if(pstmt.executeUpdate()==1) {
@@ -521,7 +521,7 @@ public class ReviewDAO {
 		try {
 			con = DBManager.connect();
 			pstmt = con.prepareStatement(
-					"update review set re_comment = re_comment -1 where re_id = ?"
+					"update review set re_comment = re_comment -1, re_view = re_view-1 where re_id = ?"
 					);
 			pstmt.setString(1, re_id);
 			if(pstmt.executeUpdate()==1) {
