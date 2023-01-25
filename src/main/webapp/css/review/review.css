@@ -1,4 +1,12 @@
 @charset "UTF-8";
+
+.tAcenter{
+	text-align:center;
+}
+.tAright{
+	text-align:right;
+}
+
 /* review.jsp ----------------------------------------------------------------  */
 .review_table {
 	width: 100vw;
@@ -23,6 +31,10 @@
 	margin: 10px;
 	color: var(--white);
 	float: right;
+}
+
+.review_write:hover{
+	text-decoration:underline;
 }
 
 #review_columnsWrap_label {
@@ -101,6 +113,7 @@
 	width: 100%;
 	display: flex;
 	justify-content: space-between;
+	align-items:center;
 }
 
 .review_bottom div {
@@ -109,19 +122,33 @@
 }
 
 .review_bottom_btn{
-	width: 75px;
+	width: 100px;
 }
 .review_bottom_btn a:hover{
 	text-decoration:underline; 
 }
+.fa-crown{
+	color:var(--dYello);
+	margin: 5px;
+}
 
-
+.fa-circle-exclamation{
+	color: red;
+	margin: 5px;
+}
 
 /* review_reg.jsp ----------------------------------------------------------------  */
-#reviewReg_table {
-	width: 100%;
-	display: flex;
-	flex-direction: column;
+.reviewReg_form{
+	width:100%;
+	background-color:  rgba(246, 228, 142, 0.4);
+	padding: 20px;
+	margin: 10px;
+}
+.reviewReg_table {
+	width: 90%;
+	background-color: var(--white);
+	margin: auto;
+	padding: 10px;
 }
 
 #reviewReg_table_h {
@@ -137,11 +164,28 @@
 	display: flex;
 }
 
+#reviewReg_row_nameInput{
+	width: 100%;
+	height: 30px;
+	margin: 10px 0px;
+}
+
+#reviewReg_row_textInput{
+	width: 100%;
+	height: 400px;
+	margin-top: 10px;
+}
+
+#reviewUpdate_row_textInput{
+	width: 100%;
+	height: 400px;
+	margin-top: 10px;
+}
+
 .reviewReg_row_index {
 	text-align: center;
 	align-items: center;
 	width: 100px;
-	background-color: #DCDDE1;
 	border: 1px solid var(--white);
 }
 
@@ -153,16 +197,65 @@
 	width: 408px;
 }
 
-.reviewReg_row_txt {
-	width: 400px;
-	height: 400px;
+#reviewReg_bottum_button{
+	margin: 10px auto 10px 440px;
+	width: 96px;
+	height: 54px;
+	border-radius: 20px;
+	border: none;	
+	background-color: var(--lYello);
+	box-shadow: 1px 1px 3px;
+	cursor: pointer;
+	font-size: 15pt;
+}
+#reviewReg_bottum_button:hover{
+	background-color: var(--dYello);
+}
+
+#reviewReg_bottum_button:active{
+	box-shadow: none;
+}
+.reviewReg_golist:hover{
+	text-decoration: underline;
 }
 
 
 
-
-
 /* review_detail.jsp --------------------------------------------------------------------------*/
+.reviewDetail_table{
+	width:inherit;
+	margin: 30px 0px;
+}
+.reviewDetail_list_subtitle{
+  width: inherit;
+  display: flex;
+  font-size: 20px;
+  justify-content: flex-end;
+  align-items: flex-end;
+}
+.reviewDetail_list_subtitle a:hover {
+	text-decoration: underline;
+}
+.reviewDetail_table_titleRow {
+	width:100%;
+	display: flex;	
+	border-bottom: solid 1px gray;
+	align-items:center;
+	margin: 10px 0px;
+}
+
+#reviewDetail_titleRow_title{
+	width: 60%; font-size: 25pt; font-weight:600;
+	padding: 0 0 5px 10px;
+	margin-bottom: 5px;
+	
+}
+#reviewDetail_titleRow_etcs{
+	width: 40%;
+	display: flex;
+	justify-content: space-between;
+}
+
 .reviewDetail_table_row{
 	width:100%;
 	display: flex;	
@@ -186,6 +279,13 @@
 .reviewDetail_row_200 {
 	width: 200px;
 }
+#reviewDetail_titleRow_date {
+	width: 160px;
+}
+
+.reviewDetail_titleRow_index {
+	width: 50px;
+}
 
 .reviewDetail_row_100 {
 	width: 100px;
@@ -198,9 +298,39 @@
 .reviewDetail_table_content{
 	width:100%;
 }
+
+#reviewDetail_content_viewsLike{
+	display:flex;
+	justify-content: flex-end;
+	align-items: center;
+	
+}
+.reviewDetail_items_likeBtn{
+	width: 40px;
+	height: 40px;
+	border-radius: 20px;
+	border: solid 0.5px gainsboro;
+	font-size:large;
+	cursor: pointer;
+	box-shadow: 1px 1px 3px;
+}
+
+.reviewDetail_items_likeBtn:hover{
+	background-color:var(--lYello);
+}
+
+.reviewDetail_items_likeBtn:active{
+	background-color: #c0c0c0;
+	box-shadow: none;
+}
+
+.reviewDetail_likeNumber{
+	width:30px;
+	text-align: center;
+}
+
 .reviewDetail_content_label{
 	width:100%;
-	background-color: #DCDDE1;
 	text-align: center;
 }
 .reviewDetail_content_txt{
@@ -216,12 +346,14 @@
 #reviewDetail_text_text{
 	margin-top: 10px;
 	font-size: 15pt;
+	line-height: 160%;
 }
 
 #reviewDetail_table_bottom{
 	width: 100%;
 	display: flex;
 	justify-content: space-between;
+	margin-bottom: 20px;
 }
 
 #reviewDetail_bottom_bttmBtns {
@@ -229,3 +361,21 @@
 	justify-content: flex-end;
 }
 
+.reviewDetail_bttmBtns_btn{
+	background-color: var(--lYello);
+	border: none;
+	width: 60px;
+	height: 30px;
+	border-radius: 5px;
+	margin: 5px;
+	box-shadow: 1px 1px 3px gray;
+	cursor: pointer;
+}
+
+.reviewDetail_bttmBtns_btn:hover{
+	background-color:var(--dYello);
+}
+
+.reviewDetail_bttmBtns_btn:active{
+	box-shadow: none;
+}

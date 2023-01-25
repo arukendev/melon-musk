@@ -30,9 +30,17 @@ public class ReviewRegC extends HttpServlet {
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		AuthDAO.loginCheck(request);
+		HttpSession hs = request.getSession();
+		Auth a =(Auth)hs.getAttribute("account");
+		if(a==null) {
+			request.setAttribute("alert", "세션이 만료되었습니다. 재로그인 해주세요.");
+			request.setAttribute("contentPage", "jsp/auth/login.jsp");
+			request.getRequestDispatcher("index.jsp").forward(request, response);
+		} else {
 		ReviewDAO.reviewReg(request);
 		request.setAttribute("contentPage", "jsp/review/review_detail.jsp");
 		request.getRequestDispatcher("index.jsp").forward(request, response);
+		}
 	}
 
 }
