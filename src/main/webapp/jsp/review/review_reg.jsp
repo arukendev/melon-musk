@@ -8,10 +8,10 @@
 <script type="text/javascript" src="js/review/review.js"></script>
 </head>
 <body>
-<div class="list_title">
+<div class="review_list_title">
 		<h1>리뷰작성</h1>
 </div>
-<div class="list_subtitle">
+<div class="review_list_subtitle">
 			<h6><a class="reviewReg_golist" href="ReviewC">목록</a></h6>
 </div>
 <form class="reviewReg_form" action="ReviewRegC" method="post" enctype="multipart/form-data" onsubmit="return reviewCall()">

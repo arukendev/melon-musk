@@ -162,6 +162,15 @@ function reviewCall(){
 	
 }
 
+function reviewCommentCall(){
+	const comment = document.getElementById("reviewDetail_comment_txt");
+	
+	if(isEmpty(comment)){
+		alert('내용은 필수 입력 사항입니다.');
+		return false;
+	}
+}
+
 /*-----------------------------------------------------------------------------------*/
 if (
   location.href.includes("ReviewLike") ||
