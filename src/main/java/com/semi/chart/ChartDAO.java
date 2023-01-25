@@ -3,9 +3,11 @@ package com.semi.chart;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.semi.auth.Auth;
 import com.semi.main.DBManager;
 
 public class ChartDAO {
@@ -71,5 +73,37 @@ public class ChartDAO {
 			DBManager.close(con, pstmt, rs);
 		}
 		return false;
+	}
+
+	public static void getLikeInfo(HttpServletRequest request) {
+		ArrayList<Chart> charts = (ArrayList<Chart>) request.getAttribute("charts");
+		Auth a = (Auth) request.getSession().getAttribute("account");
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		String sql = "select * from music_like where muli_mu_id = ? and muli_au_id = ?";
+		
+		try {
+			con = DBManager.connect();
+			for (Chart chart : charts) {
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, chart.getMusicId());
+				if (a == null) {
+					pstmt.setString(2, "");
+				} else {
+					pstmt.setString(2, a.getAu_id());
+				}
+				rs = pstmt.executeQuery();
+				while (rs.next()) {
+					chart.setLike(1);
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBManager.close(con, pstmt, rs);
+		}
 	}
 }

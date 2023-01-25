@@ -60,7 +60,7 @@
 			<h1>앨범 정보</h1>
 			<c:choose>
 				<c:when test="${album.info eq 'none'}">
-					<textarea name="info"></textarea>
+					<textarea name="info">정보를 입력해주세요.</textarea>
 				</c:when>
 				<c:otherwise>
 					<textarea name="info">${album.info}</textarea>
@@ -70,6 +70,7 @@
 	</div>
 	</form>
 	<script type="text/javascript" src="js/main/detail.js"></script>
+	<script type="text/javascript" src="js/album/albumEdit.js"></script>
 	<script src="https://kit.fontawesome.com/772d40e343.js" crossorigin="anonymous"></script>
 </body>
 </html>

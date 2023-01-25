@@ -14,17 +14,25 @@ import com.semi.music.MusicDAO;
 public class ArtistUpdateC extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		AuthDAO.loginCheck(request);
-		ArtistDAO.getArtist(request);
-		request.setAttribute("contentPage", "jsp/artist/artist_update.jsp");
-		request.getRequestDispatcher("index.jsp").forward(request, response);
+		if (AuthDAO.loginCheck(request)) {
+			ArtistDAO.getArtist(request);
+			request.setAttribute("contentPage", "jsp/artist/artist_update.jsp");
+			request.getRequestDispatcher("index.jsp").forward(request, response);
+		} else {
+			request.setAttribute("contentPage", "jsp/auth/login.jsp");
+			request.getRequestDispatcher("index.jsp").forward(request, response);
+		}
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		AuthDAO.loginCheck(request);
-		ArtistDAO.updateArtist(request);
-		request.setAttribute("contentPage", "jsp/main/loading.jsp");
-		request.getRequestDispatcher("index.jsp").forward(request, response);
+		if (AuthDAO.loginCheck(request)) {
+			ArtistDAO.updateArtist(request);
+			request.setAttribute("contentPage", "jsp/main/loading.jsp");
+			request.getRequestDispatcher("index.jsp").forward(request, response);
+		} else {
+			request.setAttribute("contentPage", "jsp/auth/login.jsp");
+			request.getRequestDispatcher("index.jsp").forward(request, response);
+		}
 	}
 
 }

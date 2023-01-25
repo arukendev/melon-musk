@@ -52,10 +52,10 @@
 			<h1>유튜브 링크</h1>
 			<c:choose>
 				<c:when test="${music.link eq 'none'}">
-					<input name="link">
+					<input name="link" placeholder="유튜브 링크를 넣어주세요">
 				</c:when>
 				<c:otherwise>
-					<input name="link" value="${music.link}">
+					<input name="link" placeholder="유튜브 링크를 넣어주세요" value="${music.link}">
 				</c:otherwise>
 			</c:choose>
 		</div>
@@ -63,7 +63,7 @@
 			<h1>가사</h1>
 			<c:choose>
 				<c:when test="${music.lyrics eq 'none'}">
-					<textarea name="lyrics">등록된 가사 정보가 없습니다.</textarea>
+					<textarea name="lyrics">가사를 입력해주세요.</textarea>
 				</c:when>
 				<c:otherwise>
 					<textarea name="lyrics">${music.lyrics}</textarea>

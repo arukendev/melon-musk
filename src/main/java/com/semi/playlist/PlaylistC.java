@@ -22,6 +22,10 @@ public class PlaylistC extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	//나의 플레이리스트 조회
+	
+	
+	
 	}
 
 }

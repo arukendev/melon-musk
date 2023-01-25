@@ -18,7 +18,7 @@
 			<h6><a href="javascript:write('${sessionScope.account.au_id }')">공지작성</a></h6>
 		</c:when>
 		<c:otherwise>
-			<h6><a href="javascript:write('${sessionScope.account.au_id }')">글쓰기</a></h6>
+			<h6><a class="review_write" href="javascript:write('${sessionScope.account.au_id }')">글쓰기</a></h6>
 		</c:otherwise>
 	</c:choose>
 </div>
@@ -73,10 +73,10 @@
 	<div class="review_bottom_btn">
 		<c:choose>
 			<c:when test="${sessionScope.account.au_id eq 'admin' }">
-				<button onclick="location.href='ReviewReportedC'">신고글</button>
+				<a href="ReviewReportedC"><i class="fa-solid fa-circle-exclamation"></i>신고글</a >
 			</c:when>
 			<c:otherwise>
-				<button onclick="location.href='ReviewBestC'">추천글</button>
+				<a href="ReviewBestC"><i class="fa-solid fa-crown"></i>추천글</a>
 			</c:otherwise>
 		</c:choose>
 	</div>

@@ -18,9 +18,7 @@ public class AddPlMusicC extends HttpServlet {
 		//플리에 음악등록을 위한 등록페이지로 이동
 		AuthDAO.loginCheck(request);
 		
-		
 		PlaylistDAO.getRdao().getAllPlMusic(request);
-		PlaylistDAO.getRdao().paging(1, request);
 		PlaylistDAO.getRdao().getPlaylist(request);
 		request.setAttribute("contentPage", "jsp/playlist/addPlaylistMusic.jsp");
 		request.getRequestDispatcher("index.jsp").forward(request, response);

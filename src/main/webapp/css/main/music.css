@@ -1,0 +1,15 @@
+.music_like button,
+.music_add button {
+  cursor: pointer;
+  padding: 0;
+  margin-right: 5px;
+  font-family: inherit;
+  font-weight: 400;
+  font-size: 18px;
+  border: none;
+  background-color: rgba(0, 0, 0, 0);
+}
+
+.music_add {
+  margin-right: 5px;
+}

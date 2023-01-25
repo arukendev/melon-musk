@@ -12,17 +12,7 @@
 	<div class="detail_header">
 		<div class="detail_top">
 			<c:choose>
-				<c:when test="${sessionScope.account.au_id eq null}">
-					<div class="detail_top_like">
-						<form action="LoginC">
-						<button>
-							<i class="far fa-heart"></i>
-							<span>${likeCount}</span>
-						</button>
-						</form>
-					</div>
-				</c:when>
-				<c:when test="${sessionScope.account.au_id ne likeAuth}">
+				<c:when test="${(sessionScope.account.au_id ne likeAuth) or (sessionScope.account.au_id eq null)}">
 					<div class="detail_top_like">
 						<form action="AlbumLikeAddC" method="post">
 							<input hidden name="albumId" value="${album.id}">
@@ -45,17 +35,15 @@
 					</div>
 				</c:otherwise>
 			</c:choose>
-			<c:if test="${sessionScope.account.au_id ne null}">
-				<div class="detail_top_edit">
-					<form action="AlbumUpdateC">
-						<input hidden name="albumId" value="${album.id}">
-						<button>
-							<i class="fas fa-pencil-alt"></i>
-							<span>편집하기</span>
-						</button>
-					</form>
-				</div>
-			</c:if>
+			<div class="detail_top_edit">
+				<form action="AlbumUpdateC">
+					<input hidden name="albumId" value="${album.id}">
+					<button>
+						<i class="fas fa-pencil-alt"></i>
+						<span>편집하기</span>
+					</button>
+				</form>
+			</div>
 		</div>
 		<div class="detail_titles">
 			<div class="detail_titles_title">
@@ -106,16 +94,44 @@
 			<c:choose>
 				<c:when test="${cdIndex.size() == 0}">
 					<c:forEach var="am" items="${albumMusics}">
-						<div class="album_track">
+						<div class="album_track" onclick="location.href='MusicC?musicId=${am.id}'">
 							<div class="album_track_num">
 								<span>${am.num}</span>
+							</div>
+							<c:choose>
+								<c:when test="${am.like ne 1}">
+									<div class="music_like">
+										<form action="MusicLikeAddC" method="post">
+											<input hidden name="musicId" value="${am.id}">
+											<button>
+												<i class="far fa-heart"></i>
+											</button>
+										</form>
+									</div>
+								</c:when>
+								<c:otherwise>
+									<div class="music_like">
+										<form action="MusicLikeDelC" method="post">
+											<input hidden name="musicId" value="${am.id}">
+											<button>
+												<i class="fas fa-heart"></i>
+											</button>
+										</form>
+									</div>
+								</c:otherwise>
+							</c:choose>
+							<div class="music_add">
+								<form action="AddPlChartMusicC">
+									<input hidden name="musicId" value="${am.id}">
+									<button>
+										<i class="fas fa-plus"></i>
+									</button>
+								</form>
 							</div>
 							<div class="album_track_music">
 								<a href="MusicC?musicId=${am.id}">
 									${am.name}
 								</a>
-							</div>
-							<div class="album_track_artist">
 								<span>${am.artist}</span>
 							</div>
 						</div>
@@ -128,16 +144,55 @@
 						</div>
 						<c:forEach var="am" items="${albumMusics}">
 							<c:if test="${ci == am.cd}">
-								<div class="album_track_num">
-									<span>${am.num}</span>
-								</div>
-								<div class="album_track_music">
-									<a href="MusicC?musicId=${am.id}">
-										${am.name}
-									</a>
-								</div>
-								<div class="album_track_artist">
-									<span>${am.artist}</span>
+								<div class="album_track" onclick="location.href='MusicC?musicId=${am.id}'">
+									<div class="album_track_num">
+										<span>${am.num}</span>
+									</div>
+									<c:choose>
+										<c:when test="${sessionScope.account.au_id eq null}">
+											<div class="music_like">
+												<form action="LoginC">
+													<button>
+														<i class="far fa-heart"></i>
+													</button>
+												</form>
+											</div>
+										</c:when>
+										<c:when test="${am.like ne 1}">
+											<div class="music_like">
+												<form action="MusicLikeAddC" method="post">
+													<input hidden name="musicId" value="${am.id}">
+													<button>
+														<i class="far fa-heart"></i>
+													</button>
+												</form>
+											</div>
+										</c:when>
+										<c:otherwise>
+											<div class="music_like">
+												<form action="MusicLikeDelC" method="post">
+													<input hidden name="musicId" value="${am.id}">
+													<button>
+														<i class="fas fa-heart"></i>
+													</button>
+												</form>
+											</div>
+										</c:otherwise>
+									</c:choose>
+									<div class="music_add">
+										<form action="AddPlChartMusicC">
+											<input hidden name="musicId" value="${am.id}">
+											<button>
+												<i class="fas fa-plus"></i>
+											</button>
+										</form>
+									</div>
+									<div class="album_track_music">
+										<a href="MusicC?musicId=${am.id}">
+											${am.name}
+										</a>
+										<span>${am.artist}</span>
+									</div>
 								</div>
 							</c:if>
 						</c:forEach>
@@ -177,7 +232,7 @@
 			<c:forEach var="c" items="${comments}">
 				<div class="comment_comment">
 					<div class="comment_profileimg">
-						<img src="${c.img}">
+						<img src="files/auth/${c.img}">
 					</div>
 					<div class="comment_contents">
 						<div class="comment_top">

@@ -14,9 +14,11 @@ import com.semi.main.Crawler;
 public class NewMusicC extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		AuthDAO.loginCheck(request);
 		Crawler.newMusicCrawler(request);
-		request.setAttribute("contentPage", "jsp/new_music/new_music.jsp");
+		if (AuthDAO.loginCheck(request)) {
+			NewMusicDAO.getLikeInfo(request);
+		}
+		request.setAttribute("contentPage", "jsp/chart/new_music.jsp");
 		request.getRequestDispatcher("index.jsp").forward(request, response);
 	}
 

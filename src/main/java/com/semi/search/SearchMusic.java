@@ -1,25 +1,28 @@
 package com.semi.search;
 
 public class SearchMusic {
+	private String number;
 	private String musicId;
 	private String musicName;
-	private String artistId;
 	private String artistName;
-	private String albumId;
-	private String albumName;
+	private int like;
 	public SearchMusic() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public SearchMusic(String musicId, String musicName, String artistId, String artistName, String albumId,
-			String albumName) {
+	public SearchMusic(String number, String musicId, String musicName, String artistName, int like) {
 		super();
+		this.number = number;
 		this.musicId = musicId;
 		this.musicName = musicName;
-		this.artistId = artistId;
 		this.artistName = artistName;
-		this.albumId = albumId;
-		this.albumName = albumName;
+		this.like = like;
+	}
+	public String getNumber() {
+		return number;
+	}
+	public void setNumber(String number) {
+		this.number = number;
 	}
 	public String getMusicId() {
 		return musicId;
@@ -33,30 +36,17 @@ public class SearchMusic {
 	public void setMusicName(String musicName) {
 		this.musicName = musicName;
 	}
-	public String getArtistId() {
-		return artistId;
-	}
-	public void setArtistId(String artistId) {
-		this.artistId = artistId;
-	}
 	public String getArtistName() {
 		return artistName;
 	}
 	public void setArtistName(String artistName) {
 		this.artistName = artistName;
 	}
-	public String getAlbumId() {
-		return albumId;
+	public int getLike() {
+		return like;
 	}
-	public void setAlbumId(String albumId) {
-		this.albumId = albumId;
+	public void setLike(int like) {
+		this.like = like;
 	}
-	public String getAlbumName() {
-		return albumName;
-	}
-	public void setAlbumName(String albumName) {
-		this.albumName = albumName;
-	}
-	
 	
 }

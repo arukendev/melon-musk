@@ -12,17 +12,7 @@
 	<div class="detail_header">
 		<div class="detail_top">
 			<c:choose>
-				<c:when test="${sessionScope.account.au_id eq null}">
-					<div class="detail_top_like">
-						<form action="LoginC">
-						<button>
-							<i class="far fa-heart"></i>
-							<span>${likeCount}</span>
-						</button>
-						</form>
-					</div>
-				</c:when>
-				<c:when test="${sessionScope.account.au_id ne likeAuth}">
+				<c:when test="${(sessionScope.account.au_id ne likeAuth) or (sessionScope.account.au_id eq null)}">
 					<div class="detail_top_like">
 						<form action="MusicLikeAddC" method="post">
 							<input hidden name="musicId" value="${music.id}">
@@ -45,6 +35,15 @@
 					</div>
 				</c:otherwise>
 			</c:choose>
+			<div class="detail_top_add">
+				<form action="AddPlChartMusicC">
+					<input hidden name="musicId" value="${music.id}">
+					<button>
+						<i class="fas fa-plus"></i>
+						<span>리스트에 추가</span>
+					</button>
+				</form>
+			</div>
 			<c:if test="${sessionScope.account.au_id ne null}">
 				<div class="detail_top_edit">
 					<form action="MusicUpdateC">
@@ -136,7 +135,7 @@
 			<c:forEach var="c" items="${comments}">
 				<div class="comment_comment">
 					<div class="comment_profileimg">
-						<img src="${c.img}">
+						<img src="files/auth/${c.img}">
 					</div>
 					<div class="comment_contents">
 						<div class="comment_top">

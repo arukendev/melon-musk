@@ -7,6 +7,8 @@ import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.semi.album.AlbumMusic;
+import com.semi.artist.ArtistMusic;
 import com.semi.artist.Artists;
 import com.semi.auth.Auth;
 import com.semi.main.Comment;
@@ -336,6 +338,69 @@ public class MusicDAO {
 		} finally {
 			DBManager.close(con, pstmt, null);
 		}
+	}
+
+	public static void artistMusicLike(ArrayList<ArtistMusic> apList, HttpServletRequest request) {
+		Auth a = (Auth) request.getSession().getAttribute("account");
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		String sql = "select * from music_like where muli_mu_id = ? and muli_au_id = ?";
+		
+		try {
+			con = DBManager.connect();
+			for (ArtistMusic ap : apList) {
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, ap.getId());
+				if (a == null) {
+					pstmt.setString(2, "");
+				} else {
+					pstmt.setString(2, a.getAu_id());
+				}
+				rs = pstmt.executeQuery();
+				while (rs.next()) {
+					ap.setLike(1);
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBManager.close(con, pstmt, rs);
+		}
+	}
+
+	public static void albumMusicLike(ArrayList<AlbumMusic> ams, HttpServletRequest request) {
+		Auth a = (Auth) request.getSession().getAttribute("account");
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		String sql = "select * from music_like where muli_mu_id = ? and muli_au_id = ?";
+		
+		try {
+			con = DBManager.connect();
+			for (AlbumMusic am : ams) {
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, am.getId());
+				if (a == null) {
+					pstmt.setString(2, "");
+				} else {
+					pstmt.setString(2, a.getAu_id());
+				}
+				rs = pstmt.executeQuery();
+				while (rs.next()) {
+					am.setLike(1);
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBManager.close(con, pstmt, rs);
+		}
+		
 	}
 
 }

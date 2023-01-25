@@ -9,6 +9,9 @@
 @import "main/comment.css";
 @import "main/artist.css";
 @import "main/album.css";
+@import "main/search.css";
+@import "main/edit.css";
+@import "main/music.css";
 
 .hidden {
   display: none;
@@ -31,8 +34,8 @@ a {
 header {
   width: 1170px;
   min-width: 1170px;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  display: flex;
+  justify-content: space-between;
 }
 
 main,
@@ -45,6 +48,7 @@ footer {
 }
 
 main {
+  height: 100%;
   flex-direction: column;
   justify-content: flex-start;
 }
@@ -113,7 +117,7 @@ main {
   background-clip: text;
   -webkit-background-clip: text;
 }
-.loginBtn,
+
 .index_login_button,
 .index_join_button {
   padding: 3px 10px;
@@ -127,3 +131,42 @@ main {
   background-color: var(--dYello);
   border-color: var(--dYello);
 }
+
+.index_login {
+    width: 100px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #fff;
+    cursor: pointer;
+    margin: 20px;
+    height: 30px;
+    text-align:center;
+    border: none;
+    background-size: 300% 100%;
+
+    border-radius: 50px;
+    moz-transition: all .4s ease-in-out;
+    -o-transition: all .4s ease-in-out;
+    -webkit-transition: all .4s ease-in-out;
+    transition: all .4s ease-in-out;
+}
+
+.index_login:hover {
+    background-position: 100% 0;
+    moz-transition: all .4s ease-in-out;
+    -o-transition: all .4s ease-in-out;
+    -webkit-transition: all .4s ease-in-out;
+    transition: all .4s ease-in-out;
+}
+
+.index_login:focus {
+    outline: none;
+}
+
+.index_login.in {
+    background-image: linear-gradient(to right, #25aae1, #40e495, #30dd8a, #2bb673);
+    box-shadow: 0 4px 15px 0 rgba(49, 196, 190, 0.75);
+}
+.index_login.join {
+ background-image: linear-gradient(to right, #25aae1, #4481eb, #04befe, #3f86ed);
+    box-shadow: 0 4px 15px 0 rgba(65, 132, 234, 0.75);}

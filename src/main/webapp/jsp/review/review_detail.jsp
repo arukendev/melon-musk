@@ -14,47 +14,46 @@
 <div class="list_title">
 		<h1>상세보기</h1>
 </div>
-<div class="list_subtitle">
+<div class="reviewDetail_list_subtitle">
 		<c:if test="${sessionScope.account.au_id eq 'admin' }">
-			<h6><a href="ReviewReportedC">신고글 목록</a><span> |&nbsp</span></h6>
+			<h6><a style="margin-right:15px;" href="ReviewReportedC">신고글목록</a></h6>
 		</c:if>
 			<h6><a href="ReviewC">목록</a></h6>
 </div>
-<div class="reviewDetail_table_row">
-	<div style="width: 70%; font-size: 25pt">${review.name }</div>
-	<div style="width: 75px;">작성자  <span>${review.au_id }</span></div>
-	<div id="reviewDetail_row_viewsLike">
-		<div class="reviewDetail_viewsLike_items"><i class="fa-solid fa-eye"></i></div>
-		<div class="reviewDetail_viewsLike_items">${review.view }</div>
-		<c:choose>
-			<c:when test="${(sessionScope.account.au_id ne null) and (like.au_id ne null) and (sessionScope.account.au_id eq like.au_id)}">
- 				<div class="reviewDetail_viewsLike_items"><button id="reviewDetail_items_likeBtn" onclick="location.href='ReviewLikeCancelC?no=${review.id}&wr=${review.au_id }'"><i class="fas fa-heart"></i></button></div>
-			</c:when>
-			<c:when test="${sessionScope.account.au_id eq 'admin'}">
- 				<div class="reviewDetail_viewsLike_items"><button id="reviewDetail_items_likeBtn" onclick="javascript:adminClickedButton()"><i class="fas fa-heart"></i></button></div>
-			</c:when>
-			<c:otherwise>
-				<div class="reviewDetail_viewsLike_items"><button id="reviewDetail_items_likeBtn" onclick="like(${review.id}, '${review.au_id }', '${a.au_id }')"><i class="far fa-heart"></i></button></div>
-			</c:otherwise>
-		</c:choose>
-		<div class="reviewDetail_viewsLike_items" id="likeNumber">${review.like }</div>
+<div class="reviewDetail_table">
+	<div class="reviewDetail_table_titleRow">
+		<div id="reviewDetail_titleRow_title">${review.name }</div>
+		<div id="reviewDetail_titleRow_etcs">
+			<div class="reviewDetail_titleRow_index tAcenter">작성자</div>
+			<div class="reviewDetail_row_100 tAcenter">${review.au_id }</div>
+			<div class="reviewDetail_titleRow_index tAcenter">작성일</div>
+			<div id="reviewDetail_titleRow_date tAright">
+			<fmt:formatDate value="${review.date }" type="both" pattern="yyyy-MM-dd HH:mm:ss"></fmt:formatDate>
+			</div>
+			<div class="reviewDetail_viewsLike_items"><i class="fa-solid fa-eye"></i></div>
+			<div class="reviewDetail_viewsLike_items">${review.view }</div>
+		</div>
 	</div>
-</div>
-<div class="reviewDetail_table_row">
-	<div class="reviewReg_row_index">작성자</div>
-	<div class="reviewDetail_row_200">
-	${review.au_id }
-	</div>
-	<div class="reviewReg_row_index">작성일</div>
-	<div class="reviewDetail_row_100">
-	<fmt:formatDate value="${review.date }" type="both" pattern="yyyy-MM-dd HH:mm:ss"></fmt:formatDate>
-	</div>
-</div>
 	<div class="reviewDetail_table_content">
-		<div class="reviewDetail_content_label">내용</div>
+		<div id="reviewDetail_content_viewsLike">
+			<c:choose>
+				<c:when test="${(sessionScope.account.au_id ne null) and (like.au_id ne null) and (sessionScope.account.au_id eq like.au_id)}">
+	 				<div class="reviewDetail_viewsLike_items"><button class="reviewDetail_items_likeBtn" onclick="location.href='ReviewLikeCancelC?no=${review.id}&wr=${review.au_id }'"><i class="fas fa-heart"></i></button></div>
+				</c:when>
+				<c:when test="${sessionScope.account.au_id eq 'admin'}">
+	 				<div class="reviewDetail_viewsLike_items"><button class="reviewDetail_items_likeBtn" onclick="javascript:adminClickedButton()"><i class="fas fa-heart"></i></button></div>
+				</c:when>
+				<c:otherwise>
+					<div class="reviewDetail_viewsLike_items"><button class="reviewDetail_items_likeBtn" onclick="like(${review.id}, '${review.au_id }', '${a.au_id }')"><i class="far fa-heart"></i></button></div>
+				</c:otherwise>
+			</c:choose>
+			<div class="reviewDetail_likeNumber">${review.like }</div>
+		</div>
 		<div class="reviewDetail_content_txt">
 			<div>
 				<c:choose>
+					<c:when test="${review.img eq null }">
+					</c:when>
 					<c:when test="${fn:contains(review.img, '*file^')  }">
 						<div class="reviewDetail_row_400">
 							<img src="<%=request.getContextPath() %>/files/review/${fn:replace(review.img,'*file^','') }" id="reviewDetail_row_img"><a href="<%=request.getContextPath() %>/files/review/${fn:replace(review.img,'*file^','') }" target="blank"><i class="fa-solid fa-magnifying-glass-plus"></i></a>
@@ -73,14 +72,15 @@
 		</div>
 	</div>
 	<div id="reviewDetail_table_bottom">
-		<div id="reviewDetail_bottom_report">
-			<button onclick="report(${review.id}, '${review.au_id }', '${a.au_id }')">신고하기</button>
-		</div>
 		<div id="reviewDetail_bottom_bttmBtns">
-			<button onclick="update(${review.id}, '${review.au_id }', '${a.au_id }')">수정하기</button>
-			<button onclick="deleteReview(${review.id}, '${review.au_id }', '${a.au_id }')">삭제하기</button>
+			<button class="reviewDetail_bttmBtns_btn" onclick="update(${review.id}, '${review.au_id }', '${a.au_id }')">수정</button>
+			<button class="reviewDetail_bttmBtns_btn" onclick="deleteReview(${review.id}, '${review.au_id }', '${a.au_id }')">삭제</button>
+		</div>
+		<div id="reviewDetail_bottom_report">
+			<button class="reviewDetail_bttmBtns_btn" onclick="report(${review.id}, '${review.au_id }', '${a.au_id }')">신고</button>
 		</div>
 	</div>
+</div>	
 <div class="comment_container">
 	<h1>댓글</h1>
 	<div class="comment_input">
@@ -116,7 +116,7 @@
 						<div class="comment_date">
 							<fmt:formatDate value="${c.date}" pattern="yyyy.MM.dd kk:mm:ss"/>
 						</div>
-						<c:if test="${c.authId eq sessionScope.account.au_id}">
+						<c:if test="${(c.authId eq sessionScope.account.au_id) or (sessionScope.account.au_id eq 'admin')}">
 							<div>
 								<a href="javascript:commentDel(${review.id}, ${c.commentId})">
 									<i class="fas fa-trash-alt"></i>

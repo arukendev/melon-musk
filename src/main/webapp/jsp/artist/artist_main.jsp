@@ -13,19 +13,54 @@
 		<div class="artist_musics">
 			<div class="artist_musics_title">
 				<h1>인기 곡</h1>
-				<a href="ArtistMusicC?artistId=${artist.id}&muIndex=1">더 보기</a>
+				<a href="ArtistMusicC?artistId=${artist.id}&page=1&muIndex=1">더 보기</a>
 			</div>
 			<c:forEach var="am" items="${artistMusic}">
-				<div class="artist_music">
-					<span>${am.rank}</span>
-					<a href="MusicC?musicId=${am.id}">${am.name}</a>
+				<div class="artist_music" onclick="location.href='MusicC?musicId=${am.id}'">
+					<div class="artist_music_num">
+						<span>${am.rank}</span>
+					</div>
+					<c:choose>
+						<c:when test="${am.like ne 1}">
+							<div class="music_like">
+								<form action="MusicLikeAddC" method="post">
+									<input hidden name="musicId" value="${am.id}">
+									<button>
+										<i class="far fa-heart"></i>
+									</button>
+								</form>
+							</div>
+						</c:when>
+						<c:otherwise>
+							<div class="music_like">
+								<form action="MusicLikeDelC" method="post">
+									<input hidden name="musicId" value="${am.id}">
+									<button>
+										<i class="fas fa-heart"></i>
+									</button>
+								</form>
+							</div>
+						</c:otherwise>
+					</c:choose>
+					<div class="music_add">
+						<form action="AddPlChartMusicC">
+							<input hidden name="musicId" value="${am.id}">
+							<button>
+								<i class="fas fa-plus"></i>
+							</button>
+						</form>
+					</div>
+					<div class="artist_music_info">
+						<a href="MusicC?musicId=${am.id}">${am.name}</a>
+						<span>${am.artist}</span>
+					</div>
 				</div>
 			</c:forEach>
 		</div>
 		<div class="artist_albums">
 			<div class="artist_album_title">
 				<h1>최신 앨범</h1>
-				<a href="ArtistAlbumC?artistId=${artist.id}&alIndex=1">더 보기</a>
+				<a href="ArtistAlbumC?artistId=${artist.id}&page=1&alIndex=1">더 보기</a>
 			</div>
 			<div class="artist_album">
 				<c:forEach var="aa" items="${artistAlbum}">
@@ -75,7 +110,7 @@
 			<c:forEach var="c" items="${comments}">
 				<div class="comment_comment">
 					<div class="comment_profileimg">
-						<img src="${c.img}">
+						<img src="files/auth/${c.img}">
 					</div>
 					<div class="comment_contents">
 						<div class="comment_top">

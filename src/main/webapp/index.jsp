@@ -28,14 +28,18 @@
 			<div id="index_header_hCenter">
 				<div id="index_hCenter_search" class="hidden">
 					<form action="SearchC">
-						<i class="fa-solid fa-xmark"></i>
+						<i class="fas fa-times fa-lg"></i>
 						<select name="sel">
 							<option value="ar">가수</option>
 							<option value="al">앨범</option>
 							<option value="mu">음악</option>
 						</select>
-						<input name="result" />
-						<button class="index_button"><i class="fas fa-search"></i></button>
+						<input name="result">
+						<input hidden name="page" value="1">
+						<input hidden name="index" value="1">
+						<button class="index_button">
+							<i class="fas fa-search"></i>
+						</button>
 					</form>
 				</div>
 				<div id="index_hCenter_nav">
@@ -46,7 +50,7 @@
 						<a href="NewMusicC">최신곡</a>
 					</div>
 					<div class="index_nav_content">
-						<a href="ReviewC">게시판</a>
+						<a href="ReviewC">리뷰</a>
 					</div>
 					<div class="index_nav_content">
 						<a href="PlaylistC">플레이리스트</a>

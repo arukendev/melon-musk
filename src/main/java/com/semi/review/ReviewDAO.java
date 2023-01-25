@@ -80,7 +80,10 @@ public class ReviewDAO {
 			MultipartRequest mr = new MultipartRequest(request,path,20*1024*1024,"utf-8",new DefaultFileRenamePolicy());
 			String text = mr.getParameter("text");
 			text = text.replaceAll("\\r\\n", "<br>");
-			String img="*file^"+mr.getFilesystemName("img");
+			String img=null;
+			if(mr.getFilesystemName("img")!=null) {
+				img="*file^"+mr.getFilesystemName("img");
+			}
 			
 			con = DBManager.connect();
 			pstmt = con.prepareStatement(sql);
@@ -205,10 +208,15 @@ public class ReviewDAO {
 				String path = request.getSession().getServletContext().getRealPath("files/review");
 				System.out.println(path);
 				
+				String img = request.getParameter("img");
 				MultipartRequest mr = new MultipartRequest(request,path,20*1024*1024,"utf-8",new DefaultFileRenamePolicy());
 				String text = mr.getParameter("text");
 				text = text.replaceAll("\\r\\n", "<br>");
-				String img="*file^"+mr.getFilesystemName("img");
+				if(mr.getFilesystemName("img")!=null) {
+					img="*file^"+mr.getFilesystemName("img");
+				} else if(mr.getFilesystemName("img")==null) {
+					img=null;
+				}
 				
 				con = DBManager.connect();
 				pstmt = con.prepareStatement(
@@ -572,7 +580,7 @@ public class ReviewDAO {
 		try {
 			con = DBManager.connect();
 			pstmt = con.prepareStatement(
-					"select * from review where re_like >= 3 order by re_id"
+					"select * from review where re_like >= 3 and re_au_id != 'admin' order by re_id"
 					);
 			rs = pstmt.executeQuery();
 			
