@@ -10,20 +10,24 @@
 <script type="text/javascript" src="js/playlist/playlist.js"></script>
 </head>
 <body>
-
-	<form action="AddPlMusicC"  >
+	<form action="AddPlMusicC">
 	<div class="pd_contanier">
 		<div class="pd_title">
-		<div class="pd_title_item">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-		&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-		플레이리스트 :  ${playlistmusics[0].pl_name}</div>
+			<div class="pd_title_item">플레이리스트 :  ${playlistmusics[0].pl_name}</div>
 		</div>
-		 <div class="pd_info">
+		<div class="pd_info">
 			<input name="pl_id" value="${param.pl_id}" type="hidden" >
-			<div id="pd_info_item1"> <img src="files/playlist/${playlistmusics[0].pl_img}"> </div>
-			<div class="pd_info_items"> <p> 작성자&nbsp :&nbsp ${playlistmusics[0].pl_au_id}</p> 등록일&nbsp :&nbsp ${playlistmusics[0].pl_date}</div>
-			<div id="pd_info_text"> ${playlistmusics[0].pl_text} </div>
-		<div ></div>
+			<div id="pd_info_img">
+				<img src="files/playlist/${playlistmusics[0].pl_img}">
+			</div>
+			<div class="pd_info_items">
+				<p>작성자 : ${playlistmusics[0].pl_au_id}</p>
+				<p>등록일 : ${playlistmusics[0].pl_date}</p>
+			</div>
+			<div id="pd_info_text">
+				<p>${playlistmusics[0].pl_text}</p>
+			</div>
+		</div>
 			<!--  
 			<div class="">
 			<button value="${plms.pl_id}">음원추가하기</button>
@@ -45,9 +49,8 @@
 		</div>-->
 		</div>
 			<div class="pd_music">
-		<div class="pd_music_title">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-		&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-		노래
+		<div class="pd_music_title">
+			노래
 		</div>	
 		<div class="pd_music_sub">
 		<button value="${plms.pl_id}">음원추가하기</button>

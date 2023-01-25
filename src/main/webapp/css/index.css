@@ -12,6 +12,7 @@
 @import "main/search.css";
 @import "main/edit.css";
 @import "main/music.css";
+@import "playlist/playlist.css";
 
 .hidden {
   display: none;
