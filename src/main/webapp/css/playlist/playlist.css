@@ -81,7 +81,7 @@ width: 100px;
 
 
 .pd_contanier {
-width: inherit;
+	width: inherit;
   flex-direction: column;
   gap: 10px;
   margin-bottom: 30px;
