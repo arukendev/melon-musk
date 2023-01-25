@@ -29,7 +29,6 @@ public class PlDetailC extends HttpServlet {
 	
 		
 		if(a==null) {
-			request.setAttribute("alert", " 로그인 정보가 사라졌어요ㅜ. 재로그인 해주세요.");
 			request.setAttribute("contentPage", "jsp/auth/login.jsp");
 			request.getRequestDispatcher("index.jsp").forward(request, response);
 		} else {
