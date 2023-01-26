@@ -1,79 +1,100 @@
 @charset "UTF-8";
 
-
-#login_form {
-  margin-top: 150px;
-  display: block;
-  justify-content: center;
-}
-
-#login_form label {
-  color: black;
-  font-size: 16px;
-  width: 100px;
-  display: inline-block;
-}
-
-#login_form input {
-  background-color: black;
-  color: white;
-  font-size: 16px;
-  width: 250px;
-  border: 1px solid white;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-  transition: border-color 0.3s ease-in-out;
-  padding:  10px;
-  text-align: center;
-}
-
-#login_form button{
-	background-color: aqua;
-	 width: 100px;
-	 justify-content: center;
-}
-#profile_img {
-  background-color: #718093;
-  overflow: hidden;
-  width: 250px;
-  height: 250px;
-  border-radius: 25%;
+#profile_box {
+  width: inherit;
+  height: inherit;
+  margin: 50px 0;
   display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 50px;
+}
+
+#profile_img {
+  width: 280px;
+  height: 280px;
+  overflow: hidden;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+}
+
+#profile_img img {
+  width: 280px;
+}
+
+.profile_content {
+  width: inherit;
+  display: grid;
+  grid-template-columns: 200px 300px;
   justify-content: center;
   align-items: center;
 }
 
-#profile_img img {
-  width: 250px;
-}
-
-
-#profile_wrapper {
+.profile_title {
   display: flex;
   justify-content: center;
 }
 
-#profile_box {
-  display: grid;
-  grid-template-rows: 300px repeat(6, 100px);
+.profile_result {
+  display: flex;
+  justify-content: center;
+  font-weight: 400;
+  color: var(--dYello);
 }
 
-.profile_content:not(.profile_content:first-child) {
-  display: grid;
-  grid-template-columns: 200px 300px;
+.profile_button {
+  font-family: "Noto Sans KR", sans-serif;
+  background-color: var(--lYello);
+  font-size: 18px;
+  font-weight: 300;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 20px;
+  cursor: pointer;
 }
 
+.profile_button:hover {
+  background-color: #f8eaa6;
+}
 
+.profile_buttons {
+  display: flex;
+  gap: 20px;
+}
 
+.profile_content input[type="text"],
+.profile_content input[type="password"] {
+  background-color: inherit;
+  padding: 10px;
+  border: 1px solid var(--gray);
+}
 
+.profile_content textarea {
+  resize: none;
+  background-color: inherit;
+  padding: 10px;
+  border: 1px solid var(--gray);
+}
 
+.id_check_button {
+  font-family: "Noto Sans KR", sans-serif;
+  font-weight: 300;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  padding: 5px 10px;
+  background-color: var(--lYello);
+}
 
-
-
-
-
-
-
-
-
-
-
+#login_form {
+  width: inherit;
+  height: inherit;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+}

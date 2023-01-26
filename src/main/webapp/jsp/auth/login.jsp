@@ -7,16 +7,13 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<form action="LoginC" method="post" onsubmit="return call()">
-	
-	
-	<div id="login_form">
-		<div style="color:red">${alert }</div>
-        <div class="login_form">
+	<form id="login_form" action="LoginC" method="post" onsubmit="return call()">
+		<div style="color:red">${alert}</div>
+        <div class="profile_content">
           <label for="id">ID</label>
-          <input id="id" name="id" placeholder="ID를 입력해주세요" />
+          <input type="text" id="id" name="id" placeholder="ID를 입력해주세요" />
         </div>
-        <div class="login_form">
+        <div class="profile_content">
           <label for="pw">Password</label>
           <input
             type="password"
@@ -25,17 +22,11 @@
             placeholder="패스워드를 입력해주세요"
           />
         </div>
-        <div class="login_button">
-          <button>Log in</button>
+        <div class="profile_buttons">
+          <button class="profile_button">로그인</button>
+          <button type="button" class="profile_button" onclick="location.href='AuthC'">회원가입</button>
         </div>
-      </div>
-	
 	</form>
-	<div id="login_form">
-	<div class="login_button2">
-          <button onclick="location.href='AuthC'">Join us</button>
-            </div>
-            </div>
 	<script src="js/auth/acValueCheck.js"></script>
     <script src="js/auth/acValidCheck.js"></script>
 </body>

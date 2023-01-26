@@ -7,19 +7,9 @@
 <title>Insert title here</title>
 </head>
 <body>
-			
-	<table id="loginAtreaTbl">
-	<tr>
-	<td>${r }</td>
-	</tr>
-	<tr>
-	<td>${sessionScope.account.au_id }(${sessionScope.account.au_name })님 안녕하세요</td>
-	</tr>
-	<tr>
-	<td ><button class="loginBtn my" onclick="location.href='MyPageC?id=${sessionScope.account.au_id }'">마이페이지</button></td>
-	<td ><button class="loginBtn out" onclick="location.href='LoginC'">로그아웃</button> </td>
-	</tr>
-	</table>
-	
+	<div class="login_buttons">
+		<button class="index_login my" onclick="location.href='MyPageC?id=${sessionScope.account.au_id }'">마이페이지</button>
+		<button class="index_login out" onclick="location.href='LoginC'">로그아웃</button>
+	</div>
 </body>
 </html>
