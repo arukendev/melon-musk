@@ -151,7 +151,7 @@ public class AuthDAO {
 				
 			for (String s : interest) {
 				System.out.println(s);
-				interest2 += s+"!";//food!excer!game,dev
+				interest2 += s+" ";//food!excer!game,dev
 			}
 			}else {
 				interest2="관심사없음";
@@ -272,7 +272,7 @@ public class AuthDAO {
 				
 			for (String s : interest) {
 				System.out.println(s);
-				interest2 +=s+"!";//food!excer!game,dev
+				interest2 +=s+" ";//food!excer!game,dev
 			}
 			}else {
 				interest2="관심사없음";
