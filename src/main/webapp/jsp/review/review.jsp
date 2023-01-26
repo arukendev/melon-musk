@@ -24,11 +24,11 @@
 </div>
 <div id="review_columnsWrap_label">
 	<div class="review_label_no">글번호</div>
-	<div class="review_label_title">제목</div>
+	<div id="review_label_title">글제목</div>
 	<div class="review_label_writer">작성자</div>
+	<div id="review_label_viewLike">조회수</div>
+	<div id="review_label_viewLike">추천수</div>
 	<div class="review_label_date">작성일</div>
-	<div class="review_label_viewLike"><i class="fa-solid fa-eye"></i></div>
-	<div class="review_label_viewLike"><i class="fas fa-heart"></i></div>
 </div>
 <div id="review_table2">
 <c:forEach var="notice" items="${notices }">
@@ -40,9 +40,9 @@
 					<%-- <div class="review_title_commentN">[${notice.comment }]</div> --%>
 				</div>
 				<div class="review_label_writer">${notice.au_id }</div>
+				<div class="review_label_viewLike"><i class="fa-solid fa-eye"></i><div>${notice.view }</div></div>
+				<div class="review_label_viewLike"><i class="fas fa-heart"></i>${notice.like }</div>
 				<div class="review_label_date">${notice.date }</div>
-				<div class="review_label_viewLike">${notice.view }</div>
-				<div class="review_label_viewLike">${notice.like }</div>
 			</div>
 		</a>
 </c:forEach>
@@ -62,9 +62,9 @@
 				<%-- <div class="review_title_commentN">[${review.comment }]</div> --%>
 			</div>
 			<div class="review_label_writer">${review.au_id }</div>
+			<div class="review_label_viewLike"><i class="fa-solid fa-eye"></i><div>${review.view }</div></div>
+			<div class="review_label_viewLike"><i class="fas fa-heart"></i>${review.like }</div>
 			<div class="review_label_date">${review.date }</div>
-			<div class="review_label_viewLike">${review.view }</div>
-			<div class="review_label_viewLike">${review.like }</div>
 		</div>
 	</a>
 </c:forEach>
