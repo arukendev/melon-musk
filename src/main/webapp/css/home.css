@@ -14,20 +14,26 @@
   font-weight: 700;
 }
 
-.home_pl_title {
+.home_1_title {
   font-size: 20px;
   font-weight: 400;
   margin-bottom: 20px;
 }
 
-.home_pl_wrapper {
+.home_1_wrapper {
   width: inherit;
   display: flex;
   flex-wrap: wrap;
   gap: 40px;
 }
 
-.home_pl_img {
+.home_1_content {
+  display: flex;
+  flex-direction: column;
+  width: 200px;
+}
+
+.home_1_img {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -39,6 +45,56 @@
   background-color: white;
 }
 
-.home_pl_img img {
+.home_1_img img {
   width: 200px;
+}
+
+.home_1_txt {
+  display: block;
+  width: 200px;
+  padding: 20px 0;
+  font-size: 18px;
+  font-weight: 400;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.home_2_content {
+  display: flex;
+  align-items: center;
+  padding: 10px 0;
+}
+
+.home_2_img {
+  display: block;
+  width: 80px;
+  height: 80px;
+  overflow: hidden;
+  box-shadow: 2px 2px 2px rgb(0, 0, 0, 0.2);
+  border-radius: 5px;
+  margin-right: 20px;
+}
+
+.home_2_img img {
+  width: 80px;
+}
+
+.home_2_txt {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.home_2_name {
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 26px;
+}
+
+.home_2_artist {
+  color: var(--gray);
+  font-size: 14px;
+  line-height: 18px;
 }
