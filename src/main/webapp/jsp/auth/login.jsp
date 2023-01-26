@@ -31,6 +31,11 @@
       </div>
 	
 	</form>
+	<div id="login_form">
+	<div class="login_button2">
+          <button onclick="location.href='AuthC'">Join us</button>
+            </div>
+            </div>
 	<script src="js/auth/acValueCheck.js"></script>
     <script src="js/auth/acValidCheck.js"></script>
 </body>

@@ -106,6 +106,17 @@
   background-color: rgb(128, 255, 255);
 }
 
+
+.login_button{
+	position: absolute;
+	top: 250px;
+	right: 730px;
+}
+.login_button2{
+	position: absolute;
+	top: 250px;
+	right: 600px;
+}
 #reg-form input[type="submit"]:focus,
 #login_form button:focus,
 .profile_button:focus {
@@ -212,10 +223,17 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  position: absolute;
+ top : 20px;
+    left: 700px;
 }
 
 #profile_img img {
   width: 250px;
+  
+   position: relative;
+ z-index:1 ;
+
 }
 
 #login_form {
