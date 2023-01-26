@@ -19,7 +19,7 @@ public class AddPlMusicC extends HttpServlet {
 		AuthDAO.loginCheck(request);
 		
 		PlaylistDAO.getRdao().getAllPlMusic(request);
-		PlaylistDAO.getRdao().getPlaylist(request);
+		PlaylistDAO.getRdao().getPlaylist_onlyPl(request);
 		request.setAttribute("contentPage", "jsp/playlist/addPlaylistMusic.jsp");
 		request.getRequestDispatcher("index.jsp").forward(request, response);
 	
@@ -33,7 +33,7 @@ public class AddPlMusicC extends HttpServlet {
 		
 		PlaylistDAO.getRdao().getPlaylist(request);
 		
-		request.setAttribute("contentPage", "jsp/playlist/playlistDetail.jsp");	
+		request.setAttribute("contentPage", "jsp/playlist/playlistDetail_guest.jsp");	
 		request.getRequestDispatcher("index.jsp").forward(request, response);
 	
 	

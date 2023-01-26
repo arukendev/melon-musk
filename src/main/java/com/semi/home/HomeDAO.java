@@ -22,7 +22,8 @@ public class HomeDAO {
 		String sql = "select pl_id, pl_name, pl_img "
 				+ "from playlist, auth " 
 				+ "where pl_au_id = au_id "
-				+ "and au_id = ?";
+				+ "and au_id = ? "
+				+ "order by pl_date desc";
 
 		try {
 			con = DBManager.connect();
@@ -123,7 +124,7 @@ public class HomeDAO {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "select mu_id, mu_name " 
+		String sql = "select mu_id, mu_name, mu_al_img, mu_ar_name " 
 				+ "from music, music_like, auth " 
 				+ "where muli_au_id = au_id "
 				+ "and mu_id = muli_mu_id "
@@ -140,6 +141,8 @@ public class HomeDAO {
 				mml = new MyMusicLike();
 				mml.setId(rs.getString("mu_id"));
 				mml.setName(rs.getString("mu_name"));
+				mml.setImg(rs.getString("mu_al_img"));
+				mml.setArtist(rs.getString("mu_ar_name"));
 				mmls.add(mml);
 			}
 			request.setAttribute("mmls", mmls);
