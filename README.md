@@ -1,12 +1,11 @@
 <img src="https://drive.google.com/uc?export=view&id=1URtx3Xr-A3BBQdLJ0-oOzxRDvj9ObviC"/>
-# Semi Project 
-#### project:The Cook
-#### member:한수진 김원봉 이영경
-#### Project execution period:2022.06.13~2022.07.01
----
+
+# Melon Musk 
+#### member: 이재현 오재호 최우영 박경록 백승명
+#### Project execution period:2023.01.02~2023.01.26
 ## Description
-### The Cook?
-The Cook은 누구나 자신의 레시피를 올리고 다른 사람들의 레시피를 보면서 레시피를 습득할 수 있는 커뮤니티입니다. <br>
+### Melon Musk?
+Melon Musk는 누구나 자신의 레시피를 올리고 다른 사람들의 레시피를 보면서 레시피를 습득할 수 있는 커뮤니티입니다. <br>
 주 이용 고객은 요리에 관심있는 모든 사람들입니다
 
 ### The Cook를 만든이유
@@ -31,4 +30,4 @@ account DB 설계 <br>로그인 기능 (회원가입, 탈퇴, 마이페이지)<b
 hansujin_1@naver.com|jinyuanfeng1@naver.com|leeyoky@naver.com
 
 ### Tools
-<img src="https://img.shields.io/badge/Eclipse-2C2255?style=flat-square&logo=Eclipse IDE&logoColor=white"/> <img src="https://img.shields.io/badge/GitHub-181717?style=flat-square&logo=GitHub&logoColor=white"/> <img src="https://img.shields.io/badge/Sourcetree-0052CC?style=flat-square&logo=Sourcetree&logoColor=white"/> <img src="https://img.shields.io/badge/Oracle-F80000?style=flat-square&logo=Oracle&logoColor=white"/> <img src="https://img.shields.io/badge/css-1572B6?style=flat-square&logo=css3&logoColor=white"> <img src="https://img.shields.io/badge/git-F05032?style=flat-square&logo=git&logoColor=white"> <img src="https://img.shields.io/badge/java-007396?style=flat-square&logo=java&logoColor=white"> <img src="https://img.shields.io/badge/Ajax-23C8D2?style=flat-square&logo=java&logoColor=white">
+<img src="https://img.shields.io/badge/Eclipse-2C2255?style=flat-square&logo=Eclipse IDE&logoColor=white"/> <img src="https://img.shields.io/badge/GitHub-181717?style=flat-square&logo=GitHub&logoColor=white"/> <img src="https://img.shields.io/badge/Sourcetree-0052CC?style=flat-square&logo=Sourcetree&logoColor=white"/> <img src="https://img.shields.io/badge/Oracle-F80000?style=flat-square&logo=Oracle&logoColor=white"/> <img src="https://img.shields.io/badge/css-1572B6?style=flat-square&logo=css3&logoColor=white"> <img src="https://img.shields.io/badge/git-F05032?style=flat-square&logo=git&logoColor=white"> <img src="https://img.shields.io/badge/java-007396?style=flat-square&logo=java&logoColor=white"> <img src="https://img.shields.io/badge/Jsoup-23C8D2?style=flat-square&logo=java&logoColor=white">
