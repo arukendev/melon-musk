@@ -28,7 +28,15 @@
 				</div>
 			</div>
 			<div class="pd_music">
-				<h1 class="pd_music_h1">노래</h1>
+				<div class="pd_music_h1">노래 
+					<div class="pd_music_button">
+						<c:if test="${deleteOK}">
+							<button value="${plms.pl_id}">음원추가하기</button>
+							<button type="button" onclick="deleteplmusic(${param.pl_id})">음악삭제하기</button>
+							<button type="button" onclick="deleteplaylist(${param.pl_id})">플리삭제하기</button>
+						</c:if>
+					</div>
+				</div>
 				<div class="pd_music_title">
 					<div class="pd_content_playlistitem1">이미지</div>
 					<div class="pd_content_playlistitem1">곡</div>
@@ -44,7 +52,7 @@
 						<div class="pd_content_playlistitem">${plms.mu_name }</div>
 						<div class="pd_content_playlistitem">${plms.mu_al_name }</div>
 						<div class="pd_content_playlistitem">${plms.ar_name }</div>
-						<div class="pd_content_playlistitem">상세보기</div>
+						<div class="pd_content_playlistitem" onclick="location.href='MusicC?musicId=${plms.mu_id}'">상세보기</div>
 					</div>
 				</c:forEach>
 			</div>

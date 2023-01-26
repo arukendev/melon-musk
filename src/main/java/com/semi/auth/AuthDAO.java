@@ -12,6 +12,7 @@ import org.apache.catalina.connector.Request;
 
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
+import com.semi.home.HomeDAO;
 import com.semi.main.DBManager;
 
 public class AuthDAO {
@@ -70,7 +71,6 @@ public class AuthDAO {
 			if (rs.next()) {
 				
 				if (userpw.equals(rs.getString("au_pw"))) {
-					request.setAttribute("r","로그인 성공");
 					
 					//id,name 
 					Auth a = new Auth();
@@ -87,13 +87,18 @@ public class AuthDAO {
 					HttpSession hs = request.getSession();
 					hs.setAttribute("account", a);
 					hs.setMaxInactiveInterval(60 * 10);
+					request.setAttribute("contentPage", "jsp/main/main_login.jsp");
+					HomeDAO.getPlayList(request);
+					HomeDAO.getArtistLike(request);
+					HomeDAO.getAlbumLike(request);
+					HomeDAO.getMusicLike(request);
 				}else {
-					request.setAttribute("r","비번에러");
+					request.setAttribute("alert","비번에러");
 					request.setAttribute("contentPage", "jsp/auth/login.jsp");
 
 				}
 			}else {
-				request.setAttribute("r","없는아이디");
+				request.setAttribute("alert","없는아이디");
 				request.setAttribute("contentPage", "jsp/auth/login.jsp");
 
 			}
@@ -151,7 +156,7 @@ public class AuthDAO {
 				
 			for (String s : interest) {
 				System.out.println(s);
-				interest2 += s+"!";//food!excer!game,dev
+				interest2 += s+" ";//food!excer!game,dev
 			}
 			}else {
 				interest2="관심사없음";
@@ -181,7 +186,7 @@ public class AuthDAO {
 			
 			if (pstmt.executeUpdate()==1) {
 				System.out.println("가입성공");
-				request.setAttribute("r", "가입성공!!");
+				request.setAttribute("alert", "가입성공!!");
 			}
 			
 			//받은 값 다 띄우기
@@ -272,7 +277,7 @@ public class AuthDAO {
 				
 			for (String s : interest) {
 				System.out.println(s);
-				interest2 +=s+"!";//food!excer!game,dev
+				interest2 +=s+" ";//food!excer!game,dev
 			}
 			}else {
 				interest2="관심사없음";

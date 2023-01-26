@@ -9,7 +9,6 @@
 <link rel="icon" href="files/favi/favicon.ico" type="image/x-icon">
 <link rel="stylesheet" href="css/index.css">
 <link rel="stylesheet" href="css/review/review.css">
-<link rel="stylesheet" href="css/auth/loginStyle.css">
 <link rel="stylesheet" href="css/auth/auth.css">
 </head>
 <body>
@@ -36,7 +35,7 @@
 						<input name="result">
 						<input hidden name="page" value="1">
 						<input hidden name="index" value="1">
-						<button class="index_button">
+						<button class="index_button search">
 							<i class="fas fa-search"></i>
 						</button>
 					</form>
@@ -62,7 +61,6 @@
 			<div id="index_header_hRight">
 				<div id="index_hRight_sign">
 					<jsp:include page="${loginPage}"></jsp:include>
-				<div id="result_txt">${r}</div>
 				</div>
 			</div>
 		</header>
