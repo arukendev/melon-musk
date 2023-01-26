@@ -36,6 +36,8 @@ public class PlaylistDAO {
 	
 	
 	public  void getPlaylist(HttpServletRequest request) {
+		
+		
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -43,6 +45,9 @@ public class PlaylistDAO {
 				+ ",pl_text,pl_img,pl_date,mu_al_name "
 				+ "from playlist, playlist_music, music "
 				+ "where pm_pl_id = pl_id and pm_mu_id = mu_id and pl_id = ?";
+		
+		
+		
 		
 		try {
 				System.out.println(request.getAttribute("pl_id"));
@@ -77,9 +82,7 @@ public class PlaylistDAO {
 							);
 					playlistmusics.add(playlistmusic);
 				}
-				
 				request.setAttribute("playlistmusics", playlistmusics);
-				request.setAttribute("plAuId",playlistmusics.get(0).getPl_au_id() );
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally {
@@ -549,6 +552,45 @@ public void pl_paging(int page,HttpServletRequest req) {
 		
 		
 		
+	}
+
+	public void getPlaylist_onlyPl(HttpServletRequest request) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "select * from playlist where pl_id=? ";
+		
+		try {
+				System.out.println(request.getAttribute("pl_id"));
+				String pl_id="";
+				if (request.getAttribute("pl_id")!=null) {
+					pl_id=(String) request.getAttribute("pl_id");
+				}else {
+					pl_id=request.getParameter("pl_id");
+				}
+				
+				
+				con = DBManager.connect();
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, pl_id);
+				rs=pstmt.executeQuery();
+//				PlaylistMusic playlistmusic = null;
+//				playlistmusics = new ArrayList<PlaylistMusic>();
+				
+				Playlist playlist = null;
+				if(rs.next()) {
+					playlist = new Playlist(rs.getInt("pl_id"), rs.getString("pl_name"), rs.getInt("pl_view"), 
+							rs.getInt("pl_like"), rs.getDate("pl_date")
+							, rs.getString("pl_au_id"), rs.getString("pl_text"), rs.getString("pl_img"));
+					
+				}
+				request.setAttribute("playlist", playlist);
+				request.setAttribute("plAuId", playlist.getPl_au_id());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			DBManager.close(con, pstmt, rs);
+		}
 	}
 		
 		

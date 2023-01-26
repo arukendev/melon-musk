@@ -47,13 +47,7 @@
 				<c:forEach var="plms" items="${playlistmusics}">
 					<div class="pd_content_playlists">
 						<div class="list_boxs_box">
-<<<<<<< HEAD
-							
 								<img src="${plms.al_img}">
-							
-=======
-							<img src="${plms.al_img}">
->>>>>>> f454888acfde4adb3d00a4f882524ad791598a95
 						</div>
 						<div class="pd_content_playlistitem">${plms.mu_name }</div>
 						<div class="pd_content_playlistitem">${plms.mu_al_name }</div>

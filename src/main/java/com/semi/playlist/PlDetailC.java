@@ -35,13 +35,16 @@ public class PlDetailC extends HttpServlet {
 		} else {
 			PlaylistDAO.getRdao().increaseView(request);
 			PlaylistDAO.getRdao().getPlaylist(request);
-			String plAuId=(String)request.getAttribute("plAuId");
+			PlaylistDAO.getRdao().getPlaylist_onlyPl(request);
+			String playlistPlId = (String) request.getAttribute("plAuId");
+			
+			
+			
 			String AuId = a.getAu_id();
-			System.out.println(plAuId);
 			System.out.println(AuId);
 			
 			//플레이리스트 작성 id와 로그인 계정 id가 같거나 관리자아이디로 로그인하면 수정 삭제 할 수 있는 페이지로 이동
-			if (plAuId.equals(AuId) || AuId.equals("admin")  ) {
+			if (playlistPlId.equals(AuId)|| AuId.equals("admin")  ) {
 				request.setAttribute("deleteOK", deleteOk);
 				request.setAttribute("contentPage", "jsp/playlist/playlistDetail_guest.jsp");	
 				request.getRequestDispatcher("index.jsp").forward(request, response);
