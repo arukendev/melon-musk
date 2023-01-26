@@ -47,14 +47,9 @@
 				<c:forEach var="plms" items="${playlistmusics}">
 					<div class="pd_content_playlists">
 						<div class="list_boxs_box">
-							<c:choose>
-								<c:when test="${plms.al_img eq 'none'}">
-								<img src="files/main/mark.png">
-								</c:when>
-							</c:choose>
-							<c:otherwise>
+							
 								<img src="${plms.al_img}">
-							</c:otherwise>
+							
 						</div>
 						<div class="pd_content_playlistitem">${plms.mu_name }</div>
 						<div class="pd_content_playlistitem">${plms.mu_al_name }</div>

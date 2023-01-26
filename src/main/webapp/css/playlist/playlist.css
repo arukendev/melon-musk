@@ -177,3 +177,54 @@
 }
 
 
+.rp_contanier {
+  width: 500px;
+  height: inherit;
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+}
+
+.rp_titles {
+  width: inherit;
+  display: flex;
+  justify-content: space-between;
+}
+.rp_title {
+  width: inherit;
+  display: flex;
+  justify-content: flex-start;
+  font-size: 24px;
+  font-weight: 400;
+  margin: 50px 0 ;
+}
+
+
+.rp_title {
+  font-size: 24px;
+  font-weight: 400;
+}
+.rp_subtitle{
+  align-items: center;
+  margin: 50px 0 ;
+}
+
+.rp_subtitle button {
+  font-family: "Noto Sans KR", sans-serif;
+  font-weight: 300;
+  font-size: 16px;
+  border: none;
+  background: inherit;
+  cursor: pointer;
+  padding: 0 20px;
+  width: 100px;
+}
+
+.rp_items{
+	width: inherit;
+	display: flex;
+}
+.rp_item_name{
+	margin-left: 20px;
+	margin-right: 70px;
+}
