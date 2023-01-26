@@ -14,6 +14,10 @@ import com.semi.auth.AuthDAO;
 public class HomeC extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		if (AuthDAO.loginCheck(request)) {
+			HomeDAO.getPlayList(request);
+			HomeDAO.getArtistLike(request);
+			HomeDAO.getAlbumLike(request);
+			HomeDAO.getMusicLike(request);
 			request.setAttribute("contentPage", "jsp/main/main_login.jsp");
 		} else {
 			request.setAttribute("contentPage", "jsp/main/main.jsp");

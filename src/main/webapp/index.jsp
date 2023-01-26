@@ -35,7 +35,7 @@
 						<input name="result">
 						<input hidden name="page" value="1">
 						<input hidden name="index" value="1">
-						<button class="index_button">
+						<button class="index_button search">
 							<i class="fas fa-search"></i>
 						</button>
 					</form>

@@ -8,12 +8,12 @@
 </head>
 <body>
 	<form id="login_form" action="LoginC" method="post" onsubmit="return call()">
-		<div style="color:red">${alert}</div>
+		<div style="color:tomato">${alert}</div>
         <div class="profile_content">
           <label for="id">ID</label>
           <input type="text" id="id" name="id" placeholder="ID를 입력해주세요" />
         </div>
-        <div class="profile_content">
+        <div class="profile_content password">
           <label for="pw">Password</label>
           <input
             type="password"

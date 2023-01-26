@@ -179,3 +179,7 @@ main {
   box-shadow: 0 4px 15px 0 rgba(133, 255, 190, 0.75);
   color: var(--gray);
 }
+
+.search {
+	z-index: 1;
+}

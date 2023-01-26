@@ -59,12 +59,12 @@
       <div class="profile_content" id="interest-box">
         <label class="titles">Interest</label>
         <div id="check-box">
-          <input id="k-pop" type="checkbox" name="interest" value="k-pop" />
-          <label for="k-pop" class="contents">k-pop</label>
-          <input id="j-pop" type="checkbox" name="interest" value="j-pop" />
-          <label for="j-pop" class="contents">j-pop</label>
-          <input id="메탈" type="checkbox" name="interest" value="메탈" />
-          <label for="메탈" class="contents">메탈</label>
+          <input id="가요" type="checkbox" name="interest" value="가요" />
+          <label for="가요" class="contents">가요</label>
+          <input id="클래식" type="checkbox" name="interest" value="클래식" />
+          <label for="클래식" class="contents">클래식</label>
+          <input id="락" type="checkbox" name="interest" value="락" />
+          <label for="락" class="contents">락</label>
           <input id="힙합" type="checkbox" name="interest" value="힙합" />
           <label for="힙합" class="contents">힙합</label>
         </div>
