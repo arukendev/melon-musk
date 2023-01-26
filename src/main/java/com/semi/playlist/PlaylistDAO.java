@@ -297,13 +297,17 @@ public void pl_paging(int page,HttpServletRequest req) {
 			//}
 			//sql = "INSERT ALL INTO playlist VALUES(playlist_seq.nextval,?,0,0,sysdate,?,?,?) "+ insertMu +"SELECT * FROM DUAL";
 		
-			sql = "INSERT INTO playlist VALUES(playlist_seq.nextval,?,0,0,sysdate,?,?,?) ";
+				sql = "INSERT INTO playlist VALUES(playlist_seq.nextval,?,0,0,sysdate,?,?,?) ";
 				con = DBManager.connect();
 				pstmt = con.prepareStatement(sql);
 				pstmt.setString(1, mr.getParameter("pl_name"));
 				pstmt.setString(2, a.getAu_id());
 				pstmt.setString(3, mr.getParameter("pl_text"));
-				pstmt.setString(4, mr.getFilesystemName("pl_img"));
+				if (mr.getFilesystemName("pl_img").equals(null)) {
+					pstmt.setString(4, "none");
+				}else {
+					pstmt.setString(4, mr.getFilesystemName("pl_img"));
+				}
 				
 				
 				if (pstmt.executeUpdate()==1) {
