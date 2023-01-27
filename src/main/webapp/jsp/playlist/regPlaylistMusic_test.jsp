@@ -46,10 +46,6 @@
 					<input name="pl_img" id="pl_img" type="file">
 				</div>
 			</div>
-<<<<<<< HEAD
-
-=======
->>>>>>> f454888acfde4adb3d00a4f882524ad791598a95
 		</div>
 	</form>
 	<script src="https://kit.fontawesome.com/772d40e343.js" crossorigin="anonymous"></script>

@@ -34,12 +34,13 @@ public class PlDetailC extends HttpServlet {
 			request.getRequestDispatcher("index.jsp").forward(request, response);
 		} else {
 			PlaylistDAO.getRdao().increaseView(request);
+			
 			PlaylistDAO.getRdao().getPlaylist(request);
-			PlaylistDAO.getRdao().getPlaylist_onlyPl(request);
+			if (request.getAttribute("mu_name")==null) {
+				PlaylistDAO.getRdao().getPlaylist_onlyPl(request);
+			}
+			
 			String playlistPlId = (String) request.getAttribute("plAuId");
-			
-			
-			
 			String AuId = a.getAu_id();
 			System.out.println(AuId);
 			
