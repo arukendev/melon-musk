@@ -13,7 +13,7 @@
 	<form action="AddPlMusicC">
 	<div class="pd_contanier">
 		<div class="pd_title">
-			<div class="pd_title_item">플레이리스트 :  ${playlistmusics[0].pl_name}</div>
+			<div class="pd_title_item">플레이리스트 :  ${playlistmusics[0].pl_name} </div>
 		</div>
 		<div class="pd_info">
 			<input name="pl_id" value="${param.pl_id}" type="hidden" >

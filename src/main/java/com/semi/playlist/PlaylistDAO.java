@@ -83,6 +83,7 @@ public class PlaylistDAO {
 					playlistmusics.add(playlistmusic);
 				}
 				request.setAttribute("playlistmusics", playlistmusics);
+				request.setAttribute("mu_ok",playlistmusics.get(0).getMu_name() );
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally {

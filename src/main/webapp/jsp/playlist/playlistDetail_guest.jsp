@@ -13,25 +13,65 @@
 		<div class="pd_contanier">
 			<div class="pd_title">
 				<div class="pd_title_item">
-					플레이리스트 : ${playlistmusics[0].pl_name}
+					플레이리스트 : <c:choose>
+									<c:when test="${playlistmusics[0].pl_name == null}">
+										${playlist.pl_name} 
+									</c:when>
+									<c:otherwise>
+										${playlistmusics[0].pl_name}
+									</c:otherwise>
+								</c:choose>
 				</div>
 			</div>
 			<div class="pd_info">
 				<input name="pl_id" value="${param.pl_id}" type="hidden">
 				<div id="pd_info_img">
-					<img src="files/playlist/${playlistmusics[0].pl_img}">
+						<c:choose>
+							<c:when test=" ${playlistmusics[0].pl_img == null} ">
+								<img src="files/playlist/${playlist.pl_img} ">
+							</c:when>
+							<c:otherwise>
+								<img src="files/playlist/${playlistmusics[0].pl_img}">
+							</c:otherwise>
+						</c:choose>
 				</div>
 				<div class="pd_info_items">
-					<p>작성자 : ${playlistmusics[0].pl_au_id}</p>
-					<p>등록일 : ${playlistmusics[0].pl_date}</p>
-					<p>${playlistmusics[0].pl_text}</p>
+					<p>작성자 : 
+						<c:choose>
+							<c:when test="${playlistmusics[0].pl_au_id ==null}">
+								${playlist.pl_au_id}
+							</c:when>
+							<c:otherwise>
+								${playlistmusics[0].pl_au_id}
+							</c:otherwise>
+						</c:choose>
+					</p>
+					<p>등록일 : 
+						<c:choose>
+							<c:when test="${playlistmusics[0].pl_date ==null}">
+								${playlist.pl_date}
+							</c:when>
+							<c:otherwise>
+								 ${playlistmusics[0].pl_date}
+							</c:otherwise>
+						</c:choose>
+					</p>
+					<p>
+						<c:choose>
+							<c:when test="${playlistmusics[0].pl_text ==null}">
+								${playlist.pl_text}
+							</c:when>
+							<c:otherwise>
+								 ${playlistmusics[0].pl_text}
+							</c:otherwise>
+						</c:choose>
+					</p>
 				</div>
 			</div>
 			<div class="pd_music">
 				<div class="pd_music_h1">노래 
 					<div class="pd_music_button">
 						<c:if test="${deleteOK}">
-							<button value="${plms.pl_id}">음원추가하기</button>
 							<button type="button" onclick="deleteplmusic(${param.pl_id})">음악삭제하기</button>
 							<button type="button" onclick="deleteplaylist(${param.pl_id})">플리삭제하기</button>
 						</c:if>
