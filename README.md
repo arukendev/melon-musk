@@ -8,8 +8,9 @@
 ## Description
 ### Melon Musk?
 Melon Musk는 누구나 수정 할 수 있는 음악 위키입니다.<br>
+국내 최대 음원사이트 멜론을 크롤링하여 실시간으로 음악정보를 받을 수 있습니다.<br>
 위키 기능 이외에도 게시판과 플레이리스트를 공유 할 수 있고,<br>
-좋아요를 눌러 좋아하는 노래를 모아 볼 수도 있습니다<br>
+좋아요를 눌러 좋아하는 노래를 모아 볼 수 있고 댓글도 작성 할 수 있습니다.<br>
 
 ### 전체 DB
 <img src="https://drive.google.com/uc?export=view&id=1CM2TZUs5wbYsCbrsx0t8zx-LRE3vvgTs">
