@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@page import="com.semi.auth.AuthDAO"%>
+    <%@page import="com.melon_musk.auth.AuthDAO"%>
 <!DOCTYPE html>
 <html>
 <head>
